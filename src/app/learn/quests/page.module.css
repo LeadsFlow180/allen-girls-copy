@@ -1,0 +1,65 @@
+.shell {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 clamp(0.65rem, 2.8vw, 1.5rem) clamp(0.9rem, 2.6vw, 1.5rem);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  margin-bottom: 0.45rem;
+  position: relative;
+  z-index: 3;
+}
+
+.mapBtn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.4rem 0.72rem;
+  background: linear-gradient(180deg, #fff, #f1f5f9);
+  box-shadow: 0 3px 0 #cbd5e1;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #475569;
+  cursor: pointer;
+}
+
+.langBadge {
+  border: none;
+  background: transparent;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+@media (max-width: 560px) {
+  .header {
+    align-items: flex-start;
+  }
+
+  .mapBtn {
+    padding: 0.34rem 0.64rem;
+    font-size: 0.7rem;
+    box-shadow: 0 2px 0 #cbd5e1;
+  }
+
+  .langBadge {
+    transform: translateY(1px);
+  }
+}
+
+@media (max-width: 380px) {
+  .header {
+    gap: 0.4rem;
+  }
+
+  .mapBtn {
+    font-size: 0.66rem;
+    padding: 0.28rem 0.56rem;
+  }
+}

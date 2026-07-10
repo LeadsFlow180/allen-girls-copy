@@ -1,0 +1,290 @@
+.panel {
+  width: min(340px, calc(100vw - 2rem));
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.18),
+    0 0 0 1px rgba(255, 150, 0, 0.12);
+}
+
+.header {
+  padding: 0.85rem 1rem 1rem;
+  background: linear-gradient(
+    165deg,
+    #fff4d6 0%,
+    #ffe8a8 35%,
+    #ffd36a 100%
+  );
+  border-bottom: 2px solid rgba(255, 180, 0, 0.25);
+}
+
+.backBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  margin-bottom: 0.65rem;
+  padding: 0.25rem 0.45rem 0.25rem 0.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: rgba(255, 255, 255, 0.45);
+  color: #9a6700;
+  font-size: 0.78rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.12s ease;
+}
+
+.backBtn:hover {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.flameBadge {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ff9600, #e68600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroText {
+  min-width: 0;
+}
+
+.streakCount {
+  margin: 0;
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1;
+  color: #7c2d12;
+  letter-spacing: -0.02em;
+}
+
+.streakLabel {
+  margin: 0.1rem 0 0;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #b45309;
+  text-transform: lowercase;
+}
+
+.cta {
+  margin: 0 0 0.75rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #78350f;
+}
+
+.weekCard {
+  border-radius: 1rem;
+  background: #fff;
+  padding: 0.65rem 0.75rem 0.7rem;
+  box-shadow:
+    0 4px 0 #fbbf24,
+    0 8px 20px rgba(251, 191, 36, 0.35);
+  border: 2px solid #fde68a;
+}
+
+.weekRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.55rem;
+}
+
+.dayRow {
+  display: flex;
+  align-items: center;
+  gap: 0.28rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.dayCell {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  max-width: 32px;
+}
+
+.dayBubble {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: #9ca3af;
+  background: #f3f4f6;
+  border: 2px solid #e5e7eb;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dayBubble[data-done="true"] {
+  background: linear-gradient(180deg, #ff9600, #e68600);
+  border-color: #c2410c;
+  color: #fff;
+  box-shadow: 0 2px 0 #c2410c;
+}
+
+.dayBubble[data-today="true"] {
+  background: #fff;
+  border-color: #ff9600;
+  color: #ea580c;
+  box-shadow: 0 0 0 3px rgba(255, 150, 0, 0.25);
+  animation: pulseToday 1.8s ease-in-out infinite;
+}
+
+@keyframes pulseToday {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px rgba(255, 150, 0, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(255, 150, 0, 0.35);
+  }
+}
+
+.weekFlame {
+  flex-shrink: 0;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+.societyProgressWrap {
+  margin-top: 0.15rem;
+}
+
+.societyProgressLabels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.3rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #92400e;
+}
+
+.progressTrack {
+  height: 10px;
+  border-radius: 999px;
+  background: #f3f4f6;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff9600, #ffc800);
+  transition: width 0.35s ease;
+}
+
+.footer {
+  padding: 0.85rem 1rem 1rem;
+  background: #fafafa;
+}
+
+.societyCard {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.7rem 0.75rem;
+  margin-bottom: 0.75rem;
+  border-radius: 1rem;
+  background: #fff;
+  border: 2px solid #e8e8e8;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+.societyCard[data-unlocked="true"] {
+  border-color: rgba(255, 150, 0, 0.45);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 244, 214, 0.6),
+    #fff 55%
+  );
+}
+
+.societyIcon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 0.75rem;
+  background: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.societyCard[data-unlocked="true"] .societyIcon {
+  background: #fff4d6;
+}
+
+.societyTitle {
+  margin: 0 0 0.2rem;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.societyDesc {
+  margin: 0;
+  font-size: 0.76rem;
+  line-height: 1.45;
+  color: #6b7280;
+  padding-right: 3.5rem;
+}
+
+.lockedPill {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: 999px;
+  background: #f3f4f6;
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #9ca3af;
+}
+
+.viewMoreBtn {
+  width: 100%;
+  padding: 0.7rem 1rem;
+  border: none;
+  border-radius: 0.9rem;
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: filter 0.12s ease;
+}
+
+.viewMoreBtn:hover {
+  filter: brightness(1.05);
+}

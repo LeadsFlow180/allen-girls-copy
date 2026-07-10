@@ -1,0 +1,313 @@
+.page {
+  position: relative;
+  min-height: calc(100vh - 4rem);
+  padding: 1.25rem 0.85rem;
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+}
+
+.shell {
+  max-width: 28rem;
+  margin: 0 auto;
+}
+
+.panel {
+  border-radius: 1.1rem;
+  border: 2px solid rgba(186, 230, 253, 0.85);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 4px 0 rgba(14, 165, 233, 0.12),
+    0 14px 32px rgba(15, 23, 42, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+.profileRow {
+  display: grid;
+  gap: 0.65rem;
+  padding: 0.95rem 1rem;
+}
+
+@media (min-width: 480px) {
+  .profileRow {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.profileItem {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #334155;
+}
+
+.profileLabel {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #64748b;
+  margin-bottom: 0.2rem;
+}
+
+.profileValue {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.statsRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+  margin-top: 0.75rem;
+}
+
+.statTile {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.7rem 0.75rem;
+  border-radius: 0.85rem;
+  border: 2px solid #fde68a;
+  background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 100%);
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.statTile:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(180, 83, 9, 0.15);
+}
+
+.statIcon {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.statValue {
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.05rem;
+  color: #92400e;
+  line-height: 1.1;
+}
+
+.statLabel {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #b45309;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.section {
+  margin-top: 0.75rem;
+  padding: 0.9rem 1rem;
+}
+
+.sectionTitle {
+  margin: 0 0 0.55rem;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 0.95rem;
+  color: #581c87;
+}
+
+.approvalOk {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #047857;
+}
+
+.approvalPending {
+  margin: 0 0 0.5rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #581c87;
+}
+
+.codeBlock {
+  margin: 0;
+  padding: 0.65rem 0.75rem;
+  border-radius: 0.65rem;
+  background: rgba(124, 34, 197, 0.08);
+  border: 2px dashed rgba(124, 34, 197, 0.35);
+  font-family: ui-monospace, monospace;
+  font-size: 1.35rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  text-align: center;
+  color: #6b21a8;
+}
+
+@media (min-width: 640px) {
+  .codeBlock {
+    font-size: 1.55rem;
+    letter-spacing: 0.28em;
+  }
+}
+
+.roleLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.roleLinkPrimary,
+.roleLinkSecondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.15s ease, filter 0.15s ease;
+}
+
+.roleLinkPrimary:hover,
+.roleLinkSecondary:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.03);
+}
+
+.roleLinkPrimary {
+  background: linear-gradient(180deg, #9333ea 0%, #7c3aed 100%);
+  color: #fff;
+  box-shadow: 0 4px 0 #5b21b6;
+}
+
+.roleLinkSecondary {
+  border: 2px solid #7c3aed;
+  color: #6b21a8;
+  background: #faf5ff;
+}
+
+.roleLinkTeacher {
+  background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
+  box-shadow: 0 4px 0 #0369a1;
+  color: #fff;
+}
+
+.roleLinkTeacherOutline {
+  border-color: #0284c7;
+  color: #0369a1;
+  background: #f0f9ff;
+}
+
+.quickGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 520px) {
+  .quickGrid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.quickCard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 0.75rem 0.7rem;
+  border-radius: 0.85rem;
+  border: 2px solid #e2e8f0;
+  background: #fff;
+  text-decoration: none;
+  color: #0f172a;
+  box-shadow: 0 3px 0 #e2e8f0;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.quickCard:hover {
+  transform: translateY(-2px);
+  border-color: #c4b5fd;
+}
+
+.quickIcon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.quickLabel {
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.quickCardPurple {
+  border-color: #ddd6fe;
+  background: linear-gradient(180deg, #faf5ff, #f5f3ff);
+  box-shadow: 0 3px 0 #ddd6fe;
+}
+
+.quickCardSky {
+  border-color: #bae6fd;
+  background: linear-gradient(180deg, #f0f9ff, #e0f2fe);
+  box-shadow: 0 3px 0 #bae6fd;
+}
+
+.quickCardAmber {
+  border-color: #fde68a;
+  background: linear-gradient(180deg, #fffbeb, #fef3c7);
+  box-shadow: 0 3px 0 #fde68a;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.85rem;
+  padding-top: 0.85rem;
+  border-top: 2px dashed rgba(148, 163, 184, 0.35);
+}
+
+.hintBox {
+  margin: 0;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #475569;
+}
+
+.setupCard {
+  border-radius: 1.1rem;
+  border: 2px solid #fcd34d;
+  background: linear-gradient(180deg, #fffbeb, #fef3c7);
+  padding: 1.5rem 1.25rem;
+  box-shadow: 0 8px 24px rgba(180, 83, 9, 0.12);
+}
+
+.setupTitle {
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.2rem;
+  color: #78350f;
+  margin: 0 0 0.5rem;
+}
+
+.setupText {
+  margin: 0 0 1rem;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: #92400e;
+}
+
+.setupText code {
+  border-radius: 0.25rem;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.1rem 0.3rem;
+  font-size: 0.8em;
+}
+
+.setupLink {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #92400e;
+  text-decoration: underline;
+}

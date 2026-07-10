@@ -1,0 +1,557 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  pointer-events: none;
+}
+
+.overlayOpen {
+  pointer-events: auto;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  padding: 0;
+  background: rgba(26, 10, 64, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0;
+  animation: navBackdropIn 0.32s ease forwards;
+  cursor: pointer;
+}
+
+@keyframes navBackdropIn {
+  to {
+    opacity: 1;
+  }
+}
+
+.drawer {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  width: min(100%, 22.5rem);
+  height: 100%;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 120% 80% at 100% 0%, rgba(232, 53, 122, 0.14), transparent 55%),
+    radial-gradient(ellipse 90% 60% at 0% 100%, rgba(124, 34, 197, 0.12), transparent 50%),
+    linear-gradient(180deg, #ffffff 0%, #fdfbff 38%, #f8f4ff 100%);
+  border-left: 1px solid rgba(124, 34, 197, 0.12);
+  box-shadow:
+    -20px 0 60px rgba(26, 10, 64, 0.22),
+    -4px 0 0 rgba(245, 197, 24, 0.35);
+  transform: translateX(100%);
+  animation: navDrawerIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes navDrawerIn {
+  to {
+    transform: translateX(0);
+  }
+}
+
+.drawerGlow {
+  position: absolute;
+  top: -4rem;
+  right: -3rem;
+  width: 11rem;
+  height: 11rem;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(245, 197, 24, 0.28) 0%, transparent 68%);
+  pointer-events: none;
+}
+
+.drawerSparkle {
+  position: absolute;
+  top: 5.5rem;
+  right: 1.25rem;
+  font-size: 1.1rem;
+  opacity: 0.85;
+  pointer-events: none;
+  animation: navSparkleFloat 3s ease-in-out infinite;
+}
+
+@keyframes navSparkleFloat {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(8deg);
+  }
+}
+
+.drawerHead {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 1.35rem 1.15rem 1.15rem;
+  border-bottom: 1px solid rgba(124, 34, 197, 0.1);
+  background:
+    linear-gradient(135deg, rgba(124, 34, 197, 0.08) 0%, rgba(232, 53, 122, 0.06) 55%, rgba(245, 197, 24, 0.08) 100%);
+}
+
+.drawerBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.drawerLogoWrap {
+  flex-shrink: 0;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 999px;
+  overflow: hidden;
+  border: 2px solid #ffffff;
+  box-shadow:
+    0 0 0 2px rgba(124, 34, 197, 0.18),
+    0 8px 20px rgba(124, 34, 197, 0.2);
+  line-height: 0;
+}
+
+.drawerLogo {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+}
+
+.drawerBrandText {
+  min-width: 0;
+}
+
+.drawerKicker {
+  margin: 0 0 0.1rem;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #a855f7;
+}
+
+.drawerTitle {
+  margin: 0;
+  font-family: "Fredoka One", cursive;
+  font-size: 1.45rem;
+  color: var(--primary);
+  line-height: 1.05;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.drawerTagline {
+  margin: 0.2rem 0 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.closeBtn {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.4rem;
+  height: 2.4rem;
+  border: 1px solid rgba(124, 34, 197, 0.15);
+  border-radius: 0.7rem;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--primary);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(124, 34, 197, 0.1);
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.closeBtn:hover {
+  background: #ffffff;
+  border-color: rgba(124, 34, 197, 0.28);
+  transform: scale(1.04);
+}
+
+.drawerNav {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem 1rem 0.5rem;
+}
+
+.drawerSectionLabel {
+  margin: 0 0 0.65rem 0.35rem;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.drawerLinkList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.drawerLink {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.8rem 0.85rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  color: #1e293b;
+  box-shadow: 0 4px 14px rgba(124, 34, 197, 0.06);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  opacity: 0;
+  transform: translateX(12px);
+  animation: navLinkIn 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+@keyframes navLinkIn {
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.drawerLink:hover {
+  background: #ffffff;
+  border-color: rgba(124, 34, 197, 0.14);
+  box-shadow: 0 8px 22px rgba(124, 34, 197, 0.1);
+  transform: translateX(-2px);
+}
+
+.drawerLinkActive {
+  background: #ffffff;
+  border-color: rgba(124, 34, 197, 0.22);
+  box-shadow:
+    0 8px 24px rgba(124, 34, 197, 0.14),
+    inset 3px 0 0 var(--primary);
+}
+
+.drawerLinkIcon {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.75rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.drawerLink:hover .drawerLinkIcon {
+  transform: scale(1.05);
+}
+
+.drawerLinkCopy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.08rem;
+}
+
+.drawerLinkLabel {
+  font-family: "Fredoka One", cursive;
+  font-size: 0.95rem;
+  line-height: 1.15;
+  color: #1a0a40;
+}
+
+.drawerLinkHint {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  line-height: 1.25;
+}
+
+.drawerLinkArrow {
+  flex-shrink: 0;
+  color: #cbd5e1;
+  transition:
+    color 0.18s ease,
+    transform 0.18s ease;
+}
+
+.drawerLink:hover .drawerLinkArrow,
+.drawerLinkActive .drawerLinkArrow {
+  color: var(--primary);
+  transform: translateX(2px);
+}
+
+/* Per-link icon tones */
+.toneViolet .drawerLinkIcon {
+  color: #7c22c5;
+  background: #f5f3ff;
+  border-color: #e9d5ff;
+}
+
+.tonePink .drawerLinkIcon {
+  color: #db2777;
+  background: #fdf2f8;
+  border-color: #fbcfe8;
+}
+
+.toneSky .drawerLinkIcon {
+  color: #0284c7;
+  background: #f0f9ff;
+  border-color: #bae6fd;
+}
+
+.toneAmber .drawerLinkIcon {
+  color: #d97706;
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.toneEmerald .drawerLinkIcon {
+  color: #059669;
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.toneGold .drawerLinkIcon {
+  color: #b45309;
+  background: #fefce8;
+  border-color: #fde047;
+}
+
+.drawerLinkActive.toneViolet .drawerLinkIcon,
+.drawerLinkActive.tonePink .drawerLinkIcon,
+.drawerLinkActive.toneSky .drawerLinkIcon,
+.drawerLinkActive.toneAmber .drawerLinkIcon,
+.drawerLinkActive.toneEmerald .drawerLinkIcon,
+.drawerLinkActive.toneGold .drawerLinkIcon {
+  box-shadow: 0 4px 12px rgba(124, 34, 197, 0.12);
+}
+
+.drawerFooter {
+  position: relative;
+  z-index: 1;
+  padding: 1rem 1.15rem calc(1.2rem + env(safe-area-inset-bottom, 0px));
+  border-top: 1px solid rgba(124, 34, 197, 0.1);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55) 0%, rgba(253, 251, 255, 0.95) 100%);
+}
+
+.drawerFooterNote {
+  margin: 0 0 0.75rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.45;
+  color: #64748b;
+  text-align: center;
+}
+
+.drawerCta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: 0.9rem;
+  background: linear-gradient(135deg, var(--secondary) 0%, #c42a68 48%, var(--primary) 100%);
+  color: #ffffff;
+  font-family: "Fredoka One", cursive;
+  font-size: 1.05rem;
+  text-decoration: none;
+  box-shadow:
+    0 10px 28px rgba(232, 53, 122, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.drawerCta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 14px 32px rgba(232, 53, 122, 0.42),
+    0 0 0 1px rgba(255, 255, 255, 0.28) inset;
+}
+
+.menuToggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.65rem;
+  background: #ffffff;
+  color: #374151;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.menuToggle:hover {
+  background: #faf5ff;
+  border-color: #e9d5ff;
+  color: var(--primary);
+  box-shadow: 0 4px 12px rgba(124, 34, 197, 0.1);
+}
+
+.menuToggleOpen {
+  background: linear-gradient(135deg, #faf5ff, #fdf2f8);
+  border-color: #e9d5ff;
+  color: var(--primary);
+  box-shadow: 0 4px 14px rgba(124, 34, 197, 0.14);
+}
+
+.navAvatar {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-radius: 999px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(124, 34, 197, 0.18);
+}
+
+.navAvatarImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.navAvatarInitial {
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.mobileLoginBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.42rem 0.8rem;
+  border-radius: 999px;
+  border: 2px solid #e9d5ff;
+  background: #ffffff;
+  color: var(--primary);
+  font-family: "Fredoka One", cursive;
+  font-size: 0.82rem;
+  text-decoration: none;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(124, 34, 197, 0.08);
+}
+
+.mobileAccountBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.mobileAccountAvatar {
+  width: 2rem;
+  height: 2rem;
+}
+
+.drawerLogin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0.8rem 1rem;
+  border-radius: 0.85rem;
+  border: 2px solid #e9d5ff;
+  background: #ffffff;
+  color: var(--primary);
+  font-family: "Fredoka One", cursive;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(124, 34, 197, 0.08);
+}
+
+.drawerAccount {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 0.85rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(124, 34, 197, 0.14);
+  background: rgba(255, 255, 255, 0.92);
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 14px rgba(124, 34, 197, 0.08);
+}
+
+.drawerAccountAvatar {
+  width: 2.35rem;
+  height: 2.35rem;
+}
+
+.drawerAccountCopy {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.drawerAccountLabel {
+  font-family: "Fredoka One", cursive;
+  font-size: 0.95rem;
+  color: #1a0a40;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.drawerAccountHint {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .drawer,
+  .drawerLink,
+  .drawerSparkle {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

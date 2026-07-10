@@ -1,0 +1,503 @@
+{
+  "sectionId": 1,
+  "code": "section-1-greetings",
+  "title": "Section 1",
+  "description": "Learn your very first greetings and introductions across multiple languages.",
+  "supportedLanguages": ["es", "fr", "ar", "ur", "en"],
+  "units": [
+    {
+      "id": 1,
+      "slug": "first-greetings",
+      "name": "Unit 1 · First greetings",
+      "world": "Greetings world",
+      "rewardXp": 10,
+      "rewardChest": true,
+      "steps": [
+        {
+          "kind": "start",
+          "title": "Say hello for the first time",
+          "description": "Meet a new friend and learn how to say hello and goodbye.",
+          "story": "Maya meets a new kid at the park. Help her say a friendly hello!",
+          "questions": [
+            {
+              "id": "u1-start-q1",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "es",
+              "prompt": "Which one means “hello” in Spanish? 👋",
+              "answers": [
+                { "id": "a", "text": "Hola 👋", "image": "/learn/hello.png", "correct": true },
+                { "id": "b", "text": "Adiós 👋", "image": "/learn/bye.png", "correct": false },
+                { "id": "c", "text": "Gracias 🙏", "image": "/learn/thanks.png", "correct": false }
+              ],
+              "ttsText": "Hola",
+              "ttsLang": "es-ES",
+              "explanation": "“Hola” is how you say “hello” in Spanish."
+            },
+            { "id": "u1-start-q2", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Your friend waves at you 😊. What do you say?", "answers": [
+              { "id": "a", "text": "Hola 👋", "image": "/learn/hello.png", "correct": true },
+              { "id": "b", "text": "Buenas noches 🌙", "image": "/learn/night.png", "correct": false },
+              { "id": "c", "text": "Gracias 🙏", "image": "/learn/thanks.png", "correct": false }
+            ], "ttsText": "Hola", "ttsLang": "es-ES", "explanation": "When someone greets you, “Hola” is a friendly reply." },
+            { "id": "u1-start-q3", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Tap the greeting you could use in the morning 🌞.", "answers": [
+              { "id": "a", "text": "Buenos días ☀️", "image": "/learn/hello.png", "correct": true },
+              { "id": "b", "text": "Buenas noches 🌙", "image": "/learn/night.png", "correct": false },
+              { "id": "c", "text": "Adiós 👋", "image": "/learn/bye.png", "correct": false }
+            ], "ttsText": "Buenos días", "ttsLang": "es-ES", "explanation": "“Buenos días” is a common way to say good morning." },
+            { "id": "u1-start-q4", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "You see a new classmate 👧. Choose a friendly greeting.", "answers": [
+              { "id": "a", "text": "Hola, soy Maya 😊", "image": "/learn/name-tag.png", "correct": true },
+              { "id": "b", "text": "Adiós, soy Maya 👋", "image": "/learn/bye.png", "correct": false },
+              { "id": "c", "text": "Buenas noches, soy Maya 🌙", "image": "/learn/night.png", "correct": false }
+            ], "ttsText": "Hola, soy Maya", "ttsLang": "es-ES", "explanation": "“Hola, soy Maya” is a natural greeting plus your name." },
+            { "id": "u1-start-q5", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Pick the greeting that matches the smiling face 😀.", "answers": [
+              { "id": "a", "text": "Hola 😀", "image": "/learn/hello.png", "correct": true },
+              { "id": "b", "text": "Lo siento 😢", "image": "/learn/confused.png", "correct": false },
+              { "id": "c", "text": "Gracias 🙏", "image": "/learn/thanks.png", "correct": false }
+            ], "ttsText": "Hola", "ttsLang": "es-ES", "explanation": "A big smile fits well with “Hola”. 😊" }
+          ]
+        },
+        {
+          "kind": "lesson",
+          "title": "Hello and goodbye",
+          "description": "Learn basic greetings like hello, hi, and goodbye.",
+          "questions": [
+            {
+              "id": "u1-es-hello",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "es",
+              "prompt": "How do you say “Hello” in Spanish? 👋",
+              "answers": [
+                { "id": "a", "text": "Hola 👋", "image": "/learn/hello.png", "correct": true },
+                { "id": "b", "text": "Bonjour 👋", "image": "/learn/hello.png", "correct": false },
+                { "id": "c", "text": "Ciao 👋", "image": "/learn/hello.png", "correct": false },
+                { "id": "d", "text": "Hello 👋", "image": "/learn/hello.png", "correct": false }
+              ],
+              "ttsText": "Hola",
+              "ttsLang": "es-ES",
+              "explanation": "“Hola” is Spanish for “Hello”."
+            },
+            {
+              "id": "u1-fr-bye",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "fr",
+              "prompt": "How do you say “Goodbye” in French?",
+              "answers": [
+                { "id": "a", "text": "Au revoir", "image": "/learn/bye.png", "correct": true },
+                { "id": "b", "text": "Adiós", "image": "/learn/bye.png", "correct": false },
+                { "id": "c", "text": "Bye bye", "image": "/learn/bye.png", "correct": false },
+                { "id": "d", "text": "Ciao", "image": "/learn/bye.png", "correct": false }
+              ],
+              "ttsText": "Au revoir",
+              "ttsLang": "fr-FR",
+              "explanation": "“Au revoir” is the common way to say goodbye in French."
+            },
+            { "id": "u1-lesson-q3", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Tap the Spanish word for “goodbye” 👋.", "answers": [
+              { "id": "a", "text": "Adiós 👋", "image": "/learn/bye.png", "correct": true },
+              { "id": "b", "text": "Hola 👋", "image": "/learn/hello.png", "correct": false },
+              { "id": "c", "text": "Gracias 🙏", "image": "/learn/thanks.png", "correct": false }
+            ], "ttsText": "Adiós", "ttsLang": "es-ES", "explanation": "“Adiós” is how you say goodbye in Spanish." },
+            { "id": "u1-lesson-q4", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Choose the pair that means “hello” and “goodbye” in Spanish. 😊", "answers": [
+              { "id": "a", "text": "Hola / Adiós", "image": "/learn/hello.png", "correct": true },
+              { "id": "b", "text": "Bonjour / Ciao", "image": "/learn/hello.png", "correct": false },
+              { "id": "c", "text": "Hola / Bonjour", "image": "/learn/hello.png", "correct": false }
+            ], "ttsText": "Hola, Adiós", "ttsLang": "es-ES", "explanation": "In Spanish, “Hola” and “Adiós” are common greeting and farewell." },
+            { "id": "u1-lesson-q5", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "You leave a party 🎉. What do you say in Spanish?", "answers": [
+              { "id": "a", "text": "Adiós, hasta luego 👋", "image": "/learn/bye.png", "correct": true },
+              { "id": "b", "text": "Hola, buenos días ☀️", "image": "/learn/hello.png", "correct": false },
+              { "id": "c", "text": "Gracias, hola 🙏", "image": "/learn/thanks.png", "correct": false }
+            ], "ttsText": "Adiós, hasta luego", "ttsLang": "es-ES", "explanation": "“Adiós, hasta luego” is a natural way to say goodbye." }
+          ]
+        },
+        {
+          "kind": "chest",
+          "title": "Greeting reward chest",
+          "description": "Open a chest to collect XP and a greeting sticker after your first lesson.",
+          "questions": [
+            {
+              "id": "u1-chest-q1",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "es",
+              "prompt": "Tap the sticker that says “Hola” 🏆.",
+              "answers": [
+                { "id": "a", "text": "Hola 👋", "image": "/learn/hello.png", "correct": true },
+                { "id": "b", "text": "Adiós 👋", "image": "/learn/bye.png", "correct": false },
+                { "id": "c", "text": "Café ☕", "image": "/learn/coffee.png", "correct": false }
+              ],
+              "ttsText": "Hola",
+              "ttsLang": "es-ES",
+              "explanation": "You earn a sticker that says “Hola” for greeting someone."
+            },
+            { "id": "u1-chest-q2", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Choose the reward card that says “Buen trabajo” 🌟.", "answers": [
+              { "id": "a", "text": "Buen trabajo 🌟", "image": "/learn/trophy.png", "correct": true },
+              { "id": "b", "text": "Buenas noches 🌙", "image": "/learn/night.png", "correct": false },
+              { "id": "c", "text": "Lo siento 😢", "image": "/learn/confused.png", "correct": false }
+            ], "ttsText": "Buen trabajo", "ttsLang": "es-ES", "explanation": "“Buen trabajo” means “good job”." },
+            { "id": "u1-chest-q3", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Tap the shiny “Hola” badge ✨.", "answers": [
+              { "id": "a", "text": "Hola ✨", "image": "/learn/hello.png", "correct": true },
+              { "id": "b", "text": "Adiós ✨", "image": "/learn/bye.png", "correct": false },
+              { "id": "c", "text": "Gracias ✨", "image": "/learn/thanks.png", "correct": false }
+            ], "ttsText": "Hola", "ttsLang": "es-ES", "explanation": "Your prize is a sparkling “Hola” badge." },
+            { "id": "u1-chest-q4", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Pick the reward that says “¡Genial!” 😄.", "answers": [
+              { "id": "a", "text": "¡Genial! 😄", "image": "/learn/trophy.png", "correct": true },
+              { "id": "b", "text": "Lo siento 😢", "image": "/learn/confused.png", "correct": false },
+              { "id": "c", "text": "Adiós 👋", "image": "/learn/bye.png", "correct": false }
+            ], "ttsText": "¡Genial!", "ttsLang": "es-ES", "explanation": "“¡Genial!” is a fun way to say “Awesome!”." },
+            { "id": "u1-chest-q5", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Which prize card says “Hola, amiga”? 🎁", "answers": [
+              { "id": "a", "text": "Hola, amiga 🎁", "image": "/learn/hello.png", "correct": true },
+              { "id": "b", "text": "Adiós, amiga 🎁", "image": "/learn/bye.png", "correct": false },
+              { "id": "c", "text": "Gracias, amiga 🎁", "image": "/learn/thanks.png", "correct": false }
+            ], "ttsText": "Hola, amiga", "ttsLang": "es-ES", "explanation": "It’s a friendly prize card that also practices greetings." }
+          ]
+        },
+        {
+          "kind": "practice",
+          "title": "Quick greeting practice",
+          "description": "Review hello and goodbye with a couple of quick questions.",
+          "questions": [
+            {
+              "id": "u1-ur-hello",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "ur",
+              "prompt": "How do you say “Hello” in Urdu?",
+              "answers": [
+                { "id": "a", "text": "السلام علیکم", "image": "/learn/hello.png", "correct": true },
+                { "id": "b", "text": "مرحبا", "image": "/learn/hello.png", "correct": false },
+                { "id": "c", "text": "Bonjour", "image": "/learn/hello.png", "correct": false },
+                { "id": "d", "text": "Hello", "image": "/learn/hello.png", "correct": false }
+              ],
+              "ttsText": "السلام علیکم",
+              "ttsLang": "ur-PK",
+              "explanation": "“السلام علیکم” is a very common greeting in Urdu and Arabic-speaking cultures."
+            },
+            { "id": "u1-practice-es-q2", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "You arrive at a party 🎉. Choose a Spanish greeting.", "answers": [
+              { "id": "a", "text": "Hola a todos 👋", "image": "/learn/hello.png", "correct": true },
+              { "id": "b", "text": "Buenas noches, adiós 🌙", "image": "/learn/night.png", "correct": false },
+              { "id": "c", "text": "Lo siento 😢", "image": "/learn/confused.png", "correct": false }
+            ], "ttsText": "Hola a todos", "ttsLang": "es-ES", "explanation": "“Hola a todos” means “Hello everyone”." },
+            { "id": "u1-practice-es-q3", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Pick the Spanish phrase that means “See you later” 👋.", "answers": [
+              { "id": "a", "text": "Hasta luego 👋", "image": "/learn/bye.png", "correct": true },
+              { "id": "b", "text": "Hola 👋", "image": "/learn/hello.png", "correct": false },
+              { "id": "c", "text": "Buenos días ☀️", "image": "/learn/hello.png", "correct": false }
+            ], "ttsText": "Hasta luego", "ttsLang": "es-ES", "explanation": "“Hasta luego” is a casual way to say “See you later”." },
+            { "id": "u1-practice-es-q4", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Your friend leaves the park 🛝. What do you say?", "answers": [
+              { "id": "a", "text": "Adiós, hasta mañana 👋", "image": "/learn/bye.png", "correct": true },
+              { "id": "b", "text": "Hola, buenos días ☀️", "image": "/learn/hello.png", "correct": false },
+              { "id": "c", "text": "Gracias, hola 🙏", "image": "/learn/thanks.png", "correct": false }
+            ], "ttsText": "Adiós, hasta mañana", "ttsLang": "es-ES", "explanation": "You are saying goodbye and that you’ll see them tomorrow." },
+            { "id": "u1-practice-es-q5", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Choose the greeting you might send in a text message 💬.", "answers": [
+              { "id": "a", "text": "Hola 😊", "image": "/learn/hello.png", "correct": true },
+              { "id": "b", "text": "Buenas noches ayer 🌙", "image": "/learn/confused.png", "correct": false },
+              { "id": "c", "text": "Lo siento nombre 🙈", "image": "/learn/confused.png", "correct": false }
+            ], "ttsText": "Hola", "ttsLang": "es-ES", "explanation": "A simple “Hola” with an emoji is a friendly text." }
+          ]
+        },
+        {
+          "kind": "review",
+          "title": "Unit 1 review quiz",
+          "description": "Check that you can recognize and choose the correct greetings.",
+          "questions": [
+            {
+              "id": "u1-ar-hi",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "ar",
+              "prompt": "Which option is a friendly way to say “Hi” in Arabic?",
+              "answers": [
+                { "id": "a", "text": "مرحبا", "image": "/learn/hello.png", "correct": true },
+                { "id": "b", "text": "Adiós", "image": "/learn/bye.png", "correct": false },
+                { "id": "c", "text": "Hello", "image": "/learn/hello.png", "correct": false },
+                { "id": "d", "text": "Salut", "image": "/learn/hello.png", "correct": false }
+              ],
+              "ttsText": "مرحبا",
+              "ttsLang": "ar-SA",
+              "explanation": "“مرحبا” (marḥaban) is a friendly Arabic greeting."
+            },
+            { "id": "u1-review-es-q2", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Match the idea “hello ↔ hola, goodbye ↔ ____” 👋.", "answers": [
+              { "id": "a", "text": "Adiós", "image": "/learn/bye.png", "correct": true },
+              { "id": "b", "text": "Gracias", "image": "/learn/thanks.png", "correct": false },
+              { "id": "c", "text": "Por favor", "image": "/learn/please.png", "correct": false }
+            ], "ttsText": "Adiós", "ttsLang": "es-ES", "explanation": "“Adiós” matches “goodbye” in Spanish." },
+            { "id": "u1-review-es-q3", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Pick the greeting that goes with a big wave 👋😊.", "answers": [
+              { "id": "a", "text": "Hola 👋", "image": "/learn/hello.png", "correct": true },
+              { "id": "b", "text": "Buenas noches 🌙", "image": "/learn/night.png", "correct": false },
+              { "id": "c", "text": "Lo siento 😢", "image": "/learn/confused.png", "correct": false }
+            ], "ttsText": "Hola", "ttsLang": "es-ES", "explanation": "A wave and “Hola” make a friendly greeting." },
+            { "id": "u1-review-es-q4", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Your friend writes “Hola, ¿cómo estás?” 💬. How do you answer?", "answers": [
+              { "id": "a", "text": "Estoy bien, gracias 😊", "image": "/learn/feelings.png", "correct": true },
+              { "id": "b", "text": "Buenos días ayer ☀️", "image": "/learn/confused.png", "correct": false },
+              { "id": "c", "text": "Me llamo adiós 👋", "image": "/learn/confused.png", "correct": false }
+            ], "ttsText": "Estoy bien, gracias", "ttsLang": "es-ES", "explanation": "“Estoy bien, gracias” is a natural answer to “How are you?”." },
+            { "id": "u1-review-es-q5", "type": "picture_choice", "fromLanguage": "en", "toLanguage": "es", "prompt": "Choose the best sentence to say hello and your name 😊.", "answers": [
+              { "id": "a", "text": "Hola, me llamo Ana 😊", "image": "/learn/name-tag.png", "correct": true },
+              { "id": "b", "text": "Adiós, me llamo Ana 👋", "image": "/learn/bye.png", "correct": false },
+              { "id": "c", "text": "Lo siento, me llamo Ana 😢", "image": "/learn/confused.png", "correct": false }
+            ], "ttsText": "Hola, me llamo Ana", "ttsLang": "es-ES", "explanation": "You are greeting and saying your name in one friendly sentence." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "slug": "introduce-yourself",
+      "name": "Unit 2 · Meet new friends",
+      "world": "Friends world",
+      "rewardXp": 10,
+      "rewardChest": true,
+      "steps": [
+        {
+          "kind": "start",
+          "title": "Say your name",
+          "description": "Learn how to say your name when you meet someone new.",
+          "story": "Alana arrives at a new club. She wants to tell everyone her name.",
+          "questions": [
+            {
+              "id": "u2-start-q1",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "en",
+              "prompt": "You meet someone new. What could you say?",
+              "answers": [
+                { "id": "a", "text": "My name is Alana.", "image": "/learn/name-tag.png", "correct": true },
+                { "id": "b", "text": "Good night.", "image": "/learn/night.png", "correct": false },
+                { "id": "c", "text": "Where is my name?", "image": "/learn/confused.png", "correct": false }
+              ],
+              "ttsText": "My name is Alana.",
+              "ttsLang": "en-US",
+              "explanation": "When you meet someone, you often say your name."
+            }
+          ]
+        },
+        {
+          "kind": "lesson",
+          "title": "My name is...",
+          "description": "Learn how to say “My name is…” in different languages.",
+          "questions": [
+            {
+              "id": "u2-es-name",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "es",
+              "prompt": "Which Spanish sentence means “My name is Maya”?",
+              "answers": [
+                { "id": "a", "text": "Me llamo Maya", "image": "/learn/name-tag.png", "correct": true },
+                { "id": "b", "text": "Je m’appelle Maya", "image": "/learn/name-tag.png", "correct": false },
+                { "id": "c", "text": "Mein Name ist Maya", "image": "/learn/name-tag.png", "correct": false },
+                { "id": "d", "text": "Mi nombre tú Maya", "image": "/learn/name-tag.png", "correct": false }
+              ],
+              "ttsText": "Me llamo Maya",
+              "ttsLang": "es-ES",
+              "explanation": "“Me llamo Maya” is the natural way to say “My name is Maya” in Spanish."
+            },
+            {
+              "id": "u2-fr-name",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "fr",
+              "prompt": "Which French phrase means “My name is Alex”?",
+              "answers": [
+                { "id": "a", "text": "Je m’appelle Alex", "image": "/learn/name-tag.png", "correct": true },
+                { "id": "b", "text": "Mi chiamo Alex", "image": "/learn/name-tag.png", "correct": false },
+                { "id": "c", "text": "Yo soy Alex", "image": "/learn/name-tag.png", "correct": false },
+                { "id": "d", "text": "Je suis Alex mon", "image": "/learn/name-tag.png", "correct": false }
+              ],
+              "ttsText": "Je m’appelle Alex",
+              "ttsLang": "fr-FR",
+              "explanation": "“Je m’appelle Alex” is the standard introduction in French."
+            }
+          ]
+        },
+        {
+          "kind": "chest",
+          "title": "Name tag chest",
+          "description": "Unlock a shiny name-tag sticker for your profile.",
+          "questions": [
+            {
+              "id": "u2-chest-q1",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "en",
+              "prompt": "Tap the name tag that shows “Maya”.",
+              "answers": [
+                { "id": "a", "text": "Maya", "image": "/learn/name-tag.png", "correct": true },
+                { "id": "b", "text": "Alex", "image": "/learn/name-tag.png", "correct": false },
+                { "id": "c", "text": "Sam", "image": "/learn/name-tag.png", "correct": false }
+              ],
+              "ttsText": "Maya",
+              "ttsLang": "en-US",
+              "explanation": "You win a special name-tag sticker with your name."
+            }
+          ]
+        },
+        {
+          "kind": "practice",
+          "title": "Introduce yourself again",
+          "description": "Practice picking the correct way to say your name.",
+          "questions": [
+            {
+              "id": "u2-ur-name",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "ur",
+              "prompt": "Which Urdu sentence means “My name is Sara”?",
+              "answers": [
+                { "id": "a", "text": "میرا نام سارہ ہے", "image": "/learn/name-tag.png", "correct": true },
+                { "id": "b", "text": "السلام علیکم سارہ", "image": "/learn/name-tag.png", "correct": false },
+                { "id": "c", "text": "مرحبا سارہ", "image": "/learn/name-tag.png", "correct": false },
+                { "id": "d", "text": "Je m’appelle Sara", "image": "/learn/name-tag.png", "correct": false }
+              ],
+              "ttsText": "میرا نام سارہ ہے",
+              "ttsLang": "ur-PK",
+              "explanation": "“میرا نام سارہ ہے” literally means “My name is Sara.”"
+            }
+          ]
+        },
+        {
+          "kind": "review",
+          "title": "Unit 2 review quiz",
+          "description": "Check if you can choose the right “My name is …” sentence.",
+          "questions": [
+            {
+              "id": "u2-en-review",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "en",
+              "prompt": "Which sentence is the best way to introduce yourself in English?",
+              "answers": [
+                { "id": "a", "text": "My name is Sam.", "image": "/learn/name-tag.png", "correct": true },
+                { "id": "b", "text": "Name me Sam.", "image": "/learn/confused.png", "correct": false },
+                { "id": "c", "text": "I am name Sam.", "image": "/learn/confused.png", "correct": false },
+                { "id": "d", "text": "Me Sam.", "image": "/learn/confused.png", "correct": false }
+              ],
+              "ttsText": "My name is Sam.",
+              "ttsLang": "en-US",
+              "explanation": "“My name is Sam.” is clear and grammatically correct."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "slug": "simple-questions",
+      "name": "Unit 3 · Ask how someone is",
+      "world": "Feelings world",
+      "rewardXp": 10,
+      "rewardChest": true,
+      "steps": [
+        {
+          "kind": "start",
+          "title": "Ask “How are you?”",
+          "description": "Learn friendly ways to ask how someone feels.",
+          "story": "Natalia wants to check if her friend is okay after a long day.",
+          "questions": [
+            {
+              "id": "u3-start-q1",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "en",
+              "prompt": "You see a friend. What could you ask?",
+              "answers": [
+                { "id": "a", "text": "How are you?", "image": "/learn/feelings.png", "correct": true },
+                { "id": "b", "text": "Where are you?", "image": "/learn/confused.png", "correct": false },
+                { "id": "c", "text": "What is my name?", "image": "/learn/confused.png", "correct": false }
+              ],
+              "ttsText": "How are you?",
+              "ttsLang": "en-US",
+              "explanation": "We often ask “How are you?” to check on a friend."
+            }
+          ]
+        },
+        {
+          "kind": "lesson",
+          "title": "How are you?",
+          "description": "Learn “How are you?” and common answers like “I’m fine.”",
+          "questions": [
+            {
+              "id": "u3-es-howareyou",
+              "type": "multiple_choice",
+              "fromLanguage": "en",
+              "toLanguage": "es",
+              "prompt": "Which Spanish phrase means “How are you?”",
+              "answers": [
+                { "id": "a", "text": "¿Cómo estás?", "correct": true },
+                { "id": "b", "text": "¿Dónde estás?", "correct": false },
+                { "id": "c", "text": "¿Cuántos años tienes?", "correct": false },
+                { "id": "d", "text": "¿Qué hora es?", "correct": false }
+              ],
+              "explanation": "“¿Cómo estás?” literally means “How are you?”"
+            }
+          ]
+        },
+        {
+          "kind": "chest",
+          "title": "Feelings badge chest",
+          "description": "Unlock a feelings badge to show how you feel today.",
+          "questions": [
+            {
+              "id": "u3-chest-q1",
+              "type": "picture_choice",
+              "fromLanguage": "en",
+              "toLanguage": "en",
+              "prompt": "Tap the happy face badge.",
+              "answers": [
+                { "id": "a", "text": "Happy", "image": "/learn/feelings.png", "correct": true },
+                { "id": "b", "text": "Sleepy", "image": "/learn/night.png", "correct": false },
+                { "id": "c", "text": "Confused", "image": "/learn/confused.png", "correct": false }
+              ],
+              "ttsText": "Happy",
+              "ttsLang": "en-US",
+              "explanation": "You earn a happy feelings badge when you check on a friend."
+            }
+          ]
+        },
+        {
+          "kind": "practice",
+          "title": "Check in on a friend",
+          "description": "Practice choosing the right “How are you?” question.",
+          "questions": [
+            {
+              "id": "u3-fr-howareyou",
+              "type": "multiple_choice",
+              "fromLanguage": "en",
+              "toLanguage": "fr",
+              "prompt": "Which is the best way to ask “How are you?” in French?",
+              "answers": [
+                { "id": "a", "text": "Comment ça va ?", "correct": true },
+                { "id": "b", "text": "Où ça va ?", "correct": false },
+                { "id": "c", "text": "Qui ça va ?", "correct": false },
+                { "id": "d", "text": "Quand ça va ?", "correct": false }
+              ],
+              "explanation": "“Comment ça va ?” is a very common informal way to ask someone how they are."
+            }
+          ]
+        },
+        {
+          "kind": "review",
+          "title": "Unit 3 review quiz",
+          "description": "Review how to ask about feelings in different languages.",
+          "questions": [
+            {
+              "id": "u3-en-review",
+              "type": "multiple_choice",
+              "fromLanguage": "en",
+              "toLanguage": "en",
+              "prompt": "Which answer fits best after “How are you?”",
+              "answers": [
+                { "id": "a", "text": "I’m fine, thanks!", "correct": true },
+                { "id": "b", "text": "My name is Alex.", "correct": false },
+                { "id": "c", "text": "I am years old.", "correct": false },
+                { "id": "d", "text": "I live in house.", "correct": false }
+              ],
+              "explanation": "A natural reply is something like “I’m fine, thanks!”"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

@@ -1,0 +1,148 @@
+.panel {
+  border-radius: 1.25rem;
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 4px 0 #e2e8f0;
+  padding: 1.1rem 1.15rem 1.2rem;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.9rem;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.35rem;
+  color: #0f172a;
+}
+
+.lead {
+  margin: 0.25rem 0 0;
+  font-size: 0.88rem;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.statPill {
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #475569;
+}
+
+.toolbar {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.search,
+.select {
+  border: 2px solid #e2e8f0;
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #0f172a;
+  background: #fff;
+}
+
+.search {
+  flex: 1 1 220px;
+}
+
+.select {
+  min-width: 140px;
+}
+
+.tableWrap {
+  overflow: auto;
+  border-radius: 0.85rem;
+  border: 1px solid #e2e8f0;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.78rem;
+}
+
+.table th,
+.table td {
+  padding: 0.55rem 0.65rem;
+  text-align: left;
+  border-bottom: 1px solid #f1f5f9;
+  white-space: nowrap;
+}
+
+.table th {
+  background: #f8fafc;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+}
+
+.nameCell {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.roleBadge {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.role_student {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.role_parent {
+  background: #fce7f3;
+  color: #9d174d;
+}
+
+.role_teacher {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.role_super_admin {
+  background: #ede9fe;
+  color: #5b21b6;
+}
+
+.message {
+  margin: 0.5rem 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.error {
+  margin: 0.5rem 0;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #b91c1c;
+}

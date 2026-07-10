@@ -1,0 +1,1059 @@
+/* Clean professional achievements dashboard */
+
+.page {
+  position: relative;
+  min-height: 68vh;
+  border-radius: 1rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.08);
+}
+
+.worldBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  object-fit: cover;
+}
+
+.skyDecor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sun,
+.cloud,
+.star,
+.hillBack,
+.hillFront,
+.pedestalWrap,
+.treasureChest,
+.sparkleRing {
+  display: none;
+}
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 999px;
+  opacity: 0.92;
+  filter: drop-shadow(0 4px 0 rgba(148, 163, 184, 0.25));
+  animation: cloudDrift linear infinite;
+}
+
+.cloudA {
+  width: 5.5rem;
+  height: 2rem;
+  top: 12%;
+  left: -6rem;
+  animation-duration: 28s;
+}
+
+.cloudB {
+  width: 7rem;
+  height: 2.4rem;
+  top: 22%;
+  left: -8rem;
+  animation-duration: 36s;
+  animation-delay: -8s;
+}
+
+.cloudC {
+  width: 4rem;
+  height: 1.6rem;
+  top: 8%;
+  left: -4rem;
+  animation-duration: 22s;
+  animation-delay: -14s;
+}
+
+@keyframes cloudDrift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw + 12rem));
+  }
+}
+
+.star {
+  position: absolute;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: #fff;
+  border-radius: 50%;
+  animation: starTwinkle 2s ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.hillBack {
+  position: absolute;
+  bottom: -2rem;
+  left: -10%;
+  width: 120%;
+  height: 8rem;
+  background: #86efac;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.7;
+}
+
+.hillFront {
+  position: absolute;
+  bottom: -3rem;
+  left: -5%;
+  width: 110%;
+  height: 6rem;
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+  border-radius: 50% 50% 0 0;
+  box-shadow: inset 0 8px 0 rgba(255, 255, 255, 0.2);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Hero stage */
+.stage {
+  display: block;
+}
+
+.signBoard {
+  border-radius: 0.9rem;
+  padding: 0.85rem 0.95rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+.signEyebrow {
+  margin: 0;
+  font-size: 0.64rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6366f1;
+}
+
+.signTitle {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: clamp(1.25rem, 3vw, 1.55rem);
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.15;
+}
+
+.signSub {
+  margin: 0.3rem 0 0;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #475569;
+  max-width: 40rem;
+  line-height: 1.4;
+}
+
+.pedestalWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0.25rem;
+}
+
+.pedestalGlow {
+  position: absolute;
+  bottom: 0.5rem;
+  width: 7rem;
+  height: 2rem;
+  background: radial-gradient(ellipse, rgba(255, 200, 0, 0.55), transparent 70%);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.15);
+  }
+}
+
+.trophyBounce {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 8px 0 #ca8a04);
+  animation: trophyBob 2.2s ease-in-out infinite;
+}
+
+@keyframes trophyBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+
+.pedestal {
+  width: 5.5rem;
+  height: 1.1rem;
+  margin-top: -0.35rem;
+  background: linear-gradient(180deg, #a78bfa, #7c3aed);
+  border-radius: 0.35rem;
+  box-shadow: 0 5px 0 #5b21b6;
+}
+
+/* Stat orbs */
+.orbRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+}
+
+.orb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.55rem 0.35rem;
+  border-radius: 999px;
+  border: 1px solid #d1d5db;
+  font-weight: 800;
+  font-size: 0.72rem;
+  color: #0f172a;
+  min-width: 5.5rem;
+}
+
+.orb strong {
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: 0.92rem;
+}
+
+.orbXp {
+  background: #fffbeb;
+  box-shadow: none;
+  color: #92400e;
+}
+
+.orbGem {
+  background: #ecfeff;
+  box-shadow: none;
+  color: #0e7490;
+}
+
+.orbReady {
+  background: #dcfce7;
+  box-shadow: none;
+  color: #166534;
+  animation: none;
+}
+
+.orbUnlock {
+  background: #eef2ff;
+  box-shadow: none;
+  color: #4338ca;
+}
+
+@keyframes orbPop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.orbIcon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+/* Tab dock */
+.tabDock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0.42rem;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  box-shadow: none;
+}
+
+.tab {
+  border: 1px solid #e2e8f0;
+  background: #fff;
+  color: #64748b;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.34rem 0.62rem;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab:active {
+  transform: none;
+  box-shadow: none;
+}
+
+.tabActive {
+  background: #4f46e5;
+  border-color: #4f46e5;
+  color: #fff;
+  box-shadow: none;
+}
+
+/* Mission cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 0.7rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 0.8rem;
+  padding: 0.72rem 0.72rem 0.66rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.42rem;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.2rem;
+  background: #e2e8f0;
+}
+
+.cardReady {
+  border-color: #86efac;
+  box-shadow: 0 0 0 2px #dcfce7;
+}
+
+.viewToggleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.viewToggleHint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #475569;
+  max-width: 28rem;
+}
+
+.viewToggleBtn {
+  border: 2px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  background: #fff;
+  color: #334155;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #94a3b8;
+}
+
+.viewToggleBtn:hover {
+  background: #f8fafc;
+}
+
+.cardClaimed {
+  border-color: #c4b5fd;
+  background: #faf5ff;
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.08);
+}
+
+.cardLocked {
+  background: #f8fafc;
+  border-color: #94a3b8;
+  box-shadow: none;
+}
+
+.cardLocked .cardInner {
+  opacity: 0.55;
+  filter: grayscale(0.4);
+}
+
+.lockOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.12);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.lockImg {
+  width: 2.5rem;
+  height: auto;
+  filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.2));
+}
+
+.sparkleRing {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  font-size: 1.25rem;
+  z-index: 2;
+  animation: sparkleSpin 3s linear infinite;
+}
+
+@keyframes sparkleSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding-top: 0.35rem;
+}
+
+.iconWrap {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: none;
+}
+
+.tier_bronze {
+  background: linear-gradient(145deg, #fdba74, #ea580c);
+}
+.tier_silver {
+  background: linear-gradient(145deg, #f8fafc, #94a3b8);
+}
+.tier_gold {
+  background: linear-gradient(145deg, #fde047, #ca8a04);
+}
+.tier_platinum {
+  background: linear-gradient(145deg, #e9d5ff, #7c3aed);
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.15;
+}
+
+.cardDesc {
+  margin: 0.2rem 0 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+.tierPill {
+  margin-left: auto;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.4rem;
+  background: #fef9c3;
+  color: #a16207;
+  border: 1px solid #fde047;
+  flex-shrink: 0;
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 0.5rem;
+  border-radius: 999px;
+  background: #e2e8f0;
+  border: 1px solid #cbd5e1;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #58cc02, #86efac, #ffc800);
+  transition: width 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.progressLabel {
+  font-size: 0.64rem;
+  font-weight: 800;
+  color: #16a34a;
+  min-width: 2.6rem;
+  text-align: right;
+}
+
+.rewardRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem;
+}
+
+.rewards {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.rewardChip {
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 0.22rem 0.5rem;
+  border-radius: 0.5rem;
+  background: #fef9c3;
+  color: #a16207;
+  border: 1px solid #fde047;
+  box-shadow: none;
+}
+
+.rewardChipGem {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #7dd3fc;
+  box-shadow: 0 2px 0 #0284c7;
+}
+
+.claimBtn {
+  border: none;
+  border-radius: 0.55rem;
+  padding: 0.4rem 0.78rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(180deg, #58cc02 0%, #46a302 100%);
+  box-shadow: none;
+  animation: none;
+}
+
+.claimBtn:active {
+  transform: none;
+  box-shadow: none;
+  animation: none;
+}
+
+@keyframes claimWiggle {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.claimedBadge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #7c3aed;
+  padding: 0.35rem 0.55rem;
+  background: #f3e8ff;
+  border-radius: 0.5rem;
+  border: 2px solid #c4b5fd;
+}
+
+.lockedBadge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #64748b;
+}
+
+/* Toast & confetti */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.7rem;
+  background: #111827;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 800;
+  border: 1px solid #1f2937;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.3);
+  max-width: 90vw;
+  text-align: center;
+}
+
+.confettiLayer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  overflow: hidden;
+}
+
+.confettiPiece {
+  position: absolute;
+  width: 0.55rem;
+  height: 0.9rem;
+  border-radius: 2px;
+  top: -1rem;
+}
+
+.tabCount {
+  display: inline-flex;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  margin-left: 0.25rem;
+  padding: 0 0.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #1cb0f6;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  box-shadow: 0 2px 0 #1899d6;
+}
+
+.tabReady {
+  background: #fef9c3;
+  border-color: #fde047;
+  color: #854d0e;
+  box-shadow: none;
+}
+
+.rankBar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  box-shadow: none;
+}
+
+.rankBarLabel {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #334155;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.rankBarTrack {
+  height: 0.5rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.rankBarFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #a855f7, #1cb0f6, #58cc02);
+  box-shadow: none;
+}
+
+.treasureChest {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 40;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: none;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #fde047, #f59e0b);
+  font-size: 1.6rem;
+  cursor: pointer;
+  box-shadow:
+    0 6px 0 #b45309,
+    0 16px 32px rgba(245, 158, 11, 0.45);
+  animation: none;
+}
+
+@keyframes chestBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+.cardPlatinum {
+  border-color: #c084fc;
+  background: linear-gradient(
+    135deg,
+    #faf5ff 0%,
+    #fff 40%,
+    #f0f9ff 100%
+  );
+  box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12);
+}
+
+.cardPlatinum::after {
+  display: none;
+}
+
+@keyframes platinumShine {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.hardBadge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.35rem;
+  background: linear-gradient(180deg, #fecaca, #f87171);
+  color: #7f1d1d;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+  box-shadow: 0 2px 0 #b91c1c;
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 1.3rem 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.loadMoreRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem 0.75rem;
+  margin-top: 0.15rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.7);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+}
+
+.loadMoreHint {
+  margin: 0;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.loadMoreBtn {
+  border: 2px solid #cbd5e1;
+  border-radius: 999px;
+  background: #fff;
+  color: #334155;
+  padding: 0.28rem 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 2px 0 #94a3b8;
+}
+
+.loadMoreBtn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #94a3b8;
+}
+
+@media (max-width: 1024px) {
+  .page {
+    border-radius: 1rem;
+  }
+
+  .content {
+    padding: 1rem 0.9rem 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .stage {
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .signBoard {
+    padding: 0.75rem 0.85rem 0.85rem;
+  }
+
+  .signSub {
+    font-size: 0.76rem;
+  }
+
+  .orb {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.55rem 0.4rem;
+    min-width: 0;
+  }
+
+  .orb strong {
+    font-size: 0.95rem;
+  }
+
+  .tab {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.65rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0.7rem;
+  }
+
+  .card {
+    padding: 0.8rem 0.75rem 0.72rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .page {
+    border-radius: 0.85rem;
+    min-height: auto;
+  }
+
+  .stage {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 0.65rem;
+  }
+
+  .signBoard {
+    transform: none;
+    width: 100%;
+    padding: 0.7rem 0.75rem 0.75rem;
+  }
+
+  .signEyebrow {
+    font-size: 0.62rem;
+  }
+
+  .signTitle {
+    font-size: clamp(1.35rem, 7.2vw, 1.8rem);
+  }
+
+  .signSub {
+    font-size: 0.72rem;
+    line-height: 1.3;
+  }
+
+  .pedestalWrap {
+    display: none;
+  }
+
+  .rankBar {
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.8rem;
+  }
+
+  .rankBarLabel {
+    font-size: 0.66rem;
+  }
+
+  .orbRow {
+    gap: 0.4rem;
+  }
+
+  .orb {
+    font-size: 0.69rem;
+    padding: 0.3rem 0.5rem 0.34rem;
+    border-width: 1.5px;
+  }
+
+  .orbIcon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .tabDock {
+    padding: 0.42rem;
+    gap: 0.35rem;
+    border-radius: 0.85rem;
+  }
+
+  .tab {
+    font-size: 0.66rem;
+    padding: 0.34rem 0.56rem;
+    border-radius: 0.62rem;
+    box-shadow: 0 2px 0 #cbd5e1;
+  }
+
+  .tabCount {
+    min-width: 1rem;
+    height: 1rem;
+    font-size: 0.56rem;
+  }
+
+  .viewToggleRow {
+    margin-bottom: 0.1rem;
+  }
+
+  .viewToggleHint {
+    font-size: 0.72rem;
+  }
+
+  .viewToggleBtn {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .cardTop {
+    gap: 0.5rem;
+  }
+
+  .iconWrap {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.8rem;
+  }
+
+  .cardTitle {
+    font-size: 0.92rem;
+  }
+
+  .cardDesc {
+    font-size: 0.68rem;
+  }
+
+  .tierPill {
+    font-size: 0.52rem;
+    padding: 0.16rem 0.32rem;
+  }
+
+  .progressTrack {
+    height: 0.56rem;
+  }
+
+  .progressLabel {
+    font-size: 0.64rem;
+    min-width: 2.1rem;
+  }
+
+  .rewardChip {
+    font-size: 0.62rem;
+    padding: 0.18rem 0.4rem;
+    border-width: 1.5px;
+    box-shadow: 0 1px 0 #ca8a04;
+  }
+
+  .claimBtn {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.58rem;
+    box-shadow: 0 3px 0 #3d8c02;
+  }
+
+  .claimedBadge,
+  .lockedBadge {
+    font-size: 0.66rem;
+  }
+
+  .toast {
+    bottom: 1rem;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.74rem;
+    border-width: 2px;
+    box-shadow: 0 4px 0 #a16207;
+  }
+
+  .treasureChest {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    width: 3.15rem;
+    height: 3.15rem;
+    border-radius: 0.75rem;
+    font-size: 1.45rem;
+    box-shadow:
+      0 4px 0 #b45309,
+      0 10px 18px rgba(245, 158, 11, 0.35);
+  }
+
+  .signSub {
+    max-width: none;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .treasureChest {
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+}

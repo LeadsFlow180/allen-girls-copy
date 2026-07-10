@@ -1,0 +1,171 @@
+.shell {
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.topBar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 1.25rem;
+  background: linear-gradient(135deg, #1e1b4b 0%, #4c1d95 55%, #312e81 100%);
+  color: #fff;
+  border-bottom: 3px solid #6d28d9;
+  box-shadow: 0 8px 24px rgba(76, 29, 149, 0.25);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.brandIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.brandTitle {
+  margin: 0;
+  font-size: 1.1rem;
+  line-height: 1.1;
+}
+
+.brandSub {
+  margin: 0.15rem 0 0;
+  font-size: 0.72rem;
+  opacity: 0.82;
+  font-weight: 700;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.signOutForm {
+  margin: 0;
+}
+
+.signOutBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.45rem 0.75rem;
+  border-radius: 0.65rem;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.signOutBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 999px;
+  background: #fbbf24;
+  color: #78350f;
+  font-weight: 900;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+}
+
+.profileName {
+  margin: 0;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.profileEmail {
+  margin: 0.1rem 0 0;
+  font-size: 0.68rem;
+  opacity: 0.8;
+  font-weight: 700;
+}
+
+.body {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem 1.25rem 2rem;
+}
+
+.sideNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  align-self: start;
+  position: sticky;
+  top: 5.5rem;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 4px 0 #e2e8f0;
+}
+
+.navLink,
+.navLinkMuted {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.7rem;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #475569;
+  text-decoration: none;
+}
+
+.navLink:hover {
+  background: #f1f5f9;
+}
+
+.navLinkActive {
+  background: linear-gradient(180deg, #ede9fe, #ddd6fe);
+  color: #5b21b6;
+  border: 1px solid #c4b5fd;
+}
+
+.navLinkMuted {
+  margin-top: 0.35rem;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.main {
+  min-width: 0;
+}
+
+@media (max-width: 900px) {
+  .body {
+    grid-template-columns: 1fr;
+  }
+
+  .sideNav {
+    position: static;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

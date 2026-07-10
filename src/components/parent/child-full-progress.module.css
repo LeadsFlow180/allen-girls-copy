@@ -1,0 +1,256 @@
+.wrap {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.55rem;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.75rem 0.9rem;
+  background: #f8fafc;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+@media (min-width: 640px) {
+  .head {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+}
+
+.heading {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+.subhead {
+  margin: 0.12rem 0 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  color: #94a3b8;
+}
+
+.summaryGrid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.75rem;
+  margin: 0;
+}
+
+.summaryItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 3.5rem;
+}
+
+.summaryItem dt {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+}
+
+.summaryItem dd {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #0f172a;
+  font-variant-numeric: tabular-nums;
+}
+
+.summaryStreak {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  color: #c2410c;
+}
+
+.tabBar {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-bottom: 1px solid #e2e8f0;
+  background: #ffffff;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.28rem;
+  padding: 0.62rem 0.45rem;
+  border: none;
+  border-bottom: 2px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #64748b;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.tab:hover {
+  color: #334155;
+  background: #f8fafc;
+}
+
+.tabActive {
+  color: #6d28d9;
+  border-bottom-color: #7c3aed;
+  background: #ffffff;
+}
+
+.tabCount {
+  display: inline-flex;
+  min-width: 1rem;
+  height: 1rem;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.2rem;
+  border-radius: 0.25rem;
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #64748b;
+  background: #f1f5f9;
+}
+
+.tabActive .tabCount {
+  color: #6d28d9;
+  background: #f5f3ff;
+}
+
+.tabPanel {
+  padding: 0;
+  min-height: 6rem;
+}
+
+.activityList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.activityItem {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  padding: 0.7rem 0.9rem;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.activityItem:last-child {
+  border-bottom: none;
+}
+
+.activityItem:hover {
+  background: #fafafa;
+}
+
+.activityTitle {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.45;
+}
+
+.activityMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem 0.75rem;
+}
+
+.activityTime {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: #94a3b8;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.chipWrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.28rem;
+}
+
+.badgeOk,
+.badgeProgress,
+.badgeQuiz {
+  display: inline-block;
+  padding: 0.1rem 0.38rem;
+  border-radius: 0.3rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+}
+
+.badgeOk {
+  background: #ecfdf5;
+  color: #047857;
+}
+
+.badgeProgress {
+  background: #eff6ff;
+  color: #0369a1;
+}
+
+.badgeQuiz {
+  background: #f8fafc;
+  color: #64748b;
+  border: 1px solid #e2e8f0;
+}
+
+.empty {
+  margin: 0;
+  padding: 1.5rem 1rem;
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  color: #94a3b8;
+}
+
+.checkpointBlock {
+  border-top: 1px solid #e2e8f0;
+  background: #f8fafc;
+}
+
+.checkpointTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0.65rem 0.9rem 0.35rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.64rem;
+  font-weight: 800;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.checkpointBlock .activityList {
+  background: #ffffff;
+}

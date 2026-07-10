@@ -1,0 +1,1445 @@
+/* Kids adventure world — Duolingo-style chunky 3D */
+
+.page {
+  position: relative;
+  min-height: 72vh;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 38%, #e0f2fe 62%, #dcfce7 100%);
+  box-shadow:
+    0 8px 0 #1899d6,
+    0 24px 48px rgba(24, 153, 214, 0.25);
+}
+
+.worldBg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  object-fit: cover;
+}
+
+.skyDecor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.sun {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.5rem;
+  width: 4.5rem;
+  height: 4.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff9c4, #ffc800 55%, #ff9600);
+  box-shadow: 0 0 40px rgba(255, 200, 0, 0.65);
+  animation: sunPulse 4s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 999px;
+  opacity: 0.92;
+  filter: drop-shadow(0 4px 0 rgba(148, 163, 184, 0.25));
+  animation: cloudDrift linear infinite;
+}
+
+.cloudA {
+  width: 5.5rem;
+  height: 2rem;
+  top: 12%;
+  left: -6rem;
+  animation-duration: 28s;
+}
+
+.cloudB {
+  width: 7rem;
+  height: 2.4rem;
+  top: 22%;
+  left: -8rem;
+  animation-duration: 36s;
+  animation-delay: -8s;
+}
+
+.cloudC {
+  width: 4rem;
+  height: 1.6rem;
+  top: 8%;
+  left: -4rem;
+  animation-duration: 22s;
+  animation-delay: -14s;
+}
+
+@keyframes cloudDrift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw + 12rem));
+  }
+}
+
+.star {
+  position: absolute;
+  width: 0.45rem;
+  height: 0.45rem;
+  background: #fff;
+  border-radius: 50%;
+  animation: starTwinkle 2s ease-in-out infinite;
+}
+
+.balloon {
+  --balloon-color: #f97316;
+  position: absolute;
+  width: 1.35rem;
+  height: 1.55rem;
+  border-radius: 50% 50% 48% 48%;
+  background: radial-gradient(circle at 35% 28%, #fff, var(--balloon-color) 45%, color-mix(in srgb, var(--balloon-color) 70%, #000) 100%);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--balloon-color) 65%, #000);
+  animation: balloonFloat ease-in-out infinite;
+  z-index: 1;
+}
+
+.balloonString {
+  position: absolute;
+  left: 50%;
+  top: 1.45rem;
+  width: 1px;
+  height: 1.1rem;
+  background: rgba(71, 85, 105, 0.65);
+  transform: translateX(-50%);
+}
+
+@keyframes balloonFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-14px) rotate(4deg);
+  }
+}
+
+.car {
+  --car-color: #1cb0f6;
+  position: absolute;
+  left: -3rem;
+  width: 2.4rem;
+  height: 0.95rem;
+  border-radius: 0.55rem 0.7rem 0.4rem 0.4rem;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--car-color) 85%, #fff), var(--car-color));
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--car-color) 68%, #000);
+  animation: carDrive linear infinite;
+  opacity: 0.9;
+}
+
+.car::before,
+.car::after {
+  content: "";
+  position: absolute;
+  bottom: -0.28rem;
+  width: 0.42rem;
+  height: 0.42rem;
+  border-radius: 50%;
+  background: #1e293b;
+  border: 1px solid #94a3b8;
+}
+
+.car::before {
+  left: 0.35rem;
+}
+
+.car::after {
+  right: 0.35rem;
+}
+
+@keyframes carDrive {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw + 6rem));
+  }
+}
+
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.hillBack {
+  position: absolute;
+  bottom: -2rem;
+  left: -10%;
+  width: 120%;
+  height: 8rem;
+  background: #86efac;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.7;
+}
+
+.hillFront {
+  position: absolute;
+  bottom: -3rem;
+  left: -5%;
+  width: 110%;
+  height: 6rem;
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+  border-radius: 50% 50% 0 0;
+  box-shadow: inset 0 8px 0 rgba(255, 255, 255, 0.2);
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 1.25rem 1.1rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.heroDashboard {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 0.9rem;
+  align-items: stretch;
+}
+
+.heroMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.heroAside {
+  border-radius: 1.05rem;
+  padding: 0.85rem 0.8rem;
+  background:
+    linear-gradient(180deg, rgba(15, 23, 42, 0.72), rgba(30, 27, 75, 0.78)),
+    radial-gradient(circle at 80% 0%, rgba(168, 85, 247, 0.35), transparent 45%);
+  border: 2px solid rgba(196, 181, 253, 0.65);
+  box-shadow:
+    0 6px 0 rgba(91, 33, 182, 0.7),
+    0 16px 28px rgba(15, 23, 42, 0.35);
+  color: #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.asideLabel {
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+}
+
+.asideTitle {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #f8fafc;
+  line-height: 1.15;
+}
+
+.asideStats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+  margin-top: 0.25rem;
+}
+
+.asideStat {
+  border-radius: 0.75rem;
+  padding: 0.5rem 0.45rem;
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(196, 181, 253, 0.42);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.asideStatKey {
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #cbd5e1;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.asideStat strong {
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: 1rem;
+  color: #fef08a;
+  line-height: 1.1;
+}
+
+.asidePrimaryBtn {
+  margin-top: auto;
+  border: none;
+  border-radius: 0.72rem;
+  padding: 0.56rem 0.68rem;
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  color: #0f172a;
+  background: linear-gradient(180deg, #fef08a, #facc15);
+  box-shadow: 0 4px 0 #ca8a04;
+  cursor: pointer;
+}
+
+.asidePrimaryBtn:disabled {
+  opacity: 0.58;
+  cursor: default;
+  box-shadow: 0 3px 0 #64748b;
+  background: #94a3b8;
+  color: #f8fafc;
+}
+
+.asideSecondaryBtn {
+  border: 2px solid rgba(226, 232, 240, 0.3);
+  border-radius: 0.65rem;
+  padding: 0.42rem 0.58rem;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e2e8f0;
+  font-size: 0.7rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.marqueeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.45rem 0.5rem;
+  border-radius: 0.9rem;
+  background: rgba(255, 255, 255, 0.5);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(5px);
+}
+
+.marqueeChip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.58rem;
+  border-radius: 999px;
+  font-size: 0.66rem;
+  font-weight: 800;
+  color: #5b21b6;
+  background: linear-gradient(180deg, #fff, #f8fafc);
+  border: 1px solid #ddd6fe;
+  box-shadow: 0 2px 0 #c4b5fd;
+}
+
+/* Hero stage */
+.stage {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: end;
+}
+
+.signBoard {
+  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+  border: 3px solid #ca8a04;
+  border-radius: 1rem;
+  padding: 0.85rem 1rem 1rem;
+  box-shadow:
+    0 6px 0 #a16207,
+    0 12px 24px rgba(161, 98, 7, 0.2);
+  transform: rotate(-1deg);
+}
+
+.signEyebrow {
+  margin: 0;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b45309;
+}
+
+.signTitle {
+  margin: 0.15rem 0 0;
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: clamp(1.75rem, 5vw, 2.35rem);
+  font-weight: 800;
+  color: #78350f;
+  line-height: 1.05;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6);
+}
+
+.signSub {
+  margin: 0.4rem 0 0;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #92400e;
+  max-width: 20rem;
+  line-height: 1.4;
+}
+
+.pedestalWrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0.25rem;
+}
+
+.pedestalGlow {
+  position: absolute;
+  bottom: 0.5rem;
+  width: 7rem;
+  height: 2rem;
+  background: radial-gradient(ellipse, rgba(255, 200, 0, 0.55), transparent 70%);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.15);
+  }
+}
+
+.trophyBounce {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 8px 0 #ca8a04);
+  animation: trophyBob 2.2s ease-in-out infinite;
+}
+
+@keyframes trophyBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(3deg);
+  }
+}
+
+.pedestal {
+  width: 5.5rem;
+  height: 1.1rem;
+  margin-top: -0.35rem;
+  background: linear-gradient(180deg, #a78bfa, #7c3aed);
+  border-radius: 0.35rem;
+  box-shadow: 0 5px 0 #5b21b6;
+}
+
+/* Stat orbs */
+.orbRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.orb {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.7rem 0.45rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.65);
+  font-weight: 800;
+  font-size: 0.82rem;
+  color: #fff;
+  min-width: 5.5rem;
+}
+
+.orb strong {
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: 1.05rem;
+}
+
+.orbXp {
+  background: linear-gradient(180deg, #fde047, #eab308);
+  box-shadow: 0 4px 0 #ca8a04;
+  color: #713f12;
+}
+
+.orbGem {
+  background: linear-gradient(180deg, #67e8f9, #0ea5e9);
+  box-shadow: 0 4px 0 #0369a1;
+}
+
+.orbReady {
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+  box-shadow: 0 4px 0 #15803d;
+  animation: orbPop 1.5s ease-in-out infinite;
+}
+
+.orbUnlock {
+  background: linear-gradient(180deg, #c4b5fd, #8b5cf6);
+  box-shadow: 0 4px 0 #6d28d9;
+}
+
+@keyframes orbPop {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+.orbIcon {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+/* Tab dock */
+.tabDock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.55rem;
+  border-radius: 1.1rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 4px 0 rgba(148, 163, 184, 0.25);
+}
+
+.contentShell {
+  border-radius: 1.2rem;
+  padding: 0.75rem 0.72rem 0.8rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(248, 250, 252, 0.9)),
+    radial-gradient(circle at 90% 0%, rgba(168, 85, 247, 0.12), transparent 46%);
+  border: 2px solid rgba(255, 255, 255, 0.95);
+  box-shadow:
+    0 8px 20px rgba(15, 23, 42, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+
+.tab {
+  border: 2px solid #e2e8f0;
+  background: linear-gradient(180deg, #fff, #f1f5f9);
+  color: #64748b;
+  font-size: 0.76rem;
+  font-weight: 800;
+  padding: 0.45rem 0.8rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #cbd5e1;
+  transition: transform 0.1s ease;
+}
+
+.tab:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #cbd5e1;
+}
+
+.tabActive {
+  background: linear-gradient(180deg, #bbf7d0, #86efac);
+  border-color: #22c55e;
+  color: #166534;
+  box-shadow: 0 4px 0 #15803d;
+}
+
+/* Mission cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(268px, 1fr));
+  gap: 0.85rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 1.15rem;
+  padding: 0.95rem 0.95rem 0.85rem;
+  background: linear-gradient(180deg, #fffef8 0%, #fff 45%);
+  border: 3px solid #e2e8f0;
+  box-shadow: 0 5px 0 #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.45rem;
+  background: repeating-linear-gradient(
+    90deg,
+    #58cc02 0,
+    #58cc02 12px,
+    #ffc800 12px,
+    #ffc800 24px,
+    #1cb0f6 24px,
+    #1cb0f6 36px
+  );
+}
+
+.cardReady {
+  border-color: #22c55e;
+  box-shadow:
+    0 5px 0 #16a34a,
+    0 0 12px rgba(34, 197, 94, 0.2);
+}
+
+.viewToggleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.35rem;
+}
+
+.viewToggleHint {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #475569;
+  max-width: 28rem;
+}
+
+.viewToggleBtn {
+  border: 2px solid #cbd5e1;
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  background: #fff;
+  color: #334155;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #94a3b8;
+}
+
+.viewToggleBtn:hover {
+  background: #f8fafc;
+}
+
+.cardClaimed {
+  border-color: #a78bfa;
+  background: linear-gradient(180deg, #faf5ff, #fff);
+  box-shadow: 0 5px 0 #7c3aed;
+}
+
+.cardLocked {
+  background: linear-gradient(180deg, #f1f5f9, #e2e8f0);
+  border-color: #94a3b8;
+  box-shadow: 0 5px 0 #64748b;
+}
+
+.cardLocked .cardInner {
+  opacity: 0.55;
+  filter: grayscale(0.4);
+}
+
+.lockOverlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.12);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.lockImg {
+  width: 2.5rem;
+  height: auto;
+  filter: drop-shadow(0 3px 0 rgba(0, 0, 0, 0.2));
+}
+
+.sparkleRing {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.65rem;
+  font-size: 1.25rem;
+  z-index: 2;
+  animation: sparkleSpin 3s linear infinite;
+}
+
+@keyframes sparkleSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.cardTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding-top: 0.1rem;
+}
+
+.cardBanner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem;
+  margin-bottom: 0.2rem;
+}
+
+.categoryPill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.16rem 0.48rem;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.iconWrap {
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.12);
+}
+
+.tier_bronze {
+  background: linear-gradient(145deg, #fdba74, #ea580c);
+}
+.tier_silver {
+  background: linear-gradient(145deg, #f8fafc, #94a3b8);
+}
+.tier_gold {
+  background: linear-gradient(145deg, #fde047, #ca8a04);
+}
+.tier_platinum {
+  background: linear-gradient(145deg, #e9d5ff, #7c3aed);
+}
+
+.cardTitle {
+  margin: 0;
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.15;
+}
+
+.cardDesc {
+  margin: 0.2rem 0 0;
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: #64748b;
+  line-height: 1.35;
+}
+
+.tierPill {
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.45rem;
+  border-radius: 0.4rem;
+  background: #fef9c3;
+  color: #a16207;
+  border: 1px solid #fde047;
+  flex-shrink: 0;
+}
+
+.progressRow {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.progressMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin-top: -0.15rem;
+}
+
+.progressMetaChip {
+  font-size: 0.58rem;
+  font-weight: 800;
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  padding: 0.12rem 0.42rem;
+}
+
+.progressMetaReady {
+  color: #166534;
+  background: #dcfce7;
+  border-color: #86efac;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 0.65rem;
+  border-radius: 999px;
+  background: #e2e8f0;
+  border: 2px solid #cbd5e1;
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #58cc02, #86efac, #ffc800);
+  transition: width 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.progressLabel {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #16a34a;
+  min-width: 2.6rem;
+  text-align: right;
+}
+
+.rewardRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem;
+}
+
+.rewards {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.rewardChip {
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.22rem 0.5rem;
+  border-radius: 0.5rem;
+  background: #fef9c3;
+  color: #a16207;
+  border: 2px solid #fde047;
+  box-shadow: 0 2px 0 #ca8a04;
+  transition: transform 120ms ease;
+}
+
+.rewardChipGem {
+  background: #e0f2fe;
+  color: #0369a1;
+  border-color: #7dd3fc;
+  box-shadow: 0 2px 0 #0284c7;
+}
+
+.rewardChip:hover {
+  transform: translateY(-1px);
+}
+
+.claimBtn {
+  border: none;
+  border-radius: 0.7rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(180deg, #58cc02 0%, #46a302 100%);
+  box-shadow: 0 5px 0 #3d8c02;
+  animation: claimWiggle 2s ease-in-out infinite;
+}
+
+.claimBtn:active {
+  transform: translateY(4px);
+  box-shadow: 0 1px 0 #3d8c02;
+  animation: none;
+}
+
+@keyframes claimWiggle {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.03);
+  }
+}
+
+.claimedBadge {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #7c3aed;
+  padding: 0.35rem 0.55rem;
+  background: #f3e8ff;
+  border-radius: 0.5rem;
+  border: 2px solid #c4b5fd;
+  box-shadow: 0 2px 0 #a78bfa;
+}
+
+.lockedBadge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #64748b;
+  padding: 0.2rem 0.46rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
+}
+
+/* Toast & confetti */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  padding: 0.85rem 1.25rem;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #fef08a, #facc15);
+  color: #713f12;
+  font-size: 0.9rem;
+  font-weight: 800;
+  border: 3px solid #ca8a04;
+  box-shadow: 0 6px 0 #a16207;
+  max-width: 90vw;
+  text-align: center;
+}
+
+.confettiLayer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99;
+  overflow: hidden;
+}
+
+.confettiPiece {
+  position: absolute;
+  width: 0.55rem;
+  height: 0.9rem;
+  border-radius: 2px;
+  top: -1rem;
+}
+
+.tabCount {
+  display: inline-flex;
+  min-width: 1.1rem;
+  height: 1.1rem;
+  margin-left: 0.25rem;
+  padding: 0 0.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background: #1cb0f6;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  box-shadow: 0 2px 0 #1899d6;
+}
+
+.tabReady {
+  background: linear-gradient(180deg, #fef08a, #fde047);
+  border-color: #eab308;
+  color: #854d0e;
+  box-shadow: 0 4px 0 #ca8a04;
+}
+
+.rankBar {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 1rem;
+  background: linear-gradient(90deg, rgba(124, 34, 197, 0.12), rgba(28, 176, 246, 0.12));
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 0 rgba(148, 163, 184, 0.2);
+}
+
+.rankBarLabel {
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #5b21b6;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.rankBarTrack {
+  height: 0.65rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.85);
+  overflow: hidden;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.rankBarFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #a855f7, #1cb0f6, #58cc02);
+  box-shadow: 0 0 12px rgba(88, 204, 2, 0.5);
+}
+
+.treasureChest {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 40;
+  width: 4.5rem;
+  height: 4.5rem;
+  border: none;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #fde047, #f59e0b);
+  font-size: 2.25rem;
+  cursor: pointer;
+  box-shadow:
+    0 6px 0 #b45309,
+    0 16px 32px rgba(245, 158, 11, 0.45);
+  animation: chestBob 1.2s ease-in-out infinite;
+}
+
+@keyframes chestBob {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-2deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(2deg);
+  }
+}
+
+.cardPlatinum {
+  border-color: #c084fc;
+  background: linear-gradient(
+    135deg,
+    #faf5ff 0%,
+    #fff 40%,
+    #f0f9ff 100%
+  );
+  box-shadow:
+    0 5px 0 #7c3aed,
+    0 0 24px rgba(168, 85, 247, 0.25);
+}
+
+.cardPlatinum::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 60%
+  );
+  animation: platinumShine 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes platinumShine {
+  0% {
+    transform: translateX(-120%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.hardBadge {
+  display: inline-block;
+  margin-left: 0.35rem;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.35rem;
+  background: linear-gradient(180deg, #fecaca, #f87171);
+  color: #7f1d1d;
+  font-size: 0.58rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  vertical-align: middle;
+  box-shadow: 0 2px 0 #b91c1c;
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 2rem 1rem;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+/* Premium motion and depth overrides */
+.card {
+  border: 2px solid #dbeafe;
+  transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
+}
+
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.45) 50%,
+    transparent 62%
+  );
+  transform: translateX(-130%);
+  transition: transform 500ms ease;
+  pointer-events: none;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #c4b5fd;
+  box-shadow:
+    0 7px 0 #a78bfa,
+    0 16px 28px rgba(139, 92, 246, 0.2);
+}
+
+.card:hover::after {
+  transform: translateX(130%);
+}
+
+.progressTrack {
+  height: 0.6rem;
+}
+
+.progressFill {
+  background: linear-gradient(90deg, #58cc02, #86efac, #22d3ee, #ffc800);
+}
+
+.claimBtn:hover {
+  filter: brightness(1.03);
+}
+
+@media (max-width: 1024px) {
+  .heroDashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .heroAside {
+    order: -1;
+  }
+
+  .page {
+    border-radius: 1rem;
+  }
+
+  .content {
+    padding: 1rem 0.9rem 1.2rem;
+    gap: 0.8rem;
+  }
+
+  .stage {
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .signBoard {
+    padding: 0.75rem 0.85rem 0.85rem;
+  }
+
+  .signSub {
+    font-size: 0.76rem;
+  }
+
+  .orb {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.55rem 0.4rem;
+    min-width: 0;
+  }
+
+  .orb strong {
+    font-size: 0.95rem;
+  }
+
+  .tab {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.65rem;
+  }
+
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 0.7rem;
+  }
+
+  .card {
+    padding: 0.8rem 0.75rem 0.72rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .balloon {
+    width: 1rem;
+    height: 1.2rem;
+  }
+
+  .balloonString {
+    top: 1.1rem;
+    height: 0.75rem;
+  }
+
+  .car {
+    width: 1.85rem;
+    height: 0.74rem;
+  }
+
+  .heroAside {
+    padding: 0.65rem 0.6rem;
+    border-radius: 0.85rem;
+    box-shadow:
+      0 4px 0 rgba(91, 33, 182, 0.7),
+      0 10px 16px rgba(15, 23, 42, 0.28);
+  }
+
+  .asideTitle {
+    font-size: 0.92rem;
+  }
+
+  .asideStats {
+    gap: 0.35rem;
+  }
+
+  .asidePrimaryBtn {
+    font-size: 0.7rem;
+    padding: 0.46rem 0.55rem;
+  }
+
+  .asideSecondaryBtn {
+    font-size: 0.64rem;
+    padding: 0.36rem 0.46rem;
+  }
+
+  .page {
+    border-radius: 0.85rem;
+    min-height: auto;
+  }
+
+  .stage {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 0.65rem;
+  }
+
+  .signBoard {
+    transform: none;
+    width: 100%;
+    padding: 0.7rem 0.75rem 0.75rem;
+  }
+
+  .signEyebrow {
+    font-size: 0.62rem;
+  }
+
+  .signTitle {
+    font-size: clamp(1.35rem, 7.2vw, 1.8rem);
+  }
+
+  .signSub {
+    font-size: 0.72rem;
+    line-height: 1.3;
+  }
+
+  .pedestalWrap {
+    display: none;
+  }
+
+  .rankBar {
+    padding: 0.5rem 0.6rem;
+    border-radius: 0.8rem;
+  }
+
+  .rankBarLabel {
+    font-size: 0.66rem;
+  }
+
+  .orbRow {
+    gap: 0.4rem;
+  }
+
+  .orb {
+    font-size: 0.69rem;
+    padding: 0.3rem 0.5rem 0.34rem;
+    border-width: 1.5px;
+  }
+
+  .orbIcon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .tabDock {
+    padding: 0.42rem;
+    gap: 0.35rem;
+    border-radius: 0.85rem;
+  }
+
+  .contentShell {
+    padding: 0.58rem 0.52rem 0.62rem;
+    border-radius: 0.92rem;
+  }
+
+  .marqueeRow {
+    gap: 0.35rem;
+    padding: 0.36rem 0.4rem;
+  }
+
+  .marqueeChip {
+    font-size: 0.58rem;
+    padding: 0.16rem 0.46rem;
+  }
+
+  .tab {
+    font-size: 0.66rem;
+    padding: 0.34rem 0.56rem;
+    border-radius: 0.62rem;
+    box-shadow: 0 2px 0 #cbd5e1;
+  }
+
+  .tabCount {
+    min-width: 1rem;
+    height: 1rem;
+    font-size: 0.56rem;
+  }
+
+  .viewToggleRow {
+    margin-bottom: 0.1rem;
+  }
+
+  .viewToggleHint {
+    font-size: 0.72rem;
+  }
+
+  .viewToggleBtn {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .cardTop {
+    gap: 0.5rem;
+  }
+
+  .iconWrap {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.8rem;
+  }
+
+  .cardTitle {
+    font-size: 0.92rem;
+  }
+
+  .cardDesc {
+    font-size: 0.68rem;
+  }
+
+  .tierPill {
+    font-size: 0.52rem;
+    padding: 0.16rem 0.32rem;
+  }
+
+  .progressTrack {
+    height: 0.56rem;
+  }
+
+  .progressLabel {
+    font-size: 0.64rem;
+    min-width: 2.1rem;
+  }
+
+  .rewardChip {
+    font-size: 0.62rem;
+    padding: 0.18rem 0.4rem;
+    border-width: 1.5px;
+    box-shadow: 0 1px 0 #ca8a04;
+  }
+
+  .claimBtn {
+    font-size: 0.72rem;
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.58rem;
+    box-shadow: 0 3px 0 #3d8c02;
+  }
+
+  .claimedBadge,
+  .lockedBadge {
+    font-size: 0.66rem;
+  }
+
+  .toast {
+    bottom: 1rem;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.74rem;
+    border-width: 2px;
+    box-shadow: 0 4px 0 #a16207;
+  }
+
+  .treasureChest {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    width: 3.15rem;
+    height: 3.15rem;
+    border-radius: 0.75rem;
+    font-size: 1.45rem;
+    box-shadow:
+      0 4px 0 #b45309,
+      0 10px 18px rgba(245, 158, 11, 0.35);
+  }
+
+  .signSub {
+    max-width: none;
+  }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .treasureChest {
+    right: 0.75rem;
+    bottom: 0.75rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .balloon,
+  .car {
+    animation: none;
+  }
+}

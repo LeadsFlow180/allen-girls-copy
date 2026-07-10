@@ -1,0 +1,199 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  padding: 0.75rem 0 1.25rem;
+  isolation: isolate;
+}
+
+/* Spark scroll guide sits on the right — inset learn pages only */
+@media (min-width: 900px) {
+  .page {
+    padding-right: 3.5rem;
+  }
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.1rem;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.aside {
+  flex-shrink: 0;
+}
+
+.sidebarWrap {
+  flex-shrink: 0;
+  order: -1;
+}
+
+.topBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.topBarStart {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+/* 3D chip buttons — matches /learn/courses back & speak controls */
+.chipBtn {
+  border: 2px solid #e8e8e8;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+  color: #6b7280;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+  font-weight: 700;
+  box-shadow: 0 3px 0 #d1d5db;
+  transition: transform 120ms ease, box-shadow 120ms ease;
+}
+
+.chipBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #d1d5db;
+}
+
+.backBtn {
+  font-size: 0.82rem;
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.75rem;
+}
+
+.backBtnIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.langBtn {
+  padding: 0.38rem 0.5rem;
+  border-radius: 0.75rem;
+}
+
+.menuToggle {
+  display: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border-radius: 0.75rem;
+  color: #46a302;
+}
+
+.sidebarBackdrop {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .aside {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .page {
+    padding: 0.35rem 0 1rem;
+  }
+
+  .shell {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0 0.65rem;
+    gap: 0;
+  }
+
+  /* Learning path & unit content first — sidebar not above hero */
+  .main {
+    order: 1;
+    gap: 0.35rem;
+  }
+
+  .sidebarWrap {
+    order: 2;
+    display: none;
+  }
+
+  .menuToggle {
+    display: inline-flex;
+  }
+
+  .sidebarBackdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 55;
+    border: none;
+    padding: 0;
+    margin: 0;
+    background: rgba(15, 23, 42, 0.45);
+    cursor: pointer;
+    animation: fadeIn 0.2s ease;
+  }
+
+  .sidebarWrapOpen {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 56;
+    pointer-events: none;
+  }
+
+  .sidebarWrapOpen > aside {
+    pointer-events: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .page {
+    padding: 0.25rem 0 0.85rem;
+  }
+
+  .shell {
+    padding: 0 0.5rem;
+  }
+
+  .menuToggle {
+    width: 36px;
+    height: 36px;
+    border-radius: 0.65rem;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chipBtn {
+    transition: none;
+  }
+}

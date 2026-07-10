@@ -1,0 +1,687 @@
+/* Family Controls — unified hub card */
+
+.world {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 58, 237, 0.06), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 100% 20%, rgba(236, 72, 153, 0.04), transparent 50%),
+    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+}
+
+.auroraA,
+.auroraB {
+  position: absolute;
+  width: 140%;
+  height: 50%;
+  left: -20%;
+  filter: blur(64px);
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+.auroraA {
+  top: -10%;
+  background: linear-gradient(100deg, transparent, rgba(167, 139, 250, 0.12), transparent);
+}
+
+.auroraB {
+  top: 30%;
+  background: linear-gradient(80deg, transparent, rgba(244, 114, 182, 0.08), transparent);
+}
+
+.guardianPage {
+  position: relative;
+  min-height: calc(100vh - 4rem);
+}
+
+.guardianShell {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 56rem);
+  margin: 0 auto;
+  padding: 1.25rem 1rem 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .guardianShell {
+    padding: 1.75rem 1.25rem 3rem;
+  }
+}
+
+/* ── Unified hub frame ─────────────────────────────────────────────── */
+
+.hubFrame {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #e8e8ef;
+  border-radius: 1.15rem;
+  box-shadow:
+    0 4px 24px rgba(15, 23, 42, 0.06),
+    0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  overflow: hidden;
+}
+
+.hubFrame::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #7c3aed 0%, #a855f7 45%, #ec4899 100%);
+  z-index: 1;
+}
+
+.hubHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem 1.2rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+}
+
+.brandBlock {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-width: 0;
+}
+
+.brandIconWrap {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.7rem;
+  display: grid;
+  place-items: center;
+  color: #7c22c5;
+  background: #faf5ff;
+  border: 1px solid #ede9fe;
+}
+
+.brandTitle {
+  margin: 0;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.15;
+  color: #0f172a;
+}
+
+.brandKicker {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.topBarActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  flex-shrink: 0;
+}
+
+.guardianBadge {
+  font-family: "Nunito", sans-serif;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #6d28d9;
+  background: #faf5ff;
+  border: 1px solid #ede9fe;
+}
+
+.signOutBtn {
+  flex-shrink: 0;
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  padding: 0.45rem 0.8rem !important;
+  height: auto !important;
+  border: 1px solid #e5e7eb !important;
+  background: #ffffff !important;
+  color: #475569 !important;
+  border-radius: 0.55rem !important;
+  box-shadow: none !important;
+}
+
+.signOutBtn:hover {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+/* ── Tabs ─────────────────────────────────────────────────────────── */
+
+.tabNav {
+  display: flex;
+  overflow-x: auto;
+  scrollbar-width: none;
+  gap: 0.15rem;
+  padding: 0.35rem 0.65rem;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafafa;
+}
+
+.tabNav::-webkit-scrollbar {
+  display: none;
+}
+
+.tabLink {
+  flex: 1 0 auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.55rem;
+  text-decoration: none;
+  color: #64748b;
+  transition: color 0.15s ease, background 0.15s ease;
+}
+
+.tabLink:hover {
+  color: #334155;
+  background: #f1f5f9;
+}
+
+.tabLinkActive {
+  color: #7c22c5;
+  font-weight: 700;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.tabLinkLabel {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: inherit;
+  white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+  .tabLinkLabel {
+    font-size: 0.72rem;
+  }
+}
+
+/* ── Page brief (sub-pages) ───────────────────────────────────────── */
+
+.pageBrief {
+  padding: 1.1rem 1.35rem;
+  border-bottom: 1px solid #f1f5f9;
+  background: #ffffff;
+}
+
+.pageBriefTag {
+  display: inline-block;
+  margin-bottom: 0.3rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #94a3b8;
+}
+
+.pageBriefTitle {
+  margin: 0 0 0.25rem;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.1rem;
+  color: #0f172a;
+}
+
+.pageBriefLead {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #64748b;
+}
+
+.hubBody {
+  min-height: 8rem;
+}
+
+.hubBodyPad {
+  padding: 0.85rem 1rem 1.15rem;
+}
+
+/* ── Home dashboard ───────────────────────────────────────────────── */
+
+.homePanel {
+  display: flex;
+  flex-direction: column;
+}
+
+.homePanelHeader {
+  padding: 1.5rem 1.35rem 1.25rem;
+  background: linear-gradient(135deg, #faf5ff 0%, #ffffff 62%);
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.homeWrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.homeHero {
+  padding: 1.5rem 1.35rem 1.25rem;
+  background: linear-gradient(135deg, #faf5ff 0%, #ffffff 55%);
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.homeProfile {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.homeAvatar {
+  flex-shrink: 0;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.35rem;
+  color: #7c22c5;
+  background: #ffffff;
+  border: 2px solid #ede9fe;
+  box-shadow: 0 4px 12px rgba(124, 34, 197, 0.1);
+}
+
+.homeProfileText {
+  min-width: 0;
+}
+
+.homeGreeting {
+  margin: 0 0 0.15rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #94a3b8;
+}
+
+.homeName {
+  margin: 0;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.55rem;
+  line-height: 1.15;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.homeEmail {
+  margin: 0.3rem 0 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.84rem;
+  color: #64748b;
+  word-break: break-word;
+}
+
+.homeStatus {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.1rem;
+}
+
+.statusChip,
+.statusChipMuted {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+}
+
+.statusChip {
+  color: #6d28d9;
+  background: #ffffff;
+  border: 1px solid #ddd6fe;
+}
+
+.statusChipMuted {
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.statStrip {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-top: 1.15rem;
+}
+
+.statTile {
+  padding: 0.85rem 0.9rem;
+  border-radius: 0.75rem;
+  background: #ffffff;
+  border: 1px solid #ede9fe;
+  box-shadow: 0 1px 2px rgba(124, 58, 237, 0.04);
+}
+
+.statValue {
+  display: block;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.35rem;
+  line-height: 1.1;
+  color: #5b21b6;
+}
+
+.statLabel {
+  display: block;
+  margin-top: 0.15rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.homePanelBody {
+  padding: 1.25rem 1.35rem 1.15rem;
+}
+
+.homeSection {
+  padding: 1.25rem 1.35rem 1.1rem;
+}
+
+.sectionIntro {
+  margin-bottom: 1rem;
+}
+
+.sectionTitle {
+  margin: 0 0 0.2rem;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.sectionLead {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+.toolGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.65rem;
+}
+
+@media (min-width: 520px) {
+  .toolGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.toolCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  padding: 1rem;
+  border-radius: 0.85rem;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  text-decoration: none;
+  color: inherit;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+}
+
+.toolCard:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  transform: translateY(-2px);
+}
+
+.toolCardViolet .toolIcon {
+  color: #7c3aed;
+  background: #f5f3ff;
+  border-color: #ddd6fe;
+}
+
+.toolCardSky .toolIcon {
+  color: #0284c7;
+  background: #f0f9ff;
+  border-color: #bae6fd;
+}
+
+.toolCardEmerald .toolIcon {
+  color: #059669;
+  background: #ecfdf5;
+  border-color: #a7f3d0;
+}
+
+.toolCardAmber .toolIcon {
+  color: #d97706;
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.toolCardViolet:hover {
+  border-color: #c4b5fd;
+}
+
+.toolCardSky:hover {
+  border-color: #7dd3fc;
+}
+
+.toolCardEmerald:hover {
+  border-color: #6ee7b7;
+}
+
+.toolCardAmber:hover {
+  border-color: #fcd34d;
+}
+
+.toolIcon {
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 0.7rem;
+  display: grid;
+  place-items: center;
+  color: #0f172a;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+}
+
+.toolCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.toolArrow {
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+  color: #cbd5e1;
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.toolCard:hover .toolArrow {
+  color: #7c22c5;
+  transform: translateX(2px);
+}
+
+.toolLabel {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.toolHint {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: #64748b;
+}
+
+.homeGuide {
+  padding: 1rem 1.35rem 1.15rem;
+  background: #fafafa;
+  border-top: 1px solid #f1f5f9;
+}
+
+.guideTitle {
+  margin: 0 0 0.75rem;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 0.92rem;
+  color: #0f172a;
+}
+
+.guideList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.guideItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.guideStep {
+  flex-shrink: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #6d28d9;
+  background: #ffffff;
+  border: 1px solid #ddd6fe;
+}
+
+.guideText {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: #475569;
+  padding-top: 0.1rem;
+}
+
+.homePanelFooter,
+.homeFooter {
+  padding: 0.95rem 1.35rem 1.15rem;
+  background: #ffffff;
+  border-top: 1px solid #f1f5f9;
+}
+
+.footerNote {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.45rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #64748b;
+  text-align: left;
+}
+
+.footerIcon {
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+  color: #94a3b8;
+}
+
+/* ── Legacy sub-page panels ───────────────────────────────────────── */
+
+.panel3d {
+  border-radius: 0.85rem;
+  border: 1px solid #e8e8ef;
+  background: #ffffff;
+  padding: 1.1rem 1.15rem;
+}
+
+.statGrid3d {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+}
+
+.statPod {
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.statPodLabel {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #64748b;
+}
+
+.statPodValue {
+  display: block;
+  margin-top: 0.2rem;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.hintGlow {
+  margin: 0.75rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.75rem;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: #475569;
+  background: #faf5ff;
+  border: 1px solid #ede9fe;
+}
+
+.panelKicker {
+  display: inline-block;
+  margin: 0 0 0.5rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6d28d9;
+  background: #f5f3ff;
+  border: 1px solid #e9d5ff;
+}
+
+.codePanel {
+  position: relative;
+}

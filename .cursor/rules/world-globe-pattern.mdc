@@ -1,0 +1,117 @@
+---
+description: Pattern for adding world icons, 3D globe textures, and embedded Vimeo videos to the WorldGlobe component
+globs: src/components/WorldGlobe.tsx
+alwaysApply: false
+---
+
+# World Globe — Icon, Texture & Video Pattern
+
+## Files involved
+- `src/components/WorldGlobe.tsx` — all globe logic lives here
+- `public/` — all images and icons must be copied here for Three.js to access them
+- `src/assets/images/` — original source images (not directly usable by Three.js)
+
+---
+
+## Step 1 — Copy icon to public/
+```powershell
+Copy-Item "src\assets\images\My World Icon.png" "public\my-world-icon.png"
+```
+Use lowercase-kebab filenames: `fossil-frontier-icon.png`, `aqua-azul-icon.png`
+
+---
+
+## Step 2 — Create a textured globe component (matches Aqua Azul / Fossil Frontier pattern)
+
+```tsx
+function MyWorldIslandTexture({ size }: { size: number }) {
+  const texture = useTexture("/my-world-icon.png");
+  const sphereRef = useRef<THREE.Mesh>(null);
+
+  useFrame((s) => {
+    if (sphereRef.current) {
+      sphereRef.current.rotation.y = s.clock.elapsedTime * 0.1;
+    }
+  });
+
+  return (
+    <group>
+      <mesh ref={sphereRef} position={[0, -size * 0.1, 0]}>
+        <sphereGeometry args={[size * 0.75, 48, 48]} />
+        <meshStandardMaterial map={texture} roughness={0.6} metalness={0.1} />
+      </mesh>
+
+      {/* Glow ring — use the world's accent color */}
+      <Torus args={[size * 0.82, size * 0.022, 8, 48]} rotation={[Math.PI / 2, 0, 0]} position={[0, -size * 0.55, 0]}>
+        <meshStandardMaterial color="#ACCENT" emissive="#COLOR" emissiveIntensity={1.4} transparent opacity={0.65} />
+      </Torus>
+
+      {/* 3 floating particles */}
+      {[0.55, -0.55, 0].map((x, i) => (
+        <Float key={i} speed={2 + i} floatIntensity={0.5}>
+          <Sphere args={[size * 0.04, 8, 8]} position={[x * size, size * (0.7 + i * 0.15), 0]}>
+            <meshStandardMaterial color="#PARTICLE_COLOR" transparent opacity={0.55} />
+          </Sphere>
+        </Float>
+      ))}
+    </group>
+  );
+}
+
+function MyWorldIsland({ size }: { size: number }) {
+  return (
+    <React.Suspense fallback={
+      <Sphere args={[size * 0.75, 16, 16]} position={[0, -size * 0.1, 0]}>
+        <meshStandardMaterial color="#FALLBACK_COLOR" />
+      </Sphere>
+    }>
+      <MyWorldIslandTexture size={size} />
+    </React.Suspense>
+  );
+}
+```
+
+---
+
+## Step 3 — Register in IslandMesh map
+
+```tsx
+const meshMap: Record<string, ...> = {
+  "My World Title": MyWorldIsland,
+  // ...existing worlds
+};
+```
+
+---
+
+## Step 4 — Add Vimeo video to worldVideos map
+
+```tsx
+const worldVideos: Record<string, { vimeoId: string; title: string }> = {
+  "aqua-azul":       { vimeoId: "1169180228", title: "The Lost City of Aqua Azul" },
+  "fossil-frontier": { vimeoId: "1169313594", title: "Fossil Frontier" },
+  "my-world-slug":   { vimeoId: "VIMEO_ID",   title: "My World Name" },
+};
+```
+
+### Vimeo URL params (always use all of these)
+```
+?badge=0&autopause=0&byline=0&portrait=0&title=0&autoplay=1&loop=1&controls=0
+```
+- `badge=0` — removes Vimeo watermark
+- `byline=0` — removes author name
+- `portrait=0` — removes profile picture
+- `title=0` — removes video title overlay
+- `controls=0` — hides player controls so video fills the frame cleanly
+- `autoplay=1` + `loop=1` — plays and loops automatically
+- DO NOT use `background=1` or `muted=1` — these force silence
+- iframes are always mounted in the DOM (never conditionally rendered) so Vimeo pre-buffers and there is zero delay on hover
+
+---
+
+## Behaviour
+- **Idle**: map tint overlay is ON (dark) so 3D globes pop
+- **Hover world WITH video**: tint lifts (opacity 0), video fades in behind 3D scene
+- **Hover world WITHOUT video**: tint stays ON, globe still reacts (scale + glow ring)
+- **Click any island**: detail panel slides up with world info + "Enter this world →" button
+- Aqua Azul detail panel shows the illustration image; all others show emoji

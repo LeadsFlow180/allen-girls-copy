@@ -1,0 +1,1092 @@
+.frameRoot {
+  padding: 0;
+}
+
+.pageInner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Adventure island container */
+.coursesWorld {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 38%, #e0f2fe 55%, #dcfce7 100%);
+  border: 3px solid #1899d6;
+  box-shadow:
+    0 8px 0 #1899d6,
+    0 22px 48px rgba(24, 153, 214, 0.22);
+}
+
+.skyDecor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.worldBg {
+  object-fit: cover;
+  opacity: 0.3;
+}
+
+.worldOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.3) 0%,
+    transparent 45%,
+    rgba(34, 197, 94, 0.1) 100%
+  );
+}
+
+.sun {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff9c4, #ffc800 55%, #ff9600);
+  box-shadow: 0 0 28px rgba(255, 200, 0, 0.55);
+  animation: sunPulse 4s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 999px;
+  opacity: 0.88;
+  animation: cloudDrift linear infinite;
+}
+
+.cloudA {
+  width: 4rem;
+  height: 1.35rem;
+  top: 14%;
+  left: -5rem;
+  animation-duration: 26s;
+}
+
+.cloudB {
+  width: 3rem;
+  height: 1rem;
+  top: 28%;
+  left: -4rem;
+  animation-duration: 32s;
+  animation-delay: -8s;
+}
+
+@keyframes cloudDrift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100% + 12rem));
+  }
+}
+
+.star {
+  position: absolute;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #fff;
+  border-radius: 50%;
+  animation: starTwinkle 2s ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.hillBack {
+  position: absolute;
+  bottom: -1.5rem;
+  left: -8%;
+  width: 116%;
+  height: 5rem;
+  background: #86efac;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.6;
+}
+
+.hillFront {
+  position: absolute;
+  bottom: -2rem;
+  left: -5%;
+  width: 110%;
+  height: 4.5rem;
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+  border-radius: 50% 50% 0 0;
+  box-shadow: inset 0 6px 0 rgba(255, 255, 255, 0.2);
+}
+
+.main {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  min-width: 0;
+  padding: 1.1rem 1rem 1.35rem;
+}
+
+/* Wooden sign header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.95rem 1.1rem;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+  border: 3px solid #ca8a04;
+  box-shadow: 0 6px 0 #a16207;
+  flex-wrap: wrap;
+}
+
+.headerStart {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.backBtn {
+  border: none;
+  background: linear-gradient(180deg, #fff, #f1f5f9);
+  font-size: 0.82rem;
+  color: #475569;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  flex-shrink: 0;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: 0 3px 0 #cbd5e1;
+  transition: transform 120ms ease;
+}
+
+.backBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #cbd5e1;
+}
+
+.titleBlock {
+  min-width: 0;
+}
+
+.pageBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff, #ecfccb);
+  border: 2px solid #58cc02;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #166534;
+  box-shadow: 0 2px 0 #46a302;
+}
+
+.pageTitle {
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  font-weight: 800;
+  color: #78350f;
+  margin: 0.25rem 0 0.1rem;
+  line-height: 1.15;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.pageSubtitle {
+  font-size: 0.88rem;
+  color: #92400e;
+  margin: 0;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.speakBtn {
+  border: 2px solid #e2e8f0;
+  background: linear-gradient(180deg, #fff, #f8fafc);
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #475569;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 0.5rem 0.85rem;
+  border-radius: 999px;
+  box-shadow: 0 3px 0 #cbd5e1;
+  transition: transform 120ms ease;
+}
+
+.speakBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #cbd5e1;
+}
+
+/* Passport hero — treasure chest card */
+.hero {
+  position: relative;
+  border-radius: 1.25rem;
+  padding: 1.15rem 1.25rem;
+  background: linear-gradient(180deg, #fffef8 0%, #ffffff 50%);
+  border: 3px solid color-mix(in srgb, var(--hero-accent, #58cc02) 55%, #e2e8f0);
+  box-shadow:
+    0 6px 0 color-mix(in srgb, var(--hero-accent, #46a302) 50%, #cbd5e1),
+    0 16px 36px color-mix(in srgb, var(--hero-accent, #58cc02) 18%, transparent);
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1.25rem 1.35rem;
+  align-items: center;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.45rem;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--hero-accent, #58cc02) 0,
+    var(--hero-accent, #58cc02) 14px,
+    #ffc800 14px,
+    #ffc800 28px,
+    #1cb0f6 28px,
+    #1cb0f6 42px
+  );
+  z-index: 3;
+}
+
+.heroAccentPanel {
+  position: absolute;
+  left: 0;
+  top: 0.45rem;
+  bottom: 0;
+  width: 38%;
+  max-width: 200px;
+  background: linear-gradient(
+    105deg,
+    color-mix(in srgb, var(--hero-accent, #58cc02) 12%, #fff) 0%,
+    transparent 100%
+  );
+  clip-path: polygon(0 0, 100% 0, 70% 100%, 0 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroGlow {
+  position: absolute;
+  top: -30%;
+  right: -5%;
+  width: 50%;
+  height: 120%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--hero-accent, #58cc02) 14%, transparent) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.heroWatermark {
+  position: absolute;
+  right: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: clamp(3.5rem, 10vw, 6rem);
+  font-weight: 800;
+  line-height: 1;
+  color: color-mix(in srgb, var(--hero-accent, #58cc02) 8%, #e2e8f0);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.heroMedallionCol {
+  position: relative;
+  z-index: 2;
+  grid-row: 1;
+  grid-column: 1;
+  padding-top: 0.35rem;
+}
+
+.heroBody {
+  position: relative;
+  z-index: 2;
+  grid-row: 1;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  min-width: 0;
+  padding-top: 0.35rem;
+}
+
+.heroEyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: #166534;
+  font-weight: 800;
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #d7ffb8, #bbf7d0);
+  border: 2px solid #58cc02;
+  box-shadow: 0 2px 0 #46a302;
+}
+
+.heroTitle {
+  font-size: clamp(1.35rem, 4vw, 1.7rem);
+  font-weight: 800;
+  color: #1e293b;
+  margin: 0;
+  line-height: 1.15;
+}
+
+.heroTitleWord {
+  display: inline-block;
+}
+
+.heroDesc {
+  font-size: 0.88rem;
+  color: #475569;
+  margin: 0;
+  line-height: 1.5;
+  font-weight: 700;
+  max-width: 36rem;
+}
+
+.heroProgressRow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-top: 0.1rem;
+}
+
+.progressTrack {
+  flex: 1;
+  height: 11px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+  min-width: 0;
+  border: 2px solid #fff;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.progressFill {
+  width: 8%;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #58cc02, #ffc800, #1cb0f6);
+  box-shadow: 0 0 8px rgba(88, 204, 2, 0.35);
+}
+
+.heroXp {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  color: #166534;
+  font-weight: 800;
+  white-space: nowrap;
+  padding: 0.3rem 0.55rem;
+  border-radius: 0.5rem;
+  background: #fff;
+  border: 2px solid #bbf7d0;
+  box-shadow: 0 2px 0 #86efac;
+}
+
+.continueBtn {
+  margin-top: 0.35rem;
+  border: none;
+  border-radius: 999px;
+  padding: 0.62rem 1.45rem;
+  background: linear-gradient(180deg, #7ee02a 0%, #58cc02 55%, #46a302 100%);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #46a302;
+  width: fit-content;
+  max-width: 100%;
+}
+
+/* Course grid — mission cards */
+.gridSection {
+  margin-top: 0.1rem;
+  padding: 0.85rem 0.65rem 0.25rem;
+  border-radius: 1.15rem;
+  background: rgba(255, 255, 255, 0.55);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.gridHead {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.showMoreBtn {
+  border: 2px solid #cbd5e1;
+  background: linear-gradient(180deg, #fff, #f8fafc);
+  color: #475569;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 0.35rem 0.65rem;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 2px 0 #cbd5e1;
+  transition: transform 120ms ease;
+}
+
+.showMoreBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #cbd5e1;
+}
+
+.gridLabel {
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #0369a1;
+  margin: 0;
+  font-weight: 800;
+}
+
+.gridLine {
+  flex: 1;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #58cc02, #1cb0f6, transparent);
+}
+
+.courseGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 0.85rem;
+}
+
+.courseCard {
+  --card-accent: #1cb0f6;
+  text-align: left;
+  border-radius: 1.1rem;
+  padding: 0;
+  border: 2px solid color-mix(in srgb, var(--card-accent) 18%, #dbeafe);
+  background:
+    radial-gradient(circle at 100% -10%, color-mix(in srgb, var(--card-accent) 10%, transparent), transparent 46%),
+    linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+  box-shadow:
+    0 4px 0 color-mix(in srgb, var(--card-accent) 25%, #cbd5e1),
+    0 10px 22px rgba(15, 23, 42, 0.08);
+  cursor: pointer;
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+}
+
+.courseCard::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.34rem;
+  background: linear-gradient(
+    90deg,
+    var(--card-accent),
+    color-mix(in srgb, var(--card-accent) 60%, #ffc800)
+  );
+  z-index: 1;
+}
+
+.courseCard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    115deg,
+    transparent 35%,
+    rgba(255, 255, 255, 0.46) 50%,
+    transparent 65%
+  );
+  transform: translateX(-130%);
+  transition: transform 450ms ease;
+  pointer-events: none;
+}
+
+.courseCard:hover {
+  transform: translateY(-3px);
+  border-color: color-mix(in srgb, var(--card-accent) 42%, #dbeafe);
+  box-shadow:
+    0 6px 0 color-mix(in srgb, var(--card-accent) 48%, #cbd5e1),
+    0 14px 30px color-mix(in srgb, var(--card-accent) 20%, rgba(15, 23, 42, 0.08));
+}
+
+.courseCard:hover::after {
+  transform: translateX(130%);
+}
+
+.cardInner {
+  padding: 0.9rem 0.9rem 0.88rem;
+  padding-top: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.cardVisualStage {
+  position: relative;
+  border-radius: 0.9rem;
+  padding: 0.5rem 0.55rem;
+  margin-bottom: 0.55rem;
+  background:
+    linear-gradient(145deg, color-mix(in srgb, var(--card-accent) 10%, #fff), #fff),
+    radial-gradient(circle at 80% 20%, color-mix(in srgb, var(--card-accent) 18%, transparent), transparent 56%);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 35%, #e2e8f0);
+  overflow: hidden;
+}
+
+.cardFlagRow {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.35rem;
+  position: relative;
+  z-index: 2;
+}
+
+.cardTag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 800;
+  color: color-mix(in srgb, var(--card-accent) 68%, #1f2937);
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid color-mix(in srgb, var(--card-accent) 28%, #e2e8f0);
+  position: relative;
+  z-index: 2;
+}
+
+.cardHalo {
+  position: absolute;
+  top: -40%;
+  right: -8%;
+  width: 65%;
+  height: 150%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in srgb, var(--card-accent) 22%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.cardCode {
+  margin: 0 0 0.18rem;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: #64748b;
+}
+
+.cardTitle {
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0 0 0.16rem;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+
+.cardLearners {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  color: #475569;
+  margin: 0 0 0.38rem;
+  font-weight: 800;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 999px;
+  width: fit-content;
+  padding: 0.16rem 0.45rem;
+}
+
+.cardBlurb {
+  font-size: 0.75rem;
+  color: #475569;
+  margin: 0 0 0.58rem;
+  line-height: 1.45;
+  font-weight: 600;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.cardProgress {
+  margin-top: 0.05rem;
+}
+
+.cardProgressTrack {
+  width: 100%;
+  height: 7px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #e2e8f0;
+  border: 1px solid #fff;
+}
+
+.cardProgressFill {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--card-accent) 78%, #fff),
+    var(--card-accent)
+  );
+}
+
+.cardProgressLabel {
+  display: inline-block;
+  margin-top: 0.26rem;
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cardFooter {
+  margin-top: auto;
+  padding-top: 0.5rem;
+  border-top: 1px dashed #dbeafe;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.cardLevel {
+  font-size: 0.64rem;
+  color: #64748b;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+}
+
+.startPill {
+  border-radius: 999px;
+  padding: 0.34rem 0.82rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--card-accent) 80%, #fff),
+    var(--card-accent)
+  );
+  box-shadow:
+    0 3px 0 color-mix(in srgb, var(--card-accent) 70%, #000),
+    0 6px 14px color-mix(in srgb, var(--card-accent) 20%, transparent);
+  white-space: nowrap;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 900px) {
+  .courseGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .frameRoot {
+    padding: 0.4rem 0 1rem;
+  }
+
+  .pageInner {
+    padding: 0 0.35rem;
+  }
+
+  .coursesWorld {
+    border-radius: 1.15rem;
+  }
+
+  .main {
+    padding: 0.85rem 0.65rem 1rem;
+    gap: 0.85rem;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.65rem;
+    padding: 0.72rem 0.78rem;
+    border-radius: 0.85rem;
+    box-shadow: 0 4px 0 #a16207;
+  }
+
+  .headerStart {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.45rem;
+  }
+
+  .backBtn {
+    padding: 0.36rem 0.58rem;
+    font-size: 0.72rem;
+    box-shadow: 0 2px 0 #cbd5e1;
+  }
+
+  .pageBadge {
+    font-size: 0.56rem;
+    padding: 0.2rem 0.48rem;
+    letter-spacing: 0.08em;
+  }
+
+  .pageTitle {
+    font-size: clamp(1.02rem, 5vw, 1.18rem);
+    margin-top: 0.2rem;
+  }
+
+  .pageSubtitle {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  .speakBtn {
+    width: 100%;
+    justify-content: center;
+    font-size: 0.64rem;
+    padding: 0.38rem 0.62rem;
+    box-shadow: 0 2px 0 #cbd5e1;
+  }
+
+  .hero {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    padding: 0.82rem 0.82rem;
+    border-radius: 1rem;
+  }
+
+  .heroMedallionCol,
+  .heroBody {
+    grid-column: 1;
+    justify-self: center;
+    width: 100%;
+  }
+
+  .heroMedallionCol {
+    grid-row: 1;
+    padding-top: 0;
+  }
+
+  .heroBody {
+    grid-row: 2;
+    align-items: center;
+    text-align: center;
+    gap: 0.35rem;
+  }
+
+  .heroEyebrow {
+    align-self: center;
+  }
+
+  .heroAccentPanel {
+    width: 100%;
+    max-width: none;
+    height: 35%;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 80%);
+  }
+
+  .heroWatermark {
+    font-size: clamp(2.4rem, 20vw, 4.2rem);
+    right: 0.3rem;
+  }
+
+  .heroTitle {
+    font-size: clamp(1.06rem, 6.2vw, 1.28rem);
+  }
+
+  .heroDesc {
+    font-size: 0.74rem;
+    line-height: 1.35;
+  }
+
+  .heroProgressRow {
+    width: 100%;
+    gap: 0.5rem;
+  }
+
+  .heroXp {
+    font-size: 0.64rem;
+    padding: 0.24rem 0.45rem;
+  }
+
+  .continueBtn {
+    width: 100%;
+    text-align: center;
+    font-size: 0.76rem;
+    padding: 0.52rem 0.8rem;
+    box-shadow: 0 3px 0 #46a302;
+  }
+
+  .courseGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .gridSection {
+    padding: 0.75rem 0.5rem;
+    border-radius: 0.9rem;
+  }
+
+  .gridHead {
+    margin-bottom: 0.6rem;
+    gap: 0.45rem;
+  }
+
+  .showMoreBtn {
+    font-size: 0.58rem;
+    padding: 0.26rem 0.5rem;
+    box-shadow: 0 2px 0 #cbd5e1;
+  }
+
+  .gridLabel {
+    font-size: 0.72rem;
+  }
+
+  .courseCard {
+    border-radius: 0.92rem;
+    box-shadow: 0 3px 0 #cbd5e1;
+  }
+
+  .courseCard:hover {
+    transform: none;
+  }
+
+  .cardInner {
+    padding: 0.72rem 0.7rem 0.7rem;
+    padding-top: 0.82rem;
+  }
+
+  .cardFlagRow {
+    margin-bottom: 0.45rem;
+  }
+
+  .cardVisualStage {
+    margin-bottom: 0.42rem;
+    padding: 0.42rem 0.48rem;
+  }
+
+  .cardTag {
+    font-size: 0.52rem;
+    padding: 0.14rem 0.42rem;
+  }
+
+  .cardCode {
+    font-size: 0.54rem;
+  }
+
+  .cardTitle {
+    font-size: 0.92rem;
+  }
+
+  .cardLearners {
+    font-size: 0.66rem;
+  }
+
+  .cardBlurb {
+    font-size: 0.68rem;
+    margin-bottom: 0.4rem;
+    line-height: 1.3;
+  }
+
+  .cardProgressLabel {
+    font-size: 0.54rem;
+  }
+
+  .cardFooter {
+    padding-top: 0.42rem;
+  }
+
+  .cardLevel {
+    font-size: 0.58rem;
+  }
+
+  .startPill {
+    font-size: 0.62rem;
+    padding: 0.28rem 0.62rem;
+    box-shadow: 0 2px 0 color-mix(in srgb, var(--card-accent) 70%, #000);
+  }
+}
+
+@media (max-width: 480px) {
+  .pageInner {
+    padding: 0 0.15rem;
+  }
+
+  .heroProgressRow {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .main {
+    padding: 0.62rem 0.52rem 0.85rem;
+    gap: 0.68rem;
+  }
+
+  .header {
+    padding: 0.62rem 0.62rem;
+  }
+
+  .headerStart {
+    gap: 0.38rem;
+  }
+
+  .backLabel {
+    font-size: 0.66rem;
+  }
+
+  .backIcon svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .speakBtn {
+    font-size: 0.58rem;
+    letter-spacing: 0.04em;
+    padding: 0.34rem 0.5rem;
+  }
+
+  .hero {
+    gap: 0.68rem;
+    padding: 0.68rem 0.64rem;
+  }
+
+  .heroEyebrow {
+    font-size: 0.54rem;
+    padding: 0.2rem 0.46rem;
+  }
+
+  .heroTitle {
+    font-size: 1rem;
+  }
+
+  .heroDesc {
+    font-size: 0.66rem;
+  }
+
+  .heroXp {
+    align-self: center;
+  }
+
+  .continueBtn {
+    font-size: 0.7rem;
+    padding: 0.44rem 0.62rem;
+  }
+
+  .gridSection {
+    padding: 0.62rem 0.4rem;
+  }
+
+  .gridLabel {
+    font-size: 0.66rem;
+  }
+
+  .showMoreBtn {
+    font-size: 0.54rem;
+    padding: 0.24rem 0.44rem;
+  }
+
+  .cardTitle {
+    font-size: 0.84rem;
+  }
+
+  .cardCode {
+    font-size: 0.5rem;
+  }
+
+  .cardBlurb {
+    font-size: 0.64rem;
+  }
+
+  .startPill {
+    font-size: 0.58rem;
+    padding: 0.24rem 0.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sun,
+  .cloud,
+  .star {
+    animation: none;
+  }
+
+  .courseCard:hover {
+    transform: none;
+  }
+}

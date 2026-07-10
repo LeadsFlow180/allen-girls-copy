@@ -1,0 +1,2393 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import ReactCountryFlag from "react-country-flag";
+import section1Units from "../section1-units.json";
+import {
+  ChevronLeft,
+  Home,
+  Shield,
+  ShoppingBag,
+  User,
+  MoreHorizontal,
+  Flame,
+} from "lucide-react";
+import streakIcon from "@/assets/images/learn/streak.svg";
+import pointsIcon from "@/assets/images/learn/points.svg";
+import lifeIcon from "@/assets/images/learn/life.svg";
+import learnIcon from "@/assets/images/learn/learn.svg";
+import leaderboardsIcon from "@/assets/images/learn/leaderboards.svg";
+import questIcon from "@/assets/images/learn/quest.svg";
+import shopIcon from "@/assets/images/learn/shop.svg";
+import profileIcon from "@/assets/images/learn/profile.svg";
+import moreIcon from "@/assets/images/learn/more.svg";
+import dailyQuestIcon from "@/assets/images/learn/dailyQuest.svg";
+import lockIcon from "@/assets/images/learn/lock.svg";
+import streakLockIcon from "@/assets/images/learn/streaklock.svg";
+import exploreGameBg from "@/assets/images/learn/explore-game-background.png";
+import signupBg from "@/assets/images/learn/background-signup.png";
+import loginBg from "@/assets/images/learn/login-background.png";
+import missionCardActiveBg from "@/assets/images/learn/mission-card-active-bg.png";
+import missionCardLockedBg from "@/assets/images/learn/mission-card-locked-bg.png";
+import { createBrowserSupabaseClient } from "@/lib/supabase/client";
+import { LearnPageFrame } from "@/components/learn-page-frame";
+import { ExploreDuolingoPath } from "@/components/learn/explore-duolingo-path";
+import { ExploreSectionCard } from "@/components/learn/explore-section-card";
+import { EXPLORE, pill3D } from "./explore-theme";
+
+const ACTIVE_LANGUAGE_STORAGE_KEY = "learn.activeLanguage";
+
+const LANGUAGES = [
+  { code: "es", label: "Spanish", countryCode: "ES" },
+  { code: "fr", label: "French", countryCode: "FR" },
+  { code: "ja", label: "Japanese", countryCode: "JP" },
+  { code: "de", label: "German", countryCode: "DE" },
+  { code: "ko", label: "Korean", countryCode: "KR" },
+  { code: "it", label: "Italian", countryCode: "IT" },
+  { code: "pt", label: "Portuguese", countryCode: "BR" },
+  { code: "ru", label: "Russian", countryCode: "RU" },
+  { code: "tr", label: "Turkish", countryCode: "TR" },
+  { code: "nl", label: "Dutch", countryCode: "NL" },
+  { code: "sv", label: "Swedish", countryCode: "SE" },
+  { code: "pl", label: "Polish", countryCode: "PL" },
+  { code: "zh", label: "Chinese", countryCode: "CN" },
+  { code: "ar", label: "Arabic", countryCode: "SA" },
+  { code: "hi", label: "Hindi", countryCode: "IN" },
+  { code: "ur", label: "Urdu", countryCode: "PK" },
+  { code: "en", label: "English", countryCode: "GB" },
+];
+
+const SECTIONS = [
+  {
+    id: 1,
+    title: "Section 1",
+    bubble: "¡Hola!",
+    description: "Learn your very first Spanish greetings.",
+    icon: learnIcon,
+    progress: 0,
+    isCurrent: true,
+  },
+  {
+    id: 2,
+    title: "Section 2",
+    bubble: "Quiero aprender español.",
+    description: "Talk about your goals and why you learn.",
+    icon: questIcon,
+    progress: 0,
+    isCurrent: false,
+  },
+  {
+    id: 3,
+    title: "Section 3",
+    bubble: "¿Cómo estás?",
+    description: "Ask how people are doing and respond.",
+    icon: leaderboardsIcon,
+    progress: 0,
+    isCurrent: false,
+  },
+  {
+    id: 4,
+    title: "Section 4",
+    bubble: "Me gustan los juegos.",
+    description: "Talk about what you like and don't like.",
+    icon: shopIcon,
+    progress: 0,
+    isCurrent: false,
+  },
+  {
+    id: 5,
+    title: "Section 5",
+    bubble: "Voy a la escuela.",
+    description: "Describe your daily routine and schedule.",
+    icon: profileIcon,
+    progress: 0,
+    isCurrent: false,
+  },
+  {
+    id: 6,
+    title: "Section 6",
+    bubble: "Hace buen tiempo hoy.",
+    description: "Chat about the weather and seasons.",
+    icon: streakIcon,
+    progress: 0,
+    isCurrent: false,
+  },
+  {
+    id: 7,
+    title: "Section 7",
+    bubble: "Quiero comer algo.",
+    description: "Order food and drinks with confidence.",
+    icon: pointsIcon,
+    progress: 0,
+    isCurrent: false,
+  },
+  {
+    id: 8,
+    title: "Section 8",
+    bubble: "Tengo muchos amigos.",
+    description: "Introduce friends and talk about people.",
+    icon: lifeIcon,
+    progress: 0,
+    isCurrent: false,
+  },
+];
+
+type UnitStepKind = "start" | "lesson" | "chest" | "practice" | "review";
+type UnitStepStatus = "locked" | "current" | "completed";
+
+const UNIT_STEP_ORDER: UnitStepKind[] = [
+  "start",
+  "lesson",
+  "chest",
+  "practice",
+  "review",
+];
+
+const UNIT_NAMES: string[] = [
+  "Unit 1 Â· First greetings",
+  "Unit 2 Â· Meet new friends",
+  "Unit 3 Â· At school",
+  "Unit 4 Â· Family & home",
+  "Unit 5 Â· Food & cafÃ©",
+  "Unit 6 Â· Numbers & time",
+  "Unit 7 Â· Feelings",
+  "Unit 8 Â· Around town",
+  "Unit 9 Â· Hobbies",
+  "Unit 10 Â· Review & quiz",
+];
+
+const UNIT_COLORS: string[] = [
+  "#0ea5e9",
+  "#22c55e",
+  "#f97316",
+  "#6366f1",
+  "#ec4899",
+  "#14b8a6",
+  "#f97316",
+  "#22c55e",
+  "#6366f1",
+  "#a855f7",
+];
+
+const MISSION_CARD_BACKGROUNDS = {
+  active: missionCardActiveBg.src,
+  locked: missionCardLockedBg.src,
+};
+
+interface UnitProgress {
+  currentUnit: number; // 0..9 (10 units total)
+  currentStep: number; // 0..4 (5 steps per unit)
+}
+
+interface ExploreSectionItem {
+  id: number;
+  dbSectionId: number;
+  title: string;
+  topicLabel: string;
+  bubble: string;
+  description: string;
+  icon: any;
+  progress: number;
+  isCurrent: boolean;
+}
+
+interface ExploreUnitItem {
+  id: number;
+  title: string;
+}
+
+interface GuidebookCardProps {
+  title: string;
+  subtitle: string;
+  bullets: string[];
+  accent: string;
+}
+
+interface CardBackgroundArtProps {
+  src: string;
+  opacity?: number;
+}
+
+function CardBackgroundArt({ src, opacity = 0.26 }: CardBackgroundArtProps) {
+  return (
+    <img
+      src={src}
+      alt=""
+      aria-hidden
+      style={{
+        position: "absolute",
+        inset: 0,
+        width: "100%",
+        height: "100%",
+        objectFit: "cover",
+        opacity,
+        pointerEvents: "none",
+        userSelect: "none",
+        zIndex: 0,
+      }}
+      onError={(e) => {
+        e.currentTarget.style.display = "none";
+      }}
+    />
+  );
+}
+
+function GuidebookCard({
+  title,
+  subtitle,
+  bullets,
+  accent,
+}: GuidebookCardProps) {
+  return (
+    <div
+      style={{
+        borderRadius: "1.2rem",
+        padding: "0.8rem 0.85rem 0.9rem",
+        background: "#ffffff",
+        boxShadow: "0 14px 34px rgba(148,163,184,0.35)",
+        border: `1px solid ${accent}33`,
+        display: "flex",
+        flexDirection: "column",
+        gap: "0.35rem",
+      }}
+    >
+      <span
+        style={{
+          fontSize: "0.75rem",
+          fontWeight: 800,
+          textTransform: "uppercase",
+          letterSpacing: "0.16em",
+          color: accent,
+        }}
+      >
+        {title}
+      </span>
+      <span
+        style={{
+          fontSize: "0.9rem",
+          fontWeight: 700,
+          color: "#111827",
+        }}
+      >
+        {subtitle}
+      </span>
+      <ul
+        style={{
+          margin: 0,
+          paddingLeft: "1.1rem",
+          fontSize: "0.8rem",
+          color: "#4b5563",
+          display: "flex",
+          flexDirection: "column",
+          gap: "0.15rem",
+        }}
+      >
+        {bullets.map((b) => (
+          <li key={b}>{b}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default function LearnExplorePage() {
+  const router = useRouter();
+  const [profileInitial, setProfileInitial] = useState("A");
+  const [profileDisplayName, setProfileDisplayName] = useState("Allen Girls");
+  const [profileRole, setProfileRole] = useState<string | null>(null);
+  const [sectionsData, setSectionsData] = useState<ExploreSectionItem[]>(
+    SECTIONS.map((section) => ({
+      ...section,
+      dbSectionId: section.id,
+      topicLabel: section.title,
+    })),
+  );
+  const [unitMetaBySection, setUnitMetaBySection] = useState<
+    Record<number, ExploreUnitItem[]>
+  >({});
+  const [activeSectionId, setActiveSectionId] = useState<number>(1);
+  const [activeLanguage, setActiveLanguage] = useState<string>("es");
+  const [availableLanguageCodes, setAvailableLanguageCodes] = useState<
+    string[]
+  >(LANGUAGES.map((lang) => lang.code));
+  const [showLanguageMenu, setShowLanguageMenu] = useState(false);
+  const [showStreakCard, setShowStreakCard] = useState(false);
+  const [showUnitView, setShowUnitView] = useState(false);
+  const [showGuidebook, setShowGuidebook] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  const [unitProgressBySection, setUnitProgressBySection] = useState<
+    Record<number, UnitProgress>
+  >(() =>
+    SECTIONS.reduce<Record<number, UnitProgress>>((acc, section) => {
+      acc[section.id] = { currentUnit: 0, currentStep: 0 };
+      return acc;
+    }, {}),
+  );
+  const sectionIcons = [
+    learnIcon,
+    questIcon,
+    leaderboardsIcon,
+    shopIcon,
+    profileIcon,
+    streakIcon,
+    pointsIcon,
+    lifeIcon,
+  ];
+  const activeSection =
+    sectionsData.find((s) => s.id === activeSectionId) ?? sectionsData[0];
+
+  const activeUnits = unitMetaBySection[activeSection?.id] ?? [];
+  const activeUnitTitles =
+    activeUnits.length > 0 ? activeUnits.map((unit) => unit.title) : UNIT_NAMES;
+  const maxUnitIndex = Math.max(0, activeUnitTitles.length - 1);
+
+  const currentUnitProgress = unitProgressBySection[activeSection?.id] ?? {
+    currentUnit: 0,
+    currentStep: 0,
+  };
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadProfile = async () => {
+      const supabase = createBrowserSupabaseClient();
+      if (!supabase) return;
+
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      if (!user || !isMounted) return;
+
+      const { data: profile } = await supabase
+        .from("profiles")
+        .select("display_name, role")
+        .eq("id", user.id)
+        .maybeSingle();
+
+      const fallbackName = user.email?.split("@")[0] ?? "Learner";
+      const resolvedName = profile?.display_name?.trim() || fallbackName;
+      const initial = resolvedName.charAt(0).toUpperCase() || "L";
+
+      if (!isMounted) return;
+      setProfileDisplayName(resolvedName);
+      setProfileInitial(initial);
+      setProfileRole(profile?.role ?? null);
+    };
+
+    void loadProfile();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    const loadAvailableLanguages = async () => {
+      const supabase = createBrowserSupabaseClient();
+      if (!supabase) return;
+
+      const { data: courseRows, error: courseError } = await supabase
+        .from("language_courses")
+        .select("learning_languages!inner(code)")
+        .eq("is_published", true)
+        .eq("learning_languages.is_active", true);
+      if (courseError || !courseRows?.length) return;
+
+      const candidateCodes = courseRows
+        .map((row: any) => {
+          const lang = Array.isArray(row.learning_languages)
+            ? row.learning_languages[0]
+            : row.learning_languages;
+          return lang?.code ?? null;
+        })
+        .filter(Boolean) as string[];
+
+      const supportChecks = await Promise.all(
+        candidateCodes.map(async (code) => {
+          const { data: hasRows } = await supabase
+            .from("learning_questions")
+            .select("id")
+            .eq("to_language", code)
+            .limit(1);
+          return [code, Boolean(hasRows?.length)] as const;
+        }),
+      );
+      const distinctCodes = supportChecks
+        .filter(([, ok]) => ok)
+        .map(([code]) => code);
+      if (!distinctCodes.length) return;
+      setAvailableLanguageCodes(Array.from(new Set(distinctCodes)));
+    };
+
+    void loadAvailableLanguages();
+  }, []);
+
+  useEffect(() => {
+    const storedCode = window.localStorage.getItem(ACTIVE_LANGUAGE_STORAGE_KEY);
+    if (!storedCode) return;
+    if (!availableLanguageCodes.includes(storedCode)) return;
+    setActiveLanguage(storedCode);
+  }, [availableLanguageCodes]);
+
+  useEffect(() => {
+    if (
+      !availableLanguageCodes.includes(activeLanguage) &&
+      availableLanguageCodes.length > 0
+    ) {
+      const nextCode = availableLanguageCodes[0];
+      setActiveLanguage(nextCode);
+      window.localStorage.setItem(ACTIVE_LANGUAGE_STORAGE_KEY, nextCode);
+    }
+  }, [availableLanguageCodes, activeLanguage]);
+
+  useEffect(() => {
+    const sectionIds = sectionsData.map((section) => section.id);
+    setUnitProgressBySection((prev) => {
+      const next = { ...prev };
+      sectionIds.forEach((id) => {
+        if (!next[id]) {
+          next[id] = { currentUnit: 0, currentStep: 0 };
+        }
+      });
+      return next;
+    });
+    if (!sectionIds.includes(activeSectionId) && sectionIds.length) {
+      setActiveSectionId(sectionIds[0]);
+    }
+  }, [sectionsData, activeSectionId]);
+
+  useEffect(() => {
+    const loadCurriculum = async () => {
+      const supabase = createBrowserSupabaseClient();
+      if (!supabase) return;
+
+      const { data: languageRow, error: languageError } = await supabase
+        .from("learning_languages")
+        .select("id")
+        .eq("code", activeLanguage)
+        .eq("is_active", true)
+        .maybeSingle();
+      if (languageError || !languageRow?.id) return;
+
+      const { data: courseRow, error: courseError } = await supabase
+        .from("language_courses")
+        .select("id")
+        .eq("language_id", languageRow.id)
+        .eq("is_published", true)
+        .order("sort_order", { ascending: true })
+        .limit(1)
+        .maybeSingle();
+      if (courseError || !courseRow?.id) return;
+
+      const { data: sectionRows, error: sectionError } = await supabase
+        .from("learning_sections")
+        .select("id, slug, title, description, sort_order")
+        .eq("language_course_id", courseRow.id)
+        .eq("is_published", true)
+        .order("sort_order", { ascending: true });
+      if (sectionError || !sectionRows?.length) return;
+
+      const mappedSections: ExploreSectionItem[] = sectionRows.map(
+        (row: any, index: number) => {
+          const fallbackTitle = `Section ${index + 1}`;
+          const titleFromDb = row.title?.trim() || fallbackTitle;
+          const topicFromSlug = (row.slug || "")
+            .replace(/^section-\d+-/, "")
+            .replace(/-/g, " ")
+            .replace(/\b\w/g, (c: string) => c.toUpperCase())
+            .trim();
+          const isGenericTitle = /^Section\s+\d+$/i.test(titleFromDb);
+          const topicLabel = topicFromSlug || titleFromDb;
+
+          return {
+            id: index + 1,
+            dbSectionId: row.id,
+            title: isGenericTitle
+              ? `${titleFromDb} Â· ${topicLabel}`
+              : titleFromDb,
+            topicLabel,
+            bubble: index === 0 ? "Let's go!" : "Keep learning!",
+            description: row.description ?? "Continue your language journey.",
+            icon: sectionIcons[index % sectionIcons.length],
+            progress: 0,
+            isCurrent: index === 0,
+          };
+        },
+      );
+
+      const dbSectionIds = mappedSections.map((section) => section.dbSectionId);
+      const { data: unitRows, error: unitError } = await supabase
+        .from("learning_units")
+        .select("id, learning_section_id, title, sort_order")
+        .in("learning_section_id", dbSectionIds)
+        .eq("is_published", true)
+        .order("sort_order", { ascending: true });
+      if (unitError) return;
+
+      const unitsByDbId = (unitRows ?? []).reduce<
+        Record<number, ExploreUnitItem[]>
+      >((acc, row: any) => {
+        if (!acc[row.learning_section_id]) acc[row.learning_section_id] = [];
+        acc[row.learning_section_id].push({ id: row.id, title: row.title });
+        return acc;
+      }, {});
+
+      const unitsByUiId = mappedSections.reduce<
+        Record<number, ExploreUnitItem[]>
+      >((acc, section) => {
+        acc[section.id] = unitsByDbId[section.dbSectionId] ?? [];
+        return acc;
+      }, {});
+
+      setSectionsData(mappedSections);
+      setUnitMetaBySection(unitsByUiId);
+      setActiveSectionId(1);
+    };
+
+    void loadCurriculum();
+  }, [activeLanguage]);
+
+  const currentUnitSteps = UNIT_STEP_ORDER.map<UnitStepStatus>(
+    (_kind, index) => {
+      if (index < currentUnitProgress.currentStep) return "completed";
+      if (index === currentUnitProgress.currentStep) return "current";
+      return "locked";
+    },
+  );
+
+  const launchExternalLesson = async (
+    unitIndex: number,
+    step: UnitStepKind,
+    dbUnitId?: number,
+  ) => {
+    if (isRedirecting) return;
+    setIsRedirecting(true);
+
+    try {
+      await fetch("/api/learn/course-view", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          language: activeLanguage,
+          sectionId: activeSection.id,
+          dbSectionId: activeSection.dbSectionId,
+          unitIndex,
+          dbUnitId,
+          step,
+        }),
+      });
+
+      const redirectRes = await fetch("/api/learn/redirect", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          language: activeLanguage,
+          sectionId: activeSection.id,
+          dbSectionId: activeSection.dbSectionId,
+          unitIndex,
+          dbUnitId,
+          step,
+        }),
+      });
+
+      if (!redirectRes.ok) {
+        let apiError = "redirect_request_failed";
+        try {
+          const errJson = (await redirectRes.json()) as { error?: string };
+          if (errJson.error) apiError = errJson.error;
+        } catch {
+          // ignore parse issues and keep generic error
+        }
+        throw new Error(apiError);
+      }
+
+      const redirectJson = (await redirectRes.json()) as {
+        redirectUrl?: string;
+      };
+      if (!redirectJson.redirectUrl) {
+        throw new Error("redirect_url_missing");
+      }
+
+      window.open(redirectJson.redirectUrl, "_blank", "noopener,noreferrer");
+      setIsRedirecting(false);
+    } catch (error) {
+      console.error("[learn/explore] launchExternalLesson failed", error);
+      setIsRedirecting(false);
+    }
+  };
+
+  return (
+    <>
+      <LearnPageFrame
+        activeTab="learn"
+        profileInitial={profileInitial}
+        profileDisplayName={profileDisplayName}
+        profileRole={profileRole}
+        style={{
+          background: EXPLORE.pageGradient,
+          padding: "1.8rem 0",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "1200px",
+            margin: "0 auto",
+            padding: "0 1.25rem",
+            display: "flex",
+            alignItems: "flex-start",
+            gap: "1.1rem",
+          }}
+        >
+          {/* CENTER: MAIN SECTION CARD + LIST OR UNIT VIEW */}
+          <main
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.85rem",
+              flex: "1 1 auto",
+            }}
+          >
+            {/* Top bar: Back + compact stats row */}
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "0.75rem",
+                position: "relative",
+              }}
+              onMouseLeave={() => setShowStreakCard(false)}
+            >
+              <button
+                type="button"
+                className="font-nunito"
+                style={{
+                  border: "none",
+                  background: "transparent",
+                  fontSize: "0.85rem",
+                  color: "#9ca3af",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.25rem",
+                }}
+                onClick={() => setShowUnitView(false)}
+              >
+                <ChevronLeft size={18} strokeWidth={2.5} aria-hidden />
+                <span style={{ fontWeight: 600 }}>Back</span>
+              </button>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                  fontSize: "0.8rem",
+                }}
+              >
+                {/* Language flag + popup */}
+                <div style={{ position: "relative" }}>
+                  <button
+                    type="button"
+                    onClick={() => setShowLanguageMenu((v) => !v)}
+                    style={{
+                      border: "none",
+                      background: "transparent",
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <ReactCountryFlag
+                      countryCode={
+                        LANGUAGES.find((l) => l.code === activeLanguage)
+                          ?.countryCode ?? "ES"
+                      }
+                      svg
+                      style={{
+                        width: "1.6rem",
+                        height: "1.1rem",
+                        borderRadius: 4,
+                        boxShadow: "0 0 0 1px rgba(15,23,42,0.08)",
+                      }}
+                    />
+                  </button>
+
+                  {showLanguageMenu && (
+                    <div
+                      style={{
+                        position: "absolute",
+                        top: "140%",
+                        left: "50%",
+                        transform: "translateX(-50%)",
+                        minWidth: 190,
+                        borderRadius: "1rem",
+                        background: "#ffffff",
+                        border: "1px solid rgba(209,213,219,0.95)",
+                        boxShadow: "0 20px 45px rgba(148,163,184,0.5)",
+                        padding: "0.5rem 0.5rem 0.45rem",
+                        zIndex: 20,
+                      }}
+                    >
+                      <p
+                        className="font-nunito"
+                        style={{
+                          fontSize: "0.7rem",
+                          textTransform: "uppercase",
+                          letterSpacing: "0.16em",
+                          color: "#9ca3af",
+                          marginBottom: "0.35rem",
+                        }}
+                      >
+                        My courses
+                      </p>
+                      {LANGUAGES.filter((lang) =>
+                        availableLanguageCodes.includes(lang.code),
+                      ).map((lang) => (
+                        <button
+                          key={lang.code}
+                          type="button"
+                          onClick={() => {
+                            setActiveLanguage(lang.code);
+                            window.localStorage.setItem(
+                              ACTIVE_LANGUAGE_STORAGE_KEY,
+                              lang.code,
+                            );
+                            setShowLanguageMenu(false);
+                          }}
+                          style={{
+                            width: "100%",
+                            borderRadius: "0.8rem",
+                            border: "none",
+                            background:
+                              lang.code === activeLanguage
+                                ? "#eff6ff"
+                                : "transparent",
+                            padding: "0.35rem 0.45rem",
+                            display: "flex",
+                            alignItems: "center",
+                            gap: "0.45rem",
+                            cursor: "pointer",
+                          }}
+                        >
+                          <ReactCountryFlag
+                            countryCode={lang.countryCode}
+                            svg
+                            style={{
+                              width: "1.3rem",
+                              height: "0.9rem",
+                              borderRadius: 4,
+                              boxShadow: "0 0 0 1px rgba(15,23,42,0.08)",
+                            }}
+                          />
+                          <span
+                            className="font-nunito"
+                            style={{
+                              fontSize: "0.8rem",
+                              color:
+                                lang.code === activeLanguage
+                                  ? "#1d4ed8"
+                                  : "#111827",
+                            }}
+                          >
+                            {lang.label}
+                          </span>
+                        </button>
+                      ))}
+                      <button
+                        type="button"
+                        onClick={() => router.push("/learn/courses")}
+                        style={{
+                          marginTop: "0.25rem",
+                          width: "100%",
+                          borderRadius: "0.8rem",
+                          border: "1px dashed rgba(209,213,219,0.9)",
+                          background: "#f9fafb",
+                          padding: "0.3rem 0.45rem",
+                          fontSize: "0.78rem",
+                          color: "#6b7280",
+                          cursor: "pointer",
+                          textAlign: "center",
+                        }}
+                      >
+                        + Add a new course
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onMouseEnter={() => setShowStreakCard(true)}
+                  onClick={() => setShowStreakCard((v) => !v)}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.3rem",
+                    padding: "0.35rem 0.85rem",
+                    color: "#fff",
+                    cursor: "pointer",
+                    fontSize: "0.85rem",
+                    fontWeight: 800,
+                    ...pill3D(EXPLORE.streak, EXPLORE.streakDark),
+                  }}
+                >
+                  <Image
+                    src={streakIcon}
+                    alt="Streak"
+                    width={22}
+                    height={22}
+                    style={{ display: "block" }}
+                  />
+                  <span>0</span>
+                </button>
+                <motion.div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.3rem",
+                    padding: "0.35rem 0.8rem",
+                    color: "#fff",
+                    ...pill3D(EXPLORE.sky, EXPLORE.skyDark),
+                  }}
+                >
+                  <Image
+                    src={pointsIcon}
+                    alt="Points"
+                    width={20}
+                    height={20}
+                    style={{ display: "block" }}
+                  />
+                  <span
+                    style={{
+                      fontWeight: 800,
+                      fontSize: "0.9rem",
+                    }}
+                  >
+                    500
+                  </span>
+                </motion.div>
+                <motion.div
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "0.3rem",
+                    padding: "0.35rem 0.8rem",
+                    color: "#fff",
+                    ...pill3D(EXPLORE.heart, EXPLORE.heartDark),
+                  }}
+                >
+                  <Image
+                    src={lifeIcon}
+                    alt="Lives"
+                    width={20}
+                    height={20}
+                    style={{ display: "block" }}
+                  />
+                  <span
+                    style={{
+                      fontWeight: 800,
+                      fontSize: "0.9rem",
+                    }}
+                  >
+                    5
+                  </span>
+                </motion.div>
+              </div>
+
+              {showStreakCard && (
+                <div
+                  style={{
+                    position: "absolute",
+                    top: "135%",
+                    right: 0,
+                    zIndex: 40,
+                  }}
+                  onMouseEnter={() => setShowStreakCard(true)}
+                >
+                  <StreakCard onClose={() => setShowStreakCard(false)} />
+                </div>
+              )}
+            </div>
+
+            {/* Either show section list view or unit path view */}
+            {!showUnitView && (
+              <motion.div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "1.15rem",
+                }}
+              >
+                <motion.div
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  style={{
+                    borderRadius: "1.2rem",
+                    padding: "1.15rem 1.25rem",
+                    background: `linear-gradient(135deg, ${EXPLORE.green} 0%, ${EXPLORE.sky} 100%)`,
+                    color: "#fff",
+                    boxShadow: `0 5px 0 ${EXPLORE.greenDark}, 0 16px 32px rgba(88,204,2,0.22)`,
+                  }}
+                >
+                  <p
+                    className="font-fredoka"
+                    style={{
+                      fontSize: "1.5rem",
+                      fontWeight: 400,
+                      marginBottom: "0.35rem",
+                      lineHeight: 1.2,
+                    }}
+                  >
+                    Your learning path
+                  </p>
+                  <p
+                    className="font-nunito"
+                    style={{
+                      fontSize: "0.9rem",
+                      opacity: 0.95,
+                      fontWeight: 600,
+                      lineHeight: 1.5,
+                      maxWidth: "34rem",
+                      margin: 0,
+                    }}
+                  >
+                    Pick a section, follow the zigzag missions, and earn XP 
+                    just like your favorite language app.
+                  </p>
+                </motion.div>
+                {sectionsData.map((section) => (
+                  <ExploreSectionCard
+                    key={section.id}
+                    sectionId={section.id}
+                    title={section.title}
+                    bubble={section.bubble}
+                    description={section.description}
+                    icon={section.icon}
+                    progress={section.progress}
+                    isActive={section.id === activeSectionId}
+                    onContinue={() => {
+                      setActiveSectionId(section.id);
+                      setShowUnitView(true);
+                    }}
+                  />
+                ))}
+              </motion.div>
+            )}
+
+            {showUnitView && (
+              <section
+                className="font-nunito"
+                style={{
+                  borderRadius: "1.35rem",
+                  padding: "0 0 1.2rem",
+                  background: EXPLORE.card,
+                  boxShadow: `0 5px 0 #d1d5db, 0 18px 40px rgba(15,23,42,0.08)`,
+                  border: `2px solid ${EXPLORE.greenLight}`,
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "stretch",
+                  gap: "0.85rem",
+                  overflow: "hidden",
+                }}
+              >
+                {/* Section header */}
+                <div
+                  style={{
+                    alignSelf: "stretch",
+                    background: `linear-gradient(90deg, ${EXPLORE.green}, ${EXPLORE.sky})`,
+                    padding: "0.95rem 1.15rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    color: "#fff",
+                  }}
+                >
+                  <div
+                    style={{ display: "flex", flexDirection: "column", gap: 2 }}
+                  >
+                    <span
+                      style={{
+                        fontSize: "0.72rem",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.14em",
+                        opacity: 0.92,
+                        fontWeight: 700,
+                      }}
+                    >
+                      Section {activeSection.id} · Unit 1
+                    </span>
+                    <span
+                      className="font-fredoka"
+                      style={{
+                        fontSize: "1.25rem",
+                        fontWeight: 400,
+                        lineHeight: 1.2,
+                      }}
+                    >
+                      {activeSection.description}
+                    </span>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowGuidebook(true)}
+                    style={{
+                      borderRadius: "0.65rem",
+                      border: "2px solid rgba(255,255,255,0.5)",
+                      background: "rgba(255,255,255,0.2)",
+                      color: "#fff",
+                      fontSize: "0.75rem",
+                      fontWeight: 800,
+                      letterSpacing: "0.06em",
+                      padding: "0.45rem 0.95rem",
+                      cursor: "pointer",
+                    }}
+                  >
+                    GUIDEBOOK
+                  </button>
+                </div>
+
+                {/* For each unit in this section, show banner + its 5-part path */}
+                <motion.div
+                  style={{
+                    alignSelf: "stretch",
+                    margin: "0 0.85rem",
+                    padding: "0.85rem",
+                    borderRadius: "1rem",
+                    background: EXPLORE.pathBg,
+                    border: `2px solid rgba(88,204,2,0.2)`,
+                    boxShadow: "inset 0 2px 0 rgba(255,255,255,0.65)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.8rem",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns:
+                        "repeat(auto-fit, minmax(320px, 1fr))",
+                      gap: "0.7rem",
+                    }}
+                  >
+                    {activeUnitTitles.map((unitTitle, index) => {
+                      const unitIndex = index;
+                      const isCurrentUnit =
+                        unitIndex === currentUnitProgress.currentUnit;
+                      const themeColor =
+                        UNIT_COLORS[unitIndex % UNIT_COLORS.length];
+
+                      let stepsForUnit: UnitStepStatus[];
+                      let completedCountForUnit = 0;
+
+                      if (unitIndex < currentUnitProgress.currentUnit) {
+                        stepsForUnit = UNIT_STEP_ORDER.map(() => "completed");
+                        completedCountForUnit = UNIT_STEP_ORDER.length;
+                      } else if (isCurrentUnit) {
+                        stepsForUnit = currentUnitSteps;
+                        completedCountForUnit = currentUnitProgress.currentStep;
+                      } else {
+                        stepsForUnit = UNIT_STEP_ORDER.map(() => "locked");
+                        completedCountForUnit = 0;
+                      }
+
+                      const cardShadow = isCurrentUnit
+                        ? "0 10px 24px rgba(37,99,235,0.12)"
+                        : "0 6px 16px rgba(15,23,42,0.05)";
+
+                      const borderColor = isCurrentUnit
+                        ? "rgba(59,130,246,0.45)"
+                        : "rgba(226,232,240,0.9)";
+
+                      const backgroundGradient = isCurrentUnit
+                        ? "linear-gradient(180deg,rgba(239,246,255,0.9),#ffffff)"
+                        : "#ffffff";
+
+                      const statusLabel = isCurrentUnit
+                        ? "Current unit"
+                        : unitIndex < currentUnitProgress.currentUnit
+                          ? "Completed"
+                          : "Locked";
+
+                      const rewardLabel = isCurrentUnit
+                        ? "Reward: 10 XP"
+                        : unitIndex < currentUnitProgress.currentUnit
+                          ? "Reward: 10 XP + 1 chest"
+                          : "Locked Â· finish earlier units";
+
+                      return (
+                        <div
+                          key={unitIndex}
+                          style={{
+                            position: "relative",
+                            borderRadius: "0.95rem",
+                            border: `1px solid ${borderColor}`,
+                            background: backgroundGradient,
+                            boxShadow: cardShadow,
+                            padding: "0.8rem 0.9rem 0.85rem",
+                            transform: isCurrentUnit
+                              ? "translateY(-2px)"
+                              : "translateY(0)",
+                            transition:
+                              "transform 160ms ease-out, box-shadow 160ms ease-out",
+                            overflow: "hidden",
+                            cursor: isCurrentUnit ? "pointer" : "default",
+                          }}
+                          onClick={() => {
+                            if (!isCurrentUnit) return;
+
+                            const stepKind =
+                              UNIT_STEP_ORDER[currentUnitProgress.currentStep];
+                            const dbUnitId = activeUnits[unitIndex]?.id;
+
+                            void launchExternalLesson(
+                              unitIndex,
+                              stepKind,
+                              dbUnitId,
+                            );
+                          }}
+                        >
+                          <CardBackgroundArt
+                            src={
+                              isCurrentUnit
+                                ? MISSION_CARD_BACKGROUNDS.active
+                                : MISSION_CARD_BACKGROUNDS.locked
+                            }
+                            opacity={isCurrentUnit ? 0.16 : 0.1}
+                          />
+                          <div
+                            style={{
+                              position: "absolute",
+                              inset: 0,
+                              background:
+                                "linear-gradient(160deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.92) 100%)",
+                              pointerEvents: "none",
+                              zIndex: 1,
+                            }}
+                          />
+                          <div
+                            style={{
+                              position: "relative",
+                              zIndex: 2,
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              gap: "0.75rem",
+                              marginBottom: "0.45rem",
+                            }}
+                          >
+                            <div
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: "0.12rem",
+                              }}
+                            >
+                              <span
+                                style={{
+                                  fontSize: "0.66rem",
+                                  textTransform: "uppercase",
+                                  letterSpacing: "0.08em",
+                                  color: "#64748b",
+                                  fontWeight: 700,
+                                }}
+                              >
+                                Section {activeSection.id} · Unit{" "}
+                                {unitIndex + 1}
+                              </span>
+                              <span
+                                className="font-fredoka"
+                                style={{
+                                  fontSize: "1.02rem",
+                                  fontWeight: 700,
+                                  color: "#111827",
+                                  lineHeight: 1.25,
+                                }}
+                              >
+                                {unitTitle}
+                              </span>
+                              <span
+                                style={{
+                                  fontSize: "0.7rem",
+                                  color: "#64748b",
+                                  fontWeight: 600,
+                                }}
+                              >
+                                {rewardLabel}
+                              </span>
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: "0.4rem",
+                              }}
+                            >
+                              {unitIndex < currentUnitProgress.currentUnit && (
+                                <div
+                                  style={{
+                                    width: 22,
+                                    height: 22,
+                                    borderRadius: "999px",
+                                    background: themeColor,
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    boxShadow:
+                                      "0 0 0 2px rgba(255,255,255,0.9), 0 6px 12px rgba(15,23,42,0.35)",
+                                    fontSize: "0.75rem",
+                                    color: "#f9fafb",
+                                    fontWeight: 800,
+                                  }}
+                                >
+                                  â
+                                </div>
+                              )}
+                              <span
+                                style={{
+                                  padding: "0.2rem 0.5rem",
+                                  borderRadius: "0.5rem",
+                                  fontSize: "0.63rem",
+                                  fontWeight: 700,
+                                  background: isCurrentUnit
+                                    ? "#1d4ed8"
+                                    : "#f1f5f9",
+                                  color: isCurrentUnit ? "#f9fafb" : "#4b5563",
+                                  letterSpacing: "0.04em",
+                                  textTransform: "uppercase",
+                                }}
+                              >
+                                {statusLabel}
+                              </span>
+                            </div>
+                          </div>
+
+                          <div style={{ position: "relative", zIndex: 2 }}>
+                            <ExploreDuolingoPath
+                              steps={stepsForUnit}
+                              themeColor={themeColor}
+                              currentCount={completedCountForUnit}
+                              onStepClick={(stepIndex) => {
+                                if (!isCurrentUnit) return;
+                                const stepKind = UNIT_STEP_ORDER[stepIndex];
+                                const dbUnitId = activeUnits[unitIndex]?.id;
+                                void launchExternalLesson(
+                                  unitIndex,
+                                  stepKind,
+                                  dbUnitId,
+                                );
+                              }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </motion.div>
+
+                {/* Hero card + current unit details */}
+                <div
+                  style={{
+                    marginTop: "0.6rem",
+                    marginBottom: "0.45rem",
+                    alignSelf: "stretch",
+                    borderRadius: "1rem",
+                    background: "#ffffff",
+                    border: "1px solid #e2e8f0",
+                    padding: "0.85rem 0.95rem",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    gap: "0.9rem",
+                    boxShadow: "0 8px 20px rgba(15,23,42,0.06)",
+                  }}
+                >
+                  <div style={{ flex: 1 }}>
+                    <p
+                      style={{
+                        fontSize: "0.68rem",
+                        color: "#64748b",
+                        marginBottom: "0.25rem",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.08em",
+                        fontWeight: 700,
+                      }}
+                    >
+                      Next up
+                    </p>
+                    <p
+                      className="font-fredoka"
+                      style={{
+                        fontSize: "1.08rem",
+                        fontWeight: 700,
+                        color: "#111827",
+                        marginBottom: "0.45rem",
+                        lineHeight: 1.3,
+                      }}
+                    >
+                      Start your first greetings lesson
+                    </p>
+                    <div
+                      style={{
+                        height: 8,
+                        borderRadius: 999,
+                        background: "#e5e7eb",
+                        overflow: "hidden",
+                        marginBottom: "0.35rem",
+                      }}
+                    >
+                      <div
+                        style={{
+                          width: "0%",
+                          height: "100%",
+                          borderRadius: 999,
+                          background:
+                            "linear-gradient(90deg,#22c55e,#4ade80,#bef264)",
+                        }}
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      className="font-fredoka"
+                      style={{
+                        border: "none",
+                        borderRadius: "999px",
+                        padding: "0.6rem 1.75rem",
+                        background: EXPLORE.green,
+                        color: "#fff",
+                        fontSize: "0.95rem",
+                        fontWeight: 700,
+                        cursor: "pointer",
+                        textTransform: "uppercase",
+                        letterSpacing: "0.05em",
+                        ...pill3D(EXPLORE.green, EXPLORE.greenDark),
+                        transform: "translateY(0)",
+                        transition:
+                          "transform 120ms ease-out, box-shadow 120ms ease-out",
+                      }}
+                      onClick={() => {
+                        const stepKind =
+                          UNIT_STEP_ORDER[currentUnitProgress.currentStep];
+                        const dbUnitId =
+                          activeUnits[currentUnitProgress.currentUnit]?.id;
+
+                        void launchExternalLesson(
+                          currentUnitProgress.currentUnit,
+                          stepKind,
+                          dbUnitId,
+                        );
+                      }}
+                      onMouseDown={(e) => {
+                        e.currentTarget.style.transform = "translateY(1px)";
+                        e.currentTarget.style.boxShadow =
+                          "0 6px 12px rgba(37,99,235,0.2)";
+                      }}
+                      onMouseUp={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow =
+                          "0 10px 20px rgba(37,99,235,0.25), 0 0 0 1px rgba(59,130,246,0.3)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.transform = "translateY(0)";
+                        e.currentTarget.style.boxShadow =
+                          "0 10px 20px rgba(37,99,235,0.25), 0 0 0 1px rgba(59,130,246,0.3)";
+                      }}
+                    >
+                      {isRedirecting
+                        ? "Opening..."
+                        : currentUnitProgress.currentStep === 0
+                          ? "Start"
+                          : currentUnitProgress.currentStep === 1
+                            ? "Resume lesson"
+                            : "Continue"}
+                    </button>
+                  </div>
+
+                  <div
+                    style={{
+                      width: 92,
+                      height: 92,
+                      borderRadius: "50%",
+                      background:
+                        "radial-gradient(circle at 30% 10%, #dbeafe, #93c5fd 65%, #3b82f6 100%)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      boxShadow: "0 14px 28px rgba(37,99,235,0.24)",
+                    }}
+                  >
+                    <Image
+                      src={activeSection.icon}
+                      alt="Section icon"
+                      width={44}
+                      height={44}
+                      style={{ display: "block" }}
+                    />
+                  </div>
+                </div>
+
+                {/* Duolingo-like unit path prototype */}
+                <ExploreDuolingoPath
+                  steps={currentUnitSteps}
+                  themeColor={
+                    UNIT_COLORS[
+                      currentUnitProgress.currentUnit % UNIT_COLORS.length
+                    ]
+                  }
+                  onStepClick={(stepIndex) => {
+                    const stepKind = UNIT_STEP_ORDER[stepIndex];
+                    const dbUnitId =
+                      activeUnits[currentUnitProgress.currentUnit]?.id;
+                    void launchExternalLesson(
+                      currentUnitProgress.currentUnit,
+                      stepKind,
+                      dbUnitId,
+                    );
+                  }}
+                />
+              </section>
+            )}
+          </main>
+
+          {/* RIGHT SIDEBAR: quests / streak / profile */}
+          <aside
+            className="font-nunito"
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.7rem",
+              position: "sticky",
+              top: "6.5rem",
+              alignSelf: "flex-start",
+              minWidth: 300,
+            }}
+          >
+            <div
+              style={{
+                position: "relative",
+                borderRadius: "1.1rem",
+                padding: "0.85rem 0.9rem",
+                background: "#ffffff",
+                border: "1px solid rgba(226,232,240,0.95)",
+                boxShadow: "0 8px 22px rgba(15,23,42,0.07)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                }}
+              >
+                <div
+                  style={{
+                    width: 40,
+                    height: 40,
+                    borderRadius: "999px",
+                    background: "#f3f4ff",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Image
+                    src={lockIcon}
+                    alt="Lock"
+                    width={22}
+                    height={22}
+                    style={{ display: "block" }}
+                  />
+                </div>
+                <div>
+                  <p
+                    style={{
+                      fontSize: "0.8rem",
+                      fontWeight: 700,
+                      color: "#111827",
+                      marginBottom: "0.15rem",
+                    }}
+                  >
+                    Unlock Leaderboards!
+                  </p>
+                  <p
+                    style={{
+                      fontSize: "0.8rem",
+                      color: "#6b7280",
+                    }}
+                  >
+                    Complete 10 more lessons to start competing.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div
+              style={{
+                position: "relative",
+                borderRadius: "1.1rem",
+                padding: "0.85rem 0.9rem",
+                background: "#ffffff",
+                border: "1px solid rgba(226,232,240,0.95)",
+                boxShadow: "0 8px 22px rgba(15,23,42,0.07)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginBottom: "0.4rem",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.6rem",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 34,
+                      height: 34,
+                      borderRadius: "999px",
+                      background: "#fff7ed",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Image
+                      src={dailyQuestIcon}
+                      alt="Daily quest"
+                      width={22}
+                      height={22}
+                      style={{ display: "block" }}
+                    />
+                  </div>
+                  <p
+                    style={{
+                      fontSize: "0.8rem",
+                      fontWeight: 700,
+                      color: "#111827",
+                    }}
+                  >
+                    Daily Quest
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  style={{
+                    border: "none",
+                    background: "transparent",
+                    fontSize: "0.75rem",
+                    color: "#2563eb",
+                    cursor: "pointer",
+                  }}
+                >
+                  View all
+                </button>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.5rem",
+                }}
+              >
+                <div
+                  style={{
+                    width: 28,
+                    height: 28,
+                    borderRadius: "999px",
+                    background: "#fef3c7",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Flame size={16} color="#f97316" />
+                </div>
+                <div style={{ flex: 1 }}>
+                  <p
+                    style={{
+                      fontSize: "0.8rem",
+                      color: "#111827",
+                      marginBottom: "0.15rem",
+                    }}
+                  >
+                    Earn 10 XP
+                  </p>
+                  <div
+                    style={{
+                      height: 6,
+                      borderRadius: 999,
+                      background: "#e5e7eb",
+                      overflow: "hidden",
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: "0%",
+                        height: "100%",
+                        background:
+                          "linear-gradient(90deg,#22c55e,#4ade80,#bef264)",
+                      }}
+                    />
+                  </div>
+                </div>
+                <span
+                  style={{
+                    fontSize: "0.75rem",
+                    color: "#6b7280",
+                    fontWeight: 600,
+                  }}
+                >
+                  0 / 10
+                </span>
+              </div>
+            </div>
+
+            <div
+              style={{
+                position: "relative",
+                borderRadius: "1.1rem",
+                padding: "0.95rem 0.9rem",
+                background:
+                  "linear-gradient(145deg, #16a34a 0%, #15803d 58%, #166534 100%)",
+                boxShadow: "0 10px 26px rgba(22,163,74,0.3)",
+                color: "#ecfdf5",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "0.9rem",
+                  fontWeight: 800,
+                  marginBottom: "0.4rem",
+                  lineHeight: 1.35,
+                }}
+              >
+                Complete your profile to sync progress.
+              </p>
+              <p
+                style={{
+                  fontSize: "0.8rem",
+                  marginBottom: "0.6rem",
+                  color: "rgba(236,253,245,0.92)",
+                }}
+              >
+                Enable cloud save, personalized goals, and cross-device access.
+              </p>
+              <button
+                type="button"
+                className="font-fredoka"
+                style={{
+                  border: "none",
+                  borderRadius: "999px",
+                  padding: "0.5rem 1rem",
+                  background: "#ffffff",
+                  color: "#166534",
+                  fontSize: "0.9rem",
+                  cursor: "pointer",
+                  fontWeight: 700,
+                }}
+              >
+                Complete profile
+              </button>
+            </div>
+
+            <div
+              style={{
+                borderRadius: "1.1rem",
+                padding: "0.7rem 0.9rem",
+                background: "#ffffff",
+                border: "1px solid rgba(226,232,240,0.95)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                gap: "0.6rem",
+                boxShadow: "0 10px 24px rgba(148,163,184,0.25)",
+              }}
+            >
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.45rem",
+                }}
+              >
+                <div
+                  style={{
+                    width: 26,
+                    height: 26,
+                    borderRadius: "999px",
+                    background: "#eff6ff",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Image
+                    src={pointsIcon}
+                    alt="Points"
+                    width={16}
+                    height={16}
+                    style={{ display: "block" }}
+                  />
+                </div>
+                <p
+                  style={{
+                    fontSize: "0.8rem",
+                    color: "#111827",
+                  }}
+                >
+                  Gems (demo only): 500
+                </p>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </LearnPageFrame>
+
+      {showGuidebook && (
+        <div
+          style={{
+            position: "fixed",
+            inset: 0,
+            zIndex: 1000,
+            background: "rgba(15,23,42,0.35)",
+            backdropFilter: "blur(6px)",
+            WebkitBackdropFilter: "blur(6px)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            paddingTop: "1.25rem",
+            paddingBottom: "1.25rem",
+            paddingLeft: "1rem",
+            paddingRight: "1rem",
+            overflowY: "auto",
+          }}
+          onClick={() => setShowGuidebook(false)}
+        >
+          <div
+            style={{
+              position: "relative",
+              maxWidth: 900,
+              width: "100%",
+              maxHeight: "calc(100dvh - 2.5rem)",
+              borderRadius: "1.7rem",
+              background: "#ffffff",
+              boxShadow:
+                "0 24px 70px rgba(15,23,42,0.25), 0 0 0 1px rgba(148,163,184,0.3)",
+              padding: "0.9rem",
+              overflowY: "auto",
+              overflowX: "hidden",
+            }}
+            onClick={(event) => event.stopPropagation()}
+          >
+            {/* book spine */}
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                bottom: 0,
+                left: "50%",
+                width: 2,
+                background: "rgba(148,163,184,0.35)",
+                boxShadow: "0 0 12px rgba(148,163,184,0.6)",
+                pointerEvents: "none",
+              }}
+            />
+
+            <button
+              type="button"
+              onClick={() => setShowGuidebook(false)}
+              style={{
+                position: "absolute",
+                top: 10,
+                right: 12,
+                border: "none",
+                background: "transparent",
+                color: "#6b7280",
+                fontSize: "1rem",
+                cursor: "pointer",
+              }}
+            >
+              â
+            </button>
+
+            <div
+              style={{
+                display: "flex",
+                gap: "0.9rem",
+                background: "#f9fafb",
+                borderRadius: "1.2rem",
+                padding: "1.2rem 1.3rem 1.3rem",
+              }}
+            >
+              {/* left page */}
+              <div
+                style={{
+                  flex: 1,
+                  paddingRight: "1.2rem",
+                  borderRight: "1px solid rgba(148,163,184,0.45)",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.75rem",
+                }}
+              >
+                {/* small character sticker */}
+                <div
+                  style={{
+                    alignSelf: "flex-start",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.4rem",
+                    marginBottom: "0.25rem",
+                  }}
+                >
+                  <div
+                    style={{
+                      width: 34,
+                      height: 34,
+                      borderRadius: "50%",
+                      background:
+                        "radial-gradient(circle at 30% 20%,#bbf7d0,#22c55e 75%,#15803d)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      boxShadow: "0 10px 20px rgba(22,163,74,0.6)",
+                    }}
+                  >
+                    <span
+                      className="font-fredoka"
+                      style={{ fontSize: "1.1rem", color: "#f9fafb" }}
+                    >
+                      S
+                    </span>
+                  </div>
+                  <span
+                    style={{
+                      fontSize: "0.8rem",
+                      color: "#4b5563",
+                    }}
+                  >
+                    Sara Â· your Spanish guide
+                  </span>
+                </div>
+                <p
+                  style={{
+                    fontSize: "0.75rem",
+                    textTransform: "uppercase",
+                    letterSpacing: "0.18em",
+                    color: "#6b21a8",
+                  }}
+                >
+                  Section 1 Â· Guidebook
+                </p>
+                <h2
+                  className="font-fredoka"
+                  style={{
+                    fontSize: "1.5rem",
+                    fontWeight: 800,
+                    color: "#111827",
+                  }}
+                >
+                  Your first Spanish greetings adventure
+                </h2>
+
+                <p
+                  style={{
+                    fontSize: "0.9rem",
+                    color: "#374151",
+                  }}
+                >
+                  Section 1 follows the same 5-mission flow you see on the map.
+                  Complete each short mission in order: warm-up, core greetings,
+                  reward chest, quick practice, and boss review.
+                </p>
+
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "0.55rem",
+                    marginTop: "0.2rem",
+                  }}
+                >
+                  <GuidebookCard
+                    title="Start"
+                    subtitle="Mission 1 Â· Hola warm-up"
+                    bullets={[
+                      "Jump into a tiny story intro with the characters.",
+                      "Complete 5 easy taps to hear and spot greeting words.",
+                      'Focus on listening first and getting comfy with "Hola".',
+                    ]}
+                    accent="#0ea5e9"
+                  />
+                  <GuidebookCard
+                    title="Learn"
+                    subtitle="Mission 2 Â· Core greetings"
+                    bullets={[
+                      "Practice key hello and goodbye phrases in Spanish.",
+                      "Use visual cards, audio cues, and short prompts.",
+                      "Clear 5 questions to unlock the reward chest mission.",
+                    ]}
+                    accent="#22c55e"
+                  />
+                </div>
+              </div>
+
+              {/* right page */}
+              <div
+                style={{
+                  flex: 1,
+                  paddingLeft: "1.2rem",
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.55rem",
+                }}
+              >
+                {/* small character sticker */}
+                <div
+                  style={{
+                    alignSelf: "flex-end",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.4rem",
+                    marginBottom: "0.1rem",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "0.8rem",
+                      color: "#4b5563",
+                    }}
+                  >
+                    Maya Â· mission master
+                  </span>
+                  <div
+                    style={{
+                      width: 34,
+                      height: 34,
+                      borderRadius: "50%",
+                      background:
+                        "radial-gradient(circle at 30% 20%,#bfdbfe,#60a5fa 75%,#2563eb)",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      boxShadow: "0 10px 20px rgba(37,99,235,0.6)",
+                    }}
+                  >
+                    <span
+                      className="font-fredoka"
+                      style={{ fontSize: "1.1rem", color: "#f9fafb" }}
+                    >
+                      M
+                    </span>
+                  </div>
+                </div>
+                <GuidebookCard
+                  title="Reward"
+                  subtitle="Mission 3 Â· Reward chest"
+                  bullets={[
+                    "Open the chest and collect your mission reward.",
+                    "Earn XP plus playful greeting-themed stickers.",
+                    "This step is quick, fun, and low pressure.",
+                  ]}
+                  accent="#f97316"
+                />
+                <GuidebookCard
+                  title="Practice"
+                  subtitle="Mission 4 Â· Quick practice"
+                  bullets={[
+                    "Review with mixed English and Spanish prompts.",
+                    "Finish 5 fast questions to lock the words in.",
+                    "Great re-entry point after a short break.",
+                  ]}
+                  accent="#6366f1"
+                />
+                <GuidebookCard
+                  title="Final boss"
+                  subtitle="Mission 5 Â· Greetings boss quiz"
+                  bullets={[
+                    "Take 5 mixed boss questions from all previous steps.",
+                    "Checks whether greetings now feel automatic.",
+                    "Complete this to unlock progress to the next unit.",
+                  ]}
+                  accent="#ec4899"
+                />
+
+                <div
+                  style={{
+                    marginTop: "0.4rem",
+                    padding: "0.6rem 0.8rem",
+                    borderRadius: "0.9rem",
+                    background:
+                      "linear-gradient(90deg,rgba(34,197,94,0.08),rgba(22,163,74,0.18))",
+                    fontSize: "0.83rem",
+                    color: "#14532d",
+                  }}
+                >
+                  Tip: tap the glowing unit node on the path or the blue
+                  Continue button to jump right back into your next mission.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+
+interface LessonQuizProps {
+  unitIndex: number;
+  activeLanguage: string;
+  onComplete: () => void;
+}
+
+function LessonQuiz({
+  unitIndex,
+  activeLanguage,
+  onComplete,
+}: LessonQuizProps) {
+  const section: any = section1Units;
+  const unit = section?.units?.[unitIndex];
+  if (!unit) return null;
+
+  const lessonStep = unit.steps.find((s: any) => s.kind === "lesson");
+  const questions = lessonStep?.questions ?? [];
+  if (!questions.length) return null;
+
+  const preferred =
+    questions.find((q: any) => q.toLanguage === activeLanguage) ?? questions[0];
+
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [showExplanation, setShowExplanation] = useState(false);
+
+  const handleSelect = (id: string, correct: boolean) => {
+    setSelectedId(id);
+    setShowExplanation(true);
+    if (correct) {
+      // small delay before advancing
+      setTimeout(() => {
+        onComplete();
+      }, 600);
+    }
+  };
+
+  return (
+    <div
+      style={{
+        alignSelf: "stretch",
+        marginTop: "1.1rem",
+        borderRadius: "1.4rem",
+        background: "#ffffff",
+        border: "1px solid rgba(226,232,240,0.95)",
+        boxShadow: "0 18px 40px rgba(148,163,184,0.35)",
+        padding: "0.9rem 1rem 1rem",
+      }}
+    >
+      <p
+        className="font-fredoka"
+        style={{
+          fontSize: "1rem",
+          fontWeight: 700,
+          marginBottom: "0.4rem",
+          color: "#111827",
+        }}
+      >
+        {lessonStep?.title ?? "Lesson quiz"}
+      </p>
+      <p
+        style={{
+          fontSize: "0.8rem",
+          color: "#6b7280",
+          marginBottom: "0.7rem",
+        }}
+      >
+        {preferred.prompt}
+      </p>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "1fr",
+          gap: "0.4rem",
+          marginBottom: "0.5rem",
+        }}
+      >
+        {preferred.answers.map((ans: any) => {
+          const isSelected = selectedId === ans.id;
+          const isCorrect = ans.correct;
+
+          let bg = "#ffffff";
+          let border = "1px solid rgba(209,213,219,0.95)";
+          if (selectedId) {
+            if (isCorrect) {
+              bg = "#dcfce7";
+              border = "1px solid rgba(34,197,94,0.9)";
+            } else if (isSelected && !isCorrect) {
+              bg = "#fee2e2";
+              border = "1px solid rgba(248,113,113,0.9)";
+            }
+          } else if (isSelected) {
+            bg = "#eff6ff";
+          }
+
+          return (
+            <button
+              key={ans.id}
+              type="button"
+              onClick={() => handleSelect(ans.id, ans.correct)}
+              style={{
+                textAlign: "left",
+                borderRadius: "0.8rem",
+                border,
+                background: bg,
+                padding: "0.5rem 0.7rem",
+                fontSize: "0.85rem",
+                cursor: "pointer",
+              }}
+            >
+              {ans.text}
+            </button>
+          );
+        })}
+      </div>
+
+      {showExplanation && preferred.explanation && (
+        <p
+          style={{
+            fontSize: "0.78rem",
+            color: "#4b5563",
+          }}
+        >
+          {preferred.explanation}
+        </p>
+      )}
+    </div>
+  );
+}
+
+interface StreakCardProps {
+  onClose: () => void;
+}
+
+function StreakCard({ onClose }: StreakCardProps) {
+  return (
+    <div
+      style={{
+        borderRadius: "1.2rem",
+        overflow: "hidden",
+        background: "#ffffff",
+        border: "1px solid rgba(226,232,240,0.95)",
+        boxShadow: "0 16px 40px rgba(148,163,184,0.4)",
+      }}
+    >
+      {/* Top yellow streak panel */}
+      <div
+        style={{
+          padding: "0.95rem 0.9rem 0.85rem",
+          background: "#fef3c7",
+          borderBottom: "1px solid rgba(254,240,138,0.9)",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            marginBottom: "0.4rem",
+          }}
+        >
+          <p
+            style={{
+              fontSize: "0.9rem",
+              fontWeight: 800,
+              color: "#f59e0b",
+            }}
+          >
+            0 day streak
+          </p>
+          <button
+            type="button"
+            onClick={onClose}
+            style={{
+              border: "none",
+              background: "transparent",
+              fontSize: "0.75rem",
+              color: "#9ca3af",
+              cursor: "pointer",
+            }}
+          >
+            Back
+          </button>
+        </div>
+        <p
+          style={{
+            fontSize: "0.8rem",
+            color: "#78350f",
+            marginBottom: "0.7rem",
+          }}
+        >
+          Do a lesson today to start a new streak!
+        </p>
+
+        <div
+          style={{
+            borderRadius: "0.9rem",
+            background: "#ffffff",
+            padding: "0.55rem 0.7rem 0.65rem",
+            boxShadow: "0 6px 18px rgba(250,204,21,0.35)",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "0.45rem",
+            }}
+          >
+            <div
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "0.3rem",
+              }}
+            >
+              {["M", "T", "W", "T", "F", "S", "S"].map((day, index) => (
+                <div
+                  key={`${day}-${index}`}
+                  style={{
+                    width: 26,
+                    height: 26,
+                    borderRadius: "999px",
+                    background: index === 0 ? "#f97316" : "#f9fafb",
+                    border:
+                      index === 0 ? "none" : "1px solid rgba(209,213,219,0.95)",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    fontSize: "0.7rem",
+                    color: index === 0 ? "#fefce8" : "#6b7280",
+                    fontWeight: index === 0 ? 700 : 500,
+                  }}
+                >
+                  {day}
+                </div>
+              ))}
+            </div>
+            <Image
+              src={streakLockIcon}
+              alt="Streak icon"
+              width={40}
+              height={40}
+              style={{ display: "block", opacity: 0.5 }}
+            />
+          </div>
+          <div
+            style={{
+              height: 10,
+              borderRadius: 999,
+              background: "#e5e7eb",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                width: "0%",
+                height: "100%",
+                borderRadius: 999,
+                background: "#f97316",
+              }}
+            />
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Streak Society card + button */}
+      <div
+        style={{
+          padding: "0.8rem 0.9rem 0.95rem",
+          background: "#ffffff",
+        }}
+      >
+        <div
+          style={{
+            borderRadius: "1rem",
+            border: "1px solid rgba(209,213,219,0.9)",
+            padding: "0.65rem 0.7rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.6rem",
+            marginBottom: "0.7rem",
+          }}
+        >
+          <div
+            style={{
+              width: 32,
+              height: 32,
+              borderRadius: "999px",
+              background: "#f3f4f6",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Image
+              src={lockIcon}
+              alt="Locked"
+              width={18}
+              height={18}
+              style={{ display: "block", opacity: 0.7 }}
+            />
+          </div>
+          <div>
+            <p
+              style={{
+                fontSize: "0.8rem",
+                fontWeight: 700,
+                color: "#111827",
+                marginBottom: "0.15rem",
+              }}
+            >
+              Streak Society
+            </p>
+            <p
+              style={{
+                fontSize: "0.75rem",
+                color: "#6b7280",
+              }}
+            >
+              Reach a 7 day streak to join the Streak Society and earn exclusive
+              rewards.
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          style={{
+            width: "100%",
+            borderRadius: "999px",
+            border: "none",
+            background: "#0ea5e9",
+            color: "#f9fafb",
+            fontSize: "0.85rem",
+            fontWeight: 700,
+            padding: "0.6rem 0.8rem",
+            cursor: "pointer",
+          }}
+        >
+          VIEW MORE
+        </button>
+      </div>
+    </div>
+  );
+}

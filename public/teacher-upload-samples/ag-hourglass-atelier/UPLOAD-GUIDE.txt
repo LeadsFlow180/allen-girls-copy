@@ -1,0 +1,19 @@
+Manual upload — Teacher Dashboard (/teacher/library/new)
+========================================================
+
+STORY ID (slug):     ag-hourglass-atelier
+Title:               The Hourglass Atelier
+Wing:                Allen Girls
+Author:              Allen Girls Adventures
+Age band:            Ages 8–11
+Tier:                Standard
+Published:           Yes
+
+Synopsis:
+Maya, Alana, and Natalia discover a hidden workshop where unfinished library moments are kept in hourglasses — and must restart a story-clock that froze an entire wing before opening day.
+
+Cover thumbnail:
+  Use file: ag-hourglass-atelier-cover.png (same folder as this guide)
+
+Chapters:
+  Copy each chapter from chapters.json or the numbered sections below into separate chapter fields in the form.

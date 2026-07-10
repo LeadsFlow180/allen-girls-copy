@@ -1,0 +1,795 @@
+/* Gem Bazaar — compact market stall, Trophy Island polish */
+
+.page {
+  position: relative;
+  min-height: 0;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #a5b4fc 0%,
+    #7dd3fc 38%,
+    #bae6fd 55%,
+    #bbf7d0 100%
+  );
+  border: 3px solid #1899d6;
+  box-shadow:
+    0 8px 0 #1482b8,
+    0 22px 48px rgba(24, 153, 214, 0.3);
+}
+
+.skyDecor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.worldBg {
+  object-fit: cover;
+  opacity: 0.34;
+}
+
+.sun {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+  width: 3.75rem;
+  height: 3.75rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff9c4, #ffc800 55%, #ff9600);
+  box-shadow: 0 0 36px rgba(255, 200, 0, 0.6);
+  animation: sunPulse 4s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.07);
+  }
+}
+
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 999px;
+  opacity: 0.92;
+  filter: drop-shadow(0 3px 0 rgba(148, 163, 184, 0.25));
+  animation: cloudDrift linear infinite;
+}
+
+.cloudA {
+  width: 5rem;
+  height: 1.75rem;
+  top: 10%;
+  left: -6rem;
+  animation-duration: 28s;
+}
+
+.cloudB {
+  width: 6.5rem;
+  height: 2rem;
+  top: 20%;
+  left: -8rem;
+  animation-duration: 34s;
+  animation-delay: -6s;
+}
+
+.cloudC {
+  width: 3.5rem;
+  height: 1.4rem;
+  top: 6%;
+  left: -4rem;
+  animation-duration: 20s;
+  animation-delay: -12s;
+}
+
+@keyframes cloudDrift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw + 10rem));
+  }
+}
+
+.star {
+  position: absolute;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #fff;
+  border-radius: 50%;
+  animation: starTwinkle 2s ease-in-out infinite;
+  box-shadow: 0 0 5px #fff;
+}
+
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.hillBack {
+  position: absolute;
+  bottom: -1.5rem;
+  left: -10%;
+  width: 120%;
+  height: 6rem;
+  background: #86efac;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.65;
+}
+
+.hillFront {
+  position: absolute;
+  bottom: -2rem;
+  left: -5%;
+  width: 110%;
+  height: 4.5rem;
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+  border-radius: 50% 50% 0 0;
+  box-shadow: inset 0 6px 0 rgba(255, 255, 255, 0.2);
+}
+
+.sparkleField {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 18% 28%, rgba(255, 255, 255, 0.4) 0, transparent 7%),
+    radial-gradient(circle at 72% 18%, rgba(253, 224, 71, 0.45) 0, transparent 6%);
+  animation: sparkleShift 7s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes sparkleShift {
+  from {
+    opacity: 0.45;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  padding: 0.8rem 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Compact hero — sign + mascot, one row */
+.stage {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  align-items: end;
+}
+
+.signBoard {
+  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 55%, #fcd34d 100%);
+  border: 3px solid #ca8a04;
+  border-radius: 1rem;
+  padding: 0.55rem 0.7rem 0.6rem;
+  box-shadow:
+    0 5px 0 #a16207,
+    0 10px 20px rgba(161, 98, 7, 0.22);
+  transform: rotate(-1deg);
+}
+
+.signEyebrow {
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #b45309;
+}
+
+.signTitle {
+  margin: 0;
+  font-size: clamp(1.35rem, 4vw, 1.75rem);
+  line-height: 1.05;
+  color: #78350f;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.65);
+}
+
+.walletRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+
+.orb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.22rem 0.5rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  font-weight: 800;
+  font-size: 0.68rem;
+}
+
+.orb strong {
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: 0.9rem;
+}
+
+.orbGem {
+  background: linear-gradient(180deg, #67e8f9, #0ea5e9);
+  box-shadow: 0 3px 0 #0369a1;
+  color: #0c4a6e;
+}
+
+.orbXp {
+  background: linear-gradient(180deg, #fde047, #eab308);
+  box-shadow: 0 3px 0 #ca8a04;
+  color: #713f12;
+}
+
+.earnLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  border: 2px solid #22c55e;
+  border-radius: 999px;
+  padding: 0.22rem 0.55rem;
+  background: linear-gradient(180deg, #bbf7d0, #86efac);
+  color: #166534;
+  font-size: 0.66rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #15803d;
+}
+
+.earnLink:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #15803d;
+}
+
+.vaultMascot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: 0.15rem;
+}
+
+.vaultGlow {
+  position: absolute;
+  bottom: 0.35rem;
+  width: 5rem;
+  height: 1.5rem;
+  background: radial-gradient(ellipse, rgba(167, 139, 250, 0.65), transparent 70%);
+  animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.15);
+  }
+}
+
+.vaultFloat {
+  position: relative;
+  z-index: 1;
+  filter: drop-shadow(0 6px 0 #7c3aed);
+}
+
+.vaultGem {
+  position: absolute;
+  top: -0.2rem;
+  right: -0.35rem;
+  filter: drop-shadow(0 2px 0 #0369a1);
+}
+
+.vaultPedestal {
+  width: 4.5rem;
+  height: 0.75rem;
+  margin-top: -0.2rem;
+  background: linear-gradient(180deg, #c4b5fd, #8b5cf6);
+  border-radius: 0.3rem;
+  box-shadow: 0 4px 0 #6d28d9;
+}
+
+/* Treasure chest (collapsible) */
+.shelfDetails {
+  border-radius: 0.75rem;
+  background: linear-gradient(180deg, #78350f, #92400e);
+  border: 2px solid #a16207;
+  box-shadow: 0 4px 0 #713f12;
+}
+
+.shelfSummary {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.38rem 0.55rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #fef3c7;
+  cursor: pointer;
+  list-style: none;
+}
+
+.shelfSummary::-webkit-details-marker {
+  display: none;
+}
+
+.shelfTrack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  padding: 0 0.5rem 0.45rem;
+}
+
+.shelfBadge {
+  width: 2.1rem;
+  height: 2.1rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.5rem;
+  background: linear-gradient(145deg, #fffef8, #fde68a);
+  border: 2px solid #fbbf24;
+  box-shadow: 0 2px 0 #d97706;
+}
+
+.shelfBadge svg {
+  width: 1.35rem;
+  height: 1.35rem;
+}
+
+/* Market stall */
+.marketWrap {
+  position: relative;
+  padding: 0.55rem 0.5rem 0.65rem;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.88) 0%, rgba(255, 254, 248, 0.95) 100%);
+  border: 3px solid #ca8a04;
+  box-shadow:
+    0 6px 0 #a16207,
+    inset 0 1px 0 #fff;
+}
+
+.awning {
+  position: absolute;
+  top: -0.55rem;
+  left: 0.35rem;
+  right: 0.35rem;
+  display: flex;
+  gap: 2px;
+  height: 0.55rem;
+  z-index: 1;
+}
+
+.awning span {
+  flex: 1;
+  border-radius: 2px 2px 0 0;
+  transform: skewX(-8deg);
+}
+
+.awning span:nth-child(odd) {
+  background: #ef4444;
+}
+
+.awning span:nth-child(even) {
+  background: #fff;
+}
+
+.tabDock {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.55rem;
+  padding: 0.35rem;
+  border-radius: 0.85rem;
+  background: rgba(241, 245, 249, 0.9);
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 3px 0 #cbd5e1;
+}
+
+.tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: 2px solid #e2e8f0;
+  background: linear-gradient(180deg, #fff, #f8fafc);
+  color: #64748b;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.32rem 0.6rem;
+  border-radius: 0.65rem;
+  cursor: pointer;
+  box-shadow: 0 3px 0 #cbd5e1;
+}
+
+.tab:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #cbd5e1;
+}
+
+.tabActive {
+  background: linear-gradient(180deg, #bbf7d0, #86efac);
+  border-color: #22c55e;
+  color: #166534;
+  box-shadow: 0 4px 0 #15803d;
+}
+
+.tabEmoji {
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+/* Treasure tiles — dense grid, vertical cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr));
+  gap: 0.55rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0.5rem 0.45rem 0.55rem;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #fffef8 0%, #fff 48%);
+  border: 3px solid #e2e8f0;
+  box-shadow: 0 5px 0 #cbd5e1;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 0.35rem;
+  background: var(--shop-accent, #7c3aed);
+}
+
+.cardFeatured::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 38%,
+    rgba(255, 255, 255, 0.5) 50%,
+    transparent 62%
+  );
+  animation: cardShine 2.8s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes cardShine {
+  0% {
+    transform: translateX(-130%);
+  }
+  100% {
+    transform: translateX(130%);
+  }
+}
+
+.cardFeatured {
+  border-color: color-mix(in srgb, var(--shop-accent) 60%, #e2e8f0);
+  box-shadow:
+    0 5px 0 color-mix(in srgb, var(--shop-accent) 50%, #94a3b8),
+    0 0 14px color-mix(in srgb, var(--shop-accent) 28%, transparent);
+}
+
+.cardAffordable {
+  border-color: #4ade80;
+  box-shadow:
+    0 5px 0 #16a34a,
+    0 0 12px rgba(34, 197, 94, 0.22);
+}
+
+.cardOwned {
+  background: linear-gradient(180deg, #faf5ff, #f5f3ff);
+  border-color: #a78bfa;
+  box-shadow: 0 5px 0 #7c3aed;
+}
+
+.featuredRibbon {
+  position: absolute;
+  top: 0.4rem;
+  right: 0.35rem;
+  z-index: 3;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.15rem;
+  font-size: 0.52rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  background: linear-gradient(180deg, #f97316, #ea580c);
+  padding: 0.1rem 0.38rem;
+  border-radius: 999px;
+  box-shadow: 0 2px 0 #c2410c;
+}
+
+.kindChip {
+  font-size: 0.52rem;
+  font-weight: 800;
+  text-transform: capitalize;
+  color: #64748b;
+  margin-bottom: 0.15rem;
+}
+
+.iconStage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0.1rem 0 0.2rem;
+}
+
+.iconGlow {
+  position: absolute;
+  bottom: 0.15rem;
+  width: 3.25rem;
+  height: 0.9rem;
+  background: radial-gradient(
+    ellipse,
+    color-mix(in srgb, var(--shop-accent) 50%, transparent),
+    transparent 72%
+  );
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  z-index: 1;
+  filter: drop-shadow(0 3px 0 rgba(15, 23, 42, 0.1));
+}
+
+.cardIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.iconPedestal {
+  width: 2.75rem;
+  height: 0.45rem;
+  margin-top: -0.1rem;
+  border-radius: 0.2rem;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--shop-accent) 65%, #cbd5e1),
+    color-mix(in srgb, var(--shop-accent) 85%, #64748b)
+  );
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--shop-accent) 75%, #475569);
+}
+
+.tierPill {
+  font-size: 0.5rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  margin-bottom: 0.15rem;
+}
+
+.tier1 .tierPill {
+  background: #e2e8f0;
+  color: #475569;
+}
+
+.tier2 .tierPill {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.tier3 .tierPill {
+  background: #ede9fe;
+  color: #6d28d9;
+}
+
+.tier4 .tierPill {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.tier5 .tierPill {
+  background: linear-gradient(90deg, #fef3c7, #fde68a);
+  color: #92400e;
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.5);
+}
+
+.cardTitle {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #0f172a;
+  line-height: 1.12;
+}
+
+.cardDesc {
+  margin: 0.12rem 0 0;
+  font-size: 0.6rem;
+  line-height: 1.3;
+  color: #64748b;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.4em;
+}
+
+.cardFoot {
+  margin-top: auto;
+  width: 100%;
+  padding-top: 0.35rem;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.3rem;
+}
+
+.price {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.2rem;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #0f172a;
+  padding: 0.18rem 0.4rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+}
+
+.buyBtn {
+  border: none;
+  border-radius: 999px;
+  padding: 0.32rem 0.5rem;
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(180deg, #a855f7, #7c3aed);
+  box-shadow: 0 3px 0 #6d28d9;
+  cursor: pointer;
+  width: 100%;
+}
+
+.buyBtn:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #6d28d9;
+}
+
+.buyBtn:disabled {
+  opacity: 0.55;
+  background: #94a3b8;
+  box-shadow: 0 2px 0 #64748b;
+  cursor: not-allowed;
+}
+
+.ownedBadge {
+  padding: 0.3rem;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #6d28d9;
+  background: #ede9fe;
+  border-radius: 0.5rem;
+  border: 2px solid #c4b5fd;
+}
+
+.confettiLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  overflow: hidden;
+}
+
+.confettiPiece {
+  position: absolute;
+  top: -0.5rem;
+  width: 0.45rem;
+  height: 0.75rem;
+  border-radius: 2px;
+  animation: confettiFall 2.2s ease-out forwards;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 80;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #7c3aed, #e8357a);
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  box-shadow:
+    0 6px 0 #5b21b6,
+    0 16px 40px rgba(124, 58, 237, 0.45);
+  max-width: min(92vw, 26rem);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.toastIcon {
+  flex-shrink: 0;
+  color: #fde047;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .stage {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .signBoard {
+    transform: none;
+    width: 100%;
+  }
+
+  .walletRow {
+    justify-content: center;
+  }
+
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 360px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 0.45rem;
+  }
+
+  .cardIcon {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+}

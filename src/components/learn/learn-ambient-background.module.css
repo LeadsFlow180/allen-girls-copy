@@ -1,0 +1,106 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.bgImage {
+  object-fit: cover;
+  object-position: center 40%;
+  opacity: 0.28;
+  filter: saturate(1.1);
+}
+
+.skyGradient {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 85% 50% at 50% -5%, rgba(255, 200, 0, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse 50% 40% at 92% 15%, rgba(28, 176, 246, 0.22) 0%, transparent 55%),
+    radial-gradient(ellipse 45% 35% at 8% 25%, rgba(88, 204, 2, 0.18) 0%, transparent 50%),
+    linear-gradient(180deg, #7dd3fc 0%, #bae6fd 32%, #e0f2fe 58%, #dcfce7 100%);
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    transparent 35%,
+    rgba(22, 163, 74, 0.08) 100%
+  );
+}
+
+.sun {
+  position: absolute;
+  top: 4.5rem;
+  right: 12%;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff9c4, #ffc800 55%, #ff9600);
+  box-shadow: 0 0 28px rgba(255, 200, 0, 0.55);
+  opacity: 0.85;
+}
+
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 999px;
+  opacity: 0.88;
+  filter: drop-shadow(0 3px 0 rgba(148, 163, 184, 0.2));
+}
+
+.cloudA {
+  width: 6rem;
+  height: 2rem;
+  top: 18%;
+  left: 8%;
+}
+
+.cloudB {
+  width: 4.5rem;
+  height: 1.5rem;
+  top: 28%;
+  right: 18%;
+}
+
+.hillBack {
+  position: absolute;
+  bottom: -4rem;
+  left: -8%;
+  width: 116%;
+  height: 10rem;
+  border-radius: 50% 50% 0 0;
+  background: #86efac;
+  opacity: 0.75;
+}
+
+.hillFront {
+  position: absolute;
+  bottom: -5rem;
+  left: -4%;
+  width: 108%;
+  height: 7rem;
+  border-radius: 50% 50% 0 0;
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+  box-shadow: inset 0 8px 0 rgba(255, 255, 255, 0.18);
+}
+
+@media (max-width: 768px) {
+  .sun {
+    width: 2.5rem;
+    height: 2.5rem;
+    top: 3.75rem;
+    right: 8%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sun {
+    animation: none;
+  }
+}

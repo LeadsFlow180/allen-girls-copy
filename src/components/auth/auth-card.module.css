@@ -1,0 +1,114 @@
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 32rem;
+  overflow: hidden;
+  border-radius: 0.9rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  padding: 1.25rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #334155;
+}
+
+.intro {
+  margin-top: 0.7rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #475569;
+}
+
+.tabsList {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-radius: 0.75rem;
+  background: #f1f5f9;
+  padding: 0.25rem;
+}
+
+.tabsTrigger {
+  border-radius: 0.55rem;
+}
+
+.roleChip {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 0.6rem;
+  border: 1px solid #e2e8f0;
+  background: #f8fafc;
+  padding: 0.55rem 0.75rem;
+  font-size: 0.88rem;
+  color: #334155;
+}
+
+.fieldWrap {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #334155;
+}
+
+.input {
+  height: 2.5rem;
+  border-radius: 0.7rem;
+  border-color: #e2e8f0;
+  background: #ffffff;
+}
+
+.loginMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.84rem;
+}
+
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #475569;
+}
+
+.forgot {
+  font-weight: 700;
+  color: #c026d3;
+}
+
+.submit {
+  height: 2.7rem;
+  width: 100%;
+  border-radius: 0.7rem;
+  background: linear-gradient(90deg, #06b6d4 0%, #14b8a6 100%);
+  color: #ffffff;
+}
+
+.switchText {
+  margin-top: 1.15rem;
+  text-align: center;
+  font-size: 0.88rem;
+  color: #475569;
+}
+
+.switchLink {
+  font-weight: 800;
+  color: #c026d3;
+}

@@ -1,0 +1,468 @@
+/* Quiz stats — professional performance panel */
+
+.panel {
+  margin: 0;
+  border-radius: 1rem;
+  background: linear-gradient(180deg, #fff 0%, #f8fafc 100%);
+  border: 2px solid #e2e8f0;
+  box-shadow:
+    0 4px 0 #cbd5e1,
+    0 8px 24px rgba(15, 23, 42, 0.06);
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.65rem 0.75rem;
+  user-select: none;
+  transition: background 0.15s ease;
+}
+
+.summary:hover {
+  background: rgba(241, 245, 249, 0.9);
+}
+
+.summary::-webkit-details-marker {
+  display: none;
+}
+
+.summaryIcon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.55rem;
+  background: linear-gradient(145deg, #ede9fe, #ddd6fe);
+  color: #6d28d9;
+  border: 2px solid #c4b5fd;
+  box-shadow: 0 2px 0 #a78bfa;
+}
+
+.summaryText {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+}
+
+.summaryTitle {
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.summarySub {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.summaryPill {
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+}
+
+.summaryPill[data-tier="excellent"] {
+  background: linear-gradient(180deg, #bbf7d0, #86efac);
+  color: #166534;
+  border-color: #4ade80;
+  box-shadow: 0 2px 0 #16a34a;
+}
+
+.summaryPill[data-tier="good"] {
+  background: linear-gradient(180deg, #fef08a, #fde047);
+  color: #854d0e;
+  border-color: #eab308;
+  box-shadow: 0 2px 0 #ca8a04;
+}
+
+.summaryPill[data-tier="needsWork"] {
+  background: linear-gradient(180deg, #fecaca, #fca5a5);
+  color: #991b1b;
+  border-color: #f87171;
+  box-shadow: 0 2px 0 #dc2626;
+}
+
+.summaryChevron {
+  flex-shrink: 0;
+  color: #94a3b8;
+  transition: transform 0.2s ease;
+}
+
+.panel[open] .summaryChevron {
+  transform: rotate(90deg);
+}
+
+.body {
+  padding: 0 0.75rem 0.75rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+/* Hero — latest attempt */
+.heroCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 0.85rem;
+  background: #fff;
+  border: 2px solid #e2e8f0;
+}
+
+.heroCard[data-tier="excellent"] {
+  border-color: #86efac;
+  background: linear-gradient(135deg, #f0fdf4 0%, #fff 100%);
+  box-shadow: 0 3px 0 #bbf7d0;
+}
+
+.heroCard[data-tier="good"] {
+  border-color: #fde047;
+  background: linear-gradient(135deg, #fffbeb 0%, #fff 100%);
+  box-shadow: 0 3px 0 #fef08a;
+}
+
+.heroCard[data-tier="needsWork"] {
+  border-color: #fca5a5;
+  background: linear-gradient(135deg, #fef2f2 0%, #fff 100%);
+  box-shadow: 0 3px 0 #fecaca;
+}
+
+.heroContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.heroLabel {
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #94a3b8;
+}
+
+.heroMission {
+  margin: 0.15rem 0 0.5rem;
+  font-size: 1rem;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.heroStats {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.statChip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.statChipIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: grid;
+  place-items: center;
+  border-radius: 0.4rem;
+  background: #f1f5f9;
+  color: #475569;
+  flex-shrink: 0;
+}
+
+.statChipText {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-width: 0;
+}
+
+.statChipLabel {
+  font-size: 0.58rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #94a3b8;
+}
+
+.statChipValue {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #334155;
+}
+
+/* Score ring */
+.scoreRing {
+  --ring-color: #22c55e;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: conic-gradient(
+    var(--ring-color) calc(var(--score-pct, 0) * 1%),
+    #e2e8f0 0
+  );
+  position: relative;
+}
+
+.scoreRing[data-tier="excellent"] {
+  --ring-color: #22c55e;
+}
+
+.scoreRing[data-tier="good"] {
+  --ring-color: #eab308;
+}
+
+.scoreRing[data-tier="needsWork"] {
+  --ring-color: #ef4444;
+}
+
+.ringSizeSm {
+  width: 2.35rem;
+  height: 2.35rem;
+}
+
+.ringSizeMd {
+  width: 3rem;
+  height: 3rem;
+}
+
+.ringSizeLg {
+  width: 3.75rem;
+  height: 3.75rem;
+}
+
+.scoreRing::before {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: inset 0 1px 2px rgba(15, 23, 42, 0.06);
+}
+
+.ringValue {
+  position: relative;
+  z-index: 1;
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+}
+
+.ringSizeLg .ringValue {
+  font-size: 1.05rem;
+}
+
+/* History */
+.historyBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.historyHeading {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: #64748b;
+}
+
+.historyCount {
+  display: inline-grid;
+  place-items: center;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  padding: 0 0.25rem;
+  border-radius: 999px;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 0.58rem;
+}
+
+.historyList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.attemptRow {
+  display: grid;
+  grid-template-columns: 3rem 1fr;
+  gap: 0.55rem;
+  align-items: start;
+  padding: 0.5rem 0.55rem;
+  border-radius: 0.75rem;
+  background: #fff;
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 2px 0 #e2e8f0;
+}
+
+.attemptRow[data-tier="excellent"] .attemptScore {
+  background: linear-gradient(180deg, #bbf7d0, #86efac);
+  border-color: #4ade80;
+  color: #166534;
+}
+
+.attemptRow[data-tier="good"] .attemptScore {
+  background: linear-gradient(180deg, #fef08a, #fde047);
+  border-color: #eab308;
+  color: #854d0e;
+}
+
+.attemptRow[data-tier="needsWork"] .attemptScore {
+  background: linear-gradient(180deg, #fecaca, #fca5a5);
+  border-color: #f87171;
+  color: #991b1b;
+}
+
+.attemptScore {
+  display: grid;
+  place-items: center;
+  min-height: 2.5rem;
+  border-radius: 0.55rem;
+  border: 2px solid #e2e8f0;
+}
+
+.attemptPercent {
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.attemptBody {
+  min-width: 0;
+}
+
+.attemptTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+  margin-bottom: 0.3rem;
+}
+
+.missionChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  font-size: 0.68rem;
+  font-weight: 800;
+  padding: 0.12rem 0.4rem;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #334155;
+  border: 1px solid #e2e8f0;
+}
+
+.attemptDate {
+  font-size: 0.6rem;
+  font-weight: 700;
+  color: #94a3b8;
+  white-space: nowrap;
+}
+
+.attemptBarTrack {
+  height: 5px;
+  border-radius: 999px;
+  background: #e2e8f0;
+  overflow: hidden;
+  margin-bottom: 0.25rem;
+}
+
+.attemptBarFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #58cc02, #86efac);
+  transition: width 0.35s ease;
+}
+
+.attemptRow[data-tier="good"] .attemptBarFill {
+  background: linear-gradient(90deg, #eab308, #fde047);
+}
+
+.attemptRow[data-tier="needsWork"] .attemptBarFill {
+  background: linear-gradient(90deg, #f87171, #fca5a5);
+}
+
+.attemptMeta {
+  margin: 0;
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: #64748b;
+}
+
+/* Compact (mission card) */
+.compactLine {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.compactScore {
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: 0.88rem;
+  font-weight: 800;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.4rem;
+}
+
+.compactScore[data-tier="excellent"] {
+  color: #166534;
+  background: #dcfce7;
+}
+
+.compactScore[data-tier="good"] {
+  color: #854d0e;
+  background: #fef9c3;
+}
+
+.compactScore[data-tier="needsWork"] {
+  color: #991b1b;
+  background: #fee2e2;
+}
+
+@media (max-width: 480px) {
+  .heroCard {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .heroStats {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .attemptTop {
+    flex-wrap: wrap;
+  }
+}

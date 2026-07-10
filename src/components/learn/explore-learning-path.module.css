@@ -1,0 +1,401 @@
+/* Adventure map — dramatic kids world (presentation only) */
+
+.wrap {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.pathWorld {
+  position: relative;
+  border-radius: 1.5rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 38%, #e0f2fe 55%, #dcfce7 100%);
+  box-shadow:
+    0 8px 0 #1899d6,
+    0 20px 48px rgba(24, 153, 214, 0.22);
+}
+
+.skyDecor {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.worldBg {
+  object-fit: cover;
+  opacity: 0.32;
+}
+
+.worldOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.25) 0%,
+    transparent 40%,
+    rgba(34, 197, 94, 0.12) 100%
+  );
+}
+
+.sun {
+  position: absolute;
+  top: 1rem;
+  right: 1.25rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff9c4, #ffc800 55%, #ff9600);
+  box-shadow: 0 0 32px rgba(255, 200, 0, 0.55);
+  animation: sunPulse 4s ease-in-out infinite;
+}
+
+@keyframes sunPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+}
+
+.cloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 999px;
+  opacity: 0.9;
+  animation: cloudDrift linear infinite;
+}
+
+.cloudA {
+  width: 4.5rem;
+  height: 1.5rem;
+  top: 14%;
+  left: -5rem;
+  animation-duration: 26s;
+}
+
+.cloudB {
+  width: 3.5rem;
+  height: 1.2rem;
+  top: 26%;
+  left: -4rem;
+  animation-duration: 34s;
+  animation-delay: -10s;
+}
+
+.cloudC {
+  width: 2.5rem;
+  height: 0.9rem;
+  top: 8%;
+  left: -3rem;
+  animation-duration: 20s;
+  animation-delay: -6s;
+}
+
+@keyframes cloudDrift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100% + 10rem));
+  }
+}
+
+.star {
+  position: absolute;
+  width: 0.4rem;
+  height: 0.4rem;
+  background: #fff;
+  border-radius: 50%;
+  animation: starTwinkle 2.2s ease-in-out infinite;
+}
+
+@keyframes starTwinkle {
+  0%,
+  100% {
+    opacity: 0.4;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+.hillBack {
+  position: absolute;
+  bottom: -1.5rem;
+  left: -8%;
+  width: 116%;
+  height: 5rem;
+  background: #86efac;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.65;
+}
+
+.hillFront {
+  position: absolute;
+  bottom: -2rem;
+  left: -5%;
+  width: 110%;
+  height: 4.5rem;
+  background: linear-gradient(180deg, #4ade80, #22c55e);
+  border-radius: 50% 50% 0 0;
+  box-shadow: inset 0 6px 0 rgba(255, 255, 255, 0.2);
+}
+
+.pathContent {
+  position: relative;
+  z-index: 2;
+  padding: 1.1rem 1rem 1.5rem;
+}
+
+/* Wooden sign hero */
+.hero {
+  position: relative;
+  border-radius: 1rem;
+  padding: 1rem 1.15rem 1.1rem;
+  margin-bottom: 1.25rem;
+  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
+  border: 3px solid #ca8a04;
+  box-shadow:
+    0 6px 0 #a16207,
+    0 14px 28px rgba(161, 98, 7, 0.2);
+  transform: rotate(-0.5deg);
+  overflow: hidden;
+}
+
+.heroRope {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: 0.65rem;
+  background: #92400e;
+  border-radius: 999px;
+  opacity: 0.5;
+}
+
+.heroBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff, #f0fdf4);
+  border: 2px solid #58cc02;
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #166534;
+  box-shadow: 0 3px 0 #46a302;
+}
+
+.heroTitle {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #78350f;
+  text-shadow: 0 2px 0 rgba(255, 255, 255, 0.5);
+}
+
+.heroDesc {
+  margin: 0;
+  max-width: 34rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #92400e;
+  font-weight: 700;
+}
+
+/* Trail timeline */
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem 0 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.timelineItem {
+  display: flex;
+  gap: 0.65rem;
+  position: relative;
+}
+
+.timelineItem:nth-child(even) .timelineCard {
+  transform: translateX(6px);
+}
+
+.timelineItem:nth-child(odd) .timelineCard {
+  transform: translateX(-2px);
+}
+
+.timelineRail {
+  width: 44px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 1.65rem;
+}
+
+.timelineLine {
+  flex: 1;
+  width: 4px;
+  min-height: 1.25rem;
+  margin: 0.4rem 0;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #58cc02, #86efac, #d1d5db);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.timelineLineMuted {
+  background: linear-gradient(180deg, #e5e7eb, #f3f4f6);
+  box-shadow: none;
+}
+
+.timelineNode {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.88rem;
+  font-weight: 800;
+  flex-shrink: 0;
+  border: 3px solid #fff;
+  font-family: var(--font-fredoka, "Fredoka", sans-serif);
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.08);
+}
+
+.nodeCurrent {
+  background: linear-gradient(145deg, #58cc02, #46a302);
+  color: #fff;
+  box-shadow:
+    0 4px 0 #46a302,
+    0 0 0 4px rgba(255, 200, 0, 0.45);
+  animation: nodePulse 2s ease-in-out infinite;
+}
+
+@keyframes nodePulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+.nodeComplete {
+  background: linear-gradient(145deg, #22c55e, #16a34a);
+  color: #fff;
+  box-shadow: 0 4px 0 #15803d;
+}
+
+.nodeUpcoming {
+  background: linear-gradient(180deg, #fff, #f1f5f9);
+  color: #64748b;
+  border-color: #e2e8f0;
+}
+
+.nodeLocked {
+  background: linear-gradient(180deg, #e5e7eb, #d1d5db);
+  color: #94a3b8;
+  border-color: #cbd5e1;
+}
+
+.timelineCard {
+  flex: 1;
+  min-width: 0;
+  padding-bottom: 1rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .pathContent {
+    padding: 0.85rem 0.75rem 1.25rem;
+  }
+
+  .hero {
+    padding: 0.85rem 0.95rem;
+    margin-bottom: 1rem;
+    transform: none;
+  }
+
+  .heroTitle {
+    font-size: 1.35rem;
+  }
+
+  .heroDesc {
+    font-size: 0.84rem;
+  }
+
+  .timelineItem:nth-child(even) .timelineCard,
+  .timelineItem:nth-child(odd) .timelineCard {
+    transform: none;
+  }
+
+  .timelineRail {
+    width: 38px;
+    padding-top: 1.4rem;
+  }
+
+  .timelineNode {
+    width: 34px;
+    height: 34px;
+    font-size: 0.8rem;
+  }
+
+  .timelineLine {
+    width: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .pathWorld {
+    border-radius: 1.15rem;
+  }
+
+  .pathContent {
+    padding: 0.7rem 0.55rem 1rem;
+  }
+
+  .heroTitle {
+    font-size: 1.2rem;
+  }
+
+  .timelineRail {
+    width: 34px;
+  }
+
+  .timelineNode {
+    width: 30px;
+    height: 30px;
+    font-size: 0.72rem;
+    border-width: 2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sun,
+  .cloud,
+  .star,
+  .nodeCurrent {
+    animation: none;
+  }
+}

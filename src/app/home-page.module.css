@@ -1,0 +1,599 @@
+.page {
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* ── Hero carousel ── */
+.hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+}
+
+.heroSlide {
+  position: absolute;
+  inset: 0;
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center top;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to right,
+    rgba(124, 34, 197, 0.85) 0%,
+    rgba(124, 34, 197, 0.55) 45%,
+    rgba(124, 34, 197, 0.1) 100%
+  );
+}
+
+.heroArrow,
+.heroArrowNext {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  padding: 0.6rem;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  color: #fff;
+}
+
+.heroArrow {
+  left: 1.5rem;
+}
+
+.heroArrowNext {
+  right: 1.5rem;
+}
+
+.heroArrowIcon {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.heroDots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.heroBlobBottom {
+  position: absolute;
+  bottom: -5rem;
+  right: -5rem;
+  width: 20rem;
+  height: 20rem;
+  background: rgba(245, 197, 24, 0.2);
+  border-radius: 999px;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heroBlobTop {
+  position: absolute;
+  top: -2.5rem;
+  left: -2.5rem;
+  width: 15rem;
+  height: 15rem;
+  background: rgba(232, 53, 122, 0.2);
+  border-radius: 999px;
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.heroContent {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem 4rem;
+  position: relative;
+  z-index: 10;
+}
+
+.heroCopy {
+  max-width: 36rem;
+}
+
+.heroTitle {
+  font-size: clamp(2.4rem, 6vw, 4rem);
+  font-weight: 400;
+  color: #fff;
+  margin-bottom: 1rem;
+  line-height: 1.15;
+  text-shadow: 0 3px 16px rgba(0, 0, 0, 0.4);
+  letter-spacing: 0.01em;
+}
+
+.heroSparkle {
+  display: inline;
+  width: 2rem;
+  height: 2rem;
+  color: #f5c518;
+  vertical-align: middle;
+}
+
+.heroLead {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  line-height: 1.65;
+  max-width: 28rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.heroCtas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.heroCtaPrimary,
+.heroCtaSecondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: 999px;
+  font-family: "Fredoka One", cursive;
+  font-size: 1.1rem;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.heroCtaPrimary {
+  background: #f5c518;
+  color: #1a0a40;
+  box-shadow: 0 8px 28px rgba(245, 197, 24, 0.5);
+}
+
+.heroCtaSecondary {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+}
+
+.heroCtaIcon {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
+/* ── Feature strips ── */
+.features {
+  padding: 0 2rem;
+  margin-top: -2.5rem;
+  position: relative;
+  z-index: 20;
+}
+
+.featuresInner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.featureCard {
+  border-radius: 1rem;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  color: #fff;
+}
+
+.featureIconWrap {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 0.75rem;
+  flex-shrink: 0;
+}
+
+.featureIcon {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.featureLabel {
+  font-size: 1.15rem;
+  font-weight: 400;
+}
+
+.featureDesc {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ── Trailer ── */
+.trailer {
+  padding: 4rem 2rem;
+}
+
+.trailerInner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.trailerHead {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.trailerTitle {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.trailerSub {
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+.trailerFrame {
+  padding: 56.25% 0 0;
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.trailerIframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Adventures grid ── */
+.adventures {
+  padding: 5rem 2rem;
+}
+
+.adventuresInner {
+  max-width: 1400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.adventuresHead {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.adventuresTitle {
+  font-size: clamp(2rem, 5vw, 3rem);
+  color: #111827;
+  margin-bottom: 0.75rem;
+}
+
+.adventuresSparkle {
+  display: inline;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: #f5c518;
+  vertical-align: middle;
+}
+
+.adventuresSub {
+  color: #6b7280;
+  font-size: 1rem;
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+.adventuresGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.adventureLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.adventureCard {
+  position: relative;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  background: #111;
+}
+
+.adventureMedia {
+  aspect-ratio: 16 / 9;
+}
+
+.adventureImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.adventureOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(90, 24, 160, 0.95) 0%,
+    rgba(90, 24, 160, 0.3) 45%,
+    transparent 70%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.5rem;
+}
+
+.adventureTheme {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  background: #f5c518;
+  color: #1a0a40;
+  font-size: 0.85rem;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.adventureTitle {
+  font-family: "Nunito", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+/* ── Newsletter ── */
+.newsletter {
+  padding: 5rem 2rem;
+  background: linear-gradient(135deg, #7c22c5 0%, #7c22c5 50%, #e8357a 100%);
+}
+
+.newsletterInner {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletterIcon {
+  width: 3rem;
+  height: 3rem;
+  color: #f5c518;
+  margin: 0 auto 1rem;
+}
+
+.newsletterTitle {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+
+.newsletterSub {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.newsletterForm {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 440px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.newsletterInput {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.9rem 1.5rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: "Nunito", sans-serif;
+  outline: none;
+  backdrop-filter: blur(8px);
+}
+
+.newsletterBtn {
+  padding: 0.9rem 1.75rem;
+  border-radius: 999px;
+  background: #f5c518;
+  color: #1a0a40;
+  border: none;
+  font-family: "Fredoka One", cursive;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 6px 20px rgba(245, 197, 24, 0.45);
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.newsletterBtnIcon {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ── Small screens ── */
+@media (max-width: 900px) {
+  .adventuresGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  .adventures {
+    padding: 3.5rem 1.25rem;
+  }
+
+  .adventuresHead {
+    margin-bottom: 2rem;
+  }
+
+  .adventureTitle {
+    font-size: 1.25rem;
+  }
+
+  .adventureOverlay {
+    padding: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    min-height: min(92svh, 860px);
+    align-items: flex-end;
+  }
+
+  .heroOverlay {
+    background: linear-gradient(
+      to top,
+      rgba(26, 10, 64, 0.94) 0%,
+      rgba(124, 34, 197, 0.78) 38%,
+      rgba(124, 34, 197, 0.35) 100%
+    );
+  }
+
+  .heroContent {
+    padding: 4.25rem 1.15rem 5.25rem;
+  }
+
+  .heroLead {
+    font-size: 1rem;
+    margin-bottom: 1.35rem;
+  }
+
+  .heroArrow {
+    left: 0.55rem;
+    padding: 0.45rem;
+  }
+
+  .heroArrowNext {
+    right: 0.55rem;
+    padding: 0.45rem;
+  }
+
+  .heroArrowIcon {
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+
+  .heroDots {
+    bottom: 1.25rem;
+  }
+
+  .features {
+    padding: 0 1.15rem;
+    margin-top: -1.75rem;
+  }
+
+  .featureCard {
+    padding: 1.15rem;
+  }
+
+  .trailer {
+    padding: 2.75rem 1.15rem;
+  }
+
+  .newsletter {
+    padding: 3.5rem 1.15rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .adventuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .heroCtas {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .heroCtaPrimary,
+  .heroCtaSecondary {
+    width: 100%;
+    justify-content: center;
+    font-size: 1rem;
+    padding: 0.8rem 1.25rem;
+  }
+
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletterForm {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .newsletterInput,
+  .newsletterBtn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .newsletterBtn {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .heroTitle {
+    font-size: clamp(1.85rem, 9vw, 2.35rem);
+  }
+
+  .heroSparkle {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .adventureTheme {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.75rem;
+  }
+
+  .adventureTitle {
+    font-size: 1.1rem;
+  }
+}

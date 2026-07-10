@@ -1,0 +1,209 @@
+.page {
+  position: relative;
+  min-height: calc(100vh - 4rem);
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 58, 237, 0.06), transparent 55%),
+    linear-gradient(180deg, #ffffff 0%, #fafafa 50%, #f8fafc 100%);
+}
+
+.shell {
+  position: relative;
+  z-index: 2;
+  width: min(100%, 52rem);
+  margin: 0 auto;
+  padding: 1rem 0.75rem 2.5rem;
+}
+
+@media (min-width: 640px) {
+  .shell {
+    padding: 1.35rem 1rem 3rem;
+  }
+}
+
+.topBar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.roleBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #fff;
+}
+
+.badgeParent {
+  background: linear-gradient(135deg, #7c3aed, #9333ea);
+}
+
+.badgeStudent {
+  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+}
+
+.badgeTeacher {
+  background: linear-gradient(135deg, #059669, #10b981);
+}
+
+.signOutForm {
+  margin: 0;
+}
+
+.signOutBtn {
+  font-size: 0.78rem !important;
+  padding: 0.35rem 0.65rem !important;
+  height: auto !important;
+}
+
+.nav {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.85rem;
+  scrollbar-width: thin;
+}
+
+.navItem {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  min-width: 4.5rem;
+  padding: 0.5rem 0.55rem;
+  border-radius: 0.75rem;
+  border: 2px solid #e2e8f0;
+  background: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  color: #475569;
+  transition: border-color 0.15s, background 0.15s, transform 0.15s;
+}
+
+.navItem:hover {
+  border-color: #c4b5fd;
+  transform: translateY(-1px);
+}
+
+.navItemActive {
+  border-color: #7c3aed;
+  background: #faf5ff;
+  color: #5b21b6;
+  box-shadow: 0 3px 0 #ddd6fe;
+}
+
+.navItemActiveStudent {
+  border-color: #0284c7;
+  background: #f0f9ff;
+  color: #0369a1;
+  box-shadow: 0 3px 0 #bae6fd;
+}
+
+.navItemActiveTeacher {
+  border-color: #059669;
+  background: #ecfdf5;
+  color: #047857;
+  box-shadow: 0 3px 0 #a7f3d0;
+}
+
+.navEmoji {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+.navLabel {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-align: center;
+  line-height: 1.15;
+}
+
+.guide {
+  margin-bottom: 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 1rem;
+  border: 2px solid #e9d5ff;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 4px 0 #ede9fe;
+}
+
+.guideStudent {
+  border-color: #bae6fd;
+  box-shadow: 0 4px 0 #e0f2fe;
+}
+
+.guideTeacher {
+  border-color: #a7f3d0;
+  box-shadow: 0 4px 0 #d1fae5;
+}
+
+.guidePending {
+  border-color: #fde68a;
+  box-shadow: 0 4px 0 #fef3c7;
+}
+
+.guideTitle {
+  margin: 0 0 0.25rem;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.15rem;
+  color: #1e1b4b;
+}
+
+.guideLead {
+  margin: 0 0 0.55rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+.guideSteps {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: #334155;
+}
+
+.guideSteps li {
+  margin-bottom: 0.2rem;
+}
+
+.content {
+  min-height: 12rem;
+}
+
+.denied {
+  padding: 2rem 1.25rem;
+  text-align: center;
+  border-radius: 1rem;
+  background: #fff;
+  border: 2px solid #fecaca;
+}
+
+.deniedTitle {
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  color: #991b1b;
+  margin: 0 0 0.5rem;
+}
+
+.deniedText {
+  margin: 0 0 1rem;
+  font-size: 0.88rem;
+  color: #64748b;
+}
+
+.deniedLink {
+  font-weight: 800;
+  color: #7c3aed;
+}

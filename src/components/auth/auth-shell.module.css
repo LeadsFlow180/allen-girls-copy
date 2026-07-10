@@ -1,0 +1,119 @@
+.page {
+  position: relative;
+  min-height: calc(100vh - 10rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #f3f3f6;
+  padding: 2.5rem 1rem;
+}
+
+.shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 72rem;
+  display: grid;
+  grid-template-columns: 1.08fr 1fr;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 18px 60px -30px rgba(15, 23, 42, 0.5);
+}
+
+.leftPanel {
+  position: relative;
+  min-height: 280px;
+  background: linear-gradient(135deg, #5eead4 0%, #bae6fd 45%, #bbf7d0 100%);
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.leftPanel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.75), transparent 55%);
+}
+
+.leftPanel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.2), transparent 45%);
+}
+
+.artFrame {
+  position: relative;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 900 / 1100;
+  max-height: 100%;
+  overflow: hidden;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  background: #f8fafc;
+}
+
+.sidebarImage {
+  object-fit: contain;
+  object-position: center;
+}
+
+.rightPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2.25rem;
+}
+
+.eyebrow {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #0f766e;
+}
+
+.title {
+  margin-top: 0.5rem;
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.subtitle {
+  margin-top: 0.5rem;
+  max-width: 32rem;
+  font-size: 0.92rem;
+  color: #475569;
+}
+
+.cardWrap {
+  margin-top: 1.25rem;
+}
+
+@media (max-width: 1024px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .leftPanel {
+    padding: 1rem;
+  }
+
+  .rightPanel {
+    padding: 1.25rem;
+  }
+
+  .title {
+    font-size: 1.7rem;
+  }
+}

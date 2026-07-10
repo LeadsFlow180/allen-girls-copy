@@ -1,0 +1,1245 @@
+/* Family Controls sub-pages — seamless content inside guardian hub */
+
+.familyScreen {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.screenHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem 1rem;
+}
+
+.screenHeadCopy {
+  min-width: 0;
+  flex: 1 1 12rem;
+}
+
+.screenTitle {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.screenLead {
+  margin: 0.2rem 0 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+.groupedList {
+  border-radius: 0.75rem;
+  border: 1px solid #e8e8ef;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.listGroup {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.listGroupItem {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.listGroupItemLast {
+  border-bottom: none;
+}
+
+.listRowWrap {
+  background: #ffffff;
+  transition: background 0.15s ease;
+}
+
+.listRowWrap:hover {
+  background: #fafbff;
+}
+
+.listRow {
+  display: flex;
+  align-items: stretch;
+  min-height: 4.25rem;
+}
+
+.listRowLink {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+  padding: 0.85rem 0.35rem 0.85rem 1rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.listRowLink:hover .listChevron {
+  color: #7c3aed;
+  transform: translateX(2px);
+}
+
+.listRowText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.listRowTop {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-width: 0;
+}
+
+.listChevron {
+  flex-shrink: 0;
+  margin-right: 0.15rem;
+  color: #cbd5e1;
+  transition:
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.statusDotVerified,
+.statusDotPending {
+  flex-shrink: 0;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+}
+
+.statusDotVerified {
+  background: #10b981;
+  box-shadow: 0 0 0 2px #d1fae5;
+}
+
+.statusDotPending {
+  background: #f59e0b;
+  box-shadow: 0 0 0 2px #fef3c7;
+}
+
+.listRowMenu {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding-right: 0.65rem;
+}
+
+.menuBtn {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border: none;
+  border-radius: 0.45rem;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.menuBtn:hover,
+.menuBtn[aria-expanded="true"] {
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.menuPopover {
+  position: absolute;
+  top: calc(100% - 0.25rem);
+  right: 0;
+  z-index: 20;
+  min-width: 9.5rem;
+  padding: 0.35rem;
+  border-radius: 0.55rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
+}
+
+.menuItem,
+.menuDangerItem {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.65rem;
+  border: none;
+  border-radius: 0.4rem;
+  background: transparent;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-align: left;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.menuItem {
+  color: #475569;
+}
+
+.menuItem:hover {
+  background: #f8fafc;
+}
+
+.menuDangerItem {
+  color: #dc2626;
+}
+
+.menuDangerItem:hover {
+  background: #fef2f2;
+}
+
+.listFootnote {
+  margin: 0;
+  padding: 0.55rem 1rem 0.7rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  color: #94a3b8;
+  border-top: 1px solid #f8fafc;
+  background: #fafafa;
+}
+
+.listRowLink .avatar {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  font-size: 0.88rem;
+}
+
+.listRowWrap .deletePanel {
+  margin: 0;
+  padding: 0.85rem 1rem 1rem;
+  border: none;
+  border-top: 1px solid #f1f5f9;
+  border-radius: 0;
+  background: #fafafa;
+}
+
+.groupedList .skeletonRow {
+  margin: 0;
+  border-radius: 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.groupedList .skeletonRow:last-child {
+  border-bottom: none;
+}
+
+.familyPage {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.pageActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.summaryLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: #475569;
+}
+
+.summaryLineMuted {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.84rem;
+  color: #94a3b8;
+}
+
+.summaryDot {
+  color: #cbd5e1;
+}
+
+.learnerGrid {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .learnerGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.learnerCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  height: 100%;
+  padding: 1rem 1.05rem;
+  border-radius: 0.85rem;
+  border: 1px solid #e8e8ef;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.learnerCard:hover {
+  border-color: #ddd6fe;
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.08);
+}
+
+.learnerCardTop {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.learnerCardBody {
+  min-width: 0;
+  flex: 1;
+}
+
+.learnerCardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem 0.6rem;
+  margin-bottom: 0.25rem;
+}
+
+.learnerCardActions {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem;
+  margin-top: auto;
+  padding-top: 0.85rem;
+  border-top: 1px solid #f1f5f9;
+}
+
+.progressBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.85rem;
+  border-radius: 0.55rem;
+  background: #7c3aed;
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.progressBtn:hover {
+  background: #6d28d9;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.22);
+}
+
+.skeletonGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .skeletonGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.skeletonCard {
+  height: 9.5rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(90deg, #f1f5f9 0%, #f8fafc 50%, #f1f5f9 100%);
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+.profilesPanel {
+  border: 1px solid #e8e8ef;
+  border-radius: 0.9rem;
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.panelHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem 1.25rem 1rem;
+  border-bottom: 1px solid #f1f5f9;
+  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+}
+
+.panelHeadCopy {
+  min-width: 0;
+  flex: 1 1 12rem;
+}
+
+.panelTitle {
+  margin: 0;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.15rem;
+  line-height: 1.2;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.panelLead {
+  margin: 0.35rem 0 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.84rem;
+  line-height: 1.5;
+  color: #64748b;
+  max-width: 34rem;
+}
+
+.panelStats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #f1f5f9;
+  background: #fafafa;
+}
+
+.statPill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.75rem;
+  color: #475569;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+}
+
+.statPill strong {
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.tableWrap {
+  padding: 0;
+}
+
+.tableHead {
+  display: none;
+  grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) auto;
+  gap: 1rem;
+  padding: 0.55rem 1.25rem;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  background: #fafafa;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+@media (min-width: 640px) {
+  .tableHead {
+    display: grid;
+  }
+}
+
+.profilesPanel > .error {
+  margin: 0 1.25rem 0.75rem;
+}
+
+.pageToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.95rem 1rem;
+  border-radius: 0.85rem;
+  background: linear-gradient(135deg, #faf5ff 0%, #ffffff 100%);
+  border: 1px solid #ede9fe;
+}
+
+.toolbarSummary {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.toolbarIcon {
+  flex-shrink: 0;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 0.65rem;
+  display: grid;
+  place-items: center;
+  color: #7c3aed;
+  background: #ffffff;
+  border: 1px solid #ddd6fe;
+}
+
+.toolbarTitle {
+  margin: 0;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1rem;
+  line-height: 1.2;
+  color: #0f172a;
+}
+
+.toolbarHint {
+  margin: 0.15rem 0 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  color: #64748b;
+}
+
+.pageHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.1rem;
+}
+
+.pageTitle {
+  margin: 0;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.15rem;
+  color: #0f172a;
+}
+
+.pageLead {
+  margin: 0.25rem 0 0;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+.primaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 0.55rem;
+  background: #7c3aed;
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.primaryBtn:hover {
+  background: #6d28d9;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+}
+
+.secondaryBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  padding: 0.48rem 0.8rem;
+  border-radius: 0.5rem;
+  background: #7c3aed;
+  color: #ffffff;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  text-decoration: none;
+  border: none;
+  white-space: nowrap;
+  transition: background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.secondaryBtn:hover {
+  background: #6d28d9;
+  box-shadow: 0 4px 10px rgba(124, 58, 237, 0.22);
+}
+
+.pathway {
+  display: grid;
+  gap: 0.55rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 720px) {
+  .pathway {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pathStep {
+  position: relative;
+  padding: 0.9rem 0.85rem;
+  border-radius: 0.85rem;
+  border: 1px solid #e8e8ef;
+  background: #ffffff;
+}
+
+.pathStep::after {
+  display: none;
+}
+
+.pathEmoji {
+  display: none;
+}
+
+.pathNum {
+  display: inline-flex;
+  width: 1.45rem;
+  height: 1.45rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.4rem;
+  background: #faf5ff;
+  color: #7c3aed;
+  font-size: 0.72rem;
+  font-weight: 800;
+  margin-bottom: 0.4rem;
+  border: 1px solid #ede9fe;
+}
+
+.pathTitle {
+  margin: 0 0 0.25rem;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 0.88rem;
+  color: #0f172a;
+}
+
+.pathText {
+  margin: 0;
+  font-size: 0.74rem;
+  line-height: 1.45;
+  color: #64748b;
+}
+
+.learnerList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tableRow {
+  padding: 0;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background 0.15s ease;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRow:hover {
+  background: #fafbff;
+}
+
+.tableRowMain {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
+  padding: 1rem 1.25rem;
+}
+
+@media (min-width: 640px) {
+  .tableRowMain {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.colLearner {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.learnerIdentity {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.colAccount {
+  min-width: 0;
+}
+
+.colActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+@media (min-width: 640px) {
+  .colActions {
+    justify-content: flex-end;
+  }
+}
+
+.learnerRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem 1.05rem;
+  border-radius: 0.85rem;
+  border: 1px solid #e8e8ef;
+  background: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+@media (min-width: 560px) {
+  .learnerRow {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+}
+
+.learnerRow:hover {
+  border-color: #ddd6fe;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06);
+}
+
+.learnerMain {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.learnerDetails {
+  min-width: 0;
+  flex: 1;
+}
+
+.learnerNameRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.learnerActions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.skeletonList {
+  padding: 0.5rem 1.25rem 1rem;
+}
+
+.skeletonRow {
+  height: 4.25rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0.65rem;
+  background: linear-gradient(90deg, #f1f5f9 0%, #f8fafc 50%, #f1f5f9 100%);
+  background-size: 200% 100%;
+  animation: skeletonPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes skeletonPulse {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.childCard {
+  padding: 1rem;
+  border-radius: 0.85rem;
+  border: 1px solid #e8e8ef;
+  background: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.childCard:hover {
+  border-color: #ddd6fe;
+  box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06);
+}
+
+.childHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.55rem;
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 2.85rem;
+  height: 2.85rem;
+  border-radius: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, #faf5ff, #f3e8ff);
+  color: #6d28d9;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1rem;
+  border: 1px solid #e9d5ff;
+}
+
+.childName {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.25;
+  color: #0f172a;
+}
+
+.childEmail {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #64748b;
+  word-break: break-word;
+}
+
+.childSource {
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.7rem;
+  color: #94a3b8;
+}
+
+.childMeta {
+  margin: 0;
+  font-size: 0.72rem;
+  color: #64748b;
+  word-break: break-word;
+}
+
+.badgeApproved,
+.badgePending {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  width: fit-content;
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.badgeApproved {
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+}
+
+.badgePending {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fde68a;
+}
+
+.childActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.65rem;
+}
+
+.linkBtn,
+.linkBtnMuted {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.55rem;
+}
+
+.linkBtn {
+  background: #7c3aed;
+  color: #fff;
+  border: none;
+}
+
+.linkBtn:hover {
+  background: #6d28d9;
+}
+
+.linkBtnMuted {
+  background: transparent;
+  color: #64748b;
+  border: none;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.55rem;
+  cursor: pointer;
+}
+
+.linkBtnMuted:hover:not(:disabled) {
+  color: #475569;
+  background: #f1f5f9;
+}
+
+.linkBtnMuted:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.removeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.55rem;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #64748b;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.removeBtn:hover {
+  color: #b91c1c;
+  background: #fff5f5;
+  border-color: #fecaca;
+}
+
+.removeBtnActive {
+  color: #b91c1c;
+  background: #fef2f2;
+  border-color: #fecaca;
+}
+
+.dangerBtn {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.4rem 0.65rem;
+  border-radius: 0.55rem;
+  cursor: pointer;
+  background: #dc2626;
+  color: #fff;
+  border: none;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.dangerBtn:hover:not(:disabled) {
+  background: #b91c1c;
+}
+
+.dangerBtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.deletePanel {
+  margin-top: 0.15rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.65rem;
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+}
+
+.deletePanelTitle {
+  margin: 0 0 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 800;
+  color: #b91c1c;
+}
+
+.deletePanelText {
+  margin: 0 0 0.55rem;
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: #7f1d1d;
+}
+
+.deleteConfirmInput {
+  width: 100%;
+  margin-bottom: 0.5rem;
+  padding: 0.45rem 0.55rem;
+  border-radius: 0.5rem;
+  border: 1px solid #fca5a5;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.78rem;
+}
+
+.deleteActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.empty {
+  padding: 2rem 1.25rem;
+  border-radius: 0.85rem;
+  border: 1px dashed #d1d5db;
+  background: #fafafa;
+  text-align: center;
+}
+
+.emptyIconWrap {
+  display: inline-grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 0.85rem;
+  border-radius: 0.85rem;
+  color: #7c3aed;
+  background: #faf5ff;
+  border: 1px solid #ede9fe;
+}
+
+.emptyTitle {
+  margin: 0 0 0.35rem;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  color: #0f172a;
+}
+
+.emptyText {
+  margin: 0 0 0.85rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.loadingText {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.secondaryRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.backLink {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #7c3aed;
+  text-decoration: none;
+}
+
+.backLink:hover {
+  text-decoration: underline;
+}
+
+.formCard {
+  margin-top: 0.75rem;
+  padding: 1.15rem 1.1rem;
+  border-radius: 0.85rem;
+  border: 1px solid #e8e8ef;
+  background: #ffffff;
+}
+
+.formCard::before {
+  display: none;
+}
+
+.formTitle {
+  margin: 0 0 0.35rem;
+  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-size: 1.2rem;
+  color: #0f172a;
+}
+
+.formLead {
+  margin: 0 0 1rem;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  color: #64748b;
+  font-weight: 500;
+}
+
+.field {
+  margin-bottom: 0.9rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.hint {
+  margin: 0.35rem 0 0;
+  font-size: 0.78rem;
+  color: #64748b;
+  line-height: 1.45;
+  font-weight: 500;
+}
+
+/* High-contrast inputs on dark guardian cards (shadcn Input defaults are too faint here). */
+.formInput {
+  display: block;
+  width: 100%;
+  min-height: 2.65rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0.55rem;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.35;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.formInput::placeholder {
+  color: #94a3b8;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.formInput:focus-visible {
+  outline: none;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.formInput:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.formSubmit {
+  width: 100%;
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+}
+
+.error {
+  margin: 0 0 0.65rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.55rem;
+  background: #fef2f2;
+  color: #b91c1c;
+  border: 1px solid #fecaca;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.success {
+  margin: 0 0 0.65rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.55rem;
+  background: #ecfdf5;
+  color: #047857;
+  border: 1px solid #a7f3d0;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.credentialBox {
+  margin-top: 0.85rem;
+  padding: 0.85rem;
+  border-radius: 0.75rem;
+  border: 1px solid #fde68a;
+  background: #fffbeb;
+}
+
+.credentialBox p {
+  margin: 0.35rem 0;
+  font-size: 0.88rem;
+  color: #78350f;
+  font-weight: 500;
+  line-height: 1.45;
+  word-break: break-all;
+}
+
+.credentialBox strong {
+  color: #92400e;
+  font-weight: 800;
+}

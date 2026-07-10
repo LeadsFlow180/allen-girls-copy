@@ -1,0 +1,222 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(80rem 34rem at 14% -10%, rgba(124, 34, 197, 0.2), transparent 62%),
+    radial-gradient(70rem 28rem at 88% 16%, rgba(232, 53, 122, 0.18), transparent 62%),
+    linear-gradient(180deg, #f8fbff 0%, #f0f9ff 48%, #ecfeff 100%);
+}
+
+.page > :not(.worldLayer) {
+  position: relative;
+  z-index: 12;
+}
+
+.worldLayer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 8;
+  overflow: hidden;
+  opacity: 0.62;
+}
+
+.worldLayer::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 20% 25%, rgba(255, 255, 255, 0.7) 0, transparent 8%),
+    radial-gradient(circle at 70% 14%, rgba(245, 197, 24, 0.2) 0, transparent 8%),
+    radial-gradient(circle at 84% 62%, rgba(34, 197, 94, 0.14) 0, transparent 10%);
+  mix-blend-mode: screen;
+}
+
+.floatCloud {
+  position: absolute;
+  background: #fff;
+  border-radius: 999px;
+  opacity: 0.94;
+  filter: drop-shadow(0 3px 0 rgba(148, 163, 184, 0.3));
+  animation: cloudDrift linear infinite;
+}
+
+.cloudOne {
+  width: 6rem;
+  height: 2rem;
+  top: 12%;
+  left: -7rem;
+  animation-duration: 28s;
+}
+
+.cloudTwo {
+  width: 5rem;
+  height: 1.6rem;
+  top: 24%;
+  left: -6rem;
+  animation-duration: 34s;
+  animation-delay: -9s;
+}
+
+.cloudThree {
+  width: 4rem;
+  height: 1.35rem;
+  top: 8%;
+  left: -5rem;
+  animation-duration: 22s;
+  animation-delay: -14s;
+}
+
+@keyframes cloudDrift {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw + 15rem));
+  }
+}
+
+.floatBalloon {
+  --balloon: #f97316;
+  position: absolute;
+  width: 1.5rem;
+  height: 1.75rem;
+  border-radius: 50% 50% 46% 46%;
+  background: radial-gradient(circle at 35% 30%, #fff, var(--balloon) 44%, color-mix(in srgb, var(--balloon) 70%, #000) 100%);
+  box-shadow: 0 3px 0 color-mix(in srgb, var(--balloon) 65%, #000);
+  animation: balloonFloat ease-in-out infinite;
+}
+
+.balloonString {
+  position: absolute;
+  left: 50%;
+  top: 1.7rem;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 1.15rem;
+  background: rgba(71, 85, 105, 0.6);
+}
+
+.balloonOne {
+  --balloon: #f97316;
+  top: 20%;
+  left: 9%;
+  animation-duration: 14s;
+}
+
+.balloonTwo {
+  --balloon: #22c55e;
+  top: 36%;
+  left: 84%;
+  animation-duration: 16s;
+  animation-delay: -4s;
+}
+
+.balloonThree {
+  --balloon: #e8357a;
+  top: 56%;
+  left: 16%;
+  animation-duration: 18s;
+  animation-delay: -8s;
+}
+
+@keyframes balloonFloat {
+  0%, 100% {
+    transform: translateY(0) rotate(-4deg);
+  }
+  50% {
+    transform: translateY(-16px) rotate(4deg);
+  }
+}
+
+.driveCar {
+  --car: #1cb0f6;
+  position: absolute;
+  left: -4rem;
+  width: 2.5rem;
+  height: 1rem;
+  border-radius: 0.55rem 0.72rem 0.4rem 0.4rem;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--car) 84%, #fff), var(--car));
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--car) 65%, #000);
+  opacity: 0.95;
+  animation: carDrive linear infinite;
+}
+
+.driveCar::before,
+.driveCar::after {
+  content: "";
+  position: absolute;
+  bottom: -0.28rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #1e293b;
+  border: 1px solid #94a3b8;
+}
+
+.driveCar::before {
+  left: 0.33rem;
+}
+
+.driveCar::after {
+  right: 0.33rem;
+}
+
+.carOne {
+  --car: #1cb0f6;
+  top: 84%;
+  animation-duration: 22s;
+}
+
+.carTwo {
+  --car: #f59e0b;
+  top: 88%;
+  animation-duration: 26s;
+  animation-delay: -10s;
+}
+
+.carThree {
+  --car: #a855f7;
+  top: 80%;
+  animation-duration: 30s;
+  animation-delay: -17s;
+}
+
+@keyframes carDrive {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(calc(100vw + 8rem));
+  }
+}
+
+@media (max-width: 720px) {
+  .worldLayer {
+    opacity: 0.5;
+  }
+
+  .floatBalloon {
+    width: 1.15rem;
+    height: 1.35rem;
+  }
+
+  .balloonString {
+    top: 1.28rem;
+    height: 0.85rem;
+  }
+
+  .driveCar {
+    width: 1.9rem;
+    height: 0.78rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .floatCloud,
+  .floatBalloon,
+  .driveCar {
+    animation: none;
+  }
+}

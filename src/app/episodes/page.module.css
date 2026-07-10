@@ -1,0 +1,80 @@
+.page {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(80rem 40rem at 10% -10%, rgba(124, 34, 197, 0.24), transparent 60%),
+    radial-gradient(70rem 36rem at 90% 12%, rgba(232, 53, 122, 0.2), transparent 62%),
+    linear-gradient(180deg, #0f0d2f 0%, #171248 28%, #1e1758 52%, #0f0b34 100%);
+}
+
+.page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 24%, rgba(245, 197, 24, 0.18) 0, transparent 6%),
+    radial-gradient(circle at 74% 18%, rgba(59, 130, 246, 0.16) 0, transparent 7%),
+    radial-gradient(circle at 60% 70%, rgba(34, 197, 94, 0.12) 0, transparent 9%);
+  opacity: 0.9;
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 4rem 2rem 3.5rem;
+  background:
+    linear-gradient(135deg, rgba(124, 34, 197, 0.9) 0%, rgba(90, 24, 160, 0.92) 50%, rgba(232, 53, 122, 0.86) 100%),
+    radial-gradient(30rem 16rem at 50% 110%, rgba(245, 197, 24, 0.2), transparent 75%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.12),
+    0 18px 36px rgba(8, 7, 28, 0.35);
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.gridSection {
+  position: relative;
+  padding-bottom: 3.25rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
+    radial-gradient(28rem 14rem at 84% 14%, rgba(124, 34, 197, 0.16), transparent 72%);
+}
+
+.comingSoonCard {
+  margin-top: 3rem;
+  padding: 2.5rem 2rem;
+  border-radius: 1.25rem;
+  text-align: center;
+  background:
+    linear-gradient(180deg, rgba(30, 22, 75, 0.65), rgba(20, 14, 58, 0.72)),
+    radial-gradient(circle at 78% 14%, rgba(245, 197, 24, 0.16), transparent 44%);
+  border: 2px solid rgba(167, 139, 250, 0.5);
+  box-shadow:
+    0 8px 0 rgba(124, 34, 197, 0.45),
+    0 24px 42px rgba(7, 6, 24, 0.45);
+}
+
+.comingSoonTitle {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.comingSoonText {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.88);
+  margin-bottom: 1.25rem;
+}
+
+.ctaSection {
+  position: relative;
+}
+
