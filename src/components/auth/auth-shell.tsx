@@ -11,9 +11,12 @@ type AuthShellProps = {
   background: StaticImageData;
 };
 
-export const AuthShell = ({ mode, title, subtitle, artwork, background: _background }: AuthShellProps) => {
+export const AuthShell = ({ mode, title, subtitle, artwork, background }: AuthShellProps) => {
   return (
     <div className={styles.page}>
+      <Image src={background} alt="" fill priority className={styles.pageBg} sizes="100vw" />
+      <div className={styles.pageScrim} aria-hidden />
+
       <div className={styles.shell}>
         <div className={styles.leftPanel}>
           <div className={styles.artFrame}>
@@ -22,8 +25,10 @@ export const AuthShell = ({ mode, title, subtitle, artwork, background: _backgro
               alt="Allen Girls Adventures"
               fill
               priority
+              sizes="(max-width: 1024px) 100vw, 42vw"
               className={styles.sidebarImage}
             />
+            <div className={styles.artGlow} aria-hidden />
           </div>
         </div>
 

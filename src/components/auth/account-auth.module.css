@@ -74,6 +74,11 @@
   overflow: hidden;
 }
 
+.formCard {
+  width: 100%;
+  max-width: 34rem;
+}
+
 .cardHeader {
   padding: 1.35rem 1.35rem 1.1rem;
   background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);

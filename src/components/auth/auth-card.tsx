@@ -7,6 +7,7 @@ import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PasswordInput } from "@/components/auth/password-input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import styles from "@/components/auth/auth-card.module.css";
 
@@ -115,13 +116,22 @@ export const AuthCard = ({ mode }: AuthCardProps) => {
                     <label htmlFor={field.id} className={styles.label}>
                       {field.label}
                     </label>
-                    <Input
-                      id={field.id}
-                      type={field.type}
-                      placeholder={field.placeholder}
-                      required
-                      className={styles.input}
-                    />
+                    {field.type === "password" ? (
+                      <PasswordInput
+                        id={field.id}
+                        placeholder={field.placeholder}
+                        required
+                        className={styles.input}
+                      />
+                    ) : (
+                      <Input
+                        id={field.id}
+                        type={field.type}
+                        placeholder={field.placeholder}
+                        required
+                        className={styles.input}
+                      />
+                    )}
                   </div>
                 ))}
 

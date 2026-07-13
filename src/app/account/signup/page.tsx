@@ -4,7 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-import { AccountAuthPortalBackdrop } from "@/components/auth/account-auth-portal-backdrop";
+import accountSignupHero from "@/assets/images/auth/account-signup-hero.png";
+import { AccountAuthShell } from "@/components/auth/account-auth-shell";
+import { PasswordField } from "@/components/auth/password-field";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 
 import styles from "@/components/auth/account-auth.module.css";
@@ -88,10 +90,12 @@ export default function AccountSignupPage() {
   }
 
   return (
-    <div className={styles.page}>
-      <AccountAuthPortalBackdrop />
-      <div className={styles.shell}>
-        <div className={styles.card}>
+    <AccountAuthShell
+      heroImage={accountSignupHero}
+      heroAlt="Allen Girls celebrating a new adventure together"
+      heroBadge="Join the adventure"
+    >
+      <div className={`${styles.card} ${styles.formCard}`}>
           <header className={styles.cardHeader}>
             <p className={styles.portalKicker}>New adventurer</p>
             <h1 className={styles.title}>Create your account</h1>
@@ -207,21 +211,15 @@ export default function AccountSignupPage() {
                 />
               </div>
 
-              <div className={styles.field}>
-                <label htmlFor="password" className={styles.fieldLabel}>
-                  Password (8+ characters)
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  autoComplete="new-password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="At least 8 characters"
-                  className={styles.authInput}
-                />
-              </div>
+              <PasswordField
+                id="password"
+                label="Password (8+ characters)"
+                autoComplete="new-password"
+                required
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="At least 8 characters"
+              />
 
               {error && <p className={styles.error}>{error}</p>}
               {message && <p className={styles.success}>{message}</p>}
@@ -242,7 +240,6 @@ export default function AccountSignupPage() {
             </p>
           </div>
         </div>
-      </div>
-    </div>
+    </AccountAuthShell>
   );
 }

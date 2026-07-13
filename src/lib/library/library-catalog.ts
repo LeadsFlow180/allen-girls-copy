@@ -66,6 +66,10 @@ export type LibraryNovel = {
   spreads: LibrarySpread[];
   /** Public path to PDF edition, e.g. /library/pdfs/ag-labyrinth-key.pdf */
   pdfPath: string;
+  /** Remote PDF URL from Supabase Storage (teacher uploads) */
+  pdfUrl?: string | null;
+  /** True when a flip-book PDF edition is available */
+  hasPdfEdition?: boolean;
   /** Premium flagship titles — shown with VIP badge on shelf */
   tier?: LibraryTier;
   /** Remote cover URL from database / Supabase Storage */
@@ -89,6 +93,7 @@ function novel(meta: LibraryNovelDefinition): LibraryNovel {
     ageBand: meta.ageBand,
     format: meta.format,
     pdfPath: meta.pdfPath,
+    hasPdfEdition: true,
     spreads,
     readMinutes: estimateReadMinutes(spreads),
     tier: meta.tier ?? "standard",

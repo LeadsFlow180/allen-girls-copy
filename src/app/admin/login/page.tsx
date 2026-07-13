@@ -5,7 +5,9 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Shield } from "lucide-react";
 
-import { AccountAuthPortalBackdrop } from "@/components/auth/account-auth-portal-backdrop";
+import adminLoginHero from "@/assets/images/auth/admin-login-hero.png";
+import { AccountAuthShell } from "@/components/auth/account-auth-shell";
+import { PasswordField } from "@/components/auth/password-field";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 import { SIGN_IN_ROLE_MISMATCH_MESSAGE } from "@/lib/auth/sign-in-messages";
 
@@ -62,85 +64,80 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className={authStyles.page}>
-      <AccountAuthPortalBackdrop />
-      <div className={authStyles.shell}>
-        <div className={`${authStyles.card} ${styles.card}`}>
-          <header className={styles.header}>
-            <span className={styles.shieldBadge} aria-hidden>
-              <Shield size={22} />
-            </span>
-            <p className={styles.kicker}>Allen Girls Adventures</p>
-            <h1 className={`font-fredoka ${styles.title}`}>Super Admin sign in</h1>
-            <p className={`font-nunito ${styles.subtitle}`}>
-              Platform control only — manage users, library stories, and operations.
+    <AccountAuthShell
+      heroImage={adminLoginHero}
+      heroAlt="Magical platform command center for super administrators"
+      heroBadge="Platform administration"
+    >
+      <div className={`${authStyles.card} ${authStyles.formCard} ${styles.card}`}>
+        <header className={styles.header}>
+          <span className={styles.shieldBadge} aria-hidden>
+            <Shield size={22} />
+          </span>
+          <p className={styles.kicker}>Allen Girls Adventures</p>
+          <h1 className={`font-fredoka ${styles.title}`}>Super Admin sign in</h1>
+          <p className={`font-nunito ${styles.subtitle}`}>
+            Platform control only — manage users, library stories, and operations.
+          </p>
+        </header>
+
+        <div className={authStyles.cardBody}>
+          {!supabase && (
+            <p className={authStyles.emailNote}>
+              Add <code>NEXT_PUBLIC_SUPABASE_URL</code> and{" "}
+              <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> to <code>.env.local</code>.
             </p>
-          </header>
+          )}
 
-          <div className={authStyles.cardBody}>
-            {!supabase && (
-              <p className={authStyles.emailNote}>
-                Add <code>NEXT_PUBLIC_SUPABASE_URL</code> and{" "}
-                <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> to <code>.env.local</code>.
-              </p>
-            )}
+          <form onSubmit={onSubmit}>
+            <div className={authStyles.field}>
+              <label htmlFor="admin-email" className={authStyles.fieldLabel}>
+                Admin email
+              </label>
+              <input
+                id="admin-email"
+                type="email"
+                autoComplete="email"
+                required
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="admin@yourdomain.com"
+                className={authStyles.authInput}
+              />
+            </div>
+            <PasswordField
+              id="admin-password"
+              label="Password"
+              autoComplete="current-password"
+              required
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Your password"
+            />
+            {error ? <p className={authStyles.error}>{error}</p> : null}
+            <button
+              type="submit"
+              className={`${authStyles.submitBtn} ${styles.submitBtn}`}
+              disabled={loading || !supabase}
+            >
+              {loading ? "Signing in…" : "Enter Super Admin"}
+            </button>
+          </form>
 
-            <form onSubmit={onSubmit}>
-              <div className={authStyles.field}>
-                <label htmlFor="admin-email" className={authStyles.fieldLabel}>
-                  Admin email
-                </label>
-                <input
-                  id="admin-email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@yourdomain.com"
-                  className={authStyles.authInput}
-                />
-              </div>
-              <div className={authStyles.field}>
-                <label htmlFor="admin-password" className={authStyles.fieldLabel}>
-                  Password
-                </label>
-                <input
-                  id="admin-password"
-                  type="password"
-                  autoComplete="current-password"
-                  required
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  placeholder="Your password"
-                  className={authStyles.authInput}
-                />
-              </div>
-              {error ? <p className={authStyles.error}>{error}</p> : null}
-              <button
-                type="submit"
-                className={`${authStyles.submitBtn} ${styles.submitBtn}`}
-                disabled={loading || !supabase}
-              >
-                {loading ? "Signing in…" : "Enter Super Admin"}
-              </button>
-            </form>
+          <p className={styles.footerNote}>
+            Super Admin accounts are set up by platform administration, not through public signup.
+          </p>
 
-            <p className={styles.footerNote}>
-              Super Admin accounts are set up by platform administration, not through public signup.
-            </p>
-
-            <p className={authStyles.footerLinks} style={{ borderTop: "none", paddingTop: "0.65rem" }}>
-              <Link href="/account/login" className={authStyles.footerLinkMuted}>
-                Learner / Guardian / Teacher login
-              </Link>
-              <Link href="/" className={authStyles.footerLinkMuted}>
-                Home
-              </Link>
-            </p>
-          </div>
+          <p className={authStyles.footerLinks} style={{ borderTop: "none", paddingTop: "0.65rem" }}>
+            <Link href="/account/login" className={authStyles.footerLinkMuted}>
+              Learner / Guardian / Teacher login
+            </Link>
+            <Link href="/" className={authStyles.footerLinkMuted}>
+              Home
+            </Link>
+          </p>
         </div>
       </div>
-    </div>
+    </AccountAuthShell>
   );
 }

@@ -27,6 +27,16 @@ export const LIBRARY_HUB_HOME_REGION: LibraryHotspotRegion = {
   height: 8.5,
 };
 
+export function doorTransformOrigin(region: LibraryHotspotRegion): string {
+  const x = region.left + region.width / 2;
+  const y = region.top + region.height / 2;
+  return `${x}% ${y}%`;
+}
+
+export function doorHingeSide(variant: LibraryHotspot["variant"]): "left" | "right" {
+  return variant === "licensed" ? "right" : "left";
+}
+
 export const LIBRARY_HUB_HOTSPOTS: LibraryHotspot[] = [
   {
     id: "enter",

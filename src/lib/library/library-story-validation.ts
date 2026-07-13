@@ -54,6 +54,13 @@ function parseChaptersArray(record: Record<string, unknown>): string[] {
     .filter(Boolean);
 }
 
+function parseFormat(record: Record<string, unknown>): LibraryFormat {
+  const raw = String(record.format ?? record.contentSource ?? "")
+    .trim()
+    .toLowerCase();
+  return raw === "pdf" ? "pdf" : "text";
+}
+
 export function parseLibraryStoryPayload(body: unknown): { ok: true; data: LibraryStoryPayload } | { ok: false; error: string } {
   if (!body || typeof body !== "object") {
     return { ok: false, error: "invalid_body" };
@@ -71,7 +78,33 @@ export function parseLibraryStoryPayload(body: unknown): { ok: true; data: Libra
   const title = String(record.title ?? "").trim();
   if (!title) return { ok: false, error: "title_required" };
 
+  const format = parseFormat(record);
+  const tier: LibraryTier = record.tier === "vip" ? "vip" : "standard";
   const storyBody = parseStoryBody(record);
+
+  if (format === "pdf") {
+    return {
+      ok: true,
+      data: {
+        id,
+        wing,
+        title,
+        author: String(record.author ?? "Allen Girls Adventures").trim() || "Allen Girls Adventures",
+        synopsis: String(record.synopsis ?? "").trim(),
+        ageBand: String(record.ageBand ?? record.age_band ?? "Ages 8–11").trim() || "Ages 8–11",
+        format: "pdf",
+        tier,
+        useChapters: false,
+        chapters: [],
+        body: storyBody,
+        isPublished: record.isPublished !== false && record.is_published !== false,
+        sortOrder: Number.isFinite(Number(record.sortOrder ?? record.sort_order))
+          ? Number(record.sortOrder ?? record.sort_order)
+          : 0,
+      },
+    };
+  }
+
   const chapterList = parseChaptersArray(record);
   const explicitUseChapters = parseExplicitUseChapters(record);
 
@@ -101,9 +134,6 @@ export function parseLibraryStoryPayload(body: unknown): { ok: true; data: Libra
     if (!normalizedBody) return { ok: false, error: "body_required" };
   }
 
-  const format = record.format === "pdf" ? "pdf" : "text";
-  const tier: LibraryTier = record.tier === "vip" ? "vip" : "standard";
-
   return {
     ok: true,
     data: {
@@ -113,7 +143,7 @@ export function parseLibraryStoryPayload(body: unknown): { ok: true; data: Libra
       author: String(record.author ?? "Allen Girls Adventures").trim() || "Allen Girls Adventures",
       synopsis: String(record.synopsis ?? "").trim(),
       ageBand: String(record.ageBand ?? record.age_band ?? "Ages 8–11").trim() || "Ages 8–11",
-      format,
+      format: "text",
       tier,
       useChapters,
       chapters,

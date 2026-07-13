@@ -15,6 +15,8 @@ export async function GET() {
       readMinutes: novel.readMinutes,
       format: novel.format,
       pdfPath: novel.pdfPath,
+      pdfUrl: novel.pdfUrl ?? null,
+      hasPdfEdition: novel.hasPdfEdition ?? false,
       tier: novel.tier ?? "standard",
       coverUrl: novel.coverUrl ?? null,
       spreads: novel.spreads,

@@ -1,6 +1,6 @@
 import { AuthShell } from "@/components/auth/auth-shell";
-import signupBackground from "@/assets/images/learn/background-signup.png";
-import loginSidebar from "@/assets/images/learn/login-sidebar.png";
+import accountSignupHero from "@/assets/images/auth/account-signup-hero.png";
+import portalSignupBackground from "@/assets/images/auth/portal-signup-background.png";
 
 const SignupPage = () => {
   return (
@@ -8,8 +8,8 @@ const SignupPage = () => {
       mode="signup"
       title="Create Account"
       subtitle="Join as a Parent or Teacher and unlock interactive lessons, quests, and progress tracking."
-      artwork={loginSidebar}
-      background={signupBackground}
+      artwork={accountSignupHero}
+      background={portalSignupBackground}
     />
   );
 };

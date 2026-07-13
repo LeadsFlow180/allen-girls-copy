@@ -5,13 +5,28 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background: #f3f3f6;
   padding: 2.5rem 1rem;
+}
+
+.pageBg {
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.pageScrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    radial-gradient(circle at 12% 18%, rgba(255, 255, 255, 0.42), transparent 42%),
+    linear-gradient(180deg, rgba(248, 250, 252, 0.72) 0%, rgba(241, 245, 249, 0.88) 100%);
+  pointer-events: none;
 }
 
 .shell {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   width: 100%;
   max-width: 72rem;
   display: grid;
@@ -26,11 +41,13 @@
 .leftPanel {
   position: relative;
   min-height: 280px;
-  background: linear-gradient(135deg, #5eead4 0%, #bae6fd 45%, #bbf7d0 100%);
   padding: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(245, 197, 24, 0.2), transparent 42%),
+    linear-gradient(160deg, #5b21b6 0%, #7c3aed 45%, #4c1d95 100%);
 }
 
 .leftPanel::before {
@@ -60,8 +77,16 @@
 }
 
 .sidebarImage {
-  object-fit: contain;
-  object-position: center;
+  object-fit: cover;
+  object-position: center top;
+}
+
+.artGlow {
+  position: absolute;
+  inset: auto 0 0;
+  height: 35%;
+  background: linear-gradient(180deg, transparent 0%, rgba(26, 10, 64, 0.45) 100%);
+  pointer-events: none;
 }
 
 .rightPanel {

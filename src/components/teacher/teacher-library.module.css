@@ -484,6 +484,55 @@
   padding: 0.12rem 0.45rem;
 }
 
+.contentSourceRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.45rem;
+}
+
+.contentSourceBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.85rem;
+  background: #fff;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.contentSourceBtn:hover {
+  border-color: #94a3b8;
+}
+
+.contentSourceBtnActive {
+  border-color: #7c3aed;
+  background: linear-gradient(180deg, #faf5ff 0%, #fff 100%);
+  box-shadow: 0 0 0 1px rgba(124, 58, 237, 0.15);
+}
+
+.contentSourceTitle {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.contentSourceHint {
+  font-family: "Nunito", sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  line-height: 1.4;
+}
+
 .linkBtn {
   font-size: 0.75rem;
   font-weight: 700;
@@ -545,6 +594,65 @@
   color: #64748b;
   font-size: 0.9rem;
   text-decoration: none;
+}
+
+.aiPanel {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.1rem;
+  border-radius: 0.9rem;
+  border: 1px solid #c4b5fd;
+  background: linear-gradient(135deg, #faf5ff 0%, #f0f9ff 100%);
+}
+
+.aiPanelHead {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  margin-bottom: 0.85rem;
+}
+
+.aiPanelIcon {
+  flex: 0 0 auto;
+  color: #7c3aed;
+  margin-top: 0.15rem;
+}
+
+.aiPanelTitle {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  color: #4c1d95;
+}
+
+.aiPanelLead {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: #5b21b6;
+}
+
+.aiPanelActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.aiGenerateBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.62rem 1rem;
+  border: none;
+  border-radius: 0.7rem;
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
+  color: #fff;
+  font-size: 0.86rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.aiGenerateBtn:disabled {
+  opacity: 0.7;
+  cursor: wait;
 }
 
 .modalOverlay {

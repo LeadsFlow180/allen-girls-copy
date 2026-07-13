@@ -4,16 +4,17 @@ import { useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 
 import type { LibraryNovel } from "@/lib/library/library-catalog";
+import { novelHasTextEdition } from "@/lib/library/novel-pdf-edition";
 
 import { LibraryPageReader } from "./library-page-reader";
 
-const LibraryPdfReader = dynamic(
-  () => import("./library-pdf-reader").then((m) => m.LibraryPdfReader),
+const LibraryFlipbookReader = dynamic(
+  () => import("./library-flipbook-reader").then((m) => m.LibraryFlipbookReader),
   {
     ssr: false,
     loading: () => (
       <div style={{ padding: "2rem", textAlign: "center", color: "#e9d5ff" }}>
-        Opening book…
+        Opening flip book…
       </div>
     ),
   },
@@ -34,10 +35,10 @@ export function LibraryReader({ novel, onClose, mode: initialMode = "text" }: Pr
 
   if (mode === "pdf") {
     return (
-      <LibraryPdfReader
+      <LibraryFlipbookReader
         novel={novel}
         onClose={onClose}
-        onReadOnline={() => setMode("text")}
+        onReadOnline={novelHasTextEdition(novel) ? () => setMode("text") : undefined}
       />
     );
   }

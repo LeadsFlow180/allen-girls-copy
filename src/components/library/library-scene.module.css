@@ -138,6 +138,15 @@
   max-width: 100%;
   max-height: 100%;
   aspect-ratio: 2764 / 1504;
+  overflow: hidden;
+}
+
+.hubZoomLayer {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .hubArtFrameFullscreen {
@@ -158,6 +167,76 @@
 
 .hubArtFrameFullscreen .hubArtImage {
   object-fit: fill;
+}
+
+.hubArtboardTransitioning {
+  cursor: wait;
+}
+
+.hubDoorVeil {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--door-origin),
+    rgba(255, 250, 235, 0.22) 0%,
+    rgba(255, 240, 200, 0.1) 18%,
+    rgba(18, 8, 46, 0.18) 42%,
+    rgba(12, 5, 28, 0.78) 72%,
+    rgba(8, 3, 18, 0.94) 100%
+  );
+}
+
+.hubDoorBloom {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at var(--door-origin),
+    rgba(255, 253, 248, 0.95) 0%,
+    rgba(255, 236, 179, 0.55) 14%,
+    rgba(245, 197, 24, 0.2) 28%,
+    transparent 52%
+  );
+}
+
+.hubDoorWash {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 252, 245, 0.55) 0%,
+    rgba(255, 248, 235, 0.88) 45%,
+    rgba(240, 230, 255, 0.96) 100%
+  );
+}
+
+.hubDoorCaption {
+  position: absolute;
+  left: 50%;
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  transform: translateX(-50%);
+  z-index: 6;
+  margin: 0;
+  padding: 0.45rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(245, 197, 24, 0.5);
+  background: rgba(26, 10, 64, 0.78);
+  font-family: "Nunito", sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  color: #fef08a;
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+.hubHotspot:disabled {
+  cursor: wait;
 }
 
 .hubHotspots {

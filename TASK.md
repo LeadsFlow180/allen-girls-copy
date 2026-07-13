@@ -102,6 +102,8 @@
 - [x] 2026-07-09 - Library hub small-screen stretch fix: render hub art in a centered fixed-aspect frame so mobile preserves proportions and door hotspots stay aligned (`library-hub-scene.tsx`, `library-scene.module.css`).
 - [x] 2026-07-09 - Library hub mobile letterbox polish: add engaging hint/counter chip and ambient magical glows in empty top/bottom zones on small screens (`library-hub-scene.tsx`, `library-scene.module.css`).
 - [x] 2026-07-09 - Site top nav account CTA: Login button when signed out, avatar + name pill when signed in, placed beside Join the Fun (`site-top-nav.tsx`, `use-nav-account.ts`, `globals.css`, `site-top-nav.module.css`).
+- [x] 2026-07-09 - Professional auth hero images + split layout on all login/signup pages: custom art in `src/assets/images/auth/`, `AccountAuthShell` for `/account/login`, `/account/signup`, `/admin/login`, and `AuthShell` backgrounds for `/login` and `/signup`.
+- [x] 2026-07-10 - Library PDF flip book: upload PDF editions on story create/edit, render as flippable two-page spread (not PDF viewer UI) via `library-flipbook-reader.tsx`, `use-library-pdf-pages.ts`, shelf **Flip book** action; upgraded to realistic StPageFlip page curl (`react-pageflip`, `library-st-flipbook.tsx`).
 
 ## Discovered During Work
 - [ ] Wire unit curriculum preview to real Supabase unit/slide content when curriculum tables are ready (replace `getUnitCurriculumPreview` dummy data).

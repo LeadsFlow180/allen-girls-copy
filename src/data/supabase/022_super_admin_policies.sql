@@ -109,3 +109,6 @@ create policy library_assets_super_admin_delete
   );
 
 notify pgrst, 'reload schema';
+
+Create Chapters by AI
+Upload Books as a pdf then show them as the books flipable.

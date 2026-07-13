@@ -115,6 +115,7 @@ export async function PUT(request: Request, context: RouteContext) {
     .from("library_stories")
     .update({
       pdf_url: pdfUpload.publicUrl,
+      format: "pdf",
       updated_at: new Date().toISOString(),
     })
     .eq("id", id)

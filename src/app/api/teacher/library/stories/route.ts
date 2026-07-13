@@ -46,6 +46,20 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "invalid_payload_json" }, { status: 400 });
     }
 
+    const pdfFile = form.get("pdf");
+    const hasPdfUpload = pdfFile instanceof File && pdfFile.size > 0;
+    if (hasPdfUpload && payloadJson && typeof payloadJson === "object") {
+      payloadJson = {
+        ...(payloadJson as Record<string, unknown>),
+        format: "pdf",
+        contentSource: "pdf",
+        useChapters: false,
+        use_chapters: false,
+        chapters: [],
+        body: "",
+      };
+    }
+
     const parsed = parseLibraryStoryPayload(payloadJson);
     if (parsed.ok === false) {
       return NextResponse.json({ error: parsed.error }, { status: 400 });
@@ -72,8 +86,7 @@ export async function POST(request: Request) {
     }
 
     let pdfUrl: string | null = null;
-    const pdfFile = form.get("pdf");
-    if (pdfFile instanceof File && pdfFile.size > 0) {
+    if (hasPdfUpload) {
       if (pdfFile.type !== "application/pdf") {
         return NextResponse.json({ error: "invalid_pdf_type" }, { status: 400 });
       }
@@ -87,6 +100,12 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: pdfUpload.error }, { status: 500 });
       }
       pdfUrl = pdfUpload.publicUrl;
+    }
+
+    if (pdfUrl) {
+      parsed.data.format = "pdf";
+    } else if (parsed.data.format === "pdf") {
+      return NextResponse.json({ error: "pdf_required" }, { status: 400 });
     }
 
     const { data, error } = await insertLibraryStory(auth.supabase, parsed.data, {

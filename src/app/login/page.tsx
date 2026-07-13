@@ -1,6 +1,6 @@
 import { AuthShell } from "@/components/auth/auth-shell";
-import loginBackground from "@/assets/images/learn/login-background.png";
-import loginSidebar from "@/assets/images/learn/login-sidebar.png";
+import accountLoginHero from "@/assets/images/auth/account-login-hero.png";
+import portalLoginBackground from "@/assets/images/auth/portal-login-background.png";
 
 const LoginPage = () => {
   return (
@@ -8,8 +8,8 @@ const LoginPage = () => {
       mode="login"
       title="Login"
       subtitle="Parents and Teachers can sign in here to continue their personalized learning journeys."
-      artwork={loginSidebar}
-      background={loginBackground}
+      artwork={accountLoginHero}
+      background={portalLoginBackground}
     />
   );
 };

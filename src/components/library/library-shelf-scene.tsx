@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, Clock, FileText, FileType } from "lucide-react";
+import { ArrowLeft, BookOpen, Clock, FileText } from "lucide-react";
 
 import {
   LIBRARY_WINGS,
@@ -8,6 +8,7 @@ import {
   type LibraryWingId,
 } from "@/lib/library/library-catalog";
 import { LIBRARY_NOVEL_COVERS } from "@/lib/library/library-art";
+import { novelHasPdfEdition, novelHasTextEdition } from "@/lib/library/novel-pdf-edition";
 import { LibraryCoverImage, resolveLibraryCoverSrc } from "./library-cover-image";
 
 import { LibrarySceneBackground } from "./library-scene-background";
@@ -82,12 +83,14 @@ export function LibraryShelfScene({
         <ul className={styles.bookCells}>
           {books.map((novel) => {
             const cover = resolveLibraryCoverSrc(novel.id, novel.coverUrl, LIBRARY_NOVEL_COVERS);
+            const flipAvailable = novelHasPdfEdition(novel);
+            const textAvailable = novelHasTextEdition(novel);
             return (
               <li key={novel.id} className={styles.bookCell}>
                 <button
                   type="button"
                   className={styles.bookSlot}
-                  onClick={() => onOpenNovel(novel, "text")}
+                  onClick={() => onOpenNovel(novel, flipAvailable && !textAvailable ? "pdf" : textAvailable ? "text" : "pdf")}
                 >
                   <div className={styles.slotFrame}>
                     {novel.tier === "vip" ? (
@@ -116,22 +119,26 @@ export function LibraryShelfScene({
                 </button>
 
                 <div className={styles.slotActions}>
-                  <button
-                    type="button"
-                    className={styles.slotBtn}
-                    onClick={() => onOpenNovel(novel, "text")}
-                  >
-                    <FileText size={12} aria-hidden />
-                    Read
-                  </button>
-                  <button
-                    type="button"
-                    className={styles.slotBtn}
-                    onClick={() => onOpenNovel(novel, "pdf")}
-                  >
-                    <FileType size={12} aria-hidden />
-                    PDF
-                  </button>
+                  {textAvailable ? (
+                    <button
+                      type="button"
+                      className={styles.slotBtn}
+                      onClick={() => onOpenNovel(novel, "text")}
+                    >
+                      <FileText size={12} aria-hidden />
+                      Read online
+                    </button>
+                  ) : null}
+                  {flipAvailable ? (
+                    <button
+                      type="button"
+                      className={styles.slotBtn}
+                      onClick={() => onOpenNovel(novel, "pdf")}
+                    >
+                      <BookOpen size={12} aria-hidden />
+                      {textAvailable ? "Flip book" : "Open book"}
+                    </button>
+                  ) : null}
                 </div>
               </li>
             );

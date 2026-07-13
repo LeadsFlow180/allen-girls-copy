@@ -8,6 +8,7 @@ export function libraryStoryRowToNovel(row: LibraryStoryRow): LibraryNovel {
   const spreads = decoded.useChapters
     ? buildSpreadsFromChapters(decoded.chapters)
     : buildSpreadsFromBody(decoded.body);
+  const hasText = spreads.some((spread) => Boolean(spread.left?.trim() || spread.right?.trim()));
 
   return {
     id: row.id,
@@ -16,10 +17,12 @@ export function libraryStoryRowToNovel(row: LibraryStoryRow): LibraryNovel {
     author: row.author,
     synopsis: row.synopsis,
     ageBand: row.age_band,
-    readMinutes: estimateReadMinutes(spreads),
+    readMinutes: hasText ? estimateReadMinutes(spreads) : 10,
     format: row.format,
     spreads,
     pdfPath: row.pdf_url?.trim() || `/library/pdfs/${row.id}.pdf`,
+    pdfUrl: row.pdf_url?.trim() || null,
+    hasPdfEdition: Boolean(row.pdf_url?.trim()) || row.format === "pdf",
     tier: row.tier === "vip" ? "vip" : undefined,
     coverUrl: row.cover_url,
     useChapters: decoded.useChapters,

@@ -9,6 +9,7 @@ import { slugifyStoryIdFromTitle } from "@/lib/library/library-story-validation"
 import { decodeLibraryStoryContent } from "@/lib/library/library-story-storage";
 import type { LibraryStoryRow } from "@/lib/library/library-story-row";
 
+import { TeacherStoryAiPanel, coverBase64ToFile, type TeacherStoryAiResult } from "./teacher-story-ai-panel";
 import styles from "./teacher-library.module.css";
 
 function formatStorySaveError(code?: string): string {
@@ -16,9 +17,11 @@ function formatStorySaveError(code?: string): string {
     case "chapters_required":
       return "Add at least one chapter, or uncheck “Use chapters” and paste the full story in Story content.";
     case "body_required":
-      return "Story content is required when “Use chapters” is off. Paste the full story in Story content.";
+      return "Story text is required in “Write chapters” mode. Switch to “Upload PDF” if you have a PDF file instead.";
     case "cover_required":
       return "Cover thumbnail is required for new stories.";
+    case "pdf_required":
+      return "Upload a PDF file for this story.";
     default:
       return code ?? "Could not save story.";
   }
@@ -30,6 +33,21 @@ type Props = {
   basePath?: string;
 };
 
+type ContentSource = "manual" | "pdf";
+
+function inferContentSource(
+  initial: LibraryStoryRow | null | undefined,
+  initialContent: ReturnType<typeof decodeLibraryStoryContent> | null,
+): ContentSource {
+  if (!initial) return "manual";
+  if (initial.format === "pdf") return "pdf";
+  const hasText =
+    Boolean(initialContent?.body?.trim()) ||
+    Boolean(initialContent?.chapters?.some((chapter) => chapter.trim()));
+  if (initial.pdf_url?.trim() && !hasText) return "pdf";
+  return "manual";
+}
+
 export function TeacherLibraryStoryForm({
   mode,
   initial,
@@ -37,6 +55,9 @@ export function TeacherLibraryStoryForm({
 }: Props) {
   const initialContent = initial ? decodeLibraryStoryContent(initial) : null;
 
+  const [contentSource, setContentSource] = useState<ContentSource>(() =>
+    inferContentSource(initial, initialContent),
+  );
   const [id, setId] = useState(initial?.id ?? "");
   const [title, setTitle] = useState(initial?.title ?? "");
   const [wing, setWing] = useState<"allen_girls" | "licensed">(initial?.wing ?? "allen_girls");
@@ -69,6 +90,14 @@ export function TeacherLibraryStoryForm({
     return resolveLibraryCoverSrc(initial.id, initial.cover_url, LIBRARY_NOVEL_COVERS);
   }, [initial?.id, initial?.cover_url]);
 
+  const hasPdfEdition = Boolean(pdfFile || initial?.pdf_url);
+  const isPdfSource = contentSource === "pdf";
+
+  const onPdfPick = (file: File | null) => {
+    setPdfFile(file);
+    if (file) setContentSource("pdf");
+  };
+
   const onCoverPick = (file: File | null) => {
     setCoverFile(file);
     if (coverPreview) URL.revokeObjectURL(coverPreview);
@@ -82,6 +111,37 @@ export function TeacherLibraryStoryForm({
   const addChapter = () => setChapters((prev) => [...prev, ""]);
   const removeChapter = (index: number) => {
     setChapters((prev) => (prev.length <= 1 ? prev : prev.filter((_, i) => i !== index)));
+  };
+
+  const applyAiGeneratedStory = (result: TeacherStoryAiResult) => {
+    if (result.title.trim()) setTitle(result.title.trim());
+    if (mode === "create" && result.storyId.trim()) setId(result.storyId.trim());
+    if (result.author.trim()) setAuthor(result.author.trim());
+    if (result.synopsis.trim()) setSynopsis(result.synopsis.trim());
+    if (result.ageBand.trim()) setAgeBand(result.ageBand.trim());
+    if (result.tier) setTier(result.tier);
+
+    setContentSource("manual");
+
+    if (result.useChapters && result.chapters.length > 0) {
+      setUseChapters(true);
+      setChapters(result.chapters);
+      setBody("");
+    } else if (result.body.trim()) {
+      setUseChapters(false);
+      setBody(result.body.trim());
+      setChapters([""]);
+    }
+
+    if (result.coverImage) {
+      const storyId = (mode === "create" ? result.storyId : initial?.id) ?? result.storyId;
+      const cover = coverBase64ToFile(
+        result.coverImage.base64,
+        result.coverImage.mimeType,
+        storyId || "story-cover",
+      );
+      onCoverPick(cover);
+    }
   };
 
   const handleUseChaptersChange = (enabled: boolean) => {
@@ -109,6 +169,7 @@ export function TeacherLibraryStoryForm({
     const trimmedChapters = chapters.map((c) => c.trim()).filter(Boolean);
     const trimmedBody = body.trim();
     const singleStory = !useChapters;
+    const uploadingPdf = Boolean(pdfFile);
     const payload = {
       id: storyId,
       wing,
@@ -117,11 +178,12 @@ export function TeacherLibraryStoryForm({
       synopsis: synopsis.trim(),
       ageBand,
       tier,
-      format: "text",
-      useChapters: !singleStory,
-      use_chapters: !singleStory,
-      chapters: singleStory ? [] : trimmedChapters,
-      body: singleStory ? trimmedBody : "",
+      format: isPdfSource ? "pdf" : "text",
+      contentSource: isPdfSource ? "pdf" : "manual",
+      useChapters: isPdfSource ? false : !singleStory,
+      use_chapters: isPdfSource ? false : !singleStory,
+      chapters: isPdfSource ? [] : singleStory ? [] : trimmedChapters,
+      body: isPdfSource ? "" : singleStory ? trimmedBody : "",
       isPublished,
     };
 
@@ -131,15 +193,24 @@ export function TeacherLibraryStoryForm({
       return;
     }
 
-    if (!singleStory && payload.chapters.length === 0) {
+    if (isPdfSource) {
+      if (mode === "create" && !uploadingPdf) {
+        setStatus("error");
+        setMessage("Upload a PDF file — no need to type chapters when using PDF mode.");
+        return;
+      }
+      if (mode === "edit" && !uploadingPdf && !hasPdfEdition) {
+        setStatus("error");
+        setMessage("Upload a PDF file for this story.");
+        return;
+      }
+    } else if (!singleStory && payload.chapters.length === 0) {
       setStatus("error");
-      setMessage("Add at least one chapter, or uncheck “Use chapters” and paste the full story instead.");
+      setMessage("Add at least one chapter, or switch to “Upload PDF” if you have a ready-made book file.");
       return;
-    }
-
-    if (singleStory && !trimmedBody) {
+    } else if (singleStory && !trimmedBody) {
       setStatus("error");
-      setMessage("Story content is required. Paste the full story in the Story content box.");
+      setMessage("Story content is required. Paste the full story, or switch to “Upload PDF”.");
       return;
     }
 
@@ -154,7 +225,7 @@ export function TeacherLibraryStoryForm({
         const form = new FormData();
         form.append("payload", JSON.stringify(payload));
         form.append("cover", coverFile);
-        if (pdfFile) form.append("pdf", pdfFile);
+        if (isPdfSource && pdfFile) form.append("pdf", pdfFile);
 
         const res = await fetch("/api/teacher/library/stories", { method: "POST", body: form });
         const json = (await res.json()) as { error?: string };
@@ -196,7 +267,7 @@ export function TeacherLibraryStoryForm({
         }
       }
 
-      if (pdfFile) {
+      if (isPdfSource && pdfFile) {
         const pdfForm = new FormData();
         pdfForm.append("pdf", pdfFile);
         const pdfRes = await fetch(
@@ -206,7 +277,7 @@ export function TeacherLibraryStoryForm({
         if (!pdfRes.ok) {
           const pdfJson = (await pdfRes.json()) as { error?: string };
           setStatus("error");
-          setMessage(pdfJson.error ?? "Story saved but PDF upload failed.");
+          setMessage(formatStorySaveError(pdfJson.error) ?? "Story saved but PDF upload failed.");
           return;
         }
       }
@@ -284,6 +355,70 @@ export function TeacherLibraryStoryForm({
       </div>
 
       <div className={styles.field}>
+        <span className={`font-nunito ${styles.label}`}>How do you want to add this story?</span>
+        <div className={styles.contentSourceRow} role="radiogroup" aria-label="Story content source">
+          <button
+            type="button"
+            role="radio"
+            aria-checked={contentSource === "manual"}
+            className={`${styles.contentSourceBtn}${contentSource === "manual" ? ` ${styles.contentSourceBtnActive}` : ""}`}
+            onClick={() => setContentSource("manual")}
+          >
+            <span className={styles.contentSourceTitle}>Write chapters</span>
+            <span className={styles.contentSourceHint}>Type story text or chapters in the form</span>
+          </button>
+          <button
+            type="button"
+            role="radio"
+            aria-checked={contentSource === "pdf"}
+            className={`${styles.contentSourceBtn}${contentSource === "pdf" ? ` ${styles.contentSourceBtnActive}` : ""}`}
+            onClick={() => setContentSource("pdf")}
+          >
+            <span className={styles.contentSourceTitle}>Upload PDF</span>
+            <span className={styles.contentSourceHint}>Skip typing — upload a PDF flip book instead</span>
+          </button>
+        </div>
+      </div>
+
+      {isPdfSource ? (
+        <div className={styles.field}>
+          <label className={`font-nunito ${styles.label}`}>
+            Story PDF {mode === "create" ? "(required)" : "(replace file)"}
+          </label>
+          <input
+            type="file"
+            accept="application/pdf"
+            onChange={(e) => onPdfPick(e.target.files?.[0] ?? null)}
+            required={mode === "create"}
+          />
+          <p className={`font-nunito ${styles.fieldHint}`}>
+            No chapters or story text needed. Kids will read this as flippable pages in the Library Labyrinth.
+          </p>
+          {initial?.pdf_url && !pdfFile ? (
+            <p className={`font-nunito ${styles.fieldHint}`}>
+              Current PDF:{" "}
+              <a href={initial.pdf_url} target="_blank" rel="noopener noreferrer">
+                {initial.id}.pdf
+              </a>
+            </p>
+          ) : null}
+          {pdfFile ? (
+            <p className={`font-nunito ${styles.fieldHint}`}>Ready to upload: {pdfFile.name}</p>
+          ) : null}
+        </div>
+      ) : (
+        <>
+      <TeacherStoryAiPanel
+        mode={mode}
+        title={title}
+        synopsis={synopsis}
+        ageBand={ageBand}
+        wing={wing}
+        useChapters={useChapters}
+        onGenerated={applyAiGeneratedStory}
+      />
+
+      <div className={styles.field}>
         <div className={styles.chapterHead}>
           <span className={`font-nunito ${styles.label}`}>Story structure</span>
           <label className={`font-nunito ${styles.toggleRow}`}>
@@ -342,6 +477,8 @@ export function TeacherLibraryStoryForm({
           />
         </div>
       )}
+        </>
+      )}
 
       <div className={styles.field}>
         <label className={`font-nunito ${styles.label}`}>
@@ -358,11 +495,6 @@ export function TeacherLibraryStoryForm({
         ) : existingCover ? (
           <LibraryCoverImage src={existingCover} alt="Current cover" className={styles.previewCover} />
         ) : null}
-      </div>
-
-      <div className={styles.field}>
-        <label className={`font-nunito ${styles.label}`}>PDF edition (optional)</label>
-        <input type="file" accept="application/pdf" onChange={(e) => setPdfFile(e.target.files?.[0] ?? null)} />
       </div>
 
       {message ? (
