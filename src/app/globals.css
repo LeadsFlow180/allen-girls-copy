@@ -5,6 +5,24 @@
 /* ---break--- */
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   AGA DESIGN TOKENS — the single source of truth for color.
+
+   THE RULE: Every color in this app comes from a token.
+   If you need a color that isn't here, add it here first.
+   Do NOT hardcode hex values in *.module.css files.
+
+   Layers (top = brand, then semantic, then component libs):
+   1. Brand palette      — the AGA identity (purple / pink / yellow).
+   2. Semantic tokens    — surface / text / border / status / focus.
+   3. Color scales        — grouped tints & shades for the above,
+                            grown as needed while tokenizing modules.
+   4. shadcn/oklch set   — kept for shadcn components, with the
+                            *emphasis* tokens (primary, accent, ring)
+                            remapped to AGA brand. The "paper"
+                            (background/foreground/muted) stays neutral.
+   ============================================================ */
+
 :root {
   /* Brand colours */
   --primary:          #7c22c5;   /* deep purple */
@@ -25,7 +43,93 @@
   /* Read-only fallback for Spark scroll guide (overwritten by JS from real nav height) */
   --aga-top-nav-height: 4rem;
 
-  /* shadcn tokens */
+  /* ── Semantic tokens (Move 1) ──────────────────────────────
+     Named roles derived from the most-used values in the modules. */
+  --surface:         #ffffff;   /* base card / page surface (137×) */
+  --surface-raised:  #f8fafc;   /* subtly lifted panel (slate-50) */
+  --surface-sunken:  #f1f5f9;   /* inset / muted fill (slate-100) */
+  --text:            #0f172a;   /* primary text (slate-900, 94×) */
+  --text-muted:      #64748b;   /* secondary text (slate-500, 134×) */
+  --text-subtle:     #94a3b8;   /* tertiary text (slate-400, 64×) */
+  /* --border is defined in the shadcn block below as slate-200 (#e2e8f0),
+     shared by both shadcn components and AGA modules. */
+  --border-strong:   #cbd5e1;   /* stronger dividers (slate-300, 82×) */
+  --success:         #22c55e;   /* success / correct */
+  --warning:         #f59e0b;   /* warning / caution */
+  --danger:          #ef4444;   /* error / destructive */
+  --focus-ring:      #7c22c5;   /* keyboard focus — brand purple */
+
+  /* ── Font stacks (Move 6) ──────────────────────────────────
+     --nf-nunito / --nf-fredoka come from next/font on <html>. */
+  --font-display:    var(--nf-fredoka), system-ui, sans-serif;  /* headings (Fredoka) */
+  --font-body:       var(--nf-nunito), system-ui, sans-serif;   /* body (Nunito) */
+
+  /* ── Color scales (Move 2) ─────────────────────────────────
+     Grouped tints/shades. Near-duplicate hardcoded values in the
+     modules are mapped to the nearest step here. Add a step here
+     before hardcoding a new hex anywhere else. */
+  /* Neutrals (slate) */
+  --slate-50:  #f8fafc;  --slate-100: #f1f5f9;  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;  --slate-400: #94a3b8;  --slate-500: #64748b;
+  --slate-600: #475569;  --slate-700: #334155;  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  /* Purple / violet (brand family) */
+  --purple-50:  #faf5ff;  --purple-100: #ede9fe;  --purple-200: #ddd6fe;
+  --purple-300: #c4b5fd;  --purple-400: #a78bfa;  --purple-500: #8b5cf6;
+  --purple-600: #7c3aed;  --purple-700: #6d28d9;  --purple-800: #5b21b6;
+  --purple-900: #4c1d95;  --purple-950: #2a1060;
+  /* Pink / rose (brand secondary family) */
+  --pink-100: #fce7f3;  --pink-300: #f472b6;  --pink-400: #ec4899;
+  --pink-500: #e8357a;  --pink-600: #db2777;  --pink-700: #be185d;
+  --pink-900: #9d174d;
+  /* Yellow / amber / gold (brand accent family) */
+  --gold-50:  #fffbeb;  --gold-100: #fef3c7;  --gold-200: #fde68a;
+  --gold-300: #fde047;  --gold-400: #facc15;  --gold-500: #f5c518;
+  --gold-metal: #d4af37;  --amber-500: #f59e0b;  --amber-600: #ca8a04;
+  --amber-700: #a16207;  --amber-800: #854d0e;
+  /* Green / emerald + gamified green */
+  --green-100: #bbf7d0;  --green-300: #86efac;  --green-400: #4ade80;
+  --green-500: #22c55e;  --green-600: #16a34a;  --green-700: #15803d;
+  --green-800: #166534;  --green-900: #14532d;
+  --emerald-500: #10b981;  --emerald-600: #059669;  --emerald-700: #047857;
+  --game-green: #58cc02;  --game-green-dark: #46a302;  --game-green-light: #7ee02a;
+  /* Blue / sky / cyan + gamified blue */
+  --sky-50:  #f0f9ff;  --sky-100: #e0f2fe;  --sky-200: #bae6fd;
+  --sky-300: #7dd3fc;  --sky-400: #38bdf8;  --sky-500: #0ea5e9;
+  --sky-600: #0284c7;  --sky-700: #0369a1;  --sky-900: #0c4a6e;
+  --blue-500: #3b82f6;  --blue-600: #2563eb;  --blue-700: #1d4ed8;
+  --game-blue: #1cb0f6;  --game-blue-dark: #1899d6;  --cyan-500: #06b6d4;
+  /* Orange + warm brown */
+  --orange-300: #fdba74;  --orange-500: #f97316;  --orange-600: #ea580c;
+  --orange-700: #c2410c;  --brown-700: #92400e;  --brown-800: #78350f;
+  --brown-900: #451a03;  --brown-warn: #b45309;
+  /* Red / rose (danger family) */
+  --red-100: #fee2e2;  --red-200: #fecaca;  --red-300: #fca5a5;
+  --red-400: #f87171;  --red-500: #ef4444;  --red-600: #dc2626;
+  --red-700: #b91c1c;  --red-800: #991b1b;  --red-900: #7f1d1d;
+  --game-red: #ff4b4b;
+  /* Teal */
+  --teal-100: #ccfbf1;  --teal-500: #14b8a6;  --teal-700: #0f766e;
+  --teal-900: #134e4a;
+  /* Extra hue steps used by a few modules (gap-fillers) */
+  --violet-400: #c084fc;  --violet-500: #a855f7;  --fuchsia-500: #c026d3;
+  --indigo-300: #a5b4fc;  --indigo-600: #4f46e5;  --indigo-700: #4338ca;
+  --indigo-800: #312e81;
+  --yellow-500: #eab308;  --yellow-600: #ca8a04;  --gold-dark: #c9a012;
+  --amber-orange: #d97706;
+  --orange-100: #ffedd5;  --orange-200: #fed7aa;
+  --lime-200: #d7ffb8;  --lime-300: #bef264;  --lime-500: #3d8c02;
+  --cyan-300: #67e8f9;  --cyan-400: #22d3ee;
+  --emerald-300: #6ee7b7;  --emerald-400: #34d399;
+  --rose-700: #be123c;
+  --earth-500: #7d6352;  --earth-600: #6b5344;  --earth-700: #5c4638;
+  --indigo-950: #1e1b4b;  --green-50: #dcfce7;
+
+  /* shadcn tokens
+     Move 1: the "paper" (background/foreground/card/muted/secondary)
+     stays neutral; the *emphasis* tokens (primary, accent, ring,
+     destructive) are remapped to AGA brand so shadcn components render
+     on-brand instead of gray. */
   --radius: 0.75rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -33,31 +137,31 @@
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
-  --primary-shadcn: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
+  --primary-shadcn: var(--primary);            /* AGA purple, was near-black */
+  --primary-foreground: #ffffff;
   --secondary-shadcn: oklch(0.97 0 0);
   --secondary-foreground: oklch(0.205 0 0);
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
-  --accent-shadcn: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
+  --accent-shadcn: var(--accent);              /* AGA yellow, was neutral */
+  --accent-foreground: var(--accent-fg);       /* dark navy text on yellow */
+  --destructive: var(--danger);
+  --border: #e2e8f0;                           /* slate-200 — shared by modules */
   --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
+  --ring: var(--focus-ring);                   /* brand purple focus ring */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: var(--focus-ring);
 }
 
 @theme inline {
-  --font-sans: "Nunito", var(--font-geist-sans), Arial, sans-serif;
-  --font-fredoka: "Fredoka One", cursive;
+  --font-sans: var(--nf-nunito), system-ui, sans-serif;
+  --font-fredoka: var(--nf-fredoka), system-ui, sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -111,7 +215,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: "Nunito", Arial, sans-serif;
+    font-family: var(--font-body);
     margin: 0;
     padding: 0;
     width: 100%;
@@ -119,6 +223,27 @@
     min-height: 100vh;
     overflow-x: clip;
   }
+}
+
+/* ── Motion respects the OS (Move 3) ──────────────────────────
+   One global rule so every animation/transition honors the user's
+   "Reduce motion" setting. Per-file prefers-reduced-motion blocks
+   that only disabled animation are now redundant and removed. */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ── Visible keyboard focus on everything interactive (Move 5) ──
+   :where() keeps specificity at 0 so any component can override it. */
+:where(a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])):focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* ── Hidden native scrollbars (Spark scroll guide on desktop) ── */
@@ -158,8 +283,8 @@ body::-webkit-scrollbar {
 }
 
 /* ── Font helpers ─────────────────────────────── */
-.font-fredoka { font-family: "Fredoka One", cursive !important; }
-.font-nunito  { font-family: "Nunito", sans-serif !important; }
+.font-fredoka { font-family: var(--font-display) !important; }
+.font-nunito  { font-family: var(--font-body) !important; }
 
 /* ── Brand colour utilities ───────────────────── */
 .bg-primary-brand  { background-color: var(--primary); }
@@ -350,7 +475,7 @@ html:has(body.store-immersive) {
 }
 
 .brand-name {
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: clamp(0.8rem, 2.8vw, 1.15rem);
   color: var(--primary);
   line-height: 1.1;
@@ -413,7 +538,7 @@ html:has(body.store-immersive) {
   align-items: center;
   padding: 0.45rem 0.75rem;
   border-radius: 999px;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: clamp(0.82rem, 1.1vw, 0.95rem);
   color: #374151;
   text-decoration: none;
@@ -437,7 +562,7 @@ html:has(body.store-immersive) {
   border-radius: 999px;
   background: var(--secondary);
   color: #fff;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: 1rem;
   text-decoration: none;
   transition: transform 120ms, background 120ms;
@@ -460,7 +585,7 @@ html:has(body.store-immersive) {
   border: 2px solid #e9d5ff;
   background: #ffffff;
   color: var(--primary);
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: 0.95rem;
   text-decoration: none;
   transition: background 140ms, border-color 140ms, transform 120ms, box-shadow 140ms;
@@ -490,7 +615,7 @@ html:has(body.store-immersive) {
   border: 2px solid #e9d5ff;
   background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
   color: #1a0a40;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.88rem;
   font-weight: 800;
   text-decoration: none;
@@ -527,9 +652,9 @@ html:has(body.store-immersive) {
   margin-bottom: 2rem;
 }
 
-.footer-brand { font-family: "Fredoka One", cursive; font-size: 1.25rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+.footer-brand { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
 .footer-desc  { font-size: 0.85rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
-.footer-heading { font-family: "Fredoka One", cursive; font-size: 1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
+.footer-heading { font-family: var(--font-display); font-size: 1rem; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.4rem; }
 .footer-link { display: block; font-size: 0.875rem; color: rgba(255,255,255,0.8); text-decoration: none; margin-bottom: 0.4rem; transition: color 140ms; }
 .footer-link:hover { color: var(--accent); }
 
@@ -572,7 +697,7 @@ html:has(body.store-immersive) {
   color: #e0e7ff;
 }
 .section-label { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.5rem; }
-.section-title { font-family: "Fredoka One", cursive; font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 400; color: #fff; margin-bottom: 0.5rem; }
+.section-title { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 400; color: #fff; margin-bottom: 0.5rem; }
 .section-subtitle { font-size: 1rem; color: rgba(255,255,255,0.8); line-height: 1.6; }
 
 /* ── Strips (Learn, etc.) ──────────────────────── */
@@ -585,8 +710,8 @@ html:has(body.store-immersive) {
 .strip-sky { background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 100%); color: #0c4a6e; }
 .strip-white { background: #fff; color: #111827; }
 .strip-dark { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); color: #fff; }
-.strip-heading { font-family: "Fredoka One", cursive; font-size: clamp(1.75rem, 4vw, 2.6rem); font-weight: 400; color: inherit; margin-bottom: 0.5rem; }
-.strip-subheading { font-family: "Nunito", sans-serif; font-size: 1rem; opacity: 0.9; line-height: 1.6; }
+.strip-heading { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.6rem); font-weight: 400; color: inherit; margin-bottom: 0.5rem; }
+.strip-subheading { font-family: var(--font-body); font-size: 1rem; opacity: 0.9; line-height: 1.6; }
 
 /* ── HUD cards (Learn dashboard) ──────────────── */
 .hud-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; }
@@ -597,7 +722,7 @@ html:has(body.store-immersive) {
 .hud-card:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
 .hud-icon { font-size: 1.75rem; flex-shrink: 0; }
 .hud-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; }
-.hud-value { font-family: "Fredoka One", cursive; font-weight: 400; }
+.hud-value { font-family: var(--font-display); font-weight: 400; }
 
 /* ── Zone cards (Learn) ────────────────────────── */
 .zones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
@@ -613,8 +738,8 @@ html:has(body.store-immersive) {
 .zone-card-coming { background: #f1f5f9; color: #475569; cursor: default; }
 .zone-card-coming:hover { transform: none; box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
 .zone-emoji { font-size: 2.5rem; }
-.zone-label { font-family: "Fredoka One", cursive; font-size: 1.35rem; font-weight: 400; margin: 0.5rem 0 0.25rem; }
-.zone-desc { font-family: "Nunito", sans-serif; font-size: 0.95rem; line-height: 1.55; margin: 0; opacity: 0.95; }
+.zone-label { font-family: var(--font-display); font-size: 1.35rem; font-weight: 400; margin: 0.5rem 0 0.25rem; }
+.zone-desc { font-family: var(--font-body); font-size: 0.95rem; line-height: 1.55; margin: 0; opacity: 0.95; }
 .zone-chip { font-size: 0.7rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.25rem 0.75rem; border-radius: 999px; background: rgba(255,255,255,0.5); }
 .zone-chip-dark { background: #cbd5e1; color: #475569; }
 
@@ -641,7 +766,7 @@ html:has(body.store-immersive) {
 .ep-card-thumb { border-radius: 1rem; padding: 2rem; text-align: center; }
 .ep-card-body { padding: 1.25rem; }
 .ep-card-tag { font-size: 0.75rem; font-weight: 800; letter-spacing: 0.06em; }
-.ep-card-title { font-family: "Fredoka One", cursive; font-size: 1.2rem; font-weight: 400; color: #111827; margin: 0.25rem 0 0.5rem; }
+.ep-card-title { font-family: var(--font-display); font-size: 1.2rem; font-weight: 400; color: #111827; margin: 0.25rem 0 0.5rem; }
 .ep-card-desc { font-size: 0.9rem; color: #6b7280; line-height: 1.55; margin: 0; }
 
 /* ── Hero (inner pages) ───────────────────────── */
@@ -653,7 +778,7 @@ html:has(body.store-immersive) {
   background: rgba(255,255,255,0.2); color: #fff;
   font-size: 0.8rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem;
 }
-.hero-title { font-family: "Fredoka One", cursive; font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: #fff; line-height: 1.15; margin-bottom: 0.75rem; }
+.hero-title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 400; color: #fff; line-height: 1.15; margin-bottom: 0.75rem; }
 .hero-title .accent { color: var(--accent); }
 .hero-subtitle { font-size: 1.05rem; color: rgba(255,255,255,0.9); line-height: 1.65; }
 
@@ -670,7 +795,7 @@ html:has(body.store-immersive) {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.85rem 2rem; border-radius: 999px;
   background: var(--accent); color: var(--accent-fg);
-  font-family: "Fredoka One", cursive; font-size: 1rem; text-decoration: none;
+  font-family: var(--font-display); font-size: 1rem; text-decoration: none;
   box-shadow: 0 6px 20px rgba(245,197,24,0.45);
   transition: transform 0.2s, box-shadow 0.2s;
 }
@@ -679,7 +804,7 @@ html:has(body.store-immersive) {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.85rem 2rem; border-radius: 999px;
   background: rgba(255,255,255,0.2); color: #fff; border: 2px solid rgba(255,255,255,0.5);
-  font-family: "Fredoka One", cursive; font-size: 1rem; text-decoration: none;
+  font-family: var(--font-display); font-size: 1rem; text-decoration: none;
   transition: background 0.2s, transform 0.2s;
 }
 .btn-hero-secondary:hover { background: rgba(255,255,255,0.3); transform: translateY(-2px); }
@@ -691,7 +816,7 @@ html:has(body.store-immersive) {
 }
 .feature-box:last-child { border-right: none; }
 .feature-box-icon { font-size: 2rem; margin-bottom: 0.75rem; }
-.feature-box-title { font-family: "Fredoka One", cursive; font-size: 1rem; font-weight: 400; color: #fff; margin-bottom: 0.35rem; }
+.feature-box-title { font-family: var(--font-display); font-size: 1rem; font-weight: 400; color: #fff; margin-bottom: 0.35rem; }
 .feature-box-text { font-size: 0.8rem; color: rgba(255,255,255,0.8); line-height: 1.5; margin: 0; }
 
 /* ── Zone row (Characters) ───────────────────── */
@@ -701,7 +826,7 @@ html:has(body.store-immersive) {
 .zone-btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
   padding: 0.75rem 1.5rem; border-radius: 999px; border: none;
-  font-family: "Fredoka One", cursive; font-size: 0.95rem; text-decoration: none;
+  font-family: var(--font-display); font-size: 0.95rem; text-decoration: none;
   transition: transform 0.2s, box-shadow 0.2s; cursor: pointer;
 }
 .zone-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
@@ -714,16 +839,16 @@ html:has(body.store-immersive) {
   border-radius: 1.25rem; margin-bottom: 2rem; color: #fff;
 }
 .kid-shell .eyebrow { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.9; margin-bottom: 0.5rem; }
-.kid-shell .page-title { font-family: "Fredoka One", cursive; font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 400; margin-bottom: 0.5rem; }
-.kid-shell .page-subtitle { font-family: "Nunito", sans-serif; font-size: 1rem; opacity: 0.9; line-height: 1.5; }
-.library-row, .library-title { font-family: "Fredoka One", cursive; }
+.kid-shell .page-title { font-family: var(--font-display); font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 400; margin-bottom: 0.5rem; }
+.kid-shell .page-subtitle { font-family: var(--font-body); font-size: 1rem; opacity: 0.9; line-height: 1.5; }
+.library-row, .library-title { font-family: var(--font-display); }
 .library-title { font-size: 1.25rem; color: var(--primary); margin-bottom: 0.35rem; }
-.library-text { font-family: "Nunito", sans-serif; font-size: 0.95rem; color: #6b7280; line-height: 1.6; margin-bottom: 1.5rem; }
+.library-text { font-family: var(--font-body); font-size: 0.95rem; color: #6b7280; line-height: 1.6; margin-bottom: 1.5rem; }
 .zone-math { background: linear-gradient(135deg, #fef08a 0%, #fef9c3 100%); border: 2px solid #eab308; color: #713f12; border-radius: 1rem; padding: 1.5rem; }
 .zone-science { background: linear-gradient(135deg, #86efac 0%, #bbf7d0 100%); border: 2px solid #22c55e; color: #14532d; border-radius: 1rem; padding: 1.5rem; }
 .zone-reading { background: linear-gradient(135deg, #ddd6fe 0%, #ede9fe 100%); border: 2px solid #a855f7; color: #581c87; border-radius: 1rem; padding: 1.5rem; }
-.zone-label { font-family: "Fredoka One", cursive; font-size: 1.2rem; margin-bottom: 0.5rem; }
-.zone-text { font-family: "Nunito", sans-serif; font-size: 0.9rem; line-height: 1.55; margin: 0; }
+.zone-label { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem; }
+.zone-text { font-family: var(--font-body); font-size: 0.9rem; line-height: 1.55; margin: 0; }
 
 /* ── Responsive ───────────────────────────────── */
 @media (min-width: 900px) {

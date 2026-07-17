@@ -5,7 +5,7 @@
   inset: 0;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+  background: linear-gradient(180deg, var(--slate-50) 0%, var(--slate-100) 100%);
 }
 
 .page {
@@ -29,8 +29,8 @@
 
 .hubFrame {
   position: relative;
-  background: #ffffff;
-  border: 1px solid #e8e8ef;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 1rem;
   box-shadow:
     0 1px 3px rgba(15, 23, 42, 0.06),
@@ -45,7 +45,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: #7c3aed;
+  background: var(--primary);
   z-index: 1;
 }
 
@@ -55,8 +55,8 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.2rem;
-  border-bottom: 1px solid #e2e8f0;
-  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
 }
 
 .brandBlock {
@@ -73,28 +73,28 @@
   border-radius: 0.65rem;
   display: grid;
   place-items: center;
-  color: #6d28d9;
-  background: #faf5ff;
-  border: 1px solid #ede9fe;
+  color: var(--purple-700);
+  background: var(--purple-50);
+  border: 1px solid var(--purple-100);
 }
 
 .brandKicker {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .brandTitle {
   margin: 0.12rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 1.02rem;
   font-weight: 800;
   line-height: 1.2;
-  color: #0f172a;
+  color: var(--text);
   letter-spacing: -0.02em;
 }
 
@@ -110,12 +110,12 @@
   display: none;
   padding: 0.32rem 0.62rem;
   border-radius: 0.4rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.68rem;
   font-weight: 700;
-  color: #475569;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  color: var(--slate-600);
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 @media (min-width: 480px) {
@@ -130,24 +130,24 @@
   font-weight: 600 !important;
   padding: 0.45rem 0.8rem !important;
   height: auto !important;
-  border: 1px solid #e2e8f0 !important;
-  background: #ffffff !important;
-  color: #475569 !important;
+  border: 1px solid var(--border) !important;
+  background: var(--surface) !important;
+  color: var(--slate-600) !important;
   border-radius: 0.45rem !important;
   box-shadow: none !important;
 }
 
 .signOutBtn:hover {
-  background: #f8fafc !important;
-  border-color: #cbd5e1 !important;
+  background: var(--slate-50) !important;
+  border-color: var(--border-strong) !important;
 }
 
 .tabNav {
   display: flex;
   overflow-x: auto;
   scrollbar-width: none;
-  border-bottom: 1px solid #e2e8f0;
-  background: #fafafa;
+  border-bottom: 1px solid var(--border);
+  background: var(--slate-50);
 }
 
 .tabNav::-webkit-scrollbar {
@@ -167,20 +167,20 @@
   margin-bottom: -1px;
   border-radius: 0;
   text-decoration: none;
-  color: #64748b;
+  color: var(--text-muted);
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
 .tabLink:hover {
-  color: #334155;
-  background: #f8fafc;
+  color: var(--slate-700);
+  background: var(--slate-50);
 }
 
 .tabLinkActive {
-  color: #6d28d9;
+  color: var(--purple-700);
   font-weight: 700;
-  background: #ffffff;
-  border-bottom-color: #7c3aed;
+  background: var(--surface);
+  border-bottom-color: var(--primary);
 }
 
 .tabIcon {
@@ -190,7 +190,7 @@
 }
 
 .tabLinkLabel {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: inherit;
   white-space: nowrap;
@@ -214,18 +214,18 @@
 
 .pageTitle {
   margin: 0 0 0.25rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .pageLead {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.82rem;
   line-height: 1.5;
-  color: #64748b;
+  color: var(--text-muted);
   max-width: 42rem;
 }
 
@@ -243,8 +243,8 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1.2rem 1.25rem 1.1rem;
-  background: #ffffff;
-  border-bottom: 1px solid #f1f5f9;
+  background: var(--surface);
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .heroMain {
@@ -262,12 +262,12 @@
   border-radius: 0.75rem;
   display: grid;
   place-items: center;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 1.05rem;
   font-weight: 800;
-  color: #6d28d9;
-  background: #faf5ff;
-  border: 1px solid #e9d5ff;
+  color: var(--purple-700);
+  background: var(--purple-50);
+  border: 1px solid var(--purple-200);
 }
 
 .heroCopy {
@@ -276,29 +276,29 @@
 
 .heroEyebrow {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.66rem;
   font-weight: 800;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .heroTitle {
   margin: 0.1rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(1.2rem, 3.5vw, 1.45rem);
   font-weight: 800;
   line-height: 1.15;
-  color: #0f172a;
+  color: var(--text);
   letter-spacing: -0.03em;
 }
 
 .heroMeta {
   margin: 0.22rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .heroCta {
@@ -308,19 +308,19 @@
   gap: 0.35rem;
   padding: 0.58rem 1rem;
   border-radius: 0.55rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 800;
   text-decoration: none;
-  color: #ffffff;
-  background: #7c3aed;
-  border: 1px solid #6d28d9;
+  color: var(--surface);
+  background: var(--primary);
+  border: 1px solid var(--purple-700);
   white-space: nowrap;
   transition: background 0.15s ease, box-shadow 0.15s ease;
 }
 
 .heroCta:hover {
-  background: #6d28d9;
+  background: var(--purple-700);
   box-shadow: 0 4px 14px rgba(124, 58, 237, 0.28);
 }
 
@@ -328,8 +328,8 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 1px;
-  background: #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
+  background: var(--border);
+  border-bottom: 1px solid var(--border);
 }
 
 @media (min-width: 520px) {
@@ -344,7 +344,7 @@
   flex-direction: column;
   gap: 0.12rem;
   padding: 0.85rem 1.25rem;
-  background: #ffffff;
+  background: var(--surface);
   text-decoration: none;
   color: inherit;
   min-height: 4.5rem;
@@ -355,33 +355,33 @@
 }
 
 .metricCell:hover {
-  background: #fafafa;
+  background: var(--slate-50);
 }
 
 .metricLabel {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.64rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .metricValue {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 1.15rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
   font-variant-numeric: tabular-nums;
   line-height: 1.1;
 }
 
 .metricAction {
   margin-top: 0.15rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 700;
-  color: #7c3aed;
+  color: var(--primary);
 }
 
 .metricMeta {
@@ -389,32 +389,32 @@
   align-items: center;
   gap: 0.28rem;
   margin-top: 0.15rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .menuSection {
-  background: #ffffff;
+  background: var(--surface);
 }
 
 .menuLabel {
   margin: 0;
   padding: 0.7rem 1.25rem 0.5rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.64rem;
   font-weight: 800;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .menuList {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--slate-100);
 }
 
 .menuRow {
@@ -424,7 +424,7 @@
   padding: 0.85rem 1.25rem;
   text-decoration: none;
   color: inherit;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--slate-100);
   transition: background 0.15s ease;
 }
 
@@ -433,22 +433,22 @@
 }
 
 .menuRow:hover {
-  background: #fafafa;
+  background: var(--slate-50);
 }
 
 .menuRow:hover .menuChevron {
-  color: #7c3aed;
+  color: var(--primary);
   transform: translateX(2px);
 }
 
 .menuRowFeatured {
-  border-left: 3px solid #7c3aed;
+  border-left: 3px solid var(--primary);
   padding-left: calc(1.25rem - 3px);
-  background: #fcfbff;
+  background: var(--slate-50);
 }
 
 .menuRowFeatured:hover {
-  background: #f8f5ff;
+  background: var(--purple-50);
 }
 
 .rowIcon {
@@ -458,15 +458,15 @@
   border-radius: 0.55rem;
   display: grid;
   place-items: center;
-  color: #64748b;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  color: var(--text-muted);
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 .menuRowFeatured .rowIcon {
-  color: #6d28d9;
-  background: #faf5ff;
-  border-color: #e9d5ff;
+  color: var(--purple-700);
+  background: var(--purple-50);
+  border-color: var(--purple-200);
 }
 
 .menuRowText {
@@ -478,22 +478,22 @@
 }
 
 .menuRowTitle {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.88rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .menuRowDesc {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.74rem;
   line-height: 1.4;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .menuChevron {
   flex-shrink: 0;
-  color: #cbd5e1;
+  color: var(--border-strong);
   transition:
     color 0.15s ease,
     transform 0.15s ease;
@@ -502,17 +502,17 @@
 .workspaceFoot {
   margin: 0;
   padding: 0.75rem 1.25rem 0.95rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.74rem;
   line-height: 1.55;
-  color: #94a3b8;
-  background: #fafafa;
-  border-top: 1px solid #f1f5f9;
+  color: var(--text-subtle);
+  background: var(--slate-50);
+  border-top: 1px solid var(--slate-100);
 }
 
 .contentCard {
   padding: 1rem;
   border-radius: 0.65rem;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--surface);
+  border: 1px solid var(--border);
 }

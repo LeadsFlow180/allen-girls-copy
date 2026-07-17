@@ -1,9 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Nunito, Fredoka } from "next/font/google";
 import "./globals.css";
 
 import { SiteTopNav } from "@/components/site-top-nav";
 import { ScrollMascotGuide } from "@/components/scroll-mascot-guide";
+
+// Move 6: self-hosted via next/font (no render-blocking <link>, no FOUT).
+// Fredoka replaces the single-weight "Fredoka One" — it is a variable font,
+// so headings no longer need font-weight:400 overrides to look right.
+// Fallback is system-ui, sans-serif — never cursive (renders as Comic Sans).
+const nunito = Nunito({
+  subsets: ["latin"],
+  variable: "--nf-nunito",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+});
+
+const fredoka = Fredoka({
+  subsets: ["latin"],
+  variable: "--nf-fredoka",
+  display: "swap",
+  fallback: ["system-ui", "sans-serif"],
+});
 //deployment
 export const metadata: Metadata = {
   title: "Allen Girls Adventures",
@@ -26,15 +45,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en">
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800&display=swap"
-          rel="stylesheet"
-        />
-      </head>
+    <html lang="en" className={`${nunito.variable} ${fredoka.variable}`}>
       <body suppressHydrationWarning>
         <ScrollMascotGuide />
 

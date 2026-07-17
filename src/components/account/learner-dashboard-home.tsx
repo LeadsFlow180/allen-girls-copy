@@ -10,6 +10,7 @@ type Props = {
   displayName: string;
   heroInitial: string;
   pointsBalance: number;
+  studentId: string | null;
 };
 
 const SHORTCUTS: {
@@ -44,6 +45,7 @@ export function LearnerDashboardHome({
   displayName,
   heroInitial,
   pointsBalance,
+  studentId,
 }: Props) {
   const firstName = displayName.trim().split(/\s+/)[0] || displayName;
 
@@ -59,7 +61,9 @@ export function LearnerDashboardHome({
             <h1 id="learner-home-title" className={studio.heroTitle}>
               {firstName}
             </h1>
-            <p className={studio.heroMeta}>Learner account · not shared with parents</p>
+            <p className={studio.heroMeta}>
+              Learner account{studentId ? ` · Student ID ${studentId}` : ""}
+            </p>
           </div>
         </div>
         <Link href="/learn/explore" className={studio.heroCta}>

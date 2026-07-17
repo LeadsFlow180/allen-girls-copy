@@ -35,7 +35,7 @@ export async function GET() {
 
   const { data: studentLinks } = await supabase
     .from("student_profiles")
-    .select("user_id, parent_approved_at")
+    .select("user_id, student_number, parent_approved_at")
     .eq("parent_user_id", user.id)
     .not("parent_approved_at", "is", null);
 
@@ -125,7 +125,11 @@ export async function GET() {
     }
   }
 
-  const children: ParentDashboardChild[] = studentLinks.map((sl: { user_id: string; parent_approved_at: string }) => {
+  const children: ParentDashboardChild[] = studentLinks.map((sl: {
+    user_id: string;
+    student_number: number;
+    parent_approved_at: string;
+  }) => {
     const sid = sl.user_id;
     const prof = (profilesData ?? []).find((p: { id: string }) => p.id === sid);
     const pl = mostRecentPlacement.get(sid);
@@ -162,6 +166,7 @@ export async function GET() {
 
     return {
       userId: sid,
+      studentNumber: sl.student_number,
       displayName: (prof as { display_name?: string } | undefined)?.display_name ?? "Learner",
       approvedAt: sl.parent_approved_at,
       placement:

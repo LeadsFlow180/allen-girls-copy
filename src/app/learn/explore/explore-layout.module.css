@@ -59,9 +59,9 @@
 
 /* 3D chip buttons — matches /learn/courses back & speak controls */
 .chipBtn {
-  border: 2px solid #e8e8e8;
-  background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
-  color: #6b7280;
+  border: 2px solid var(--border);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--slate-100) 100%);
+  color: var(--text-muted);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -69,13 +69,13 @@
   gap: 0.25rem;
   flex-shrink: 0;
   font-weight: 700;
-  box-shadow: 0 3px 0 #d1d5db;
+  box-shadow: 0 3px 0 var(--border-strong);
   transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
 .chipBtn:active {
   transform: translateY(2px);
-  box-shadow: 0 1px 0 #d1d5db;
+  box-shadow: 0 1px 0 var(--border-strong);
 }
 
 .backBtn {
@@ -101,7 +101,7 @@
   height: 40px;
   padding: 0;
   border-radius: 0.75rem;
-  color: #46a302;
+  color: var(--game-green-dark);
 }
 
 .sidebarBackdrop {
@@ -192,8 +192,4 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .chipBtn {
-    transition: none;
-  }
-}
+/* Reduced-motion handled globally in globals.css (Move 3). */

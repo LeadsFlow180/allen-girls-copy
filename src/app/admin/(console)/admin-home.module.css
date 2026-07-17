@@ -7,9 +7,9 @@
 .hero {
   border-radius: 1.25rem;
   padding: 1.35rem 1.4rem;
-  background: linear-gradient(135deg, #faf5ff 0%, #ffffff 50%, #ecfeff 100%);
-  border: 2px solid #ddd6fe;
-  box-shadow: 0 4px 0 #c4b5fd;
+  background: linear-gradient(135deg, var(--purple-50) 0%, var(--surface) 50%, var(--sky-50) 100%);
+  border: 2px solid var(--purple-200);
+  box-shadow: 0 4px 0 var(--purple-300);
 }
 
 .kicker {
@@ -18,13 +18,13 @@
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #6d28d9;
+  color: var(--purple-700);
 }
 
 .title {
   margin: 0.35rem 0 0;
   font-size: clamp(1.5rem, 3vw, 2rem);
-  color: #312e81;
+  color: var(--indigo-800);
 }
 
 .lead {
@@ -32,7 +32,7 @@
   max-width: 46rem;
   font-size: 0.92rem;
   font-weight: 700;
-  color: #475569;
+  color: var(--slate-600);
   line-height: 1.5;
 }
 
@@ -49,14 +49,14 @@
   padding: 0.8rem 0.9rem;
   border-radius: 1rem;
   background: #fff;
-  border: 2px solid #e2e8f0;
-  box-shadow: 0 3px 0 #e2e8f0;
+  border: 2px solid var(--border);
+  box-shadow: 0 3px 0 var(--border);
   text-decoration: none;
   color: inherit;
 }
 
 .quickCard:hover {
-  border-color: #c4b5fd;
+  border-color: var(--purple-300);
 }
 
 .quickIcon {
@@ -66,8 +66,8 @@
   width: 2rem;
   height: 2rem;
   border-radius: 0.65rem;
-  background: #ede9fe;
-  color: #6d28d9;
+  background: var(--purple-100);
+  color: var(--purple-700);
   flex-shrink: 0;
 }
 
@@ -75,7 +75,7 @@
   display: block;
   font-size: 0.84rem;
   font-weight: 900;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .quickDesc {
@@ -83,14 +83,14 @@
   margin-top: 0.15rem;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .statusCard {
   border-radius: 1rem;
   padding: 0.9rem 1rem;
   background: #fff;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border);
 }
 
 .statusHead {
@@ -106,25 +106,25 @@
   width: 2rem;
   height: 2rem;
   border-radius: 0.65rem;
-  background: #0f172a;
+  background: var(--text);
   color: #fff;
 }
 
 .statusTitle {
   margin: 0;
   font-size: 1rem;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .statusSub {
   margin: 0.15rem 0 0;
   font-size: 0.78rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .statusLine {
   margin: 0.65rem 0 0;
   font-size: 0.82rem;
-  color: #334155;
+  color: var(--slate-700);
 }

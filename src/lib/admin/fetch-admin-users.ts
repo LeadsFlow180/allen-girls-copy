@@ -11,6 +11,7 @@ import {
 
 export type AdminUserRow = {
   id: string;
+  studentNumber: number | null;
   email: string;
   displayName: string;
   role: string;
@@ -31,6 +32,7 @@ type ProfileRow = {
 
 type StudentRow = {
   user_id: string;
+  student_number: number;
   parent_user_id: string | null;
   parent_approved_at: string | null;
 };
@@ -67,7 +69,9 @@ export async function fetchAdminUserDirectory(admin: SupabaseClient): Promise<Ad
     admin.from("profiles").select("id, role, display_name, created_at").order("created_at", {
       ascending: false,
     }),
-    admin.from("student_profiles").select("user_id, parent_user_id, parent_approved_at"),
+    admin
+      .from("student_profiles")
+      .select("user_id, student_number, parent_user_id, parent_approved_at"),
     admin
       .from("learn_playback_progress")
       .select("learner_id, details, last_played_at")
@@ -114,6 +118,7 @@ export async function fetchAdminUserDirectory(admin: SupabaseClient): Promise<Ad
 
     return {
       id: profile.id,
+      studentNumber: student?.student_number ?? null,
       email: emailMap.get(profile.id) ?? "—",
       displayName: profile.display_name?.trim() || "Unnamed",
       role: profile.role,

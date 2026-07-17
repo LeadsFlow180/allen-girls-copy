@@ -17,7 +17,7 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  background: #1a0a40;
+  background: var(--aga-navy);
 }
 
 .ambientBase {
@@ -49,8 +49,8 @@
   z-index: 10;
   margin: 0 -1.25rem 1rem;
   padding: 0.75rem 1.25rem;
-  background: #1a0a40;
-  border-bottom: 3px solid #f5c518;
+  background: var(--aga-navy);
+  border-bottom: 3px solid var(--accent);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
@@ -70,17 +70,17 @@
   border-radius: 8px;
   font-size: 0.84rem;
   font-weight: 700;
-  color: #1a0a40;
+  color: var(--aga-navy);
   text-decoration: none;
-  background: #f5c518;
+  background: var(--accent);
   border: none;
-  box-shadow: 0 2px 0 #c9a012;
+  box-shadow: 0 2px 0 var(--gold-dark);
   transition: transform 0.12s ease, box-shadow 0.12s ease;
 }
 
 .back:hover {
   transform: translateY(-1px);
-  box-shadow: 0 3px 0 #c9a012;
+  box-shadow: 0 3px 0 var(--gold-dark);
 }
 
 .topBarLabel {
@@ -88,7 +88,7 @@
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #f5c518;
+  color: var(--accent);
 }
 
 /* ── Hero ── */
@@ -111,9 +111,9 @@
   inset: 0;
   background: linear-gradient(
     105deg,
-    #1a0a40 0%,
-    #5a18a0 50%,
-    #7c22c5 100%
+    var(--aga-navy) 0%,
+    var(--primary-dark) 50%,
+    var(--primary) 100%
   );
   opacity: 0.88;
 }
@@ -139,12 +139,12 @@
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #f5c518;
+  color: var(--accent);
 }
 
 .title {
   margin: 0;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 2.75rem);
   font-weight: 400;
   line-height: 1.08;
@@ -155,7 +155,7 @@
   margin: 0.5rem 0 0;
   font-size: 0.95rem;
   line-height: 1.55;
-  color: #e9d5ff;
+  color: var(--purple-200);
 }
 
 .byline strong {
@@ -168,9 +168,9 @@
   padding: 0.7rem 1.6rem;
   border: none;
   border-radius: 10px;
-  background: #e8357a;
+  background: var(--secondary);
   color: #fff;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: 0.95rem;
   cursor: pointer;
   box-shadow: 0 4px 14px rgba(232, 53, 122, 0.35);
@@ -178,7 +178,7 @@
 }
 
 .cta:hover {
-  background: #c42a68;
+  background: var(--pink-700);
   transform: translateY(-1px);
 }
 
@@ -200,12 +200,12 @@
   min-width: 5rem;
   padding: 0.85rem 1rem;
   border-radius: 12px;
-  background: #1a0a40;
-  border: 2px solid #f5c518;
+  background: var(--aga-navy);
+  border: 2px solid var(--accent);
 }
 
 .statValue {
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: 1.5rem;
   line-height: 1;
   color: #fff;
@@ -217,7 +217,7 @@
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #f5c518;
+  color: var(--accent);
 }
 
 /* ── Content sheet — dark panel on library backdrop ── */
@@ -225,7 +225,7 @@
   margin-top: 1.25rem;
   border-radius: 12px;
   overflow: hidden;
-  background: #1e0b45;
+  background: var(--aga-navy);
   border: 1px solid rgba(124, 34, 197, 0.35);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
@@ -236,7 +236,7 @@
 
 .sectionTitle {
   margin: 0;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: 1.4rem;
   font-weight: 400;
   color: #fff;
@@ -245,7 +245,7 @@
 .sectionDesc {
   margin: 0.25rem 0 1.25rem;
   font-size: 0.875rem;
-  color: #c4b5fd;
+  color: var(--purple-300);
 }
 
 /* Filter tabs */
@@ -261,8 +261,8 @@
   border-radius: 8px;
   border: 1px solid rgba(124, 34, 197, 0.4);
   background: rgba(26, 10, 64, 0.6);
-  color: #ddd6fe;
-  font-family: "Nunito", sans-serif;
+  color: var(--purple-200);
+  font-family: var(--font-body);
   font-size: 0.84rem;
   font-weight: 700;
   cursor: pointer;
@@ -270,20 +270,20 @@
 }
 
 .tab:hover {
-  border-color: #a78bfa;
+  border-color: var(--purple-400);
   color: #fff;
   background: rgba(45, 18, 84, 0.9);
 }
 
 .tabActive {
-  border-color: #e8357a;
-  background: #e8357a;
+  border-color: var(--secondary);
+  background: var(--secondary);
   color: #fff;
 }
 
 .tabActive:hover {
-  background: #c42a68;
-  border-color: #c42a68;
+  background: var(--pink-700);
+  border-color: var(--pink-700);
   color: #fff;
 }
 
@@ -315,7 +315,7 @@
   padding: 0;
   border: 1px solid rgba(124, 34, 197, 0.3);
   border-radius: 10px;
-  background: #2a1060;
+  background: var(--purple-950);
   overflow: hidden;
   cursor: pointer;
   text-align: left;
@@ -323,12 +323,12 @@
 }
 
 .bookCard:hover {
-  border-color: #f5c518;
+  border-color: var(--accent);
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
 }
 
 .bookCard:focus-visible {
-  outline: 2px solid #7c22c5;
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
@@ -339,7 +339,7 @@
   justify-content: center;
   aspect-ratio: 4 / 3;
   overflow: hidden;
-  background: #1a0a40;
+  background: var(--aga-navy);
 }
 
 .coverImg {
@@ -348,7 +348,7 @@
 }
 
 .coverInitial {
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: 2.25rem;
   line-height: 1;
   color: rgba(255, 255, 255, 0.45);
@@ -367,7 +367,7 @@
   font-weight: 800;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: #f5c518;
+  color: var(--accent);
 }
 
 .bookTitle {
@@ -386,7 +386,7 @@
   margin: 0;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #a78bfa;
+  color: var(--purple-400);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -399,7 +399,7 @@
   margin: 0.2rem 0 0;
   font-size: 0.72rem;
   font-weight: 600;
-  color: #c4b5fd;
+  color: var(--purple-300);
 }
 
 .readActions {
@@ -422,7 +422,7 @@
 }
 
 .readOnline {
-  color: #f5c518;
+  color: var(--accent);
   background: rgba(245, 197, 24, 0.12);
 }
 
@@ -431,7 +431,7 @@
 }
 
 .readPdf {
-  color: #c4b5fd;
+  color: var(--purple-300);
   background: rgba(124, 34, 197, 0.2);
 }
 
@@ -450,8 +450,8 @@
   border: 1px solid rgba(124, 34, 197, 0.5);
   border-radius: 8px;
   background: rgba(26, 10, 64, 0.8);
-  color: #ddd6fe;
-  font-family: "Nunito", sans-serif;
+  color: var(--purple-200);
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
@@ -459,15 +459,15 @@
 }
 
 .loadMore:hover {
-  border-color: #f5c518;
-  color: #f5c518;
+  border-color: var(--accent);
+  color: var(--accent);
   background: rgba(45, 18, 84, 0.9);
 }
 
 /* Collections */
 .collections {
   padding: 1.5rem 1.5rem 1.75rem;
-  background: #150830;
+  background: var(--aga-navy);
   border-top: 1px solid rgba(124, 34, 197, 0.3);
 }
 
@@ -477,7 +477,7 @@
 
 .collectionsTitle {
   margin: 0;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: 1.15rem;
   font-weight: 400;
   color: #fff;
@@ -486,7 +486,7 @@
 .collectionsDesc {
   margin: 0.25rem 0 0;
   font-size: 0.84rem;
-  color: #a78bfa;
+  color: var(--purple-400);
 }
 
 .carousel {
@@ -504,14 +504,14 @@
   height: 2.25rem;
   border: 1px solid rgba(124, 34, 197, 0.4);
   border-radius: 10px;
-  background: #2a1060;
-  color: #c4b5fd;
+  background: var(--purple-950);
+  color: var(--purple-300);
   cursor: pointer;
 }
 
 .carouselBtn:hover {
-  border-color: #f5c518;
-  color: #f5c518;
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 .carouselTrack {
@@ -558,23 +558,23 @@
 }
 
 .wingCard:hover .wingThumb {
-  border-color: #a78bfa;
+  border-color: var(--purple-400);
 }
 
 .wingCardActive .wingThumb {
-  border-color: #f5c518;
-  box-shadow: 0 0 0 1px #f5c518, 0 4px 16px rgba(245, 197, 24, 0.2);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent), 0 4px 16px rgba(245, 197, 24, 0.2);
 }
 
 .wingName {
   font-size: 0.8rem;
   font-weight: 700;
-  color: #c4b5fd;
+  color: var(--purple-300);
   line-height: 1.3;
 }
 
 .wingCardActive .wingName {
-  color: #f5c518;
+  color: var(--accent);
 }
 
 @media (max-width: 640px) {

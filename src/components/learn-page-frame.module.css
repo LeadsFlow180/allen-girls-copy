@@ -42,18 +42,18 @@
   width: 40px;
   height: 40px;
   padding: 0;
-  border: 2px solid #e8e8e8;
+  border: 2px solid var(--border);
   border-radius: 0.75rem;
   background: #fff;
-  color: #46a302;
+  color: var(--game-green-dark);
   cursor: pointer;
   flex-shrink: 0;
-  box-shadow: 0 2px 0 #e8e8e8;
+  box-shadow: 0 2px 0 var(--border);
 }
 
 .menuToggle:active {
   transform: translateY(1px);
-  box-shadow: 0 1px 0 #e8e8e8;
+  box-shadow: 0 1px 0 var(--border);
 }
 
 .sidebarWrap {

@@ -1,9 +1,9 @@
 /* Progress dashboard — professional guardian reporting UI */
 
 .rosterPanel {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 0.75rem;
-  background: #ffffff;
+  background: var(--surface);
   overflow: hidden;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
@@ -15,25 +15,25 @@
   justify-content: space-between;
   gap: 0.35rem 1rem;
   padding: 0.75rem 1rem;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  background: var(--slate-50);
+  border-bottom: 1px solid var(--border);
 }
 
 .rosterPanelTitle {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .rosterPanelHint {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .learnerStack {
@@ -48,12 +48,12 @@
   gap: 0.4rem;
   padding: 0.3rem 0.6rem;
   border-radius: 0.4rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.68rem;
   font-weight: 700;
-  color: #047857;
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
+  color: var(--emerald-700);
+  background: var(--slate-100);
+  border: 1px solid var(--green-100);
 }
 
 .liveBadge::before {
@@ -61,7 +61,7 @@
   width: 0.35rem;
   height: 0.35rem;
   border-radius: 50%;
-  background: #22c55e;
+  background: var(--success);
   animation: livePulse 1.8s ease-in-out infinite;
 }
 
@@ -79,15 +79,15 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 0.75rem;
   overflow: hidden;
 }
 
 .skeletonCard {
   height: 4.25rem;
-  border-bottom: 1px solid #f1f5f9;
-  background: linear-gradient(90deg, #f8fafc 0%, #ffffff 50%, #f8fafc 100%);
+  border-bottom: 1px solid var(--slate-100);
+  background: linear-gradient(90deg, var(--slate-50) 0%, var(--surface) 50%, var(--slate-50) 100%);
   background-size: 200% 100%;
   animation: skeletonPulse 1.4s ease-in-out infinite;
 }
@@ -108,8 +108,8 @@
 .empty {
   padding: 2.25rem 1.25rem;
   border-radius: 0.75rem;
-  border: 1px solid #e2e8f0;
-  background: #f8fafc;
+  border: 1px solid var(--border);
+  background: var(--slate-50);
   text-align: center;
 }
 
@@ -120,30 +120,30 @@
   height: 2.75rem;
   margin-bottom: 0.75rem;
   border-radius: 0.65rem;
-  color: #64748b;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  color: var(--text-muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
 }
 
 .emptyTitle {
   margin: 0 0 0.3rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.92rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .emptyText {
   margin: 0 0 0.85rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   line-height: 1.55;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .childCard {
-  border-bottom: 1px solid #e2e8f0;
-  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
 }
 
 .childCard:last-child {
@@ -153,7 +153,7 @@
 .headerBtn {
   width: 100%;
   text-align: left;
-  background: #ffffff;
+  background: var(--surface);
   border: none;
   padding: 0.85rem 1rem;
   cursor: pointer;
@@ -166,11 +166,11 @@
 }
 
 .headerBtn:hover {
-  background: #f8fafc;
+  background: var(--slate-50);
 }
 
 .headerBtn[aria-expanded="true"] {
-  background: #fafafa;
+  background: var(--slate-50);
 }
 
 .headerInner {
@@ -199,20 +199,20 @@
   border-radius: 0.55rem;
   display: grid;
   place-items: center;
-  background: #f1f5f9;
-  color: #475569;
-  font-family: "Nunito", sans-serif;
+  background: var(--slate-100);
+  color: var(--slate-600);
+  font-family: var(--font-body);
   font-size: 0.88rem;
   font-weight: 800;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
 }
 
 .childName {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
   letter-spacing: -0.01em;
 }
 
@@ -222,29 +222,29 @@
   align-items: center;
   padding: 0.14rem 0.45rem;
   border-radius: 0.35rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.64rem;
   font-weight: 700;
   white-space: nowrap;
 }
 
 .statusBadgeReady {
-  color: #047857;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
+  color: var(--emerald-700);
+  background: var(--sky-50);
+  border: 1px solid var(--green-100);
 }
 
 .statusBadgePending {
-  color: #b45309;
-  background: #fffbeb;
-  border: 1px solid #fde68a;
+  color: var(--brown-warn);
+  background: var(--gold-50);
+  border: 1px solid var(--gold-200);
 }
 
 .collapsedSummary {
   margin: 0.22rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.74rem;
-  color: #94a3b8;
+  color: var(--text-subtle);
   line-height: 1.4;
 }
 
@@ -255,15 +255,15 @@
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 0.4rem;
-  color: #64748b;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  color: var(--text-muted);
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 .body {
   padding: 0 1rem 1rem;
-  background: #fafafa;
-  border-top: 1px solid #f1f5f9;
+  background: var(--slate-50);
+  border-top: 1px solid var(--slate-100);
 }
 
 .placementWarn {
@@ -273,9 +273,9 @@
   margin-top: 0.85rem;
   padding: 0.75rem 0.85rem;
   border-radius: 0.55rem;
-  background: #ffffff;
-  border: 1px solid #fde68a;
-  border-left: 3px solid #f59e0b;
+  background: var(--surface);
+  border: 1px solid var(--gold-200);
+  border-left: 3px solid var(--warning);
 }
 
 .placementIconWrap {
@@ -285,24 +285,24 @@
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 0.4rem;
-  color: #b45309;
-  background: #fffbeb;
+  color: var(--brown-warn);
+  background: var(--gold-50);
 }
 
 .placementTitle {
   margin: 0 0 0.15rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 800;
-  color: #92400e;
+  color: var(--brown-700);
 }
 
 .placementText {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   line-height: 1.55;
-  color: #a16207;
+  color: var(--amber-700);
 }
 
 .metricStrip {
@@ -310,10 +310,10 @@
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   margin: 0.85rem 0 0.9rem;
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 0.55rem;
   overflow: hidden;
-  background: #e2e8f0;
+  background: var(--border);
 }
 
 @media (min-width: 640px) {
@@ -328,7 +328,7 @@
   flex-direction: column;
   gap: 0.15rem;
   padding: 0.7rem 0.75rem;
-  background: #ffffff;
+  background: var(--surface);
   min-width: 0;
 }
 
@@ -341,27 +341,27 @@
   width: 1.45rem;
   height: 1.45rem;
   border-radius: 0.35rem;
-  color: #64748b;
-  background: #f8fafc;
+  color: var(--text-muted);
+  background: var(--slate-50);
 }
 
 .metricLabel {
   margin: 0;
   padding-right: 1.5rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.64rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .metricValue {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
   line-height: 1.15;
   letter-spacing: -0.02em;
 }
@@ -379,15 +379,15 @@
 }
 
 .insightsPanel {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 0.55rem;
-  background: #ffffff;
+  background: var(--surface);
   overflow: hidden;
 }
 
 .insightSection {
   padding: 0.75rem 0.85rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .insightSection:last-child {
@@ -400,12 +400,12 @@
 
 .panelTitle {
   margin: 0 0 0.55rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.64rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .domainCards {
@@ -423,30 +423,30 @@
   align-items: center;
   gap: 0.4rem;
   margin-bottom: 0.35rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 700;
-  color: #334155;
+  color: var(--slate-700);
 }
 
 .domainCardHead strong {
   margin-left: auto;
   font-size: 0.86rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .domainTier {
   display: block;
   margin-top: 0.28rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .percentBar {
   height: 5px;
-  background: #e2e8f0;
+  background: var(--border);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -462,32 +462,32 @@
   align-items: center;
   gap: 0.35rem;
   margin: 0 0 0.35rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.64rem;
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .pathText {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
-  color: #334155;
+  color: var(--slate-700);
   line-height: 1.5;
 }
 
 .pathDivider {
   margin: 0 0.28rem;
-  color: #cbd5e1;
+  color: var(--border-strong);
 }
 
 .pathNext {
   margin: 0.3rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.45;
 }
 
@@ -495,12 +495,12 @@
   display: inline-flex;
   padding: 0.2rem 0.55rem;
   border-radius: 0.35rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 600;
-  color: #475569;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  color: var(--slate-600);
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 .chipRow {
@@ -515,7 +515,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.45rem 0;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .activityRow:last-child {
@@ -524,24 +524,24 @@
 }
 
 .activityLabel {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.76rem;
-  color: #475569;
+  color: var(--slate-600);
 }
 
 .activityPtsPos {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.76rem;
   font-weight: 800;
-  color: #047857;
+  color: var(--emerald-700);
   font-variant-numeric: tabular-nums;
 }
 
 .activityPtsNeg {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.76rem;
   font-weight: 800;
-  color: #b91c1c;
+  color: var(--red-700);
   font-variant-numeric: tabular-nums;
 }
 
@@ -551,10 +551,10 @@
   gap: 0.35rem;
   padding: 0.35rem 0.6rem;
   border-radius: 0.4rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.74rem;
   font-weight: 700;
-  color: #c2410c;
-  background: #fff7ed;
-  border: 1px solid #fed7aa;
+  color: var(--orange-700);
+  background: var(--gold-50);
+  border: 1px solid var(--orange-200);
 }

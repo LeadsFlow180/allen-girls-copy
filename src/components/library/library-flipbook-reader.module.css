@@ -18,7 +18,7 @@
   align-items: center;
   gap: 0.75rem;
   padding: 0.7rem 1rem;
-  border-bottom: 2px solid #f5c518;
+  border-bottom: 2px solid var(--accent);
   background: rgba(26, 10, 64, 0.92);
   backdrop-filter: blur(10px);
 }
@@ -32,7 +32,7 @@
   border-radius: 999px;
   background: rgba(124, 34, 197, 0.35);
   color: #fff;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 800;
   cursor: pointer;
@@ -49,7 +49,7 @@
 
 .hudTitle {
   margin: 0;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: clamp(0.95rem, 2.2vw, 1.15rem);
   color: #fff;
   white-space: nowrap;
@@ -59,19 +59,19 @@
 
 .hudSub {
   margin: 0.1rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 700;
-  color: #c4b5fd;
+  color: var(--purple-300);
 }
 
 .hudPage {
   margin: 0;
   padding: 0.3rem 0.65rem;
   border-radius: 8px;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: 0.95rem;
-  color: #fde68a;
+  color: var(--gold-200);
   background: rgba(0, 0, 0, 0.25);
   border: 1px solid rgba(245, 197, 24, 0.4);
   white-space: nowrap;
@@ -140,8 +140,8 @@
   width: 100%;
   height: 100%;
   min-height: 12rem;
-  color: #64748b;
-  font-family: "Nunito", sans-serif;
+  color: var(--text-muted);
+  font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 700;
   overflow: hidden;
@@ -180,8 +180,8 @@
   padding: 1.5rem;
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.92);
-  color: #475569;
-  font-family: "Nunito", sans-serif;
+  color: var(--slate-600);
+  font-family: var(--font-body);
   font-weight: 700;
   text-align: center;
 }
@@ -190,9 +190,9 @@
   padding: 0.55rem 1rem;
   border: none;
   border-radius: 999px;
-  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  background: linear-gradient(135deg, var(--primary), var(--purple-700));
   color: #fff;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-weight: 800;
   cursor: pointer;
 }
@@ -217,7 +217,7 @@
 .progressFill {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #f5c518, #f97316);
+  background: linear-gradient(90deg, var(--accent), var(--orange-500));
   transition: width 0.25s ease;
 }
 
@@ -245,7 +245,7 @@
   border-radius: 999px;
   border: 1px solid rgba(245, 197, 24, 0.35);
   background: rgba(255, 255, 255, 0.08);
-  color: #fde68a;
+  color: var(--gold-200);
   cursor: pointer;
 }
 
@@ -254,16 +254,16 @@
 }
 
 .soundBtn[aria-pressed="false"] {
-  color: #c4b5fd;
+  color: var(--purple-300);
   opacity: 0.85;
 }
 
 .hint {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 700;
-  color: #ddd6fe;
+  color: var(--purple-200);
 }
 
 .navBtn,
@@ -287,16 +287,16 @@
 }
 
 .navBtnNext {
-  background: linear-gradient(135deg, #f5c518, #f97316);
-  color: #1e1b4b;
+  background: linear-gradient(135deg, var(--accent), var(--orange-500));
+  color: var(--indigo-950);
   border-color: transparent;
 }
 
 .navBtnDone {
   width: auto;
   padding: 0 1rem;
-  font-family: "Fredoka One", cursive;
-  background: linear-gradient(135deg, #34d399, #10b981);
+  font-family: var(--font-display);
+  background: linear-gradient(135deg, var(--emerald-400), var(--emerald-500));
   border-color: transparent;
 }
 

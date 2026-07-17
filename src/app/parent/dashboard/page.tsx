@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 
 import { ChildFullProgress } from "@/components/parent/child-full-progress";
+import { formatStudentNumber } from "@/lib/student/format-student-number";
 import type { ParentDashboardChild } from "@/lib/parent/parent-dashboard-types";
 
 import family from "../family.module.css";
@@ -157,7 +158,9 @@ function ChildCard({ child, defaultOpen }: { child: ChildData; defaultOpen?: boo
           </span>
           <div className={styles.headerMeta}>
             <div className={styles.headerTitleRow}>
-              <p className={styles.childName}>{child.displayName}</p>
+              <p className={styles.childName}>
+                {child.displayName} · ID {formatStudentNumber(child.studentNumber)}
+              </p>
               <span
                 className={
                   child.placement ? styles.statusBadgeReady : styles.statusBadgePending

@@ -132,7 +132,7 @@
   display: inline;
   width: 2rem;
   height: 2rem;
-  color: #f5c518;
+  color: var(--accent);
   vertical-align: middle;
 }
 
@@ -158,15 +158,15 @@
   gap: 0.5rem;
   padding: 0.85rem 2rem;
   border-radius: 999px;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: 1.1rem;
   text-decoration: none;
   cursor: pointer;
 }
 
 .heroCtaPrimary {
-  background: #f5c518;
-  color: #1a0a40;
+  background: var(--accent);
+  color: var(--aga-navy);
   box-shadow: 0 8px 28px rgba(245, 197, 24, 0.5);
 }
 
@@ -251,12 +251,12 @@
 
 .trailerTitle {
   font-size: clamp(1.75rem, 4vw, 2.5rem);
-  color: #111827;
+  color: var(--text);
   margin-bottom: 0.5rem;
 }
 
 .trailerSub {
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 1rem;
 }
 
@@ -294,7 +294,7 @@
 
 .adventuresTitle {
   font-size: clamp(2rem, 5vw, 3rem);
-  color: #111827;
+  color: var(--text);
   margin-bottom: 0.75rem;
 }
 
@@ -302,12 +302,12 @@
   display: inline;
   width: 1.75rem;
   height: 1.75rem;
-  color: #f5c518;
+  color: var(--accent);
   vertical-align: middle;
 }
 
 .adventuresSub {
-  color: #6b7280;
+  color: var(--text-muted);
   font-size: 1rem;
   max-width: 32rem;
   margin: 0 auto;
@@ -364,16 +364,16 @@
   margin-bottom: 0.5rem;
   padding: 0.3rem 1rem;
   border-radius: 999px;
-  background: #f5c518;
-  color: #1a0a40;
+  background: var(--accent);
+  color: var(--aga-navy);
   font-size: 0.85rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   width: fit-content;
 }
 
 .adventureTitle {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 1.5rem;
   font-weight: 500;
   color: #fff;
@@ -382,7 +382,7 @@
 /* ── Newsletter ── */
 .newsletter {
   padding: 5rem 2rem;
-  background: linear-gradient(135deg, #7c22c5 0%, #7c22c5 50%, #e8357a 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary) 50%, var(--secondary) 100%);
 }
 
 .newsletterInner {
@@ -394,7 +394,7 @@
 .newsletterIcon {
   width: 3rem;
   height: 3rem;
-  color: #f5c518;
+  color: var(--accent);
   margin: 0 auto 1rem;
 }
 
@@ -429,18 +429,17 @@
   background: rgba(255, 255, 255, 0.18);
   color: #fff;
   font-size: 0.95rem;
-  font-family: "Nunito", sans-serif;
-  outline: none;
+  font-family: var(--font-body);
   backdrop-filter: blur(8px);
 }
 
 .newsletterBtn {
   padding: 0.9rem 1.75rem;
   border-radius: 999px;
-  background: #f5c518;
-  color: #1a0a40;
+  background: var(--accent);
+  color: var(--aga-navy);
   border: none;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: 1rem;
   cursor: pointer;
   box-shadow: 0 6px 20px rgba(245, 197, 24, 0.45);

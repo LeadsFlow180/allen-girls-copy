@@ -5,6 +5,7 @@ import { getStudentApprovalStatus } from "@/lib/auth/student-approval";
 import { requireSignedInAccount } from "@/lib/auth/require-account-role";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { formatStudentNumber } from "@/lib/student/format-student-number";
 
 import styles from "./page.module.css";
 
@@ -22,6 +23,13 @@ export default async function PendingApprovalPage() {
 
   return (
     <LearnerAccountShell studentPending>
+      {approval.studentNumber !== null ? (
+        <section className={styles.cardMuted}>
+          <h2 className={styles.cardTitle}>Your student ID</h2>
+          <p className={styles.code}>{formatStudentNumber(approval.studentNumber)}</p>
+        </section>
+      ) : null}
+
       <section className={styles.card}>
         <h2 className={styles.cardTitle}>Approval code</h2>
         <p className={styles.cardText}>

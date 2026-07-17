@@ -1,7 +1,7 @@
 .wrap {
-  border: 1px solid #e2e8f0;
+  border: 1px solid var(--border);
   border-radius: 0.55rem;
-  background: #ffffff;
+  background: var(--surface);
   overflow: hidden;
 }
 
@@ -10,8 +10,8 @@
   flex-direction: column;
   gap: 0.65rem;
   padding: 0.75rem 0.9rem;
-  background: #f8fafc;
-  border-bottom: 1px solid #e2e8f0;
+  background: var(--slate-50);
+  border-bottom: 1px solid var(--border);
 }
 
 @media (min-width: 640px) {
@@ -24,18 +24,18 @@
 
 .heading {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
   letter-spacing: -0.01em;
 }
 
 .subhead {
   margin: 0.12rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .summaryGrid {
@@ -54,20 +54,20 @@
 
 .summaryItem dt {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.62rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .summaryItem dd {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
   font-variant-numeric: tabular-nums;
 }
 
@@ -75,14 +75,14 @@
   display: inline-flex;
   align-items: center;
   gap: 0.2rem;
-  color: #c2410c;
+  color: var(--orange-700);
 }
 
 .tabBar {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-bottom: 1px solid #e2e8f0;
-  background: #ffffff;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
 }
 
 .tab {
@@ -95,10 +95,10 @@
   border-bottom: 2px solid transparent;
   border-radius: 0;
   background: transparent;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-muted);
   cursor: pointer;
   white-space: nowrap;
   transition:
@@ -108,14 +108,14 @@
 }
 
 .tab:hover {
-  color: #334155;
-  background: #f8fafc;
+  color: var(--slate-700);
+  background: var(--slate-50);
 }
 
 .tabActive {
-  color: #6d28d9;
-  border-bottom-color: #7c3aed;
-  background: #ffffff;
+  color: var(--purple-700);
+  border-bottom-color: var(--primary);
+  background: var(--surface);
 }
 
 .tabCount {
@@ -128,13 +128,13 @@
   border-radius: 0.25rem;
   font-size: 0.58rem;
   font-weight: 800;
-  color: #64748b;
-  background: #f1f5f9;
+  color: var(--text-muted);
+  background: var(--slate-100);
 }
 
 .tabActive .tabCount {
-  color: #6d28d9;
-  background: #f5f3ff;
+  color: var(--purple-700);
+  background: var(--purple-50);
 }
 
 .tabPanel {
@@ -153,7 +153,7 @@
   flex-direction: column;
   gap: 0.28rem;
   padding: 0.7rem 0.9rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .activityItem:last-child {
@@ -161,15 +161,15 @@
 }
 
 .activityItem:hover {
-  background: #fafafa;
+  background: var(--slate-50);
 }
 
 .activityTitle {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--slate-800);
   line-height: 1.45;
 }
 
@@ -182,10 +182,10 @@
 }
 
 .activityTime {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.68rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--text-subtle);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -202,39 +202,39 @@
   display: inline-block;
   padding: 0.1rem 0.38rem;
   border-radius: 0.3rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.62rem;
   font-weight: 700;
 }
 
 .badgeOk {
-  background: #ecfdf5;
-  color: #047857;
+  background: var(--sky-50);
+  color: var(--emerald-700);
 }
 
 .badgeProgress {
-  background: #eff6ff;
-  color: #0369a1;
+  background: var(--sky-50);
+  color: var(--sky-700);
 }
 
 .badgeQuiz {
-  background: #f8fafc;
-  color: #64748b;
-  border: 1px solid #e2e8f0;
+  background: var(--slate-50);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
 }
 
 .empty {
   margin: 0;
   padding: 1.5rem 1rem;
   text-align: center;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .checkpointBlock {
-  border-top: 1px solid #e2e8f0;
-  background: #f8fafc;
+  border-top: 1px solid var(--border);
+  background: var(--slate-50);
 }
 
 .checkpointTitle {
@@ -243,14 +243,14 @@
   gap: 0.3rem;
   margin: 0;
   padding: 0.65rem 0.9rem 0.35rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.64rem;
   font-weight: 800;
-  color: #94a3b8;
+  color: var(--text-subtle);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
 
 .checkpointBlock .activityList {
-  background: #ffffff;
+  background: var(--surface);
 }

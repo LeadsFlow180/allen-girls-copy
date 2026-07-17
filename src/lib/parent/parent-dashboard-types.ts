@@ -95,6 +95,7 @@ export type ParentDashboardChildExtended = {
 
 export type ParentDashboardChild = {
   userId: string;
+  studentNumber: number;
   displayName: string;
   approvedAt: string;
   placement: {

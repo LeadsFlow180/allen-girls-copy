@@ -65,8 +65,8 @@
 
 .card {
   border-radius: 1.25rem;
-  border: 1px solid #e8e8ef;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   box-shadow:
     0 1px 2px rgba(15, 23, 42, 0.04),
     0 12px 40px rgba(15, 23, 42, 0.06),
@@ -81,8 +81,8 @@
 
 .cardHeader {
   padding: 1.35rem 1.35rem 1.1rem;
-  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
-  border-bottom: 1px solid #f1f5f9;
+  background: linear-gradient(180deg, var(--slate-50) 0%, var(--surface) 100%);
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .portalKicker {
@@ -94,16 +94,16 @@
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6d28d9;
-  background: #f5f3ff;
-  border: 1px solid #e9d5ff;
+  color: var(--purple-700);
+  background: var(--purple-50);
+  border: 1px solid var(--purple-200);
 }
 
 .title {
   margin: 0;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(1.5rem, 4vw, 1.85rem);
-  color: #0f172a;
+  color: var(--text);
   letter-spacing: -0.02em;
   line-height: 1.15;
 }
@@ -112,7 +112,7 @@
   margin: 0.45rem 0 0;
   font-size: 0.92rem;
   line-height: 1.55;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 500;
   max-width: 28rem;
 }
@@ -127,7 +127,7 @@
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .tabs {
@@ -137,8 +137,8 @@
   margin-bottom: 0.9rem;
   padding: 0.25rem;
   border-radius: 0.85rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 @media (min-width: 520px) {
@@ -154,7 +154,7 @@
   background: transparent;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-muted);
   cursor: pointer;
   text-align: center;
   line-height: 1.25;
@@ -172,35 +172,35 @@
 }
 
 .tab:hover {
-  color: #334155;
-  background: #ffffff;
+  color: var(--slate-700);
+  background: var(--surface);
 }
 
 .tabActiveParent {
-  border-color: #ddd6fe;
-  background: #ffffff;
-  color: #5b21b6;
+  border-color: var(--purple-200);
+  background: var(--surface);
+  color: var(--purple-800);
   box-shadow: 0 1px 3px rgba(124, 58, 237, 0.12);
 }
 
 .tabActiveKid {
-  border-color: #bae6fd;
-  background: #ffffff;
-  color: #0369a1;
+  border-color: var(--sky-200);
+  background: var(--surface);
+  color: var(--sky-700);
   box-shadow: 0 1px 3px rgba(14, 165, 233, 0.12);
 }
 
 .tabActiveTeacher {
-  border-color: #a7f3d0;
-  background: #ffffff;
-  color: #047857;
+  border-color: var(--green-100);
+  background: var(--surface);
+  color: var(--emerald-700);
   box-shadow: 0 1px 3px rgba(16, 185, 129, 0.12);
 }
 
 .tabActiveAdmin {
-  border-color: #c4b5fd;
-  background: #ffffff;
-  color: #5b21b6;
+  border-color: var(--purple-300);
+  background: var(--surface);
+  color: var(--purple-800);
   box-shadow: 0 1px 3px rgba(109, 40, 217, 0.14);
 }
 
@@ -208,35 +208,35 @@
   margin-bottom: 1rem;
   padding: 0.95rem 1rem;
   border-radius: 0.85rem;
-  border: 1px solid #e8e8ef;
-  background: #fafafa;
+  border: 1px solid var(--border);
+  background: var(--slate-50);
 }
 
 .guideParent {
-  border-color: #e9d5ff;
-  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+  border-color: var(--purple-200);
+  background: linear-gradient(180deg, var(--purple-50) 0%, var(--surface) 100%);
 }
 
 .guideKid {
-  border-color: #bae6fd;
-  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+  border-color: var(--sky-200);
+  background: linear-gradient(180deg, var(--sky-50) 0%, var(--surface) 100%);
 }
 
 .guideTeacher {
-  border-color: #a7f3d0;
-  background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%);
+  border-color: var(--green-100);
+  background: linear-gradient(180deg, var(--sky-50) 0%, var(--surface) 100%);
 }
 
 .guideAdmin {
-  border-color: #ddd6fe;
-  background: linear-gradient(180deg, #f5f3ff 0%, #ffffff 100%);
+  border-color: var(--purple-200);
+  background: linear-gradient(180deg, var(--purple-50) 0%, var(--surface) 100%);
 }
 
 .guideTitle {
   margin: 0 0 0.5rem;
   font-size: 0.9rem;
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .steps {
@@ -244,7 +244,7 @@
   padding-left: 1.15rem;
   font-size: 0.84rem;
   line-height: 1.55;
-  color: #475569;
+  color: var(--slate-600);
   font-weight: 500;
 }
 
@@ -253,21 +253,21 @@
 }
 
 .steps li::marker {
-  color: #7c3aed;
+  color: var(--primary);
 }
 
 .note {
   margin: 0.65rem 0 0;
   padding-top: 0.55rem;
-  border-top: 1px dashed #e2e8f0;
+  border-top: 1px dashed var(--border);
   font-size: 0.8rem;
   line-height: 1.5;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
 .note strong {
-  color: #334155;
+  color: var(--slate-700);
 }
 
 .footerLinks {
@@ -276,29 +276,29 @@
   gap: 0.5rem 0.85rem;
   margin-top: 0.9rem;
   padding-top: 0.9rem;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--slate-100);
   font-size: 0.82rem;
 }
 
 .footerLink {
   font-weight: 700;
-  color: #7c3aed;
+  color: var(--primary);
   text-decoration: none;
 }
 
 .footerLink:hover {
-  color: #5b21b6;
+  color: var(--purple-800);
   text-decoration: underline;
 }
 
 .footerLinkMuted {
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 600;
   text-decoration: none;
 }
 
 .footerLinkMuted:hover {
-  color: #334155;
+  color: var(--slate-700);
   text-decoration: underline;
 }
 
@@ -306,16 +306,16 @@
   margin: 0 0 0.9rem;
   padding: 0.65rem 0.75rem;
   border-radius: 0.65rem;
-  background: #fffbeb;
-  border: 1px solid #fde68a;
+  background: var(--gold-50);
+  border: 1px solid var(--gold-200);
   font-size: 0.78rem;
   line-height: 1.45;
-  color: #92400e;
+  color: var(--brown-700);
   font-weight: 600;
 }
 
 .emailNote code {
-  color: #b45309;
+  color: var(--brown-warn);
   font-weight: 800;
 }
 
@@ -330,7 +330,7 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: #475569;
+  color: var(--slate-600);
 }
 
 .authInput {
@@ -339,9 +339,9 @@
   min-height: 2.65rem;
   padding: 0.55rem 0.75rem;
   border-radius: 0.65rem;
-  border: 1px solid #d1d5db;
-  background: #ffffff;
-  color: #0f172a;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
   font-size: 0.95rem;
   font-weight: 500;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
@@ -351,13 +351,13 @@
 }
 
 .authInput::placeholder {
-  color: #94a3b8;
+  color: var(--text-subtle);
   font-weight: 400;
 }
 
 .authInput:focus-visible {
   outline: none;
-  border-color: #a78bfa;
+  border-color: var(--purple-400);
   box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.25);
 }
 
@@ -370,8 +370,8 @@
   padding: 0.72rem 1rem;
   border: none;
   border-radius: 0.75rem;
-  background: linear-gradient(180deg, #8b5cf6 0%, #7c3aed 100%);
-  color: #ffffff;
+  background: linear-gradient(180deg, var(--purple-500) 0%, var(--primary) 100%);
+  color: var(--surface);
   font-size: 0.9rem;
   font-weight: 800;
   letter-spacing: 0.02em;
@@ -394,22 +394,22 @@
   margin-bottom: 0.7rem;
   padding: 0.55rem 0.65rem;
   border-radius: 0.55rem;
-  background: #fef2f2;
-  border: 1px solid #fecaca;
+  background: var(--purple-50);
+  border: 1px solid var(--red-200);
   font-size: 0.82rem;
   font-weight: 600;
-  color: #b91c1c;
+  color: var(--red-700);
 }
 
 .success {
   margin-bottom: 0.7rem;
   padding: 0.55rem 0.65rem;
   border-radius: 0.55rem;
-  background: #ecfdf5;
-  border: 1px solid #a7f3d0;
+  background: var(--sky-50);
+  border: 1px solid var(--green-100);
   font-size: 0.82rem;
   font-weight: 600;
-  color: #047857;
+  color: var(--emerald-700);
 }
 
 .roleRow {
@@ -425,8 +425,8 @@
   gap: 0.55rem;
   padding: 0.7rem 0.8rem;
   border-radius: 0.75rem;
-  border: 1px solid #e2e8f0;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   cursor: pointer;
   font-size: 0.82rem;
   transition:
@@ -436,38 +436,38 @@
 }
 
 .roleOption:hover {
-  border-color: #c4b5fd;
-  background: #fafafa;
+  border-color: var(--purple-300);
+  background: var(--slate-50);
 }
 
 .roleOptionActive {
-  border-color: #a78bfa;
-  background: #faf5ff;
+  border-color: var(--purple-400);
+  background: var(--purple-50);
   box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.15);
 }
 
 .roleOptionTitle {
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .roleOptionDesc {
   display: block;
   margin-top: 0.2rem;
   font-size: 0.78rem;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.45;
   font-weight: 500;
 }
 
 .roleOption input {
   margin-top: 0.2rem;
-  accent-color: #7c3aed;
+  accent-color: var(--primary);
 }
 
 .divider {
   height: 1px;
   margin: 0.75rem 0;
-  background: #f1f5f9;
+  background: var(--slate-100);
   border: none;
 }

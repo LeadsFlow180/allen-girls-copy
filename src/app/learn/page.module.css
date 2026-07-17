@@ -5,7 +5,7 @@
   background:
     radial-gradient(80rem 34rem at 14% -10%, rgba(124, 34, 197, 0.2), transparent 62%),
     radial-gradient(70rem 28rem at 88% 16%, rgba(232, 53, 122, 0.18), transparent 62%),
-    linear-gradient(180deg, #f8fbff 0%, #f0f9ff 48%, #ecfeff 100%);
+    linear-gradient(180deg, var(--slate-50) 0%, var(--sky-50) 48%, var(--sky-50) 100%);
 }
 
 .page > :not(.worldLayer) {
@@ -78,7 +78,7 @@
 }
 
 .floatBalloon {
-  --balloon: #f97316;
+  --balloon: var(--orange-500);
   position: absolute;
   width: 1.5rem;
   height: 1.75rem;
@@ -99,14 +99,14 @@
 }
 
 .balloonOne {
-  --balloon: #f97316;
+  --balloon: var(--orange-500);
   top: 20%;
   left: 9%;
   animation-duration: 14s;
 }
 
 .balloonTwo {
-  --balloon: #22c55e;
+  --balloon: var(--success);
   top: 36%;
   left: 84%;
   animation-duration: 16s;
@@ -114,7 +114,7 @@
 }
 
 .balloonThree {
-  --balloon: #e8357a;
+  --balloon: var(--secondary);
   top: 56%;
   left: 16%;
   animation-duration: 18s;
@@ -131,7 +131,7 @@
 }
 
 .driveCar {
-  --car: #1cb0f6;
+  --car: var(--game-blue);
   position: absolute;
   left: -4rem;
   width: 2.5rem;
@@ -151,8 +151,8 @@
   width: 0.45rem;
   height: 0.45rem;
   border-radius: 50%;
-  background: #1e293b;
-  border: 1px solid #94a3b8;
+  background: var(--slate-800);
+  border: 1px solid var(--text-subtle);
 }
 
 .driveCar::before {
@@ -164,20 +164,20 @@
 }
 
 .carOne {
-  --car: #1cb0f6;
+  --car: var(--game-blue);
   top: 84%;
   animation-duration: 22s;
 }
 
 .carTwo {
-  --car: #f59e0b;
+  --car: var(--warning);
   top: 88%;
   animation-duration: 26s;
   animation-delay: -10s;
 }
 
 .carThree {
-  --car: #a855f7;
+  --car: var(--violet-500);
   top: 80%;
   animation-duration: 30s;
   animation-delay: -17s;
@@ -213,10 +213,4 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .floatCloud,
-  .floatBalloon,
-  .driveCar {
-    animation: none;
-  }
-}
+/* Reduced-motion handled globally in globals.css (Move 3). */

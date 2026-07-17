@@ -17,7 +17,7 @@
   align-items: center;
   gap: 1rem;
   padding: 0.85rem 1.5rem;
-  border-bottom: 2px solid #f5c518;
+  border-bottom: 2px solid var(--accent);
   background: rgba(26, 10, 64, 0.85);
   backdrop-filter: blur(6px);
 }
@@ -31,8 +31,8 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 8px;
   background: transparent;
-  color: #e9d5ff;
-  font-family: "Nunito", sans-serif;
+  color: var(--purple-200);
+  font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 700;
   cursor: pointer;
@@ -54,7 +54,7 @@
 
 .title {
   margin: 0;
-  font-family: "Fredoka One", cursive;
+  font-family: var(--font-display);
   font-size: clamp(1rem, 2.2vw, 1.2rem);
   color: #fff;
   white-space: nowrap;
@@ -66,7 +66,7 @@
   margin: 0.15rem 0 0;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #a78bfa;
+  color: var(--purple-400);
 }
 
 .main {
@@ -92,7 +92,7 @@
   border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
-  color: #e9d5ff;
+  color: var(--purple-200);
   cursor: pointer;
 }
 
@@ -119,7 +119,7 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
   border-radius: 8px;
-  background: #f8f6f2;
+  background: var(--slate-100);
   box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
   padding: 0.5rem;
 }
@@ -152,9 +152,9 @@
 .loading,
 .error {
   padding: 2rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
-  color: #64748b;
+  color: var(--text-muted);
   text-align: center;
 }
 
@@ -173,9 +173,9 @@
   padding: 0.55rem 1.1rem;
   border: none;
   border-radius: 999px;
-  background: #e8357a;
+  background: var(--secondary);
   color: #fff;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 800;
   cursor: pointer;
@@ -184,14 +184,14 @@
 .downloadInline {
   font-size: 0.8rem;
   font-weight: 700;
-  color: #7c22c5;
+  color: var(--primary);
 }
 
 .footer {
   position: relative;
   z-index: 3;
   padding: 1rem 1.5rem max(1.1rem, env(safe-area-inset-bottom));
-  border-top: 2px solid #f5c518;
+  border-top: 2px solid var(--accent);
   background: rgba(26, 10, 64, 0.88);
   backdrop-filter: blur(6px);
 }
@@ -213,14 +213,14 @@
 
 .progressFill {
   height: 100%;
-  background: #7c22c5;
+  background: var(--primary);
   transition: width 0.3s ease;
 }
 
 .progressText {
   font-size: 0.72rem;
   font-weight: 700;
-  color: #a78bfa;
+  color: var(--purple-400);
   white-space: nowrap;
 }
 
@@ -234,7 +234,7 @@
 .btnPrimary {
   padding: 0.6rem 1.35rem;
   border-radius: 8px;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   font-weight: 700;
   cursor: pointer;
@@ -243,7 +243,7 @@
 .btnSecondary {
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: transparent;
-  color: #ddd6fe;
+  color: var(--purple-200);
 }
 
 .btnSecondary:disabled {
@@ -253,7 +253,7 @@
 
 .btnPrimary {
   border: none;
-  background: #7c22c5;
+  background: var(--primary);
   color: #fff;
 }
 

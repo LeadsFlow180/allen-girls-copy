@@ -1,14 +1,82 @@
 "use client";
 
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Sparkles, Compass, Map, Globe } from "lucide-react";
+import { Sparkles, Compass, Map, Globe, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { loadCadetProgress, type CadetOnboardingProgress } from "@/lib/onboarding/cadet-progress";
+import { loadPlacementResult } from "@/lib/placement-storage";
 
 // Load WorldGlobe only on the client — it uses WebGL / Three.js
 const WorldGlobe = dynamic(() => import("@/components/WorldGlobe"), { ssr: false });
+
+function CadetCheckmarks() {
+  const [progress, setProgress] = useState<CadetOnboardingProgress | null>(null);
+
+  useEffect(() => {
+    const p = loadCadetProgress();
+    // Keep assessment checkmark in sync if placement already exists.
+    if (loadPlacementResult() && !p.assessmentComplete) {
+      p.assessmentComplete = true;
+    }
+    setProgress(p);
+  }, []);
+
+  if (!progress) return null;
+
+  const items = [
+    { ok: progress.introVideoSeen, label: "Intro video" },
+    { ok: progress.assessmentComplete, label: "Signal Clarity Scan" },
+  ];
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        gap: "0.6rem",
+        marginTop: "1.1rem",
+      }}
+    >
+      {items.map((item) => (
+        <span
+          key={item.label}
+          className="font-nunito"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.4rem",
+            padding: "0.4rem 0.85rem",
+            borderRadius: "999px",
+            fontSize: "0.85rem",
+            fontWeight: 800,
+            background: item.ok ? "rgba(74,222,128,0.22)" : "rgba(255,255,255,0.12)",
+            color: item.ok ? "#bbf7d0" : "rgba(255,255,255,0.8)",
+            border: item.ok ? "1px solid rgba(74,222,128,0.55)" : "1px solid rgba(255,255,255,0.2)",
+          }}
+        >
+          <span
+            style={{
+              width: "1.15rem",
+              height: "1.15rem",
+              borderRadius: "999px",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              background: item.ok ? "#22c55e" : "rgba(255,255,255,0.15)",
+            }}
+          >
+            {item.ok ? <Check style={{ width: "0.8rem", height: "0.8rem", color: "#fff" }} /> : null}
+          </span>
+          {item.label}
+        </span>
+      ))}
+    </div>
+  );
+}
 
 export default function WorldsPage() {
   const [showWorlds, setShowWorlds] = useState(true);
@@ -42,6 +110,8 @@ export default function WorldsPage() {
               Explore the galaxy map and pick a world to start your next adventure!
             </p>
 
+            <CadetCheckmarks />
+
           </motion.div>
         </div>
 
@@ -69,7 +139,7 @@ export default function WorldsPage() {
             borderRadius: "999px",
             background: showWorlds ? "#7c22c5" : "#f5c518",
             color: showWorlds ? "#fff" : "#1a0a40",
-            fontFamily: "'Fredoka One', cursive",
+            fontFamily: "var(--font-display)",
             fontSize: "1.05rem",
             border: "none",
             cursor: "pointer",

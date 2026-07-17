@@ -9,7 +9,7 @@
   background:
     radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 58, 237, 0.06), transparent 55%),
     radial-gradient(ellipse 50% 40% at 100% 20%, rgba(236, 72, 153, 0.04), transparent 50%),
-    linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+    linear-gradient(180deg, var(--slate-50) 0%, var(--slate-100) 100%);
 }
 
 .auroraA,
@@ -56,8 +56,8 @@
 
 .hubFrame {
   position: relative;
-  background: #ffffff;
-  border: 1px solid #e8e8ef;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 1.15rem;
   box-shadow:
     0 4px 24px rgba(15, 23, 42, 0.06),
@@ -72,7 +72,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background: linear-gradient(90deg, #7c3aed 0%, #a855f7 45%, #ec4899 100%);
+  background: linear-gradient(90deg, var(--primary) 0%, var(--violet-500) 45%, var(--pink-400) 100%);
   z-index: 1;
 }
 
@@ -82,8 +82,8 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1.15rem 1.2rem 1rem;
-  border-bottom: 1px solid #f1f5f9;
-  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+  border-bottom: 1px solid var(--slate-100);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--slate-50) 100%);
 }
 
 .brandBlock {
@@ -100,27 +100,27 @@
   border-radius: 0.7rem;
   display: grid;
   place-items: center;
-  color: #7c22c5;
-  background: #faf5ff;
-  border: 1px solid #ede9fe;
+  color: var(--primary);
+  background: var(--purple-50);
+  border: 1px solid var(--purple-100);
 }
 
 .brandTitle {
   margin: 0;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
   line-height: 1.15;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .brandKicker {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .topBarActions {
@@ -132,14 +132,14 @@
 }
 
 .guardianBadge {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   padding: 0.35rem 0.7rem;
   border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 600;
-  color: #6d28d9;
-  background: #faf5ff;
-  border: 1px solid #ede9fe;
+  color: var(--purple-700);
+  background: var(--purple-50);
+  border: 1px solid var(--purple-100);
 }
 
 .signOutBtn {
@@ -148,16 +148,16 @@
   font-weight: 600 !important;
   padding: 0.45rem 0.8rem !important;
   height: auto !important;
-  border: 1px solid #e5e7eb !important;
-  background: #ffffff !important;
-  color: #475569 !important;
+  border: 1px solid var(--border) !important;
+  background: var(--surface) !important;
+  color: var(--slate-600) !important;
   border-radius: 0.55rem !important;
   box-shadow: none !important;
 }
 
 .signOutBtn:hover {
-  background: #f8fafc !important;
-  border-color: #cbd5e1 !important;
+  background: var(--slate-50) !important;
+  border-color: var(--border-strong) !important;
 }
 
 /* ── Tabs ─────────────────────────────────────────────────────────── */
@@ -168,8 +168,8 @@
   scrollbar-width: none;
   gap: 0.15rem;
   padding: 0.35rem 0.65rem;
-  border-bottom: 1px solid #f1f5f9;
-  background: #fafafa;
+  border-bottom: 1px solid var(--slate-100);
+  background: var(--slate-50);
 }
 
 .tabNav::-webkit-scrollbar {
@@ -185,24 +185,24 @@
   padding: 0.55rem 0.7rem;
   border-radius: 0.55rem;
   text-decoration: none;
-  color: #64748b;
+  color: var(--text-muted);
   transition: color 0.15s ease, background 0.15s ease;
 }
 
 .tabLink:hover {
-  color: #334155;
-  background: #f1f5f9;
+  color: var(--slate-700);
+  background: var(--slate-100);
 }
 
 .tabLinkActive {
-  color: #7c22c5;
+  color: var(--primary);
   font-weight: 700;
-  background: #ffffff;
+  background: var(--surface);
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.06);
 }
 
 .tabLinkLabel {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: inherit;
   white-space: nowrap;
@@ -218,34 +218,34 @@
 
 .pageBrief {
   padding: 1.1rem 1.35rem;
-  border-bottom: 1px solid #f1f5f9;
-  background: #ffffff;
+  border-bottom: 1px solid var(--slate-100);
+  background: var(--surface);
 }
 
 .pageBriefTag {
   display: inline-block;
   margin-bottom: 0.3rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.62rem;
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .pageBriefTitle {
   margin: 0 0 0.25rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.1rem;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .pageBriefLead {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.84rem;
   line-height: 1.5;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .hubBody {
@@ -265,8 +265,8 @@
 
 .homePanelHeader {
   padding: 1.5rem 1.35rem 1.25rem;
-  background: linear-gradient(135deg, #faf5ff 0%, #ffffff 62%);
-  border-bottom: 1px solid #f1f5f9;
+  background: linear-gradient(135deg, var(--purple-50) 0%, var(--surface) 62%);
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .homeWrap {
@@ -276,8 +276,8 @@
 
 .homeHero {
   padding: 1.5rem 1.35rem 1.25rem;
-  background: linear-gradient(135deg, #faf5ff 0%, #ffffff 55%);
-  border-bottom: 1px solid #f1f5f9;
+  background: linear-gradient(135deg, var(--purple-50) 0%, var(--surface) 55%);
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .homeProfile {
@@ -293,11 +293,11 @@
   border-radius: 999px;
   display: grid;
   place-items: center;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.35rem;
-  color: #7c22c5;
-  background: #ffffff;
-  border: 2px solid #ede9fe;
+  color: var(--primary);
+  background: var(--surface);
+  border: 2px solid var(--purple-100);
   box-shadow: 0 4px 12px rgba(124, 34, 197, 0.1);
 }
 
@@ -307,26 +307,26 @@
 
 .homeGreeting {
   margin: 0 0 0.15rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .homeName {
   margin: 0;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.55rem;
   line-height: 1.15;
-  color: #0f172a;
+  color: var(--text);
   letter-spacing: -0.02em;
 }
 
 .homeEmail {
   margin: 0.3rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.84rem;
-  color: #64748b;
+  color: var(--text-muted);
   word-break: break-word;
 }
 
@@ -344,21 +344,21 @@
   gap: 0.35rem;
   padding: 0.32rem 0.7rem;
   border-radius: 999px;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 600;
 }
 
 .statusChip {
-  color: #6d28d9;
-  background: #ffffff;
-  border: 1px solid #ddd6fe;
+  color: var(--purple-700);
+  background: var(--surface);
+  border: 1px solid var(--purple-200);
 }
 
 .statusChipMuted {
-  color: #475569;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  color: var(--slate-600);
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 .statStrip {
@@ -371,26 +371,26 @@
 .statTile {
   padding: 0.85rem 0.9rem;
   border-radius: 0.75rem;
-  background: #ffffff;
-  border: 1px solid #ede9fe;
+  background: var(--surface);
+  border: 1px solid var(--purple-100);
   box-shadow: 0 1px 2px rgba(124, 58, 237, 0.04);
 }
 
 .statValue {
   display: block;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.35rem;
   line-height: 1.1;
-  color: #5b21b6;
+  color: var(--purple-800);
 }
 
 .statLabel {
   display: block;
   margin-top: 0.15rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .homePanelBody {
@@ -407,17 +407,17 @@
 
 .sectionTitle {
   margin: 0 0 0.2rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .sectionLead {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.84rem;
   line-height: 1.45;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .toolGrid {
@@ -438,8 +438,8 @@
   gap: 0.85rem;
   padding: 1rem;
   border-radius: 0.85rem;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   text-decoration: none;
   color: inherit;
   transition:
@@ -449,49 +449,49 @@
 }
 
 .toolCard:hover {
-  border-color: #cbd5e1;
+  border-color: var(--border-strong);
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
   transform: translateY(-2px);
 }
 
 .toolCardViolet .toolIcon {
-  color: #7c3aed;
-  background: #f5f3ff;
-  border-color: #ddd6fe;
+  color: var(--primary);
+  background: var(--purple-50);
+  border-color: var(--purple-200);
 }
 
 .toolCardSky .toolIcon {
-  color: #0284c7;
-  background: #f0f9ff;
-  border-color: #bae6fd;
+  color: var(--sky-600);
+  background: var(--sky-50);
+  border-color: var(--sky-200);
 }
 
 .toolCardEmerald .toolIcon {
-  color: #059669;
-  background: #ecfdf5;
-  border-color: #a7f3d0;
+  color: var(--emerald-600);
+  background: var(--sky-50);
+  border-color: var(--green-100);
 }
 
 .toolCardAmber .toolIcon {
-  color: #d97706;
-  background: #fffbeb;
-  border-color: #fde68a;
+  color: var(--amber-orange);
+  background: var(--gold-50);
+  border-color: var(--gold-200);
 }
 
 .toolCardViolet:hover {
-  border-color: #c4b5fd;
+  border-color: var(--purple-300);
 }
 
 .toolCardSky:hover {
-  border-color: #7dd3fc;
+  border-color: var(--sky-300);
 }
 
 .toolCardEmerald:hover {
-  border-color: #6ee7b7;
+  border-color: var(--emerald-300);
 }
 
 .toolCardAmber:hover {
-  border-color: #fcd34d;
+  border-color: var(--gold-300);
 }
 
 .toolIcon {
@@ -501,9 +501,9 @@
   border-radius: 0.7rem;
   display: grid;
   place-items: center;
-  color: #0f172a;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
+  color: var(--text);
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 .toolCopy {
@@ -516,41 +516,41 @@
 .toolArrow {
   flex-shrink: 0;
   margin-top: 0.15rem;
-  color: #cbd5e1;
+  color: var(--border-strong);
   transition: color 0.15s ease, transform 0.15s ease;
 }
 
 .toolCard:hover .toolArrow {
-  color: #7c22c5;
+  color: var(--primary);
   transform: translateX(2px);
 }
 
 .toolLabel {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.92rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text);
   line-height: 1.2;
 }
 
 .toolHint {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   line-height: 1.4;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .homeGuide {
   padding: 1rem 1.35rem 1.15rem;
-  background: #fafafa;
-  border-top: 1px solid #f1f5f9;
+  background: var(--slate-50);
+  border-top: 1px solid var(--slate-100);
 }
 
 .guideTitle {
   margin: 0 0 0.75rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 0.92rem;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .guideList {
@@ -575,27 +575,27 @@
   border-radius: 999px;
   display: grid;
   place-items: center;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
   font-weight: 800;
-  color: #6d28d9;
-  background: #ffffff;
-  border: 1px solid #ddd6fe;
+  color: var(--purple-700);
+  background: var(--surface);
+  border: 1px solid var(--purple-200);
 }
 
 .guideText {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.82rem;
   line-height: 1.5;
-  color: #475569;
+  color: var(--slate-600);
   padding-top: 0.1rem;
 }
 
 .homePanelFooter,
 .homeFooter {
   padding: 0.95rem 1.35rem 1.15rem;
-  background: #ffffff;
-  border-top: 1px solid #f1f5f9;
+  background: var(--surface);
+  border-top: 1px solid var(--slate-100);
 }
 
 .footerNote {
@@ -604,25 +604,25 @@
   align-items: flex-start;
   justify-content: center;
   gap: 0.45rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   line-height: 1.5;
-  color: #64748b;
+  color: var(--text-muted);
   text-align: left;
 }
 
 .footerIcon {
   flex-shrink: 0;
   margin-top: 0.1rem;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 /* ── Legacy sub-page panels ───────────────────────────────────────── */
 
 .panel3d {
   border-radius: 0.85rem;
-  border: 1px solid #e8e8ef;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   padding: 1.1rem 1.15rem;
 }
 
@@ -636,8 +636,8 @@
   padding: 0.75rem;
   border-radius: 0.75rem;
   text-align: center;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 .statPodLabel {
@@ -646,15 +646,15 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .statPodValue {
   display: block;
   margin-top: 0.2rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .hintGlow {
@@ -663,9 +663,9 @@
   border-radius: 0.75rem;
   font-size: 0.78rem;
   line-height: 1.45;
-  color: #475569;
-  background: #faf5ff;
-  border: 1px solid #ede9fe;
+  color: var(--slate-600);
+  background: var(--purple-50);
+  border: 1px solid var(--purple-100);
 }
 
 .panelKicker {
@@ -677,9 +677,9 @@
   font-weight: 800;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #6d28d9;
-  background: #f5f3ff;
-  border: 1px solid #e9d5ff;
+  color: var(--purple-700);
+  background: var(--purple-50);
+  border: 1px solid var(--purple-200);
 }
 
 .codePanel {

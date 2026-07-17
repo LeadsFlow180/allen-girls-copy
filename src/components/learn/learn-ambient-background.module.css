@@ -20,7 +20,7 @@
     radial-gradient(ellipse 85% 50% at 50% -5%, rgba(255, 200, 0, 0.2) 0%, transparent 50%),
     radial-gradient(ellipse 50% 40% at 92% 15%, rgba(28, 176, 246, 0.22) 0%, transparent 55%),
     radial-gradient(ellipse 45% 35% at 8% 25%, rgba(88, 204, 2, 0.18) 0%, transparent 50%),
-    linear-gradient(180deg, #7dd3fc 0%, #bae6fd 32%, #e0f2fe 58%, #dcfce7 100%);
+    linear-gradient(180deg, var(--sky-300) 0%, var(--sky-200) 32%, var(--sky-100) 58%, var(--green-50) 100%);
 }
 
 .vignette {
@@ -41,7 +41,7 @@
   width: 3.5rem;
   height: 3.5rem;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fff9c4, #ffc800 55%, #ff9600);
+  background: radial-gradient(circle at 35% 35%, var(--gold-100), var(--gold-400) 55%, var(--warning));
   box-shadow: 0 0 28px rgba(255, 200, 0, 0.55);
   opacity: 0.85;
 }
@@ -75,7 +75,7 @@
   width: 116%;
   height: 10rem;
   border-radius: 50% 50% 0 0;
-  background: #86efac;
+  background: var(--green-300);
   opacity: 0.75;
 }
 
@@ -86,7 +86,7 @@
   width: 108%;
   height: 7rem;
   border-radius: 50% 50% 0 0;
-  background: linear-gradient(180deg, #4ade80, #22c55e);
+  background: linear-gradient(180deg, var(--green-400), var(--success));
   box-shadow: inset 0 8px 0 rgba(255, 255, 255, 0.18);
 }
 
@@ -99,8 +99,4 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .sun {
-    animation: none;
-  }
-}
+/* Reduced-motion handled globally in globals.css (Move 3). */

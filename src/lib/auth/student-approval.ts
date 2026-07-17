@@ -4,6 +4,7 @@ export type StudentApprovalStatus = {
   isStudent: boolean;
   isApproved: boolean;
   approvalCode: string | null;
+  studentNumber: number | null;
   guardianCreated: boolean;
   parentApprovedAt: string | null;
 };
@@ -20,6 +21,7 @@ export async function getStudentApprovalStatus(
       isStudent: false,
       isApproved: true,
       approvalCode: null,
+      studentNumber: null,
       guardianCreated: false,
       parentApprovedAt: null,
     };
@@ -27,7 +29,7 @@ export async function getStudentApprovalStatus(
 
   const { data: sp } = await supabase
     .from("student_profiles")
-    .select("approval_code, parent_approved_at, guardian_created")
+    .select("approval_code, student_number, parent_approved_at, guardian_created")
     .eq("user_id", userId)
     .maybeSingle();
 
@@ -37,6 +39,7 @@ export async function getStudentApprovalStatus(
     isStudent: true,
     isApproved: Boolean(parentApprovedAt),
     approvalCode: (sp?.approval_code as string | null) ?? null,
+    studentNumber: (sp?.student_number as number | null) ?? null,
     guardianCreated: Boolean(sp?.guardian_created),
     parentApprovedAt,
   };

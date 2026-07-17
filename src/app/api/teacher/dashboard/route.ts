@@ -56,6 +56,7 @@ export async function GET() {
     { data: placements },
     { data: domainTiers },
     { data: wallets },
+    { data: studentProfiles },
   ] = await Promise.all([
     supabase.from("profiles").select("id, display_name").in("id", studentIds),
     supabase
@@ -71,6 +72,10 @@ export async function GET() {
       .from("points_wallet")
       .select("student_user_id, balance, lifetime_earned")
       .in("student_user_id", studentIds),
+    supabase
+      .from("student_profiles")
+      .select("user_id, student_number")
+      .in("user_id", studentIds),
   ]);
 
   // Most recent placement per student
@@ -94,9 +99,13 @@ export async function GET() {
       }));
     const wallet = (wallets ?? []).find((w: { student_user_id: string }) => w.student_user_id === sid) as
       { balance?: number; lifetime_earned?: number } | undefined;
+    const studentProfile = (studentProfiles ?? []).find(
+      (student: { user_id: string }) => student.user_id === sid,
+    ) as { student_number?: number } | undefined;
 
     return {
       userId: sid,
+      studentNumber: studentProfile?.student_number ?? null,
       displayName: prof?.display_name ?? "Learner",
       linkedAt: link.linked_at,
       placementTier: score?.tier ?? null,

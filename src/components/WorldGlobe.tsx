@@ -17,10 +17,18 @@ import {
   useTexture,
 } from "@react-three/drei";
 import * as THREE from "three";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+import { CadetIntroOverlay } from "@/components/cadet/cadet-intro-overlay";
 import { worlds as worldsFromLib } from "@/lib/worlds";
+import {
+  loadCadetProgress,
+  markCadetAssessmentComplete,
+  placementNextPathForWorld,
+  resolveWorldEntryAction,
+  setPendingWorldSlug,
+} from "@/lib/onboarding/cadet-progress";
+import { loadPlacementResult } from "@/lib/placement-storage";
 
 /* ─── GPU shaders ─── */
 const ICON_VERT = `
@@ -542,13 +550,22 @@ const IslandMesh = ({ world }: { world: WorldData }) => {
   return Comp ? <Comp size={world.baseSize} /> : null;
 };
 
-function WorldIsland({ world, onSelect, isSelected, onHover }: { world: WorldData; onSelect: (w: WorldData | null) => void; isSelected: boolean; onHover: (w: WorldData | null) => void }) {
+function WorldIsland({
+  world,
+  onSelect,
+  isSelected,
+  onHover,
+  onActivate,
+}: {
+  world: WorldData;
+  onSelect: (w: WorldData | null) => void;
+  isSelected: boolean;
+  onHover: (w: WorldData | null) => void;
+  onActivate: (w: WorldData) => void;
+}) {
   const groupRef = useRef<THREE.Group>(null);
   const [hovered, setHovered] = useState(false);
-  const router = useRouter();
   const active = hovered || isSelected;
-  /** Planet click → placement check-in first, then world picker (`next` on placement page). */
-  const goAssessmentThenPickWorld = () => router.push("/learn/placement?next=/worlds");
 
   useFrame((state) => {
     if (groupRef.current) {
@@ -563,7 +580,7 @@ function WorldIsland({ world, onSelect, isSelected, onHover }: { world: WorldDat
     <group
       ref={groupRef}
       position={world.position}
-      onClick={(e) => { e.stopPropagation(); goAssessmentThenPickWorld(); }}
+      onClick={(e) => { e.stopPropagation(); onSelect(world); onActivate(world); }}
       onPointerOver={(e) => { e.stopPropagation(); setHovered(true); onHover(world); onSelect(world); document.body.style.cursor = "pointer"; }}
       onPointerOut={() => { setHovered(false); onHover(null); onSelect(null); document.body.style.cursor = "auto"; }}
     >
@@ -585,8 +602,8 @@ function WorldIsland({ world, onSelect, isSelected, onHover }: { world: WorldDat
           role="link"
           tabIndex={0}
           className={`font-nunito text-center whitespace-nowrap transition-all duration-300 cursor-pointer ${active ? "scale-125 -translate-y-1" : "scale-100"}`}
-          onClick={(e) => { e.stopPropagation(); goAssessmentThenPickWorld(); }}
-          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); goAssessmentThenPickWorld(); } }}
+          onClick={(e) => { e.stopPropagation(); onSelect(world); onActivate(world); }}
+          onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onSelect(world); onActivate(world); } }}
         >
           <div
             className="px-2 py-0.5 rounded-full shadow-lg backdrop-blur-sm"
@@ -648,11 +665,13 @@ function Scene({
   onSelect,
   selected,
   onHover,
+  onActivate,
   showWorlds,
 }: {
   onSelect: (w: WorldData | null) => void;
   selected: WorldData | null;
   onHover: (w: WorldData | null) => void;
+  onActivate: (w: WorldData) => void;
   showWorlds: boolean;
 }) {
   return (
@@ -669,7 +688,14 @@ function Scene({
 
       {showWorlds &&
         worlds.map((w) => (
-          <WorldIsland key={w.title} world={w} onSelect={onSelect} isSelected={selected?.title === w.title} onHover={onHover} />
+          <WorldIsland
+            key={w.title}
+            world={w}
+            onSelect={onSelect}
+            isSelected={selected?.title === w.title}
+            onHover={onHover}
+            onActivate={onActivate}
+          />
         ))}
 
       <OrbitControls
@@ -699,8 +725,11 @@ type WorldGlobeProps = {
 };
 
 export default function WorldGlobe({ showWorlds: showWorldsProp, onShowWorldsChange }: WorldGlobeProps = {}) {
+  const router = useRouter();
   const [selected, setSelected] = useState<WorldData | null>(null);
   const [hovered, setHovered] = useState<WorldData | null>(null);
+  const [introWorldSlug, setIntroWorldSlug] = useState<string | null>(null);
+  const [soundEnabled, setSoundEnabled] = useState(false);
   const [showWorldsInternal, setShowWorldsInternal] = useState(true);
   const isControlled = showWorldsProp !== undefined && onShowWorldsChange !== undefined;
   const showWorlds = isControlled ? showWorldsProp : showWorldsInternal;
@@ -710,6 +739,33 @@ export default function WorldGlobe({ showWorlds: showWorldsProp, onShowWorldsCha
         onShowWorldsChange(next);
       }
     : setShowWorldsInternal;
+
+  // If they already finished placement before this gate existed, stamp the checkmark.
+  useEffect(() => {
+    const existing = loadPlacementResult();
+    const progress = loadCadetProgress();
+    if (existing && !progress.assessmentComplete) {
+      markCadetAssessmentComplete();
+    }
+  }, []);
+
+  const activateWorld = useCallback(
+    (world: WorldData) => {
+      const action = resolveWorldEntryAction(world.slug);
+      setPendingWorldSlug(world.slug);
+
+      if (action.kind === "play_intro") {
+        setIntroWorldSlug(world.slug);
+        return;
+      }
+      if (action.kind === "go_assessment") {
+        router.push(placementNextPathForWorld(world.slug));
+        return;
+      }
+      router.push(`/worlds/${world.slug}`);
+    },
+    [router],
+  );
 
   // Refs to each video iframe so we can send postMessage commands
   const videoRefs = useRef<Record<string, HTMLIFrameElement | null>>({});
@@ -732,12 +788,14 @@ export default function WorldGlobe({ showWorlds: showWorldsProp, onShowWorldsCha
     if (!showWorlds) setSelected(null);
   }, [showWorlds]);
 
-  // When active world changes: play+unmute the active one, pause+mute all others
+  // When active world changes: play+unmute the active one, pause+mute all others.
+  // Sound only turns on after the kid taps once (browsers block audio until a gesture).
   useEffect(() => {
+    const activeVolume = soundEnabled ? 1 : 0;
     Object.keys(worldVideos).forEach((slug) => {
       const isActive = slug === activeSlug;
       if (isActive) {
-        vimeoCmd(slug, "setVolume", 1);
+        vimeoCmd(slug, "setVolume", activeVolume);
         vimeoCmd(slug, "play");
       } else {
         vimeoCmd(slug, "setVolume", 0);
@@ -746,7 +804,7 @@ export default function WorldGlobe({ showWorlds: showWorldsProp, onShowWorldsCha
       // Retry after 300ms in case Vimeo player wasn't ready yet on first hover
       setTimeout(() => {
         if (isActive) {
-          vimeoCmd(slug, "setVolume", 1);
+          vimeoCmd(slug, "setVolume", activeVolume);
           vimeoCmd(slug, "play");
         } else {
           vimeoCmd(slug, "setVolume", 0);
@@ -754,6 +812,15 @@ export default function WorldGlobe({ showWorlds: showWorldsProp, onShowWorldsCha
         }
       }, 300);
     });
+  }, [activeSlug, soundEnabled, vimeoCmd]);
+
+  // Kid taps "turn on sound" → satisfies the browser gesture, unmutes the active preview.
+  const enableSound = useCallback(() => {
+    setSoundEnabled(true);
+    if (activeSlug) {
+      vimeoCmd(activeSlug, "setVolume", 1);
+      vimeoCmd(activeSlug, "play");
+    }
   }, [activeSlug, vimeoCmd]);
 
   return (
@@ -840,7 +907,13 @@ export default function WorldGlobe({ showWorlds: showWorldsProp, onShowWorldsCha
             gl={{ alpha: true }}
             style={{ background: "transparent" }}
           >
-            <Scene onSelect={setSelected} selected={selected} onHover={setHovered} showWorlds={showWorlds} />
+            <Scene
+              onSelect={setSelected}
+              selected={selected}
+              onHover={setHovered}
+              onActivate={activateWorld}
+              showWorlds={showWorlds}
+            />
           </Canvas>
         </div>
       )}
@@ -904,14 +977,14 @@ export default function WorldGlobe({ showWorlds: showWorldsProp, onShowWorldsCha
                     <span className="font-bold" style={{ color: "rgba(255,255,255,0.55)" }}>Themes: </span>
                     <span style={{ color: "rgba(255,255,255,0.75)" }}>{selected.themes}</span>
                   </p>
-                  <Link href={`/worlds/${selected.slug}`}>
-                    <Button
-                      className="font-fredoka rounded-full w-full sm:w-auto"
-                      style={{ background: `linear-gradient(90deg, ${selected.color}, ${selected.emissive})`, color: "#fff", border: "none", fontWeight: 700, letterSpacing: "0.02em" }}
-                    >
-                      Enter this world →
-                    </Button>
-                  </Link>
+                  <Button
+                    type="button"
+                    onClick={() => activateWorld(selected)}
+                    className="font-fredoka rounded-full w-full sm:w-auto"
+                    style={{ background: `linear-gradient(90deg, ${selected.color}, ${selected.emissive})`, color: "#fff", border: "none", fontWeight: 700, letterSpacing: "0.02em" }}
+                  >
+                    Enter this world →
+                  </Button>
                 </div>
               </div>
             </div>
@@ -930,9 +1003,57 @@ export default function WorldGlobe({ showWorlds: showWorldsProp, onShowWorldsCha
             className="text-sm font-nunito text-center px-5 py-2 rounded-full shadow-sm"
             style={{ color: "rgba(255,255,255,0.75)", background: "rgba(255,255,255,0.08)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.15)" }}
           >
-            🗺️ Click an island for your check-in, then pick a world · Drag to rotate
+            Click a world to begin · First time: intro video → Signal Clarity Scan
           </p>
         </div>
+      ) : null}
+
+      {/* Kid-friendly one-tap sound enabler (top-center) — hides after first tap */}
+      {showWorlds && !soundEnabled ? (
+        <div
+          style={{
+            position: "absolute",
+            top: "1rem",
+            left: "50%",
+            transform: "translateX(-50%)",
+            zIndex: 3,
+          }}
+        >
+          <button
+            type="button"
+            onClick={enableSound}
+            className="font-fredoka"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.6rem 1.2rem",
+              borderRadius: "999px",
+              border: "2px solid rgba(255,255,255,0.35)",
+              background: "linear-gradient(135deg, #7c22c5, #e8357a)",
+              color: "#fff",
+              fontSize: "1rem",
+              cursor: "pointer",
+              boxShadow: "0 6px 22px rgba(124,34,197,0.5)",
+              animation: "agaSoundPulse 1.8s ease-in-out infinite",
+            }}
+          >
+            🔊 Tap to turn on sound
+          </button>
+          <style>{`
+            @keyframes agaSoundPulse {
+              0%, 100% { transform: scale(1); }
+              50% { transform: scale(1.06); }
+            }
+          `}</style>
+        </div>
+      ) : null}
+
+      {introWorldSlug ? (
+        <CadetIntroOverlay
+          worldSlug={introWorldSlug}
+          onClose={() => setIntroWorldSlug(null)}
+        />
       ) : null}
     </div>
   );

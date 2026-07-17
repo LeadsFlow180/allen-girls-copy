@@ -4,8 +4,8 @@
   max-width: 32rem;
   overflow: hidden;
   border-radius: 0.9rem;
-  border: 1px solid #e2e8f0;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   padding: 1.25rem;
   box-shadow: 0 8px 24px rgba(15, 23, 42, 0.07);
 }
@@ -15,20 +15,20 @@
   align-items: center;
   gap: 0.45rem;
   border-radius: 999px;
-  background: #f1f5f9;
+  background: var(--slate-100);
   padding: 0.3rem 0.7rem;
   font-size: 0.68rem;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #334155;
+  color: var(--slate-700);
 }
 
 .intro {
   margin-top: 0.7rem;
   font-size: 0.9rem;
   line-height: 1.55;
-  color: #475569;
+  color: var(--slate-600);
 }
 
 .tabsList {
@@ -36,7 +36,7 @@
   width: 100%;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   border-radius: 0.75rem;
-  background: #f1f5f9;
+  background: var(--slate-100);
   padding: 0.25rem;
 }
 
@@ -49,11 +49,11 @@
   align-items: center;
   gap: 0.5rem;
   border-radius: 0.6rem;
-  border: 1px solid #e2e8f0;
-  background: #f8fafc;
+  border: 1px solid var(--border);
+  background: var(--slate-50);
   padding: 0.55rem 0.75rem;
   font-size: 0.88rem;
-  color: #334155;
+  color: var(--slate-700);
 }
 
 .fieldWrap {
@@ -64,14 +64,14 @@
 .label {
   font-size: 0.85rem;
   font-weight: 700;
-  color: #334155;
+  color: var(--slate-700);
 }
 
 .input {
   height: 2.5rem;
   border-radius: 0.7rem;
-  border-color: #e2e8f0;
-  background: #ffffff;
+  border-color: var(--border);
+  background: var(--surface);
 }
 
 .loginMeta {
@@ -85,30 +85,30 @@
   display: inline-flex;
   align-items: center;
   gap: 0.45rem;
-  color: #475569;
+  color: var(--slate-600);
 }
 
 .forgot {
   font-weight: 700;
-  color: #c026d3;
+  color: var(--fuchsia-500);
 }
 
 .submit {
   height: 2.7rem;
   width: 100%;
   border-radius: 0.7rem;
-  background: linear-gradient(90deg, #06b6d4 0%, #14b8a6 100%);
-  color: #ffffff;
+  background: linear-gradient(90deg, var(--cyan-500) 0%, var(--teal-500) 100%);
+  color: var(--surface);
 }
 
 .switchText {
   margin-top: 1.15rem;
   text-align: center;
   font-size: 0.88rem;
-  color: #475569;
+  color: var(--slate-600);
 }
 
 .switchLink {
   font-weight: 800;
-  color: #c026d3;
+  color: var(--fuchsia-500);
 }

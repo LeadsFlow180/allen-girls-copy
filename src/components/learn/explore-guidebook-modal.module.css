@@ -1,21 +1,21 @@
 /* 3D chip controls — aligned with /learn/courses & /learn/explore */
 .chipBtn {
-  border: 2px solid #e8e8e8;
-  background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
-  color: #6b7280;
+  border: 2px solid var(--border);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--slate-100) 100%);
+  color: var(--text-muted);
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
   font-weight: 700;
-  box-shadow: 0 3px 0 #d1d5db;
+  box-shadow: 0 3px 0 var(--border-strong);
   transition: transform 120ms ease, box-shadow 120ms ease;
 }
 
 .chipBtn:active:not(:disabled) {
   transform: translateY(2px);
-  box-shadow: 0 1px 0 #d1d5db;
+  box-shadow: 0 1px 0 var(--border-strong);
 }
 
 .closeBtn {
@@ -24,13 +24,13 @@
   padding: 0;
   border-radius: 0.65rem;
   flex-shrink: 0;
-  color: #6b7280;
+  color: var(--text-muted);
 }
 
 .footer {
   flex-shrink: 0;
   padding: 0.5rem 1rem 0.7rem;
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--slate-100);
   background: #fff;
   display: flex;
   flex-direction: column;
@@ -49,13 +49,13 @@
   border: none;
   padding: 0;
   cursor: pointer;
-  background: #e5e5e5;
+  background: var(--border);
   transition: width 0.2s ease, background 0.2s ease;
 }
 
 .dotActive {
   width: 22px;
-  background: #58cc02;
+  background: var(--game-green);
 }
 
 .dotIdle {
@@ -74,20 +74,20 @@
   padding: 0.45rem 0.75rem;
   border-radius: 0.75rem;
   font-size: 0.82rem;
-  color: #4b4b4b;
+  color: var(--slate-700);
   white-space: nowrap;
 }
 
 .backBtn:disabled {
-  background: #f5f5f5;
+  background: var(--slate-100);
   color: #bbb;
   cursor: not-allowed;
-  box-shadow: 0 2px 0 #e8e8e8;
+  box-shadow: 0 2px 0 var(--border);
 }
 
 .backBtn:disabled:active {
   transform: none;
-  box-shadow: 0 2px 0 #e8e8e8;
+  box-shadow: 0 2px 0 var(--border);
 }
 
 .nextBtn {
@@ -106,9 +106,9 @@
   color: #fff;
   white-space: nowrap;
   cursor: pointer;
-  background: linear-gradient(180deg, #7ee02a 0%, #58cc02 55%, #46a302 100%);
+  background: linear-gradient(180deg, var(--game-green-light) 0%, var(--game-green) 55%, var(--game-green-dark) 100%);
   box-shadow:
-    0 3px 0 #46a302,
+    0 3px 0 var(--game-green-dark),
     0 8px 18px rgba(88, 204, 2, 0.22);
   transition: transform 120ms ease, box-shadow 120ms ease;
 }
@@ -116,7 +116,7 @@
 .nextBtn:active {
   transform: translateY(2px);
   box-shadow:
-    0 1px 0 #46a302,
+    0 1px 0 var(--game-green-dark),
     0 4px 12px rgba(88, 204, 2, 0.18);
 }
 
@@ -209,10 +209,4 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .chipBtn,
-  .nextBtn,
-  .dot {
-    transition: none;
-  }
-}
+/* Reduced-motion handled globally in globals.css (Move 3). */

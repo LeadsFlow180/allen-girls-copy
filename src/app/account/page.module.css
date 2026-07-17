@@ -2,7 +2,7 @@
   position: relative;
   min-height: calc(100vh - 4rem);
   padding: 1.25rem 0.85rem;
-  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+  background: linear-gradient(180deg, var(--surface) 0%, var(--slate-50) 100%);
 }
 
 .shell {
@@ -35,7 +35,7 @@
 .profileItem {
   margin: 0;
   font-size: 0.82rem;
-  color: #334155;
+  color: var(--slate-700);
 }
 
 .profileLabel {
@@ -44,13 +44,13 @@
   font-weight: 800;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #64748b;
+  color: var(--text-muted);
   margin-bottom: 0.2rem;
 }
 
 .profileValue {
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .statsRow {
@@ -66,8 +66,8 @@
   gap: 0.15rem;
   padding: 0.7rem 0.75rem;
   border-radius: 0.85rem;
-  border: 2px solid #fde68a;
-  background: linear-gradient(180deg, #fffbeb 0%, #fef3c7 100%);
+  border: 2px solid var(--gold-200);
+  background: linear-gradient(180deg, var(--gold-50) 0%, var(--gold-100) 100%);
   text-decoration: none;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -83,16 +83,16 @@
 }
 
 .statValue {
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.05rem;
-  color: #92400e;
+  color: var(--brown-700);
   line-height: 1.1;
 }
 
 .statLabel {
   font-size: 0.68rem;
   font-weight: 800;
-  color: #b45309;
+  color: var(--brown-warn);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -104,23 +104,23 @@
 
 .sectionTitle {
   margin: 0 0 0.55rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 0.95rem;
-  color: #581c87;
+  color: var(--purple-900);
 }
 
 .approvalOk {
   margin: 0;
   font-size: 0.85rem;
   font-weight: 700;
-  color: #047857;
+  color: var(--emerald-700);
 }
 
 .approvalPending {
   margin: 0 0 0.5rem;
   font-size: 0.82rem;
   line-height: 1.45;
-  color: #581c87;
+  color: var(--purple-900);
 }
 
 .codeBlock {
@@ -134,7 +134,7 @@
   font-weight: 800;
   letter-spacing: 0.2em;
   text-align: center;
-  color: #6b21a8;
+  color: var(--purple-800);
 }
 
 @media (min-width: 640px) {
@@ -171,27 +171,27 @@
 }
 
 .roleLinkPrimary {
-  background: linear-gradient(180deg, #9333ea 0%, #7c3aed 100%);
+  background: linear-gradient(180deg, var(--purple-600) 0%, var(--primary) 100%);
   color: #fff;
-  box-shadow: 0 4px 0 #5b21b6;
+  box-shadow: 0 4px 0 var(--purple-800);
 }
 
 .roleLinkSecondary {
-  border: 2px solid #7c3aed;
-  color: #6b21a8;
-  background: #faf5ff;
+  border: 2px solid var(--primary);
+  color: var(--purple-800);
+  background: var(--purple-50);
 }
 
 .roleLinkTeacher {
-  background: linear-gradient(180deg, #0ea5e9 0%, #0284c7 100%);
-  box-shadow: 0 4px 0 #0369a1;
+  background: linear-gradient(180deg, var(--sky-500) 0%, var(--sky-600) 100%);
+  box-shadow: 0 4px 0 var(--sky-700);
   color: #fff;
 }
 
 .roleLinkTeacherOutline {
-  border-color: #0284c7;
-  color: #0369a1;
-  background: #f0f9ff;
+  border-color: var(--sky-600);
+  color: var(--sky-700);
+  background: var(--sky-50);
 }
 
 .quickGrid {
@@ -214,17 +214,17 @@
   gap: 0.25rem;
   padding: 0.75rem 0.7rem;
   border-radius: 0.85rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border);
   background: #fff;
   text-decoration: none;
-  color: #0f172a;
-  box-shadow: 0 3px 0 #e2e8f0;
+  color: var(--text);
+  box-shadow: 0 3px 0 var(--border);
   transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
 .quickCard:hover {
   transform: translateY(-2px);
-  border-color: #c4b5fd;
+  border-color: var(--purple-300);
 }
 
 .quickIcon {
@@ -239,21 +239,21 @@
 }
 
 .quickCardPurple {
-  border-color: #ddd6fe;
-  background: linear-gradient(180deg, #faf5ff, #f5f3ff);
-  box-shadow: 0 3px 0 #ddd6fe;
+  border-color: var(--purple-200);
+  background: linear-gradient(180deg, var(--purple-50), var(--purple-50));
+  box-shadow: 0 3px 0 var(--purple-200);
 }
 
 .quickCardSky {
-  border-color: #bae6fd;
-  background: linear-gradient(180deg, #f0f9ff, #e0f2fe);
-  box-shadow: 0 3px 0 #bae6fd;
+  border-color: var(--sky-200);
+  background: linear-gradient(180deg, var(--sky-50), var(--sky-100));
+  box-shadow: 0 3px 0 var(--sky-200);
 }
 
 .quickCardAmber {
-  border-color: #fde68a;
-  background: linear-gradient(180deg, #fffbeb, #fef3c7);
-  box-shadow: 0 3px 0 #fde68a;
+  border-color: var(--gold-200);
+  background: linear-gradient(180deg, var(--gold-50), var(--gold-100));
+  box-shadow: 0 3px 0 var(--gold-200);
 }
 
 .actions {
@@ -269,25 +269,25 @@
   margin: 0;
   padding: 0.75rem 0.85rem;
   border-radius: 0.75rem;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--slate-50);
+  border: 1px solid var(--border);
   font-size: 0.8rem;
   line-height: 1.45;
-  color: #475569;
+  color: var(--slate-600);
 }
 
 .setupCard {
   border-radius: 1.1rem;
-  border: 2px solid #fcd34d;
-  background: linear-gradient(180deg, #fffbeb, #fef3c7);
+  border: 2px solid var(--gold-300);
+  background: linear-gradient(180deg, var(--gold-50), var(--gold-100));
   padding: 1.5rem 1.25rem;
   box-shadow: 0 8px 24px rgba(180, 83, 9, 0.12);
 }
 
 .setupTitle {
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
-  color: #78350f;
+  color: var(--brown-800);
   margin: 0 0 0.5rem;
 }
 
@@ -295,7 +295,7 @@
   margin: 0 0 1rem;
   font-size: 0.85rem;
   line-height: 1.55;
-  color: #92400e;
+  color: var(--brown-700);
 }
 
 .setupText code {
@@ -308,6 +308,6 @@
 .setupLink {
   font-size: 0.85rem;
   font-weight: 800;
-  color: #92400e;
+  color: var(--brown-700);
   text-decoration: underline;
 }

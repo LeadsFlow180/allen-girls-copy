@@ -10,7 +10,7 @@
     radial-gradient(ellipse 80% 50% at 50% -10%, rgba(14, 165, 233, 0.08), transparent 55%),
     radial-gradient(ellipse 50% 40% at 100% 20%, rgba(5, 150, 105, 0.05), transparent 50%),
     radial-gradient(ellipse 50% 40% at 0% 85%, rgba(14, 165, 233, 0.05), transparent 45%),
-    linear-gradient(180deg, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%);
+    linear-gradient(180deg, var(--surface) 0%, var(--slate-50) 50%, var(--slate-100) 100%);
 }
 
 .auroraA,
@@ -92,8 +92,8 @@
 
 .topBar {
   margin-bottom: 1.25rem;
-  background: #ffffff;
-  border: 1px solid #e8e8ef;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 1.15rem;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
   overflow: hidden;
@@ -105,7 +105,7 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1rem 1.15rem 0.85rem;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .brandBlock {
@@ -122,9 +122,9 @@
   border-radius: 0.7rem;
   display: grid;
   place-items: center;
-  color: #0f172a;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
+  color: var(--text);
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 .brandKicker {
@@ -133,15 +133,15 @@
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .brandTitle {
   margin: 0;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
   line-height: 1.15;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .topBarActions {
@@ -157,9 +157,9 @@
   border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #0369a1;
-  background: #f0f9ff;
-  border: 1px solid #bae6fd;
+  color: var(--sky-700);
+  background: var(--sky-50);
+  border: 1px solid var(--sky-200);
 }
 
 .signOutBtn {
@@ -168,9 +168,9 @@
   font-weight: 600 !important;
   padding: 0.45rem 0.8rem !important;
   height: auto !important;
-  border: 1px solid #e5e7eb !important;
-  background: #ffffff !important;
-  color: #475569 !important;
+  border: 1px solid var(--border) !important;
+  background: var(--surface) !important;
+  color: var(--slate-600) !important;
   border-radius: 0.55rem !important;
   box-shadow: none !important;
 }
@@ -194,21 +194,21 @@
   gap: 0.4rem;
   padding: 0.85rem 1rem;
   text-decoration: none;
-  color: #64748b;
+  color: var(--text-muted);
   border-bottom: 2px solid transparent;
   transition: color 0.15s ease, border-color 0.15s ease, background 0.15s ease;
 }
 
 .tabLink:hover {
-  color: #0f172a;
-  background: #fafafa;
+  color: var(--text);
+  background: var(--slate-50);
 }
 
 .tabLinkActive {
-  color: #0369a1;
+  color: var(--sky-700);
   font-weight: 700;
-  border-bottom-color: #0ea5e9;
-  background: #ffffff;
+  border-bottom-color: var(--sky-500);
+  background: var(--surface);
 }
 
 .tabLinkLabel {
@@ -222,8 +222,8 @@
 .pageBrief {
   margin-bottom: 1rem;
   padding: 1rem 1.1rem;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 0.85rem;
 }
 
@@ -234,21 +234,21 @@
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .pageBriefTitle {
   margin: 0 0 0.25rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.1rem;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .pageBriefLead {
   margin: 0;
   font-size: 0.84rem;
   line-height: 1.5;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .contentStage {
@@ -258,8 +258,8 @@
 /* ── Home — single panel ──────────────────────────────────────────── */
 
 .homePanel {
-  background: #ffffff;
-  border: 1px solid #e8e8ef;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 1.15rem;
   box-shadow: 0 1px 3px rgba(15, 23, 42, 0.05);
   overflow: hidden;
@@ -267,8 +267,8 @@
 
 .homePanelHeader {
   padding: 1.35rem 1.25rem 1.15rem;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
-  border-bottom: 1px solid #f1f5f9;
+  background: linear-gradient(180deg, var(--surface) 0%, var(--slate-50) 100%);
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .homeProfile {
@@ -284,11 +284,11 @@
   border-radius: 999px;
   display: grid;
   place-items: center;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.4rem;
-  color: #0369a1;
-  background: linear-gradient(135deg, #f0f9ff, #ecfdf5);
-  border: 2px solid #bae6fd;
+  color: var(--sky-700);
+  background: linear-gradient(135deg, var(--sky-50), var(--sky-50));
+  border: 2px solid var(--sky-200);
   box-shadow: 0 4px 12px rgba(14, 165, 233, 0.12);
 }
 
@@ -300,21 +300,21 @@
   margin: 0 0 0.15rem;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .homeName {
   margin: 0;
   font-size: 1.55rem;
   line-height: 1.15;
-  color: #0f172a;
+  color: var(--text);
   letter-spacing: -0.02em;
 }
 
 .homeEmail {
   margin: 0.3rem 0 0;
   font-size: 0.84rem;
-  color: #64748b;
+  color: var(--text-muted);
   word-break: break-word;
 }
 
@@ -330,9 +330,9 @@
   border-radius: 999px;
   font-size: 0.72rem;
   font-weight: 600;
-  color: #0369a1;
-  background: #f0f9ff;
-  border: 1px solid #bae6fd;
+  color: var(--sky-700);
+  background: var(--sky-50);
+  border: 1px solid var(--sky-200);
 }
 
 .homePanelBody {
@@ -346,14 +346,14 @@
 .sectionTitle {
   margin: 0 0 0.2rem;
   font-size: 1rem;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .sectionLead {
   margin: 0;
   font-size: 0.84rem;
   line-height: 1.45;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .toolGrid {
@@ -374,8 +374,8 @@
   gap: 0.85rem;
   padding: 1rem;
   border-radius: 0.85rem;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   text-decoration: none;
   color: inherit;
   transition:
@@ -385,49 +385,49 @@
 }
 
 .toolCard:hover {
-  border-color: #cbd5e1;
+  border-color: var(--border-strong);
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
   transform: translateY(-2px);
 }
 
 .toolCardSky .toolIcon {
-  color: #0284c7;
-  background: #f0f9ff;
-  border-color: #bae6fd;
+  color: var(--sky-600);
+  background: var(--sky-50);
+  border-color: var(--sky-200);
 }
 
 .toolCardViolet .toolIcon {
-  color: #7c3aed;
-  background: #f5f3ff;
-  border-color: #ddd6fe;
+  color: var(--primary);
+  background: var(--purple-50);
+  border-color: var(--purple-200);
 }
 
 .toolCardEmerald .toolIcon {
-  color: #059669;
-  background: #ecfdf5;
-  border-color: #a7f3d0;
+  color: var(--emerald-600);
+  background: var(--sky-50);
+  border-color: var(--green-100);
 }
 
 .toolCardAmber .toolIcon {
-  color: #d97706;
-  background: #fffbeb;
-  border-color: #fde68a;
+  color: var(--amber-orange);
+  background: var(--gold-50);
+  border-color: var(--gold-200);
 }
 
 .toolCardSky:hover {
-  border-color: #7dd3fc;
+  border-color: var(--sky-300);
 }
 
 .toolCardViolet:hover {
-  border-color: #c4b5fd;
+  border-color: var(--purple-300);
 }
 
 .toolCardEmerald:hover {
-  border-color: #6ee7b7;
+  border-color: var(--emerald-300);
 }
 
 .toolCardAmber:hover {
-  border-color: #fcd34d;
+  border-color: var(--gold-300);
 }
 
 .toolIcon {
@@ -437,9 +437,9 @@
   border-radius: 0.7rem;
   display: grid;
   place-items: center;
-  color: #0f172a;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
+  color: var(--text);
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 .toolCopy {
@@ -452,35 +452,35 @@
 .toolLabel {
   font-size: 0.92rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text);
   line-height: 1.2;
 }
 
 .toolHint {
   font-size: 0.78rem;
   line-height: 1.4;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .homePanelFooter {
   padding: 0.9rem 1.25rem 1.1rem;
-  background: #fafafa;
-  border-top: 1px solid #f1f5f9;
+  background: var(--slate-50);
+  border-top: 1px solid var(--slate-100);
 }
 
 .footerNote {
   margin: 0;
   font-size: 0.78rem;
   line-height: 1.5;
-  color: #64748b;
+  color: var(--text-muted);
   text-align: center;
 }
 
 /* ── Forms (link-student, etc.) ─────────────────────────────────────── */
 
 .panelCard {
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 1.5rem 1.25rem;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
@@ -488,9 +488,9 @@
 
 .formTitle {
   margin: 0 0 0.35rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.35rem;
-  color: #0f172a;
+  color: var(--text);
   text-align: center;
 }
 
@@ -498,7 +498,7 @@
   margin: 0 0 1.5rem;
   font-size: 0.88rem;
   line-height: 1.5;
-  color: #64748b;
+  color: var(--text-muted);
   text-align: center;
 }
 
@@ -507,23 +507,23 @@
   margin-bottom: 0.4rem;
   font-size: 0.8rem;
   font-weight: 600;
-  color: #374151;
+  color: var(--slate-700);
 }
 
 .fieldInput {
   width: 100%;
   padding: 0.75rem 1rem;
   border-radius: 0.65rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
   font-size: 1rem;
   box-sizing: border-box;
   outline: none;
-  background: #ffffff;
+  background: var(--surface);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .fieldInput:focus {
-  border-color: #0f172a;
+  border-color: var(--text);
   box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.06);
 }
 
@@ -533,8 +533,8 @@
   padding: 0.85rem;
   border-radius: 0.65rem;
   border: none;
-  background: #0f172a;
-  color: #ffffff;
+  background: var(--text);
+  color: var(--surface);
   font-weight: 700;
   font-size: 0.95rem;
   cursor: pointer;
@@ -542,7 +542,7 @@
 }
 
 .submitBtn:hover:not(:disabled) {
-  background: #1e293b;
+  background: var(--slate-800);
 }
 
 .submitBtn:disabled {
@@ -559,15 +559,15 @@
 }
 
 .alertSuccess {
-  background: #f0fdf4;
-  border: 1px solid #bbf7d0;
-  color: #166534;
+  background: var(--slate-100);
+  border: 1px solid var(--green-100);
+  color: var(--green-800);
 }
 
 .alertError {
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  color: #991b1b;
+  background: var(--purple-50);
+  border: 1px solid var(--red-200);
+  color: var(--red-800);
 }
 
 .formFooter {
@@ -581,11 +581,11 @@
   font-size: 0.85rem;
   font-weight: 600;
   text-decoration: none;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .formFooterLinkMuted {
-  color: #94a3b8;
+  color: var(--text-subtle);
   font-weight: 500;
 }
 
@@ -595,7 +595,7 @@
   border-radius: 0.85rem;
   display: grid;
   place-items: center;
-  color: #0f172a;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
+  color: var(--text);
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }

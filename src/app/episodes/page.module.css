@@ -5,7 +5,7 @@
   background:
     radial-gradient(80rem 40rem at 10% -10%, rgba(124, 34, 197, 0.24), transparent 60%),
     radial-gradient(70rem 36rem at 90% 12%, rgba(232, 53, 122, 0.2), transparent 62%),
-    linear-gradient(180deg, #0f0d2f 0%, #171248 28%, #1e1758 52%, #0f0b34 100%);
+    linear-gradient(180deg, var(--text) 0%, var(--indigo-950) 28%, var(--indigo-950) 52%, var(--aga-navy) 100%);
 }
 
 .page::before {

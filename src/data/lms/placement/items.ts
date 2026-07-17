@@ -752,3 +752,10 @@ export const placementItems: PlacementItem[] = [
     correctIndex: 1,
   },
 ];
+
+/** Runtime counts used by placement copy so the UI cannot drift from the bank. */
+export const placementItemCounts = {
+  ela: placementItems.filter((item) => item.section === "ela").length,
+  math: placementItems.filter((item) => item.section === "math").length,
+  total: placementItems.length,
+} as const;

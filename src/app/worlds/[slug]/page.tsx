@@ -222,7 +222,7 @@ export default function WorldDetailPage() {
                 color: "#fff",
                 border: "none",
                 borderRadius: "0.9rem",
-                fontFamily: "'Fredoka One', cursive",
+                fontFamily: "var(--font-display)",
                 fontSize: "1.15rem",
                 cursor: "pointer",
                 display: "flex",

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 
 import type { AdminUserRow } from "@/lib/admin/fetch-admin-users";
+import { formatStudentNumber } from "@/lib/student/format-student-number";
 
 import styles from "./super-admin-users-panel.module.css";
 
@@ -77,7 +78,9 @@ export function SuperAdminUsersPanel() {
       return (
         user.displayName.toLowerCase().includes(q) ||
         user.email.toLowerCase().includes(q) ||
-        user.role.toLowerCase().includes(q)
+        user.role.toLowerCase().includes(q) ||
+        (user.studentNumber !== null &&
+          formatStudentNumber(user.studentNumber).includes(q.replace(/^student\s*id\s*/i, "")))
       );
     });
   }, [users, roleFilter, search]);
@@ -112,7 +115,7 @@ export function SuperAdminUsersPanel() {
         <input
           type="search"
           className={styles.search}
-          placeholder="Search name or email…"
+          placeholder="Search name, email, or student ID…"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           aria-label="Search users"
@@ -140,6 +143,7 @@ export function SuperAdminUsersPanel() {
             <thead>
               <tr>
                 <th>Name</th>
+                <th>Student ID</th>
                 <th>Email</th>
                 <th>Role</th>
                 <th>Lessons</th>
@@ -152,6 +156,9 @@ export function SuperAdminUsersPanel() {
               {filtered.map((user) => (
                 <tr key={user.id}>
                   <td className={styles.nameCell}>{user.displayName}</td>
+                  <td>
+                    {user.studentNumber === null ? "—" : formatStudentNumber(user.studentNumber)}
+                  </td>
                   <td>{user.email}</td>
                   <td>
                     <span className={`${styles.roleBadge} ${roleBadgeClass(user.role, styles)}`}>

@@ -3,6 +3,9 @@
 # Large media files — store these locally or use a CDN/cloud storage
 src/assets/images/*.mp4
 src/assets/images/*.MP4
+public/videos/*.mp4
+public/videos/*.MP4
+public/videos/*.webm
 
 # dependencies
 /node_modules

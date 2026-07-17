@@ -4,7 +4,7 @@
   overflow: hidden;
   background:
     radial-gradient(ellipse 80% 50% at 50% -10%, rgba(124, 58, 237, 0.06), transparent 55%),
-    linear-gradient(180deg, #ffffff 0%, #fafafa 50%, #f8fafc 100%);
+    linear-gradient(180deg, var(--surface) 0%, var(--slate-50) 50%, var(--slate-50) 100%);
 }
 
 .shell {
@@ -45,15 +45,15 @@
 }
 
 .badgeParent {
-  background: linear-gradient(135deg, #7c3aed, #9333ea);
+  background: linear-gradient(135deg, var(--primary), var(--purple-600));
 }
 
 .badgeStudent {
-  background: linear-gradient(135deg, #0284c7, #0ea5e9);
+  background: linear-gradient(135deg, var(--sky-600), var(--sky-500));
 }
 
 .badgeTeacher {
-  background: linear-gradient(135deg, #059669, #10b981);
+  background: linear-gradient(135deg, var(--emerald-600), var(--emerald-500));
 }
 
 .signOutForm {
@@ -84,37 +84,37 @@
   min-width: 4.5rem;
   padding: 0.5rem 0.55rem;
   border-radius: 0.75rem;
-  border: 2px solid #e2e8f0;
+  border: 2px solid var(--border);
   background: rgba(255, 255, 255, 0.85);
   text-decoration: none;
-  color: #475569;
+  color: var(--slate-600);
   transition: border-color 0.15s, background 0.15s, transform 0.15s;
 }
 
 .navItem:hover {
-  border-color: #c4b5fd;
+  border-color: var(--purple-300);
   transform: translateY(-1px);
 }
 
 .navItemActive {
-  border-color: #7c3aed;
-  background: #faf5ff;
-  color: #5b21b6;
-  box-shadow: 0 3px 0 #ddd6fe;
+  border-color: var(--primary);
+  background: var(--purple-50);
+  color: var(--purple-800);
+  box-shadow: 0 3px 0 var(--purple-200);
 }
 
 .navItemActiveStudent {
-  border-color: #0284c7;
-  background: #f0f9ff;
-  color: #0369a1;
-  box-shadow: 0 3px 0 #bae6fd;
+  border-color: var(--sky-600);
+  background: var(--sky-50);
+  color: var(--sky-700);
+  box-shadow: 0 3px 0 var(--sky-200);
 }
 
 .navItemActiveTeacher {
-  border-color: #059669;
-  background: #ecfdf5;
-  color: #047857;
-  box-shadow: 0 3px 0 #a7f3d0;
+  border-color: var(--emerald-600);
+  background: var(--sky-50);
+  color: var(--emerald-700);
+  box-shadow: 0 3px 0 var(--green-100);
 }
 
 .navEmoji {
@@ -133,38 +133,38 @@
   margin-bottom: 1rem;
   padding: 0.9rem 1rem;
   border-radius: 1rem;
-  border: 2px solid #e9d5ff;
+  border: 2px solid var(--purple-200);
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 4px 0 #ede9fe;
+  box-shadow: 0 4px 0 var(--purple-100);
 }
 
 .guideStudent {
-  border-color: #bae6fd;
-  box-shadow: 0 4px 0 #e0f2fe;
+  border-color: var(--sky-200);
+  box-shadow: 0 4px 0 var(--sky-100);
 }
 
 .guideTeacher {
-  border-color: #a7f3d0;
-  box-shadow: 0 4px 0 #d1fae5;
+  border-color: var(--green-100);
+  box-shadow: 0 4px 0 var(--green-50);
 }
 
 .guidePending {
-  border-color: #fde68a;
-  box-shadow: 0 4px 0 #fef3c7;
+  border-color: var(--gold-200);
+  box-shadow: 0 4px 0 var(--gold-100);
 }
 
 .guideTitle {
   margin: 0 0 0.25rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.15rem;
-  color: #1e1b4b;
+  color: var(--indigo-950);
 }
 
 .guideLead {
   margin: 0 0 0.55rem;
   font-size: 0.82rem;
   line-height: 1.45;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .guideSteps {
@@ -172,7 +172,7 @@
   padding-left: 1.1rem;
   font-size: 0.78rem;
   line-height: 1.5;
-  color: #334155;
+  color: var(--slate-700);
 }
 
 .guideSteps li {
@@ -188,22 +188,22 @@
   text-align: center;
   border-radius: 1rem;
   background: #fff;
-  border: 2px solid #fecaca;
+  border: 2px solid var(--red-200);
 }
 
 .deniedTitle {
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
-  color: #991b1b;
+  font-family: var(--font-display);
+  color: var(--red-800);
   margin: 0 0 0.5rem;
 }
 
 .deniedText {
   margin: 0 0 1rem;
   font-size: 0.88rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .deniedLink {
   font-weight: 800;
-  color: #7c3aed;
+  color: var(--primary);
 }

@@ -11,6 +11,7 @@ import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
 import { getBalance } from "@/lib/rewards/points-engine";
 import { requireSignedInAccount } from "@/lib/auth/require-account-role";
+import { formatStudentNumber } from "@/lib/student/format-student-number";
 
 import styles from "./page.module.css";
 
@@ -50,9 +51,23 @@ export default async function AccountHomePage() {
   }
 
   let pointsBalance = 0;
+  let studentId: string | null = null;
 
   if (session.role === "student") {
-    pointsBalance = await getBalance(supabase, session.userId).catch(() => 0);
+    const [balance, studentProfile] = await Promise.all([
+      getBalance(supabase, session.userId).catch(() => 0),
+      supabase
+        .from("student_profiles")
+        .select("student_number")
+        .eq("user_id", session.userId)
+        .maybeSingle(),
+    ]);
+
+    pointsBalance = balance;
+    const studentNumber = studentProfile.data?.student_number;
+    if (typeof studentNumber === "number") {
+      studentId = formatStudentNumber(studentNumber);
+    }
   }
 
   const heroInitial =
@@ -65,6 +80,7 @@ export default async function AccountHomePage() {
           displayName={session.displayName}
           heroInitial={heroInitial}
           pointsBalance={pointsBalance}
+          studentId={studentId}
         />
       </LearnerAccountShell>
     );

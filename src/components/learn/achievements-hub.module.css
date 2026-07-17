@@ -5,9 +5,9 @@
   min-height: 72vh;
   border-radius: 1.5rem;
   overflow: hidden;
-  background: linear-gradient(180deg, #7dd3fc 0%, #bae6fd 38%, #e0f2fe 62%, #dcfce7 100%);
+  background: linear-gradient(180deg, var(--sky-300) 0%, var(--sky-200) 38%, var(--sky-100) 62%, var(--green-50) 100%);
   box-shadow:
-    0 8px 0 #1899d6,
+    0 8px 0 var(--game-blue-dark),
     0 24px 48px rgba(24, 153, 214, 0.25);
 }
 
@@ -33,7 +33,7 @@
   width: 4.5rem;
   height: 4.5rem;
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fff9c4, #ffc800 55%, #ff9600);
+  background: radial-gradient(circle at 35% 35%, var(--gold-100), var(--gold-400) 55%, var(--warning));
   box-shadow: 0 0 40px rgba(255, 200, 0, 0.65);
   animation: sunPulse 4s ease-in-out infinite;
 }
@@ -102,7 +102,7 @@
 }
 
 .balloon {
-  --balloon-color: #f97316;
+  --balloon-color: var(--orange-500);
   position: absolute;
   width: 1.35rem;
   height: 1.55rem;
@@ -133,7 +133,7 @@
 }
 
 .car {
-  --car-color: #1cb0f6;
+  --car-color: var(--game-blue);
   position: absolute;
   left: -3rem;
   width: 2.4rem;
@@ -153,8 +153,8 @@
   width: 0.42rem;
   height: 0.42rem;
   border-radius: 50%;
-  background: #1e293b;
-  border: 1px solid #94a3b8;
+  background: var(--slate-800);
+  border: 1px solid var(--text-subtle);
 }
 
 .car::before {
@@ -192,7 +192,7 @@
   left: -10%;
   width: 120%;
   height: 8rem;
-  background: #86efac;
+  background: var(--green-300);
   border-radius: 50% 50% 0 0;
   opacity: 0.7;
 }
@@ -203,7 +203,7 @@
   left: -5%;
   width: 110%;
   height: 6rem;
-  background: linear-gradient(180deg, #4ade80, #22c55e);
+  background: linear-gradient(180deg, var(--green-400), var(--success));
   border-radius: 50% 50% 0 0;
   box-shadow: inset 0 8px 0 rgba(255, 255, 255, 0.2);
 }
@@ -240,7 +240,7 @@
   box-shadow:
     0 6px 0 rgba(91, 33, 182, 0.7),
     0 16px 28px rgba(15, 23, 42, 0.35);
-  color: #e2e8f0;
+  color: var(--border);
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
@@ -252,13 +252,13 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #c4b5fd;
+  color: var(--purple-300);
 }
 
 .asideTitle {
   margin: 0;
   font-size: 1.05rem;
-  color: #f8fafc;
+  color: var(--slate-50);
   line-height: 1.15;
 }
 
@@ -282,7 +282,7 @@
 .asideStatKey {
   font-size: 0.58rem;
   font-weight: 800;
-  color: #cbd5e1;
+  color: var(--border-strong);
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
@@ -290,7 +290,7 @@
 .asideStat strong {
   font-family: var(--font-fredoka, "Fredoka", sans-serif);
   font-size: 1rem;
-  color: #fef08a;
+  color: var(--gold-200);
   line-height: 1.1;
 }
 
@@ -302,18 +302,18 @@
   font-size: 0.76rem;
   font-weight: 800;
   letter-spacing: 0.03em;
-  color: #0f172a;
-  background: linear-gradient(180deg, #fef08a, #facc15);
-  box-shadow: 0 4px 0 #ca8a04;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--gold-200), var(--gold-400));
+  box-shadow: 0 4px 0 var(--amber-600);
   cursor: pointer;
 }
 
 .asidePrimaryBtn:disabled {
   opacity: 0.58;
   cursor: default;
-  box-shadow: 0 3px 0 #64748b;
-  background: #94a3b8;
-  color: #f8fafc;
+  box-shadow: 0 3px 0 var(--text-muted);
+  background: var(--text-subtle);
+  color: var(--slate-50);
 }
 
 .asideSecondaryBtn {
@@ -321,7 +321,7 @@
   border-radius: 0.65rem;
   padding: 0.42rem 0.58rem;
   background: rgba(255, 255, 255, 0.06);
-  color: #e2e8f0;
+  color: var(--border);
   font-size: 0.7rem;
   font-weight: 700;
   cursor: pointer;
@@ -345,10 +345,10 @@
   border-radius: 999px;
   font-size: 0.66rem;
   font-weight: 800;
-  color: #5b21b6;
-  background: linear-gradient(180deg, #fff, #f8fafc);
-  border: 1px solid #ddd6fe;
-  box-shadow: 0 2px 0 #c4b5fd;
+  color: var(--purple-800);
+  background: linear-gradient(180deg, #fff, var(--slate-50));
+  border: 1px solid var(--purple-200);
+  box-shadow: 0 2px 0 var(--purple-300);
 }
 
 /* Hero stage */
@@ -360,12 +360,12 @@
 }
 
 .signBoard {
-  background: linear-gradient(180deg, #fef3c7 0%, #fde68a 100%);
-  border: 3px solid #ca8a04;
+  background: linear-gradient(180deg, var(--gold-100) 0%, var(--gold-200) 100%);
+  border: 3px solid var(--amber-600);
   border-radius: 1rem;
   padding: 0.85rem 1rem 1rem;
   box-shadow:
-    0 6px 0 #a16207,
+    0 6px 0 var(--amber-700),
     0 12px 24px rgba(161, 98, 7, 0.2);
   transform: rotate(-1deg);
 }
@@ -376,7 +376,7 @@
   font-weight: 800;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #b45309;
+  color: var(--brown-warn);
 }
 
 .signTitle {
@@ -384,7 +384,7 @@
   font-family: var(--font-fredoka, "Fredoka", sans-serif);
   font-size: clamp(1.75rem, 5vw, 2.35rem);
   font-weight: 800;
-  color: #78350f;
+  color: var(--brown-800);
   line-height: 1.05;
   text-shadow: 0 2px 0 rgba(255, 255, 255, 0.6);
 }
@@ -393,7 +393,7 @@
   margin: 0.4rem 0 0;
   font-size: 0.82rem;
   font-weight: 700;
-  color: #92400e;
+  color: var(--brown-700);
   max-width: 20rem;
   line-height: 1.4;
 }
@@ -430,7 +430,7 @@
 .trophyBounce {
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 8px 0 #ca8a04);
+  filter: drop-shadow(0 8px 0 var(--amber-600));
   animation: trophyBob 2.2s ease-in-out infinite;
 }
 
@@ -448,9 +448,9 @@
   width: 5.5rem;
   height: 1.1rem;
   margin-top: -0.35rem;
-  background: linear-gradient(180deg, #a78bfa, #7c3aed);
+  background: linear-gradient(180deg, var(--purple-400), var(--primary));
   border-radius: 0.35rem;
-  box-shadow: 0 5px 0 #5b21b6;
+  box-shadow: 0 5px 0 var(--purple-800);
 }
 
 /* Stat orbs */
@@ -479,25 +479,25 @@
 }
 
 .orbXp {
-  background: linear-gradient(180deg, #fde047, #eab308);
-  box-shadow: 0 4px 0 #ca8a04;
-  color: #713f12;
+  background: linear-gradient(180deg, var(--gold-300), var(--yellow-500));
+  box-shadow: 0 4px 0 var(--amber-600);
+  color: var(--brown-800);
 }
 
 .orbGem {
-  background: linear-gradient(180deg, #67e8f9, #0ea5e9);
-  box-shadow: 0 4px 0 #0369a1;
+  background: linear-gradient(180deg, var(--cyan-300), var(--sky-500));
+  box-shadow: 0 4px 0 var(--sky-700);
 }
 
 .orbReady {
-  background: linear-gradient(180deg, #4ade80, #22c55e);
-  box-shadow: 0 4px 0 #15803d;
+  background: linear-gradient(180deg, var(--green-400), var(--success));
+  box-shadow: 0 4px 0 var(--green-700);
   animation: orbPop 1.5s ease-in-out infinite;
 }
 
 .orbUnlock {
-  background: linear-gradient(180deg, #c4b5fd, #8b5cf6);
-  box-shadow: 0 4px 0 #6d28d9;
+  background: linear-gradient(180deg, var(--purple-300), var(--purple-500));
+  box-shadow: 0 4px 0 var(--purple-700);
 }
 
 @keyframes orbPop {
@@ -541,28 +541,28 @@
 }
 
 .tab {
-  border: 2px solid #e2e8f0;
-  background: linear-gradient(180deg, #fff, #f1f5f9);
-  color: #64748b;
+  border: 2px solid var(--border);
+  background: linear-gradient(180deg, #fff, var(--slate-100));
+  color: var(--text-muted);
   font-size: 0.76rem;
   font-weight: 800;
   padding: 0.45rem 0.8rem;
   border-radius: 0.75rem;
   cursor: pointer;
-  box-shadow: 0 3px 0 #cbd5e1;
+  box-shadow: 0 3px 0 var(--border-strong);
   transition: transform 0.1s ease;
 }
 
 .tab:active {
   transform: translateY(2px);
-  box-shadow: 0 1px 0 #cbd5e1;
+  box-shadow: 0 1px 0 var(--border-strong);
 }
 
 .tabActive {
-  background: linear-gradient(180deg, #bbf7d0, #86efac);
-  border-color: #22c55e;
-  color: #166534;
-  box-shadow: 0 4px 0 #15803d;
+  background: linear-gradient(180deg, var(--green-100), var(--green-300));
+  border-color: var(--success);
+  color: var(--green-800);
+  box-shadow: 0 4px 0 var(--green-700);
 }
 
 /* Mission cards */
@@ -576,9 +576,9 @@
   position: relative;
   border-radius: 1.15rem;
   padding: 0.95rem 0.95rem 0.85rem;
-  background: linear-gradient(180deg, #fffef8 0%, #fff 45%);
-  border: 3px solid #e2e8f0;
-  box-shadow: 0 5px 0 #cbd5e1;
+  background: linear-gradient(180deg, var(--surface) 0%, #fff 45%);
+  border: 3px solid var(--border);
+  box-shadow: 0 5px 0 var(--border-strong);
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
@@ -594,19 +594,19 @@
   height: 0.45rem;
   background: repeating-linear-gradient(
     90deg,
-    #58cc02 0,
-    #58cc02 12px,
-    #ffc800 12px,
-    #ffc800 24px,
-    #1cb0f6 24px,
-    #1cb0f6 36px
+    var(--game-green) 0,
+    var(--game-green) 12px,
+    var(--gold-400) 12px,
+    var(--gold-400) 24px,
+    var(--game-blue) 24px,
+    var(--game-blue) 36px
   );
 }
 
 .cardReady {
-  border-color: #22c55e;
+  border-color: var(--success);
   box-shadow:
-    0 5px 0 #16a34a,
+    0 5px 0 var(--green-600),
     0 0 12px rgba(34, 197, 94, 0.2);
 }
 
@@ -622,36 +622,36 @@
 .viewToggleHint {
   margin: 0;
   font-size: 0.8rem;
-  color: #475569;
+  color: var(--slate-600);
   max-width: 28rem;
 }
 
 .viewToggleBtn {
-  border: 2px solid #cbd5e1;
+  border: 2px solid var(--border-strong);
   border-radius: 999px;
   padding: 0.35rem 0.85rem;
   background: #fff;
-  color: #334155;
+  color: var(--slate-700);
   font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 3px 0 #94a3b8;
+  box-shadow: 0 3px 0 var(--text-subtle);
 }
 
 .viewToggleBtn:hover {
-  background: #f8fafc;
+  background: var(--slate-50);
 }
 
 .cardClaimed {
-  border-color: #a78bfa;
-  background: linear-gradient(180deg, #faf5ff, #fff);
-  box-shadow: 0 5px 0 #7c3aed;
+  border-color: var(--purple-400);
+  background: linear-gradient(180deg, var(--purple-50), #fff);
+  box-shadow: 0 5px 0 var(--primary);
 }
 
 .cardLocked {
-  background: linear-gradient(180deg, #f1f5f9, #e2e8f0);
-  border-color: #94a3b8;
-  box-shadow: 0 5px 0 #64748b;
+  background: linear-gradient(180deg, var(--slate-100), var(--border));
+  border-color: var(--text-subtle);
+  box-shadow: 0 5px 0 var(--text-muted);
 }
 
 .cardLocked .cardInner {
@@ -718,9 +718,9 @@
   font-weight: 800;
   letter-spacing: 0.07em;
   text-transform: uppercase;
-  color: #475569;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  color: var(--slate-600);
+  background: var(--slate-50);
+  border: 1px solid var(--border);
 }
 
 .iconWrap {
@@ -736,16 +736,16 @@
 }
 
 .tier_bronze {
-  background: linear-gradient(145deg, #fdba74, #ea580c);
+  background: linear-gradient(145deg, var(--orange-300), var(--orange-600));
 }
 .tier_silver {
-  background: linear-gradient(145deg, #f8fafc, #94a3b8);
+  background: linear-gradient(145deg, var(--slate-50), var(--text-subtle));
 }
 .tier_gold {
-  background: linear-gradient(145deg, #fde047, #ca8a04);
+  background: linear-gradient(145deg, var(--gold-300), var(--amber-600));
 }
 .tier_platinum {
-  background: linear-gradient(145deg, #e9d5ff, #7c3aed);
+  background: linear-gradient(145deg, var(--purple-200), var(--primary));
 }
 
 .cardTitle {
@@ -753,7 +753,7 @@
   font-family: var(--font-fredoka, "Fredoka", sans-serif);
   font-size: 1.05rem;
   font-weight: 800;
-  color: #1e293b;
+  color: var(--slate-800);
   line-height: 1.15;
 }
 
@@ -761,7 +761,7 @@
   margin: 0.2rem 0 0;
   font-size: 0.76rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.35;
 }
 
@@ -772,9 +772,9 @@
   text-transform: uppercase;
   padding: 0.2rem 0.45rem;
   border-radius: 0.4rem;
-  background: #fef9c3;
-  color: #a16207;
-  border: 1px solid #fde047;
+  background: var(--gold-100);
+  color: var(--amber-700);
+  border: 1px solid var(--gold-300);
   flex-shrink: 0;
 }
 
@@ -794,39 +794,39 @@
 .progressMetaChip {
   font-size: 0.58rem;
   font-weight: 800;
-  color: #64748b;
-  background: #f1f5f9;
-  border: 1px solid #e2e8f0;
+  color: var(--text-muted);
+  background: var(--slate-100);
+  border: 1px solid var(--border);
   border-radius: 999px;
   padding: 0.12rem 0.42rem;
 }
 
 .progressMetaReady {
-  color: #166534;
-  background: #dcfce7;
-  border-color: #86efac;
+  color: var(--green-800);
+  background: var(--green-50);
+  border-color: var(--green-300);
 }
 
 .progressTrack {
   flex: 1;
   height: 0.65rem;
   border-radius: 999px;
-  background: #e2e8f0;
-  border: 2px solid #cbd5e1;
+  background: var(--border);
+  border: 2px solid var(--border-strong);
   overflow: hidden;
 }
 
 .progressFill {
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #58cc02, #86efac, #ffc800);
+  background: linear-gradient(90deg, var(--game-green), var(--green-300), var(--gold-400));
   transition: width 0.5s cubic-bezier(0.34, 1.4, 0.64, 1);
 }
 
 .progressLabel {
   font-size: 0.72rem;
   font-weight: 800;
-  color: #16a34a;
+  color: var(--green-600);
   min-width: 2.6rem;
   text-align: right;
 }
@@ -850,18 +850,18 @@
   font-weight: 800;
   padding: 0.22rem 0.5rem;
   border-radius: 0.5rem;
-  background: #fef9c3;
-  color: #a16207;
-  border: 2px solid #fde047;
-  box-shadow: 0 2px 0 #ca8a04;
+  background: var(--gold-100);
+  color: var(--amber-700);
+  border: 2px solid var(--gold-300);
+  box-shadow: 0 2px 0 var(--amber-600);
   transition: transform 120ms ease;
 }
 
 .rewardChipGem {
-  background: #e0f2fe;
-  color: #0369a1;
-  border-color: #7dd3fc;
-  box-shadow: 0 2px 0 #0284c7;
+  background: var(--sky-100);
+  color: var(--sky-700);
+  border-color: var(--sky-300);
+  box-shadow: 0 2px 0 var(--sky-600);
 }
 
 .rewardChip:hover {
@@ -876,14 +876,14 @@
   font-weight: 800;
   cursor: pointer;
   color: #fff;
-  background: linear-gradient(180deg, #58cc02 0%, #46a302 100%);
-  box-shadow: 0 5px 0 #3d8c02;
+  background: linear-gradient(180deg, var(--game-green) 0%, var(--game-green-dark) 100%);
+  box-shadow: 0 5px 0 var(--lime-500);
   animation: claimWiggle 2s ease-in-out infinite;
 }
 
 .claimBtn:active {
   transform: translateY(4px);
-  box-shadow: 0 1px 0 #3d8c02;
+  box-shadow: 0 1px 0 var(--lime-500);
   animation: none;
 }
 
@@ -900,22 +900,22 @@
 .claimedBadge {
   font-size: 0.75rem;
   font-weight: 800;
-  color: #7c3aed;
+  color: var(--primary);
   padding: 0.35rem 0.55rem;
-  background: #f3e8ff;
+  background: var(--purple-100);
   border-radius: 0.5rem;
-  border: 2px solid #c4b5fd;
-  box-shadow: 0 2px 0 #a78bfa;
+  border: 2px solid var(--purple-300);
+  box-shadow: 0 2px 0 var(--purple-400);
 }
 
 .lockedBadge {
   font-size: 0.72rem;
   font-weight: 800;
-  color: #64748b;
+  color: var(--text-muted);
   padding: 0.2rem 0.46rem;
   border-radius: 999px;
-  background: #f1f5f9;
-  border: 1px solid #cbd5e1;
+  background: var(--slate-100);
+  border: 1px solid var(--border-strong);
 }
 
 /* Toast & confetti */
@@ -927,12 +927,12 @@
   z-index: 100;
   padding: 0.85rem 1.25rem;
   border-radius: 1rem;
-  background: linear-gradient(180deg, #fef08a, #facc15);
-  color: #713f12;
+  background: linear-gradient(180deg, var(--gold-200), var(--gold-400));
+  color: var(--brown-800);
   font-size: 0.9rem;
   font-weight: 800;
-  border: 3px solid #ca8a04;
-  box-shadow: 0 6px 0 #a16207;
+  border: 3px solid var(--amber-600);
+  box-shadow: 0 6px 0 var(--amber-700);
   max-width: 90vw;
   text-align: center;
 }
@@ -962,18 +962,18 @@
   align-items: center;
   justify-content: center;
   border-radius: 999px;
-  background: #1cb0f6;
+  background: var(--game-blue);
   color: #fff;
   font-size: 0.62rem;
   font-weight: 800;
-  box-shadow: 0 2px 0 #1899d6;
+  box-shadow: 0 2px 0 var(--game-blue-dark);
 }
 
 .tabReady {
-  background: linear-gradient(180deg, #fef08a, #fde047);
-  border-color: #eab308;
-  color: #854d0e;
-  box-shadow: 0 4px 0 #ca8a04;
+  background: linear-gradient(180deg, var(--gold-200), var(--gold-300));
+  border-color: var(--yellow-500);
+  color: var(--amber-800);
+  box-shadow: 0 4px 0 var(--amber-600);
 }
 
 .rankBar {
@@ -991,7 +991,7 @@
   margin: 0;
   font-size: 0.75rem;
   font-weight: 800;
-  color: #5b21b6;
+  color: var(--purple-800);
   display: flex;
   justify-content: space-between;
   gap: 0.5rem;
@@ -1008,7 +1008,7 @@
 .rankBarFill {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, #a855f7, #1cb0f6, #58cc02);
+  background: linear-gradient(90deg, var(--violet-500), var(--game-blue), var(--game-green));
   box-shadow: 0 0 12px rgba(88, 204, 2, 0.5);
 }
 
@@ -1021,11 +1021,11 @@
   height: 4.5rem;
   border: none;
   border-radius: 1rem;
-  background: linear-gradient(180deg, #fde047, #f59e0b);
+  background: linear-gradient(180deg, var(--gold-300), var(--warning));
   font-size: 2.25rem;
   cursor: pointer;
   box-shadow:
-    0 6px 0 #b45309,
+    0 6px 0 var(--brown-warn),
     0 16px 32px rgba(245, 158, 11, 0.45);
   animation: chestBob 1.2s ease-in-out infinite;
 }
@@ -1041,15 +1041,15 @@
 }
 
 .cardPlatinum {
-  border-color: #c084fc;
+  border-color: var(--violet-400);
   background: linear-gradient(
     135deg,
-    #faf5ff 0%,
+    var(--purple-50) 0%,
     #fff 40%,
-    #f0f9ff 100%
+    var(--sky-50) 100%
   );
   box-shadow:
-    0 5px 0 #7c3aed,
+    0 5px 0 var(--primary),
     0 0 24px rgba(168, 85, 247, 0.25);
 }
 
@@ -1081,13 +1081,13 @@
   margin-left: 0.35rem;
   padding: 0.1rem 0.4rem;
   border-radius: 0.35rem;
-  background: linear-gradient(180deg, #fecaca, #f87171);
-  color: #7f1d1d;
+  background: linear-gradient(180deg, var(--red-200), var(--red-400));
+  color: var(--red-900);
   font-size: 0.58rem;
   font-weight: 900;
   letter-spacing: 0.04em;
   vertical-align: middle;
-  box-shadow: 0 2px 0 #b91c1c;
+  box-shadow: 0 2px 0 var(--red-700);
 }
 
 .emptyState {
@@ -1096,12 +1096,12 @@
   padding: 2rem 1rem;
   font-size: 1rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 /* Premium motion and depth overrides */
 .card {
-  border: 2px solid #dbeafe;
+  border: 2px solid var(--sky-100);
   transition: transform 150ms ease, box-shadow 150ms ease, border-color 150ms ease;
 }
 
@@ -1122,9 +1122,9 @@
 
 .card:hover {
   transform: translateY(-3px);
-  border-color: #c4b5fd;
+  border-color: var(--purple-300);
   box-shadow:
-    0 7px 0 #a78bfa,
+    0 7px 0 var(--purple-400),
     0 16px 28px rgba(139, 92, 246, 0.2);
 }
 
@@ -1137,7 +1137,7 @@
 }
 
 .progressFill {
-  background: linear-gradient(90deg, #58cc02, #86efac, #22d3ee, #ffc800);
+  background: linear-gradient(90deg, var(--game-green), var(--green-300), var(--cyan-400), var(--gold-400));
 }
 
 .claimBtn:hover {
@@ -1326,7 +1326,7 @@
     font-size: 0.66rem;
     padding: 0.34rem 0.56rem;
     border-radius: 0.62rem;
-    box-shadow: 0 2px 0 #cbd5e1;
+    box-shadow: 0 2px 0 var(--border-strong);
   }
 
   .tabCount {
@@ -1384,14 +1384,14 @@
     font-size: 0.62rem;
     padding: 0.18rem 0.4rem;
     border-width: 1.5px;
-    box-shadow: 0 1px 0 #ca8a04;
+    box-shadow: 0 1px 0 var(--amber-600);
   }
 
   .claimBtn {
     font-size: 0.72rem;
     padding: 0.4rem 0.7rem;
     border-radius: 0.58rem;
-    box-shadow: 0 3px 0 #3d8c02;
+    box-shadow: 0 3px 0 var(--lime-500);
   }
 
   .claimedBadge,
@@ -1404,7 +1404,7 @@
     padding: 0.65rem 0.85rem;
     font-size: 0.74rem;
     border-width: 2px;
-    box-shadow: 0 4px 0 #a16207;
+    box-shadow: 0 4px 0 var(--amber-700);
   }
 
   .treasureChest {
@@ -1415,7 +1415,7 @@
     border-radius: 0.75rem;
     font-size: 1.45rem;
     box-shadow:
-      0 4px 0 #b45309,
+      0 4px 0 var(--brown-warn),
       0 10px 18px rgba(245, 158, 11, 0.35);
   }
 
@@ -1437,9 +1437,4 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .balloon,
-  .car {
-    animation: none;
-  }
-}
+/* Reduced-motion handled globally in globals.css (Move 3). */

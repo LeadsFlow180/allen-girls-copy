@@ -31,3 +31,24 @@ export type { PlacementItem } from "./items";
 export { placementItems } from "./items";
 export { scorePlacement, tierFromPercent } from "./scoring";
 export { placementIntro, placementSectionTitles, placementTierCopy } from "./copy";
+export {
+  placementMissionBriefing,
+  placementSpeakerNotes,
+} from "./mission-briefing";
+export type {
+  PlacementBriefingLine,
+  PlacementBriefingSceneId,
+  PlacementBriefingSpeaker,
+} from "./mission-briefing";
+export { placementOpeningStoryboard } from "./storyboard";
+export type {
+  AnimationPrinciple,
+  AnimationPrincipleApplication,
+  PlacementStoryboardCharacter,
+  PlacementStoryboardShot,
+} from "./storyboard";
+export { placementOpeningReviewPack } from "./review-pack";
+export type {
+  PlacementOpeningReviewShot,
+  ShotApprovalStatus,
+} from "./review-pack";

@@ -19,11 +19,11 @@
   border: none;
   border-radius: 999px;
   padding: 0.4rem 0.72rem;
-  background: linear-gradient(180deg, #fff, #f1f5f9);
-  box-shadow: 0 3px 0 #cbd5e1;
+  background: linear-gradient(180deg, #fff, var(--slate-100));
+  box-shadow: 0 3px 0 var(--border-strong);
   font-size: 0.76rem;
   font-weight: 800;
-  color: #475569;
+  color: var(--slate-600);
   cursor: pointer;
 }
 
@@ -45,7 +45,7 @@
   .mapBtn {
     padding: 0.34rem 0.64rem;
     font-size: 0.7rem;
-    box-shadow: 0 2px 0 #cbd5e1;
+    box-shadow: 0 2px 0 var(--border-strong);
   }
 
   .langBadge {

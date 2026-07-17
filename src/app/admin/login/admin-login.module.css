@@ -1,5 +1,5 @@
 .card {
-  border: 2px solid #c4b5fd;
+  border: 2px solid var(--purple-300);
   box-shadow:
     0 12px 40px rgba(76, 29, 149, 0.18),
     0 0 0 1px rgba(196, 181, 253, 0.35);
@@ -8,8 +8,8 @@
 .header {
   text-align: center;
   padding: 1.35rem 1.5rem 0.25rem;
-  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
-  border-bottom: 1px solid #ede9fe;
+  background: linear-gradient(180deg, var(--purple-50) 0%, var(--surface) 100%);
+  border-bottom: 1px solid var(--purple-100);
 }
 
 .shieldBadge {
@@ -20,9 +20,9 @@
   height: 3rem;
   margin-bottom: 0.65rem;
   border-radius: 1rem;
-  background: linear-gradient(145deg, #7c3aed, #4c1d95);
+  background: linear-gradient(145deg, var(--primary), var(--purple-900));
   color: #fff;
-  box-shadow: 0 4px 0 #5b21b6;
+  box-shadow: 0 4px 0 var(--purple-800);
 }
 
 .kicker {
@@ -31,13 +31,13 @@
   font-weight: 900;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #6d28d9;
+  color: var(--purple-700);
 }
 
 .title {
   margin: 0.35rem 0 0;
   font-size: 1.65rem;
-  color: #312e81;
+  color: var(--indigo-800);
 }
 
 .subtitle {
@@ -45,20 +45,20 @@
   max-width: 22rem;
   font-size: 0.88rem;
   font-weight: 700;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.45;
 }
 
 .submitBtn {
-  background: linear-gradient(180deg, #8b5cf6, #6d28d9) !important;
-  box-shadow: 0 4px 0 #5b21b6 !important;
+  background: linear-gradient(180deg, var(--purple-500), var(--purple-700)) !important;
+  box-shadow: 0 4px 0 var(--purple-800) !important;
 }
 
 .footerNote {
   margin: 0.75rem 0 0;
   font-size: 0.72rem;
   font-weight: 700;
-  color: #94a3b8;
+  color: var(--text-subtle);
   text-align: center;
   line-height: 1.4;
 }

@@ -5,10 +5,12 @@ import Link from "next/link";
 import { Users, Copy, Check } from "lucide-react";
 
 import classroom from "@/components/teacher/teacher-classroom.module.css";
+import { formatStudentNumber } from "@/lib/student/format-student-number";
 
 type DomainTier = { domain: string; tier: string; percent: number };
 type StudentRow = {
   userId: string;
+  studentNumber: number | null;
   displayName: string;
   linkedAt: string;
   placementTier: string | null;
@@ -215,6 +217,9 @@ export default function TeacherDashboardPage() {
                         </div>
                         <span className={`font-nunito ${classroom.studentName}`}>
                           {student.displayName}
+                          {student.studentNumber === null
+                            ? ""
+                            : ` · ID ${formatStudentNumber(student.studentNumber)}`}
                         </span>
                       </div>
                       <TierBadge tier={student.placementTier} />

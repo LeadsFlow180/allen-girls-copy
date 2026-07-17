@@ -1,4 +1,5 @@
 import type { PlacementScoreResult } from "@/data/lms/placement/types";
+import { markCadetAssessmentComplete } from "@/lib/onboarding/cadet-progress";
 
 const STORAGE_KEY = "aga_placement_result_v1";
 
@@ -19,6 +20,8 @@ export function savePlacementResult(displayName: string, score: PlacementScoreRe
       score,
     };
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+    // Checkmark: Signal Clarity Scan completed (pairs with intro-video checkmark).
+    markCadetAssessmentComplete();
   } catch {
     // ignore quota / private mode
   }

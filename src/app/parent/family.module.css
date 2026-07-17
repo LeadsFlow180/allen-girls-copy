@@ -21,26 +21,26 @@
 
 .screenTitle {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 1.05rem;
   font-weight: 800;
   line-height: 1.25;
-  color: #0f172a;
+  color: var(--text);
   letter-spacing: -0.02em;
 }
 
 .screenLead {
   margin: 0.2rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   line-height: 1.45;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .groupedList {
   border-radius: 0.75rem;
-  border: 1px solid #e8e8ef;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   overflow: hidden;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
@@ -52,7 +52,7 @@
 }
 
 .listGroupItem {
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .listGroupItemLast {
@@ -60,12 +60,12 @@
 }
 
 .listRowWrap {
-  background: #ffffff;
+  background: var(--surface);
   transition: background 0.15s ease;
 }
 
 .listRowWrap:hover {
-  background: #fafbff;
+  background: var(--slate-50);
 }
 
 .listRow {
@@ -86,7 +86,7 @@
 }
 
 .listRowLink:hover .listChevron {
-  color: #7c3aed;
+  color: var(--primary);
   transform: translateX(2px);
 }
 
@@ -108,7 +108,7 @@
 .listChevron {
   flex-shrink: 0;
   margin-right: 0.15rem;
-  color: #cbd5e1;
+  color: var(--border-strong);
   transition:
     color 0.15s ease,
     transform 0.15s ease;
@@ -123,13 +123,13 @@
 }
 
 .statusDotVerified {
-  background: #10b981;
-  box-shadow: 0 0 0 2px #d1fae5;
+  background: var(--emerald-500);
+  box-shadow: 0 0 0 2px var(--green-50);
 }
 
 .statusDotPending {
-  background: #f59e0b;
-  box-shadow: 0 0 0 2px #fef3c7;
+  background: var(--warning);
+  box-shadow: 0 0 0 2px var(--gold-100);
 }
 
 .listRowMenu {
@@ -147,7 +147,7 @@
   border: none;
   border-radius: 0.45rem;
   background: transparent;
-  color: #94a3b8;
+  color: var(--text-subtle);
   cursor: pointer;
   transition:
     background 0.15s ease,
@@ -156,8 +156,8 @@
 
 .menuBtn:hover,
 .menuBtn[aria-expanded="true"] {
-  background: #f1f5f9;
-  color: #475569;
+  background: var(--slate-100);
+  color: var(--slate-600);
 }
 
 .menuPopover {
@@ -168,8 +168,8 @@
   min-width: 9.5rem;
   padding: 0.35rem;
   border-radius: 0.55rem;
-  border: 1px solid #e2e8f0;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.12);
 }
 
@@ -181,7 +181,7 @@
   border: none;
   border-radius: 0.4rem;
   background: transparent;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 600;
   text-align: left;
@@ -190,29 +190,29 @@
 }
 
 .menuItem {
-  color: #475569;
+  color: var(--slate-600);
 }
 
 .menuItem:hover {
-  background: #f8fafc;
+  background: var(--slate-50);
 }
 
 .menuDangerItem {
-  color: #dc2626;
+  color: var(--red-600);
 }
 
 .menuDangerItem:hover {
-  background: #fef2f2;
+  background: var(--purple-50);
 }
 
 .listFootnote {
   margin: 0;
   padding: 0.55rem 1rem 0.7rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.72rem;
-  color: #94a3b8;
-  border-top: 1px solid #f8fafc;
-  background: #fafafa;
+  color: var(--text-subtle);
+  border-top: 1px solid var(--slate-50);
+  background: var(--slate-50);
 }
 
 .listRowLink .avatar {
@@ -226,15 +226,15 @@
   margin: 0;
   padding: 0.85rem 1rem 1rem;
   border: none;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--slate-100);
   border-radius: 0;
-  background: #fafafa;
+  background: var(--slate-50);
 }
 
 .groupedList .skeletonRow {
   margin: 0;
   border-radius: 0;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--slate-100);
 }
 
 .groupedList .skeletonRow:last-child {
@@ -261,21 +261,21 @@
   align-items: center;
   gap: 0.35rem;
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.84rem;
   font-weight: 600;
-  color: #475569;
+  color: var(--slate-600);
 }
 
 .summaryLineMuted {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.84rem;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .summaryDot {
-  color: #cbd5e1;
+  color: var(--border-strong);
 }
 
 .learnerGrid {
@@ -300,8 +300,8 @@
   height: 100%;
   padding: 1rem 1.05rem;
   border-radius: 0.85rem;
-  border: 1px solid #e8e8ef;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
   transition:
     border-color 0.15s ease,
@@ -309,7 +309,7 @@
 }
 
 .learnerCard:hover {
-  border-color: #ddd6fe;
+  border-color: var(--purple-200);
   box-shadow: 0 8px 24px rgba(124, 58, 237, 0.08);
 }
 
@@ -340,7 +340,7 @@
   gap: 0.5rem;
   margin-top: auto;
   padding-top: 0.85rem;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--slate-100);
 }
 
 .progressBtn {
@@ -350,9 +350,9 @@
   gap: 0.35rem;
   padding: 0.55rem 0.85rem;
   border-radius: 0.55rem;
-  background: #7c3aed;
-  color: #ffffff;
-  font-family: "Nunito", sans-serif;
+  background: var(--primary);
+  color: var(--surface);
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 700;
   text-decoration: none;
@@ -362,7 +362,7 @@
 }
 
 .progressBtn:hover {
-  background: #6d28d9;
+  background: var(--purple-700);
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.22);
 }
 
@@ -381,15 +381,15 @@
 .skeletonCard {
   height: 9.5rem;
   border-radius: 0.85rem;
-  background: linear-gradient(90deg, #f1f5f9 0%, #f8fafc 50%, #f1f5f9 100%);
+  background: linear-gradient(90deg, var(--slate-100) 0%, var(--slate-50) 50%, var(--slate-100) 100%);
   background-size: 200% 100%;
   animation: skeletonPulse 1.4s ease-in-out infinite;
 }
 
 .profilesPanel {
-  border: 1px solid #e8e8ef;
+  border: 1px solid var(--border);
   border-radius: 0.9rem;
-  background: #ffffff;
+  background: var(--surface);
   overflow: hidden;
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
@@ -401,8 +401,8 @@
   justify-content: space-between;
   gap: 1rem;
   padding: 1.2rem 1.25rem 1rem;
-  border-bottom: 1px solid #f1f5f9;
-  background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+  border-bottom: 1px solid var(--slate-100);
+  background: linear-gradient(180deg, var(--slate-50) 0%, var(--surface) 100%);
 }
 
 .panelHeadCopy {
@@ -412,19 +412,19 @@
 
 .panelTitle {
   margin: 0;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.15rem;
   line-height: 1.2;
-  color: #0f172a;
+  color: var(--text);
   letter-spacing: -0.02em;
 }
 
 .panelLead {
   margin: 0.35rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.84rem;
   line-height: 1.5;
-  color: #64748b;
+  color: var(--text-muted);
   max-width: 34rem;
 }
 
@@ -433,8 +433,8 @@
   flex-wrap: wrap;
   gap: 0.45rem;
   padding: 0.75rem 1.25rem;
-  border-bottom: 1px solid #f1f5f9;
-  background: #fafafa;
+  border-bottom: 1px solid var(--slate-100);
+  background: var(--slate-50);
 }
 
 .statPill {
@@ -443,16 +443,16 @@
   gap: 0.25rem;
   padding: 0.3rem 0.65rem;
   border-radius: 999px;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
-  color: #475569;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  color: var(--slate-600);
+  background: var(--surface);
+  border: 1px solid var(--border);
 }
 
 .statPill strong {
   font-weight: 800;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .tableWrap {
@@ -464,14 +464,14 @@
   grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) auto;
   gap: 1rem;
   padding: 0.55rem 1.25rem;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.68rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #94a3b8;
-  background: #fafafa;
-  border-bottom: 1px solid #f1f5f9;
+  color: var(--text-subtle);
+  background: var(--slate-50);
+  border-bottom: 1px solid var(--slate-100);
 }
 
 @media (min-width: 640px) {
@@ -492,8 +492,8 @@
   gap: 0.85rem;
   padding: 0.95rem 1rem;
   border-radius: 0.85rem;
-  background: linear-gradient(135deg, #faf5ff 0%, #ffffff 100%);
-  border: 1px solid #ede9fe;
+  background: linear-gradient(135deg, var(--purple-50) 0%, var(--surface) 100%);
+  border: 1px solid var(--purple-100);
 }
 
 .toolbarSummary {
@@ -510,24 +510,24 @@
   border-radius: 0.65rem;
   display: grid;
   place-items: center;
-  color: #7c3aed;
-  background: #ffffff;
-  border: 1px solid #ddd6fe;
+  color: var(--primary);
+  background: var(--surface);
+  border: 1px solid var(--purple-200);
 }
 
 .toolbarTitle {
   margin: 0;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1rem;
   line-height: 1.2;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .toolbarHint {
   margin: 0.15rem 0 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .pageHeader {
@@ -541,16 +541,16 @@
 
 .pageTitle {
   margin: 0;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.15rem;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .pageLead {
   margin: 0.25rem 0 0;
   font-size: 0.84rem;
   line-height: 1.45;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .toolbar {
@@ -568,9 +568,9 @@
   gap: 0.4rem;
   padding: 0.55rem 0.95rem;
   border-radius: 0.55rem;
-  background: #7c3aed;
-  color: #ffffff;
-  font-family: "Nunito", sans-serif;
+  background: var(--primary);
+  color: var(--surface);
+  font-family: var(--font-body);
   font-size: 0.82rem;
   font-weight: 700;
   text-decoration: none;
@@ -581,7 +581,7 @@
 }
 
 .primaryBtn:hover {
-  background: #6d28d9;
+  background: var(--purple-700);
   box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
 }
 
@@ -592,9 +592,9 @@
   gap: 0.35rem;
   padding: 0.48rem 0.8rem;
   border-radius: 0.5rem;
-  background: #7c3aed;
-  color: #ffffff;
-  font-family: "Nunito", sans-serif;
+  background: var(--primary);
+  color: var(--surface);
+  font-family: var(--font-body);
   font-size: 0.76rem;
   font-weight: 700;
   text-decoration: none;
@@ -604,7 +604,7 @@
 }
 
 .secondaryBtn:hover {
-  background: #6d28d9;
+  background: var(--purple-700);
   box-shadow: 0 4px 10px rgba(124, 58, 237, 0.22);
 }
 
@@ -624,8 +624,8 @@
   position: relative;
   padding: 0.9rem 0.85rem;
   border-radius: 0.85rem;
-  border: 1px solid #e8e8ef;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
 }
 
 .pathStep::after {
@@ -643,26 +643,26 @@
   align-items: center;
   justify-content: center;
   border-radius: 0.4rem;
-  background: #faf5ff;
-  color: #7c3aed;
+  background: var(--purple-50);
+  color: var(--primary);
   font-size: 0.72rem;
   font-weight: 800;
   margin-bottom: 0.4rem;
-  border: 1px solid #ede9fe;
+  border: 1px solid var(--purple-100);
 }
 
 .pathTitle {
   margin: 0 0 0.25rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 0.88rem;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .pathText {
   margin: 0;
   font-size: 0.74rem;
   line-height: 1.45;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .learnerList {
@@ -673,7 +673,7 @@
 
 .tableRow {
   padding: 0;
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--slate-100);
   transition: background 0.15s ease;
 }
 
@@ -682,7 +682,7 @@
 }
 
 .tableRow:hover {
-  background: #fafbff;
+  background: var(--slate-50);
 }
 
 .tableRowMain {
@@ -737,8 +737,8 @@
   gap: 0.85rem;
   padding: 1rem 1.05rem;
   border-radius: 0.85rem;
-  border: 1px solid #e8e8ef;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
@@ -752,7 +752,7 @@
 }
 
 .learnerRow:hover {
-  border-color: #ddd6fe;
+  border-color: var(--purple-200);
   box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06);
 }
 
@@ -793,7 +793,7 @@
   height: 4.25rem;
   margin-bottom: 0.5rem;
   border-radius: 0.65rem;
-  background: linear-gradient(90deg, #f1f5f9 0%, #f8fafc 50%, #f1f5f9 100%);
+  background: linear-gradient(90deg, var(--slate-100) 0%, var(--slate-50) 50%, var(--slate-100) 100%);
   background-size: 200% 100%;
   animation: skeletonPulse 1.4s ease-in-out infinite;
 }
@@ -821,13 +821,13 @@
 .childCard {
   padding: 1rem;
   border-radius: 0.85rem;
-  border: 1px solid #e8e8ef;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .childCard:hover {
-  border-color: #ddd6fe;
+  border-color: var(--purple-200);
   box-shadow: 0 4px 16px rgba(124, 58, 237, 0.06);
 }
 
@@ -846,42 +846,42 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(145deg, #faf5ff, #f3e8ff);
-  color: #6d28d9;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  background: linear-gradient(145deg, var(--purple-50), var(--purple-100));
+  color: var(--purple-700);
+  font-family: var(--font-display);
   font-size: 1rem;
-  border: 1px solid #e9d5ff;
+  border: 1px solid var(--purple-200);
 }
 
 .childName {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 700;
   line-height: 1.25;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .childEmail {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 500;
-  color: #64748b;
+  color: var(--text-muted);
   word-break: break-word;
 }
 
 .childSource {
   margin: 0;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
-  color: #94a3b8;
+  color: var(--text-subtle);
 }
 
 .childMeta {
   margin: 0;
   font-size: 0.72rem;
-  color: #64748b;
+  color: var(--text-muted);
   word-break: break-word;
 }
 
@@ -893,7 +893,7 @@
   width: fit-content;
   padding: 0.18rem 0.5rem;
   border-radius: 999px;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
@@ -901,15 +901,15 @@
 }
 
 .badgeApproved {
-  background: #ecfdf5;
-  color: #047857;
-  border: 1px solid #a7f3d0;
+  background: var(--sky-50);
+  color: var(--emerald-700);
+  border: 1px solid var(--green-100);
 }
 
 .badgePending {
-  background: #fffbeb;
-  color: #b45309;
-  border: 1px solid #fde68a;
+  background: var(--gold-50);
+  color: var(--brown-warn);
+  border: 1px solid var(--gold-200);
 }
 
 .childActions {
@@ -921,7 +921,7 @@
 
 .linkBtn,
 .linkBtnMuted {
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700;
   text-decoration: none;
@@ -930,20 +930,20 @@
 }
 
 .linkBtn {
-  background: #7c3aed;
+  background: var(--primary);
   color: #fff;
   border: none;
 }
 
 .linkBtn:hover {
-  background: #6d28d9;
+  background: var(--purple-700);
 }
 
 .linkBtnMuted {
   background: transparent;
-  color: #64748b;
+  color: var(--text-muted);
   border: none;
-  font-family: "Nunito", sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 700;
   text-decoration: none;
@@ -953,8 +953,8 @@
 }
 
 .linkBtnMuted:hover:not(:disabled) {
-  color: #475569;
-  background: #f1f5f9;
+  color: var(--slate-600);
+  background: var(--slate-100);
 }
 
 .linkBtnMuted:disabled {
@@ -969,10 +969,10 @@
   gap: 0.3rem;
   padding: 0.55rem 0.75rem;
   border-radius: 0.55rem;
-  border: 1px solid #e2e8f0;
-  background: #ffffff;
-  color: #64748b;
-  font-family: "Nunito", sans-serif;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  font-family: var(--font-body);
   font-size: 0.78rem;
   font-weight: 600;
   cursor: pointer;
@@ -984,15 +984,15 @@
 }
 
 .removeBtn:hover {
-  color: #b91c1c;
-  background: #fff5f5;
-  border-color: #fecaca;
+  color: var(--red-700);
+  background: var(--purple-50);
+  border-color: var(--red-200);
 }
 
 .removeBtnActive {
-  color: #b91c1c;
-  background: #fef2f2;
-  border-color: #fecaca;
+  color: var(--red-700);
+  background: var(--purple-50);
+  border-color: var(--red-200);
 }
 
 .dangerBtn {
@@ -1001,14 +1001,14 @@
   padding: 0.4rem 0.65rem;
   border-radius: 0.55rem;
   cursor: pointer;
-  background: #dc2626;
+  background: var(--red-600);
   color: #fff;
   border: none;
   transition: background 0.15s ease, opacity 0.15s ease;
 }
 
 .dangerBtn:hover:not(:disabled) {
-  background: #b91c1c;
+  background: var(--red-700);
 }
 
 .dangerBtn:disabled {
@@ -1020,22 +1020,22 @@
   margin-top: 0.15rem;
   padding: 0.9rem 1rem;
   border-radius: 0.65rem;
-  border: 1px solid #fecaca;
-  background: #fef2f2;
+  border: 1px solid var(--red-200);
+  background: var(--purple-50);
 }
 
 .deletePanelTitle {
   margin: 0 0 0.35rem;
   font-size: 0.8rem;
   font-weight: 800;
-  color: #b91c1c;
+  color: var(--red-700);
 }
 
 .deletePanelText {
   margin: 0 0 0.55rem;
   font-size: 0.72rem;
   line-height: 1.45;
-  color: #7f1d1d;
+  color: var(--red-900);
 }
 
 .deleteConfirmInput {
@@ -1043,9 +1043,9 @@
   margin-bottom: 0.5rem;
   padding: 0.45rem 0.55rem;
   border-radius: 0.5rem;
-  border: 1px solid #fca5a5;
-  background: #ffffff;
-  color: #0f172a;
+  border: 1px solid var(--red-300);
+  background: var(--surface);
+  color: var(--text);
   font-size: 0.78rem;
 }
 
@@ -1058,8 +1058,8 @@
 .empty {
   padding: 2rem 1.25rem;
   border-radius: 0.85rem;
-  border: 1px dashed #d1d5db;
-  background: #fafafa;
+  border: 1px dashed var(--border-strong);
+  background: var(--slate-50);
   text-align: center;
 }
 
@@ -1070,28 +1070,28 @@
   height: 3rem;
   margin-bottom: 0.85rem;
   border-radius: 0.85rem;
-  color: #7c3aed;
-  background: #faf5ff;
-  border: 1px solid #ede9fe;
+  color: var(--primary);
+  background: var(--purple-50);
+  border: 1px solid var(--purple-100);
 }
 
 .emptyTitle {
   margin: 0 0 0.35rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
-  color: #0f172a;
+  font-family: var(--font-display);
+  color: var(--text);
 }
 
 .emptyText {
   margin: 0 0 0.85rem;
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .loadingText {
   text-align: center;
   padding: 1.5rem;
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--text-muted);
 }
 
 .secondaryRow {
@@ -1104,7 +1104,7 @@
 .backLink {
   font-size: 0.82rem;
   font-weight: 700;
-  color: #7c3aed;
+  color: var(--primary);
   text-decoration: none;
 }
 
@@ -1116,8 +1116,8 @@
   margin-top: 0.75rem;
   padding: 1.15rem 1.1rem;
   border-radius: 0.85rem;
-  border: 1px solid #e8e8ef;
-  background: #ffffff;
+  border: 1px solid var(--border);
+  background: var(--surface);
 }
 
 .formCard::before {
@@ -1126,16 +1126,16 @@
 
 .formTitle {
   margin: 0 0 0.35rem;
-  font-family: "Fredoka One", Fredoka, system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 1.2rem;
-  color: #0f172a;
+  color: var(--text);
 }
 
 .formLead {
   margin: 0 0 1rem;
   font-size: 0.9rem;
   line-height: 1.55;
-  color: #64748b;
+  color: var(--text-muted);
   font-weight: 500;
 }
 
@@ -1148,7 +1148,7 @@
   margin-bottom: 0.35rem;
   font-size: 0.75rem;
   font-weight: 700;
-  color: #475569;
+  color: var(--slate-600);
   letter-spacing: 0.04em;
   text-transform: uppercase;
 }
@@ -1156,7 +1156,7 @@
 .hint {
   margin: 0.35rem 0 0;
   font-size: 0.78rem;
-  color: #64748b;
+  color: var(--text-muted);
   line-height: 1.45;
   font-weight: 500;
 }
@@ -1168,9 +1168,9 @@
   min-height: 2.65rem;
   padding: 0.55rem 0.75rem;
   border-radius: 0.55rem;
-  border: 1px solid #d1d5db;
-  background: #ffffff;
-  color: #0f172a;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text);
   font-size: 0.95rem;
   font-weight: 500;
   line-height: 1.35;
@@ -1178,14 +1178,14 @@
 }
 
 .formInput::placeholder {
-  color: #94a3b8;
+  color: var(--text-subtle);
   font-weight: 400;
   opacity: 1;
 }
 
 .formInput:focus-visible {
   outline: none;
-  border-color: #7c3aed;
+  border-color: var(--primary);
   box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
 }
 
@@ -1204,9 +1204,9 @@
   margin: 0 0 0.65rem;
   padding: 0.55rem 0.65rem;
   border-radius: 0.55rem;
-  background: #fef2f2;
-  color: #b91c1c;
-  border: 1px solid #fecaca;
+  background: var(--purple-50);
+  color: var(--red-700);
+  border: 1px solid var(--red-200);
   font-size: 0.8rem;
   font-weight: 600;
 }
@@ -1215,9 +1215,9 @@
   margin: 0 0 0.65rem;
   padding: 0.55rem 0.65rem;
   border-radius: 0.55rem;
-  background: #ecfdf5;
-  color: #047857;
-  border: 1px solid #a7f3d0;
+  background: var(--sky-50);
+  color: var(--emerald-700);
+  border: 1px solid var(--green-100);
   font-size: 0.8rem;
   font-weight: 600;
 }
@@ -1226,20 +1226,20 @@
   margin-top: 0.85rem;
   padding: 0.85rem;
   border-radius: 0.75rem;
-  border: 1px solid #fde68a;
-  background: #fffbeb;
+  border: 1px solid var(--gold-200);
+  background: var(--gold-50);
 }
 
 .credentialBox p {
   margin: 0.35rem 0;
   font-size: 0.88rem;
-  color: #78350f;
+  color: var(--brown-800);
   font-weight: 500;
   line-height: 1.45;
   word-break: break-all;
 }
 
 .credentialBox strong {
-  color: #92400e;
+  color: var(--brown-700);
   font-weight: 800;
 }
