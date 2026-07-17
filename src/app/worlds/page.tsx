@@ -6,8 +6,8 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Sparkles, Compass, Map, Globe, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { loadCadetProgress, type CadetOnboardingProgress } from "@/lib/onboarding/cadet-progress";
-import { loadPlacementResult } from "@/lib/placement-storage";
+import { loadCadetProgress, clearCadetProgress, type CadetOnboardingProgress } from "@/lib/onboarding/cadet-progress";
+import { loadPlacementResult, clearPlacementResult } from "@/lib/placement-storage";
 
 // Load WorldGlobe only on the client — it uses WebGL / Three.js
 const WorldGlobe = dynamic(() => import("@/components/WorldGlobe"), { ssr: false });
@@ -31,7 +31,16 @@ function CadetCheckmarks() {
     { ok: progress.assessmentComplete, label: "Signal Clarity Scan" },
   ];
 
+  // Owner/dev-only helper so the first-time intro flow can be re-tested.
+  const isDev = process.env.NODE_ENV !== "production";
+  const handleReplayIntro = () => {
+    clearCadetProgress();
+    clearPlacementResult();
+    window.location.reload();
+  };
+
   return (
+    <>
     <div
       style={{
         display: "flex",
@@ -75,6 +84,33 @@ function CadetCheckmarks() {
         </span>
       ))}
     </div>
+
+      {isDev && (progress.introVideoSeen || progress.assessmentComplete) ? (
+        <div style={{ display: "flex", justifyContent: "center", marginTop: "0.7rem" }}>
+          <button
+            type="button"
+            onClick={handleReplayIntro}
+            className="font-nunito"
+            title="Dev only: clears the intro + scan checkmarks so you can watch the first-time flow again"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.4rem",
+              padding: "0.35rem 0.9rem",
+              borderRadius: "999px",
+              fontSize: "0.8rem",
+              fontWeight: 800,
+              background: "rgba(255,255,255,0.12)",
+              color: "rgba(255,255,255,0.9)",
+              border: "1px dashed rgba(255,255,255,0.45)",
+              cursor: "pointer",
+            }}
+          >
+            ↻ Replay intro (dev)
+          </button>
+        </div>
+      ) : null}
+    </>
   );
 }
 
