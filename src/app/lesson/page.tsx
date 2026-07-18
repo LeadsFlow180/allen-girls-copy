@@ -15,7 +15,7 @@ const LessonPage = async () => {
     userSubscriptionData,
   ]);
 
-  if (!lesson || !userProgress) return redirect("/learn");
+  if (!lesson || !userProgress) return redirect("/worlds");
 
   const initialPercentage =
     (lesson.challenges.filter((challenge) => challenge.completed).length /

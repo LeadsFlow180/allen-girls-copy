@@ -21,7 +21,7 @@ export default function ParentPage() {
             what their kids are learning, who they&apos;re learning from, and how their data is protected.
           </p>
           <div style={{ display: "flex", gap: "1rem", justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/learn" className="btn-hero-primary">▶ Start Free Trial</Link>
+            <Link href="/worlds" className="btn-hero-primary">▶ Start Free Trial</Link>
             <Link href="/parent/progress" className="btn-hero-secondary">📊 View Progress Reports</Link>
           </div>
         </div>
@@ -118,7 +118,7 @@ export default function ParentPage() {
                     </li>
                   ))}
                 </ul>
-                <Link href="/learn" style={{
+                <Link href="/worlds" style={{
                   display: "block", padding: "0.85rem", borderRadius: "999px", textAlign: "center",
                   background: p.primary ? p.color : "transparent",
                   color: p.primary ? "var(--aga-navy)" : "#fff",
@@ -169,7 +169,7 @@ export default function ParentPage() {
           <p className="font-nunito" style={{ fontSize: "1rem", color: "rgba(255,255,255,0.9)", marginBottom: "1.5rem" }}>
             30 days free. No credit card. Cancel anytime.
           </p>
-          <Link href="/learn" className="btn-hero-primary">▶ &nbsp;Start Free Trial</Link>
+          <Link href="/worlds" className="btn-hero-primary">▶ &nbsp;Start Free Trial</Link>
         </div>
       </section>
     </div>

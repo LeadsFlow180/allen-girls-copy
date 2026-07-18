@@ -65,6 +65,21 @@
   text-transform: uppercase;
 }
 
+.worldChip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin: 0;
+  width: fit-content;
+  padding: 0.4rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(255, 156, 90, 0.16);
+  border: 1px solid rgba(255, 156, 90, 0.45);
+  color: #ffc089;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
 .title {
   margin: 0;
   font-family: var(--font-display, Georgia, serif);
@@ -149,6 +164,20 @@
 .playBtn:active {
   transform: translateY(2px);
   box-shadow: 0 1px 0 #128a95;
+}
+
+.worldLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: #7ff3fa;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.worldLink:hover {
+  color: #fff;
 }
 
 .note {

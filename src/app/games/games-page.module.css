@@ -278,6 +278,25 @@
   margin: 0;
 }
 
+.worldNotice {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.4rem;
+  margin: 0.85rem 0 0;
+  padding: 0.55rem 0.7rem;
+  border-radius: 0.75rem;
+  background: rgba(13, 107, 115, 0.08);
+  border: 1px solid rgba(13, 107, 115, 0.18);
+  color: #0d6b73;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.worldNotice strong {
+  font-weight: 800;
+}
+
 .cardCta {
   display: inline-flex;
   align-items: center;

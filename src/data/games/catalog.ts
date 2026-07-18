@@ -33,6 +33,16 @@ export type GameCatalogEntry = {
   subjects: Array<"ela" | "math">;
   /** How often a question appears — academic only */
   questionCadence?: QuestionCadence;
+  /**
+   * Adventure world this academic game belongs to (globe).
+   * Academic games live inside worlds — Game Zone only features them with a
+   * "find it here" notice, they are not arcade free-play cards.
+   */
+  world?: {
+    slug: string;
+    name: string;
+    emoji: string;
+  };
   /** Short label shown on the card badge */
   badge: string;
   /** CSS gradient for card background */
@@ -62,10 +72,16 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     description:
       "Roll a gyrosphere through 8 volcanic levels — math checkpoints power the escape!",
     kind: "iframe",
-    href: "/games/jurassic-journey",
+    /** Feature card points kids to the adventure world, not arcade free-play */
+    href: "/worlds/fossil-frontier",
     available: true,
     icon: Mountain,
     badge: "Academic · Math",
+    world: {
+      slug: "fossil-frontier",
+      name: "Fossil Frontier",
+      emoji: "🦕",
+    },
     gradient: "linear-gradient(145deg, #180f28 0%, #2a1848 45%, #0d6b73 100%)",
     accent: "#2ee6ef",
     emoji: "🌋",
@@ -219,6 +235,11 @@ export function getGameById(id: string): GameCatalogEntry | undefined {
   return GAME_CATALOG.find((g) => g.id === id);
 }
 
+/** Academic adventure games that belong to a specific globe world */
+export function getAcademicGamesForWorld(worldSlug: string): GameCatalogEntry[] {
+  return ACADEMIC_GAMES.filter((g) => g.world?.slug === worldSlug && g.available);
+}
+
 export function getIframeGameById(id: string): GameCatalogEntry | undefined {
   const game = getGameById(id);
   return game?.kind === "iframe" ? game : undefined;
@@ -235,6 +256,7 @@ export type IframeGameData = {
   embedUrl: string;
   embedHeight: number;
   gameClass: GameClass;
+  worldSlug?: string;
 };
 
 export function toIframeGameData(game: GameCatalogEntry): IframeGameData {
@@ -248,5 +270,6 @@ export function toIframeGameData(game: GameCatalogEntry): IframeGameData {
     embedUrl: game.embedUrl ?? "",
     embedHeight: game.embedHeight ?? 640,
     gameClass: game.gameClass,
+    worldSlug: game.world?.slug,
   };
 }

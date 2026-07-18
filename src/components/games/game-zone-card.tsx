@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Gamepad2, Lock, Play } from "lucide-react";
+import { Gamepad2, Globe2, Lock, MapPin, Play } from "lucide-react";
 
 import type { GameCatalogEntry } from "@/data/games/catalog";
 
@@ -16,6 +16,7 @@ type GameZoneCardProps = {
 
 export function GameZoneCard({ game, index, featured }: GameZoneCardProps) {
   const isPlayable = game.available;
+  const isAcademicWorld = game.gameClass === "academic" && Boolean(game.world);
 
   const cardContent = (
     <div
@@ -34,21 +35,45 @@ export function GameZoneCard({ game, index, featured }: GameZoneCardProps) {
           {game.emoji}
         </span>
         {featured && isPlayable && (
-          <div className={styles.featuredRibbon}>✨ New — Play now!</div>
+          <div className={styles.featuredRibbon}>
+            {isAcademicWorld
+              ? `${game.world!.emoji} Find it in ${game.world!.name}`
+              : "✨ New — Play now!"}
+          </div>
         )}
       </div>
 
       <div className={styles.cardBody}>
         <h3 className={styles.cardTitle}>{game.title}</h3>
         <p className={styles.cardDesc}>{game.description}</p>
+
+        {game.world && (
+          <p className={styles.worldNotice}>
+            <MapPin size={13} aria-hidden />
+            <span>
+              Lives on the globe in{" "}
+              <strong>
+                {game.world.emoji} {game.world.name}
+              </strong>
+            </span>
+          </p>
+        )}
+
         <span
           className={`${styles.cardCta} ${isPlayable ? styles.cardCtaPlay : styles.cardCtaSoon}`}
         >
           {isPlayable ? (
-            <>
-              <Play size={14} aria-hidden />
-              Play now
-            </>
+            isAcademicWorld ? (
+              <>
+                <Globe2 size={14} aria-hidden />
+                Go to {game.world!.name}
+              </>
+            ) : (
+              <>
+                <Play size={14} aria-hidden />
+                Play now
+              </>
+            )
           ) : (
             <>
               <Lock size={13} aria-hidden />
@@ -93,6 +118,7 @@ export function GameSectionEyebrow({ variant, children }: SectionEyebrowProps) {
   return (
     <span className={`${styles.sectionEyebrow} ${className}`}>
       {variant === "arcade" && <Gamepad2 size={13} aria-hidden />}
+      {variant === "academic" && <Globe2 size={13} aria-hidden />}
       {children}
     </span>
   );

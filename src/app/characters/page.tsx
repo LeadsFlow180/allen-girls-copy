@@ -189,7 +189,7 @@ export default function CharactersPage() {
                   </div>
                 </div>
 
-                <Link href="/learn" className="zone-btn font-fredoka" style={{ background: c.color, color: i === 1 ? "#1a0a40" : "#fff", width: "fit-content" }}>
+                <Link href="/worlds" className="zone-btn font-fredoka" style={{ background: c.color, color: i === 1 ? "#1a0a40" : "#fff", width: "fit-content" }}>
                   Adventure with {c.name} →
                 </Link>
               </div>
@@ -208,7 +208,7 @@ export default function CharactersPage() {
           <p className="font-nunito" style={{ fontSize: "1rem", color: "rgba(255,255,255,0.9)", marginBottom: "1.5rem" }}>
             Start free and let your child discover which Allen Girl is their perfect guide.
           </p>
-          <Link href="/learn" className="btn-hero-primary">▶ &nbsp;Start Free Today</Link>
+          <Link href="/worlds" className="btn-hero-primary">▶ &nbsp;Start Free Today</Link>
         </div>
       </section>
     </>

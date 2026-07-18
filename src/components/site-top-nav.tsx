@@ -196,7 +196,7 @@ export function SiteTopNav() {
               ))}
               <div className="top-nav-cta-group">
                 <DesktopAccountButton account={account} />
-                <Link href="/learn" className="nav-btn-primary">
+                <Link href="/worlds" className="nav-btn-primary">
                   <span className="nav-cta-long">Join the Fun!</span>
                   <span className="nav-cta-short">Join!</span>
                 </Link>
@@ -328,7 +328,7 @@ export function SiteTopNav() {
               <p className={styles.drawerFooterNote}>
                 Ready to learn, play, and earn rewards?
               </p>
-              <Link href="/learn" className={styles.drawerCta} onClick={closeMenu}>
+              <Link href="/worlds" className={styles.drawerCta} onClick={closeMenu}>
                 <Sparkles size={18} strokeWidth={2.25} aria-hidden />
                 Join the Fun!
               </Link>

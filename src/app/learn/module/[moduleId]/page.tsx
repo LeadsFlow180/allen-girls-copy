@@ -354,7 +354,7 @@ export default function ModulePage() {
             >
               🌍 Back to {worldSlug.replace(/-/g, " ")}
             </Link>
-            <Link href="/learn" style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.82rem", fontFamily: "var(--font-nunito, sans-serif)" }}>
+            <Link href="/worlds" style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.82rem", fontFamily: "var(--font-nunito, sans-serif)" }}>
               ← Kid World Dashboard
             </Link>
           </div>

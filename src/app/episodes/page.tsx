@@ -117,7 +117,7 @@ export default function EpisodesPage() {
           <p className="font-nunito" style={{ fontSize: "1rem", color: "rgba(255,255,255,0.9)", marginBottom: "1.5rem" }}>
             Every episode unlocks activities, quizzes, and adventures on the platform.
           </p>
-          <Link href="/learn" className="btn-hero-primary">▶ &nbsp;Start Learning Free</Link>
+          <Link href="/worlds" className="btn-hero-primary">▶ &nbsp;Start Learning Free</Link>
         </div>
       </section>
     </div>

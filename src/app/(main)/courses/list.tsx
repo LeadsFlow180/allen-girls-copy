@@ -22,7 +22,7 @@ export const List = ({ courses, activeCourseId }: ListProps) => {
   const onClick = (id: number) => {
     if (pending) return;
 
-    if (id === activeCourseId) return router.push("/learn");
+    if (id === activeCourseId) return router.push("/worlds");
 
     startTransition(() => {
       upsertUserProgress(id).catch(() => toast.error("Something went wrong."));

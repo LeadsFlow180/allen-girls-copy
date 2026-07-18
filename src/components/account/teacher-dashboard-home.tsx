@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpen, UserPlus, Users } from "lucide-react";
+import { BookOpen, FileBarChart2, UserPlus, Users } from "lucide-react";
 
 import educator from "./teacher-educator.module.css";
 
@@ -15,6 +15,13 @@ const ACTIONS = [
     hint: "Students, placement, and progress",
     icon: Users,
     tone: "sky" as const,
+  },
+  {
+    href: "/teacher/reports",
+    label: "Games report",
+    hint: "Weekly summary + CSV download",
+    icon: FileBarChart2,
+    tone: "violet" as const,
   },
   {
     href: "/teacher/link-student",

@@ -68,7 +68,12 @@ export function IframeGameShell({ game }: IframeGameShellProps) {
     }
   }, []);
 
-  const backHref = game.gameClass === "academic" ? `/games/${game.id}` : "/games";
+  const backHref =
+    game.gameClass === "academic" && game.worldSlug
+      ? `/worlds/${game.worldSlug}`
+      : game.gameClass === "academic"
+        ? `/games/${game.id}`
+        : "/games";
 
   return (
     <div

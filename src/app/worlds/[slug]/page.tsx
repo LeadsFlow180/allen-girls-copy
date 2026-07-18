@@ -3,15 +3,17 @@
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowLeft, BookOpen, Calculator, Heart, Globe, Lightbulb, ChevronRight } from "lucide-react";
+import { ArrowLeft, BookOpen, Calculator, Heart, Globe, Lightbulb, ChevronRight, Gamepad2 } from "lucide-react";
 import { getWorldBySlug } from "@/lib/worlds";
 import { getWorldContext } from "@/data/lms/worlds-context";
+import { getAcademicGamesForWorld } from "@/data/games/catalog";
 
 export default function WorldDetailPage() {
   const params = useParams();
   const slug = typeof params.slug === "string" ? params.slug : "";
   const world = getWorldBySlug(slug);
   const context = getWorldContext(slug);
+  const academicGames = getAcademicGamesForWorld(slug);
 
   if (!world) {
     return (
@@ -167,6 +169,89 @@ export default function WorldDetailPage() {
               }}
               title={world.name}
             />
+          </motion.div>
+        )}
+
+        {/* ── Academic Adventures in this world ── */}
+        {academicGames.length > 0 && (
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.22 }}
+            style={{
+              background: "#fff",
+              borderRadius: "1.25rem",
+              border: "2px solid #0d6b73",
+              boxShadow: "0 4px 24px rgba(13,107,115,0.12)",
+              padding: "1.75rem",
+              marginTop: "1.5rem",
+            }}
+          >
+            <p
+              className="font-nunito"
+              style={{
+                fontSize: "0.7rem",
+                fontWeight: 800,
+                textTransform: "uppercase",
+                letterSpacing: "0.1em",
+                color: "#0d6b73",
+                margin: "0 0 0.35rem",
+              }}
+            >
+              Academic Adventures
+            </p>
+            <h2 className="font-fredoka" style={{ fontSize: "1.25rem", color: "#1a0a40", margin: "0 0 0.35rem" }}>
+              Learn while you play in {world.name}
+            </h2>
+            <p className="font-nunito" style={{ fontSize: "0.9rem", color: "#6b7280", margin: "0 0 1.1rem", lineHeight: 1.5 }}>
+              These learning games belong to this world — real curriculum questions, real points.
+            </p>
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+              {academicGames.map((game) => (
+                <Link
+                  key={game.id}
+                  href={`/games/${game.id}`}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "0.85rem",
+                    padding: "0.9rem 1rem",
+                    borderRadius: "0.9rem",
+                    background: "linear-gradient(135deg, rgba(46,230,239,0.12), rgba(13,107,115,0.08))",
+                    border: "1px solid rgba(13,107,115,0.25)",
+                    textDecoration: "none",
+                    color: "inherit",
+                  }}
+                >
+                  <span style={{ fontSize: "1.75rem", lineHeight: 1 }} aria-hidden>
+                    {game.emoji}
+                  </span>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <p className="font-fredoka" style={{ margin: 0, fontSize: "1.05rem", color: "#0f172a" }}>
+                      {game.title}
+                    </p>
+                    <p className="font-nunito" style={{ margin: "0.15rem 0 0", fontSize: "0.82rem", color: "#64748b", lineHeight: 1.4 }}>
+                      {game.description}
+                    </p>
+                  </div>
+                  <span
+                    className="font-nunito"
+                    style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.35rem",
+                      flexShrink: 0,
+                      fontWeight: 800,
+                      fontSize: "0.85rem",
+                      color: "#0d6b73",
+                    }}
+                  >
+                    <Gamepad2 style={{ width: "0.95rem", height: "0.95rem" }} />
+                    Play
+                  </span>
+                </Link>
+              ))}
+            </div>
           </motion.div>
         )}
 

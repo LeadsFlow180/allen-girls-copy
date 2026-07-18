@@ -48,8 +48,8 @@ export default function GamesPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className={styles.heroSubtitle}
           >
-            Academic missions, arcade adventures, and creative color labs — pick a game and jump
-            right in!
+            Peek at learning adventures inside the worlds, then play free arcade games and creative
+            color labs!
           </motion.p>
 
           <motion.div
@@ -74,10 +74,11 @@ export default function GamesPage() {
         <section className={styles.section}>
           <div className={styles.sectionInner}>
             <div className={styles.sectionHeader}>
-              <GameSectionEyebrow variant="academic">Learn &amp; Earn</GameSectionEyebrow>
+              <GameSectionEyebrow variant="academic">Learn in the Worlds</GameSectionEyebrow>
               <h2 className={styles.sectionTitle}>Academic Adventures</h2>
               <p className={styles.sectionDesc}>
-                Real curriculum questions inside the game — correct answers earn store points.
+                These games live inside adventure worlds on the globe — not the arcade vault. Tap a
+                card to see which world it belongs to, then play it on your mission.
               </p>
             </div>
             <div className={styles.grid}>
@@ -92,7 +93,7 @@ export default function GamesPage() {
       <section className={`${styles.section} ${styles.sectionAlt}`}>
         <div className={styles.sectionInner}>
           <div className={styles.sectionHeader}>
-            <GameSectionEyebrow variant="arcade">Arcade Adventures</GameSectionEyebrow>
+            <GameSectionEyebrow variant="arcade">Fun Games</GameSectionEyebrow>
             <h2 className={styles.sectionTitle}>Unity Arcade Vault</h2>
             <p className={styles.sectionDesc}>
               Fast-paced browser games — tap, fly, and race without downloading anything.

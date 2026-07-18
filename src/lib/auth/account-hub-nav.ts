@@ -70,6 +70,20 @@ const PARENT_NAV: HubNavItem[] = [
     ],
   },
   {
+    id: "reports",
+    href: "/parent/reports",
+    label: "Reports",
+    shortLabel: "Reports",
+    emoji: "",
+    pageTitle: "Games report",
+    pageLead: "Weekly games summary with download — sessions, accuracy, and points.",
+    howTo: [
+      "Pick 7, 14, or 30 days.",
+      "Download CSV to share or keep for your records.",
+      "Numbers update when learners play while signed in.",
+    ],
+  },
+  {
     id: "approve",
     href: "/account/approve-learner",
     label: "Approve code",
@@ -157,6 +171,20 @@ const TEACHER_NAV: HubNavItem[] = [
     howTo: ["Review student progress from your dashboard.", "Link new students with their learner code."],
   },
   {
+    id: "reports",
+    href: "/teacher/reports",
+    label: "Reports",
+    shortLabel: "Reports",
+    emoji: "📊",
+    pageTitle: "Games report",
+    pageLead: "Weekly class games summary with CSV download.",
+    howTo: [
+      "Pick 7, 14, or 30 days.",
+      "Download CSV for conferences or your records.",
+      "Data appears after students play while signed in.",
+    ],
+  },
+  {
     id: "link-student",
     href: "/teacher/link-student",
     label: "Add student",
@@ -227,10 +255,14 @@ export function isHubNavItemActive(pathname: string, item: HubNavItem, role: Acc
     }
     if (item.id === "add-child") return pathname === "/parent/children/new";
     if (item.id === "dashboard") return pathname.startsWith("/parent/dashboard");
+    if (item.id === "reports") {
+      return pathname.startsWith("/parent/reports") || pathname.startsWith("/parent/progress");
+    }
   }
 
   if (role === "teacher") {
     if (item.id === "classroom") return pathname.startsWith("/teacher/dashboard");
+    if (item.id === "reports") return pathname.startsWith("/teacher/reports");
     if (item.id === "link-student") return pathname.startsWith("/teacher/link-student");
   }
 

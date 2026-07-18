@@ -17,7 +17,8 @@ export function GuardianPageBrief() {
   if (
     pathname === "/parent/children" ||
     pathname === "/account/approve-learner" ||
-    pathname.startsWith("/parent/dashboard")
+    pathname.startsWith("/parent/dashboard") ||
+    pathname.startsWith("/parent/reports")
   ) {
     return null;
   }

@@ -334,7 +334,7 @@ export default function RewardsPage() {
         )}
 
         <div style={{ textAlign: "center", marginTop: "2.5rem" }}>
-          <Link href="/learn" className="font-nunito" style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.85rem" }}>
+          <Link href="/worlds" className="font-nunito" style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.85rem" }}>
             ← Back to Learning
           </Link>
         </div>

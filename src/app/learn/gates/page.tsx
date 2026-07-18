@@ -164,7 +164,7 @@ export default function LearnGatesPage() {
       </section>
 
       <p className="font-nunito" style={{ textAlign: "center", marginTop: 24 }}>
-        <Link href="/learn" style={{ color: "var(--accent)", fontWeight: 700 }}>
+        <Link href="/worlds" style={{ color: "var(--accent)", fontWeight: 700 }}>
           ← Back to Kid World
         </Link>
       </p>

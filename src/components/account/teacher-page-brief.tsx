@@ -10,7 +10,11 @@ import educator from "./teacher-educator.module.css";
 export function TeacherPageBrief() {
   const pathname = usePathname();
 
-  if (pathname === "/account" || pathname.startsWith("/teacher/dashboard")) {
+  if (
+    pathname === "/account" ||
+    pathname.startsWith("/teacher/dashboard") ||
+    pathname.startsWith("/teacher/reports")
+  ) {
     return null;
   }
 

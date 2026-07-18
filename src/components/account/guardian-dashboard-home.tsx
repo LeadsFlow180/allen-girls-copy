@@ -1,6 +1,7 @@
 import Link from "next/link";
 import {
   BarChart3,
+  FileBarChart2,
   KeyRound,
   Lock,
   ShieldCheck,
@@ -49,6 +50,13 @@ const ACTIONS: {
     tone: "emerald",
   },
   {
+    href: "/parent/reports",
+    label: "Games report",
+    hint: "Weekly summary + CSV download",
+    icon: FileBarChart2,
+    tone: "amber",
+  },
+  {
     href: "/account/approve-learner",
     label: "Approve code",
     hint: "Link a child who signed up on their own",
@@ -67,7 +75,7 @@ const TOOL_TONE_CLASS = {
 const GUIDE_STEPS = [
   "Open Family profiles to see every learner linked to your account.",
   "Use Add learner to create a sign-in, or Approve code if they enrolled themselves.",
-  "Check Progress dashboard for slides, quizzes, quests, and skills.",
+  "Check Progress dashboard and Games report for activity and downloads.",
 ] as const;
 
 /** Guardian home — server-rendered so updates appear without a stale client bundle. */

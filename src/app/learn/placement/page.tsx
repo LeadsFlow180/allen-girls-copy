@@ -212,7 +212,7 @@ function PlacementPageContent() {
         }}
       >
         <Link
-          href="/learn"
+          href="/worlds"
           className="font-nunito"
           style={{
             display: "inline-flex",
@@ -227,7 +227,7 @@ function PlacementPageContent() {
           }}
         >
           <ArrowLeft style={{ width: "1.1rem", height: "1.1rem" }} />
-          Back to Kid World
+          Back to worlds
         </Link>
 
         <motion.header
@@ -586,7 +586,7 @@ function PlacementPageContent() {
                   </Link>
                 )}
                 <Link
-                  href="/learn"
+                  href="/worlds"
                   className="font-nunito"
                   style={{
                     textAlign: "center",
@@ -595,7 +595,7 @@ function PlacementPageContent() {
                     fontSize: "0.95rem",
                   }}
                 >
-                  Back to Kid World
+                  Back to worlds
                 </Link>
                 <button
                   type="button"
