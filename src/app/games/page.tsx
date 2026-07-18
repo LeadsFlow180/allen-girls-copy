@@ -6,14 +6,13 @@ import { Sparkles } from "lucide-react";
 
 import gameZoneImg from "@/assets/images/AGA Game Card.png";
 import { GameSectionEyebrow, GameZoneCard } from "@/components/games/game-zone-card";
-import { ARCADE_GAMES, CREATIVE_GAMES } from "@/data/games/catalog";
+import { ACADEMIC_GAMES, ARCADE_GAMES, CREATIVE_GAMES } from "@/data/games/catalog";
 
 import styles from "./games-page.module.css";
 
 export default function GamesPage() {
   return (
     <div className={styles.page}>
-      {/* Hero */}
       <section className={styles.hero}>
         <div className={styles.heroGlow1} aria-hidden />
         <div className={styles.heroGlow2} aria-hidden />
@@ -49,7 +48,8 @@ export default function GamesPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className={styles.heroSubtitle}
           >
-            Arcade adventures, creative color labs, and more — pick a game and jump right in!
+            Academic missions, arcade adventures, and creative color labs — pick a game and jump
+            right in!
           </motion.p>
 
           <motion.div
@@ -70,7 +70,25 @@ export default function GamesPage() {
         </div>
       </section>
 
-      {/* Arcade — iframe Unity / WebGL games */}
+      {ACADEMIC_GAMES.length > 0 && (
+        <section className={styles.section}>
+          <div className={styles.sectionInner}>
+            <div className={styles.sectionHeader}>
+              <GameSectionEyebrow variant="academic">Learn &amp; Earn</GameSectionEyebrow>
+              <h2 className={styles.sectionTitle}>Academic Adventures</h2>
+              <p className={styles.sectionDesc}>
+                Real curriculum questions inside the game — correct answers earn store points.
+              </p>
+            </div>
+            <div className={styles.grid}>
+              {ACADEMIC_GAMES.map((game, i) => (
+                <GameZoneCard key={game.id} game={game} index={i} featured />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className={`${styles.section} ${styles.sectionAlt}`}>
         <div className={styles.sectionInner}>
           <div className={styles.sectionHeader}>
@@ -88,7 +106,6 @@ export default function GamesPage() {
         </div>
       </section>
 
-      {/* Creative —Not native in-app games */}
       <section className={styles.section}>
         <div className={styles.sectionInner}>
           <div className={styles.sectionHeader}>

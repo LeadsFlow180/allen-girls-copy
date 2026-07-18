@@ -106,9 +106,9 @@ For Grades 3–6 we need predictable, standards-aligned content. Use a **content
 
 ```json
 {
-  "skill_id": "G3-MATH-MULT-01",
+  "skill_id": "SK-M3-101",
   "grade": 3,
-  "standard": "multiplication-within-100",
+  "standard": "M3.1 — Build Equal Groups",
   "mission_id": "crystal-generator",
   "variants": {
     "emerging":  ["question_001", "question_002", "question_003"],

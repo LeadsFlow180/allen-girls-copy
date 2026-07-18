@@ -6,6 +6,7 @@ import { NextResponse } from "next/server";
 
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 import { isSupabaseConfigured } from "@/lib/supabase/env";
+import { emptyGamesSummary, fetchGamesSummaryByStudent } from "@/lib/games/fetch-games-summary";
 
 export async function GET() {
   if (!isSupabaseConfigured()) {
@@ -57,6 +58,7 @@ export async function GET() {
     { data: domainTiers },
     { data: wallets },
     { data: studentProfiles },
+    gamesByStudent,
   ] = await Promise.all([
     supabase.from("profiles").select("id, display_name").in("id", studentIds),
     supabase
@@ -76,6 +78,7 @@ export async function GET() {
       .from("student_profiles")
       .select("user_id, student_number")
       .in("user_id", studentIds),
+    fetchGamesSummaryByStudent(supabase, studentIds),
   ]);
 
   // Most recent placement per student
@@ -103,6 +106,8 @@ export async function GET() {
       (student: { user_id: string }) => student.user_id === sid,
     ) as { student_number?: number } | undefined;
 
+    const games = gamesByStudent.get(sid) ?? emptyGamesSummary();
+
     return {
       userId: sid,
       studentNumber: studentProfile?.student_number ?? null,
@@ -112,6 +117,17 @@ export async function GET() {
       overallPercent: score?.overallPercent ?? null,
       domainTiers: tiers,
       points: wallet ? { balance: wallet.balance ?? 0, lifetimeEarned: wallet.lifetime_earned ?? 0 } : null,
+      games: {
+        playSeconds: games.totalPlaySeconds,
+        sessions: games.totalSessions,
+        questionsAsked: games.totalQuestions,
+        questionsCorrect: games.totalCorrect,
+        gamePoints: games.totalGamePoints,
+        accuracyPercent: games.accuracyPercent,
+        strongestSkill: games.strongestSkill,
+        weakestSkill: games.weakestSkill,
+        perGame: games.perGame,
+      },
     };
   });
 

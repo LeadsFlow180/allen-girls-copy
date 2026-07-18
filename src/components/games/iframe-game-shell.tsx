@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useRef } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { ArrowLeft, ExternalLink, Maximize2 } from "lucide-react";
 
 import type { IframeGameData } from "@/data/games/catalog";
@@ -12,9 +12,51 @@ type IframeGameShellProps = {
   game: IframeGameData;
 };
 
+/**
+ * Starts a game_sessions row when the player opens the game, and closes it on
+ * leave. If Supabase tables aren't ready yet (or the student isn't signed in),
+ * the game still plays — we just skip recording.
+ */
+function useGameSession(gameSlug: string) {
+  const sessionIdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    void (async () => {
+      try {
+        const res = await fetch("/api/games/session/start", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ gameSlug }),
+        });
+        if (!res.ok || cancelled) return;
+        const data = (await res.json()) as { sessionId?: string };
+        if (data.sessionId) sessionIdRef.current = data.sessionId;
+      } catch {
+        /* offline / tables not migrated yet — play anyway */
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      const id = sessionIdRef.current;
+      if (!id) return;
+      // keepalive so the request survives page navigation
+      void fetch("/api/games/session/complete", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sessionId: id }),
+        keepalive: true,
+      }).catch(() => {});
+    };
+  }, [gameSlug]);
+}
+
 export function IframeGameShell({ game }: IframeGameShellProps) {
   const frameRef = useRef<HTMLDivElement>(null);
   const { embedUrl, embedHeight } = game;
+  useGameSession(game.id);
 
   const handleFullscreen = useCallback(() => {
     const el = frameRef.current;
@@ -26,6 +68,8 @@ export function IframeGameShell({ game }: IframeGameShellProps) {
     }
   }, []);
 
+  const backHref = game.gameClass === "academic" ? `/games/${game.id}` : "/games";
+
   return (
     <div
       className={styles.shell}
@@ -36,9 +80,9 @@ export function IframeGameShell({ game }: IframeGameShellProps) {
       <div className={styles.stars} aria-hidden />
 
       <header className={styles.header}>
-        <Link href="/games" className={styles.backLink}>
+        <Link href={backHref} className={styles.backLink}>
           <ArrowLeft size={16} aria-hidden />
-          All games
+          {game.gameClass === "academic" ? "Game info" : "All games"}
         </Link>
 
         <div className={styles.titleBlock}>
@@ -89,7 +133,8 @@ export function IframeGameShell({ game }: IframeGameShellProps) {
             Open {game.title} in a new tab
           </a>
           <span className={styles.tip}>
-            Tip: Unity games may take a moment to load — click inside the frame to start playing.
+            Tip: click inside the frame to start. Academic games save progress when you&apos;re
+            signed in (after the database tables are connected).
           </span>
         </p>
       </main>

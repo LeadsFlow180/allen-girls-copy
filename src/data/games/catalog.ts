@@ -1,7 +1,17 @@
 import type { LucideIcon } from "lucide-react";
-import { Bike, Bird, Cat, CircleDot, Palette, School, Sparkles } from "lucide-react";
+import { Bike, Bird, Cat, CircleDot, Mountain, Palette, School, Sparkles } from "lucide-react";
 
 export type GameKind = "native" | "iframe";
+
+// ── GAME-MASTER-SPEC §2 fields ─────────────────────────────────────────
+export type GameClass = "academic" | "arcade";
+export type IntegrationMode = "overlay" | "native";
+export type WrongAnswerPolicy = "soft" | "gate";
+
+export type QuestionCadence = {
+  kind: "per_checkpoint" | "per_minutes" | "per_level";
+  value: number;
+};
 
 export type GameCatalogEntry = {
   id: string;
@@ -11,6 +21,18 @@ export type GameCatalogEntry = {
   href: string;
   available: boolean;
   icon: LucideIcon;
+  /** GAME-MASTER-SPEC: 'academic' asks curriculum questions + earns real points; 'arcade' is pure fun */
+  gameClass: GameClass;
+  /** How questions get in — academic games only */
+  integration?: IntegrationMode;
+  /** 'soft' (play continues) or 'gate' (blocks until correct) — academic only */
+  wrongAnswerPolicy?: WrongAnswerPolicy;
+  /** Curriculum skills practiced (content-bank skill IDs) — required non-empty for academic */
+  skillIds: string[];
+  gradeLevels: number[];
+  subjects: Array<"ela" | "math">;
+  /** How often a question appears — academic only */
+  questionCadence?: QuestionCadence;
   /** Short label shown on the card badge */
   badge: string;
   /** CSS gradient for card background */
@@ -26,9 +48,38 @@ export type GameCatalogEntry = {
 };
 
 export const GAME_CATALOG: GameCatalogEntry[] = [
+  // ── Academic (curriculum questions + wallet points) ───────────────────
+  {
+    id: "jurassic-journey",
+    gameClass: "academic",
+    integration: "native",
+    wrongAnswerPolicy: "soft",
+    skillIds: ["SK-M3-101"],
+    gradeLevels: [3, 4, 5],
+    subjects: ["math"],
+    questionCadence: { kind: "per_checkpoint", value: 1 },
+    title: "Jurassic Journey",
+    description:
+      "Roll a gyrosphere through 8 volcanic levels — math checkpoints power the escape!",
+    kind: "iframe",
+    href: "/games/jurassic-journey",
+    available: true,
+    icon: Mountain,
+    badge: "Academic · Math",
+    gradient: "linear-gradient(145deg, #180f28 0%, #2a1848 45%, #0d6b73 100%)",
+    accent: "#2ee6ef",
+    emoji: "🌋",
+    embedUrl: "/games/jurassic-journey/index.html",
+    embedHeight: 720,
+  },
+
   // ── Arcade (iframe Unity / WebGL) ─────────────────────────────────────
   {
     id: "penguin-flapper",
+    gameClass: "arcade",
+    skillIds: [],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: [],
     title: "Penguin Flapper",
     description: "Tap to fly! Dodge icy obstacles and soar through the arctic sky.",
     kind: "iframe",
@@ -44,6 +95,10 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
   },
   {
     id: "skid-runner",
+    gameClass: "arcade",
+    skillIds: [],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: [],
     title: "Skid Runner",
     description: "Run, jump, and explore as a brave cat on a 2D platform adventure!",
     kind: "iframe",
@@ -59,6 +114,10 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
   },
   {
     id: "bike-wheel",
+    gameClass: "arcade",
+    skillIds: [],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: [],
     title: "Bike Wheel",
     description: "Pop wheelies and race through tricky tracks on your moto bike!",
     kind: "iframe",
@@ -74,6 +133,10 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
   },
   {
     id: "town-school",
+    gameClass: "arcade",
+    skillIds: [],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: [],
     title: "Town School",
     description: "Explore a lively town school — discover, learn, and play along the way!",
     kind: "iframe",
@@ -89,6 +152,10 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
   },
   {
     id: "dot-physics",
+    gameClass: "arcade",
+    skillIds: [],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: [],
     title: "Dot Physics",
     description: "Use physics and clever moves to roll the ball into the jar!",
     kind: "iframe",
@@ -106,6 +173,10 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
   // ── Creative (native in-app games) ────────────────────────────────────
   {
     id: "butterfly-lab",
+    gameClass: "arcade",
+    skillIds: [],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: [],
     title: "Butterfly Sisters Color Lab",
     description: "Pick a color and tap numbered sections on the butterfly!",
     kind: "native",
@@ -119,6 +190,10 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
   },
   {
     id: "color-quest",
+    gameClass: "arcade",
+    skillIds: [],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: [],
     title: "Color Quest",
     description: "Color by numbers to light up magical scenes.",
     kind: "native",
@@ -132,8 +207,13 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
   },
 ];
 
-export const ARCADE_GAMES = GAME_CATALOG.filter((g) => g.kind === "iframe");
-export const CREATIVE_GAMES = GAME_CATALOG.filter((g) => g.kind === "native");
+export const ACADEMIC_GAMES = GAME_CATALOG.filter((g) => g.gameClass === "academic");
+export const ARCADE_GAMES = GAME_CATALOG.filter(
+  (g) => g.gameClass === "arcade" && g.kind === "iframe",
+);
+export const CREATIVE_GAMES = GAME_CATALOG.filter(
+  (g) => g.gameClass === "arcade" && g.kind === "native",
+);
 
 export function getGameById(id: string): GameCatalogEntry | undefined {
   return GAME_CATALOG.find((g) => g.id === id);
@@ -154,6 +234,7 @@ export type IframeGameData = {
   emoji: string;
   embedUrl: string;
   embedHeight: number;
+  gameClass: GameClass;
 };
 
 export function toIframeGameData(game: GameCatalogEntry): IframeGameData {
@@ -166,5 +247,6 @@ export function toIframeGameData(game: GameCatalogEntry): IframeGameData {
     emoji: game.emoji,
     embedUrl: game.embedUrl ?? "",
     embedHeight: game.embedHeight ?? 640,
+    gameClass: game.gameClass,
   };
 }

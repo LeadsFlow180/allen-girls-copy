@@ -8,6 +8,7 @@ import {
   ChevronUp,
   Compass,
   Flame,
+  Gamepad2,
   Hash,
   MapPin,
   Presentation,
@@ -47,8 +48,20 @@ const EVENT_LABELS: Record<string, string> = {
   streak_milestone: "Streak milestone",
   first_time_bonus: "First-time bonus",
   clean_run_bonus: "Clean run bonus",
+  game_question_correct: "Game question correct",
+  game_session_complete: "Finished a game",
   redeem: "Spent in store",
 };
+
+/** Turn seconds of playtime into a short human label like "12m" or "1h 5m". */
+function formatPlaytime(totalSeconds: number): string {
+  if (totalSeconds <= 0) return "0m";
+  const mins = Math.round(totalSeconds / 60);
+  if (mins < 60) return `${mins}m`;
+  const hrs = Math.floor(mins / 60);
+  const rem = mins % 60;
+  return rem > 0 ? `${hrs}h ${rem}m` : `${hrs}h`;
+}
 
 function PercentBar({ pct, color }: { pct: number; color: string }) {
   return (
@@ -117,6 +130,17 @@ function buildMetrics(child: ChildData): MetricDef[] {
       Icon: Sparkles,
       label: "Sanctuary",
       value: `${child.butterflies.length}`,
+    },
+    {
+      key: "games",
+      Icon: Gamepad2,
+      label: "Game time",
+      value:
+        child.games.totalPlaySeconds > 0
+          ? formatPlaytime(child.games.totalPlaySeconds)
+          : child.games.totalSessions > 0
+            ? "<1m"
+            : "—",
     },
   ];
 }
@@ -241,6 +265,76 @@ function ChildCard({ child, defaultOpen }: { child: ChildData; defaultOpen?: boo
                       </div>
                     )}
                   </div>
+                </section>
+              )}
+
+              {(child.games.totalSessions > 0 || child.games.perGame.length > 0) && (
+                <section className={styles.insightSection}>
+                  <p className={styles.panelTitle}>
+                    <Gamepad2
+                      size={14}
+                      strokeWidth={2.25}
+                      aria-hidden
+                      style={{ display: "inline", marginRight: 6, verticalAlign: "-2px" }}
+                    />
+                    Games
+                  </p>
+
+                  <div className={styles.gamesStatRow}>
+                    <div className={styles.gamesStat}>
+                      <span className={styles.gamesStatValue}>
+                        {formatPlaytime(child.games.totalPlaySeconds)}
+                      </span>
+                      <span className={styles.gamesStatLabel}>Time played</span>
+                    </div>
+                    <div className={styles.gamesStat}>
+                      <span className={styles.gamesStatValue}>
+                        {child.games.totalCorrect}/{child.games.totalQuestions}
+                      </span>
+                      <span className={styles.gamesStatLabel}>
+                        Questions{" "}
+                        {child.games.accuracyPercent != null
+                          ? `· ${child.games.accuracyPercent}%`
+                          : ""}
+                      </span>
+                    </div>
+                    <div className={styles.gamesStat}>
+                      <span className={styles.gamesStatValue}>{child.games.totalGamePoints}</span>
+                      <span className={styles.gamesStatLabel}>Points earned</span>
+                    </div>
+                  </div>
+
+                  {child.games.perGame.map((g) => (
+                    <div key={g.gameSlug} className={styles.activityRow}>
+                      <span className={styles.activityLabel}>
+                        {g.gameTitle}
+                        {g.gameClass === "arcade" ? " (arcade)" : ""}
+                      </span>
+                      <span className={styles.gamesPerGameMeta}>
+                        {g.gameClass === "academic"
+                          ? `${g.questionsCorrect}/${g.questionsAsked} · ${formatPlaytime(g.playSeconds)}`
+                          : formatPlaytime(g.playSeconds)}
+                      </span>
+                    </div>
+                  ))}
+
+                  {(child.games.strongestSkill || child.games.weakestSkill) && (
+                    <p className={styles.gamesSkillNote}>
+                      {child.games.strongestSkill && (
+                        <>Strongest: {child.games.strongestSkill.skillId} (
+                        {child.games.strongestSkill.accuracyPercent}%)</>
+                      )}
+                      {child.games.strongestSkill &&
+                        child.games.weakestSkill &&
+                        child.games.weakestSkill.skillId !== child.games.strongestSkill.skillId &&
+                        " · "}
+                      {child.games.weakestSkill &&
+                        child.games.weakestSkill.skillId !== child.games.strongestSkill?.skillId && (
+                          <>Needs work: {child.games.weakestSkill.skillId} (
+                          {child.games.weakestSkill.accuracyPercent}%)</>
+                        )}
+                    </p>
+                  )}
                 </section>
               )}
 

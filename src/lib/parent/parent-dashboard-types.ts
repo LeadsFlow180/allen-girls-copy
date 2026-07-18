@@ -93,6 +93,29 @@ export type ParentDashboardChildExtended = {
   };
 };
 
+export type ParentDashboardGameStat = {
+  gameSlug: string;
+  gameTitle: string;
+  gameClass: "academic" | "arcade";
+  sessions: number;
+  playSeconds: number;
+  questionsAsked: number;
+  questionsCorrect: number;
+  pointsEarned: number;
+};
+
+export type ParentDashboardGamesSummary = {
+  totalPlaySeconds: number;
+  totalSessions: number;
+  totalQuestions: number;
+  totalCorrect: number;
+  totalGamePoints: number;
+  accuracyPercent: number | null;
+  perGame: ParentDashboardGameStat[];
+  strongestSkill: { skillId: string; accuracyPercent: number; attempts: number } | null;
+  weakestSkill: { skillId: string; accuracyPercent: number; attempts: number } | null;
+};
+
 export type ParentDashboardChild = {
   userId: string;
   studentNumber: number;
@@ -116,4 +139,5 @@ export type ParentDashboardChild = {
   butterflies: { speciesKey: string; label: string; earnedAt: string }[];
   recentActivity: { eventType: string; amount: number; createdAt: string }[];
   progress: ParentDashboardChildExtended;
+  games: ParentDashboardGamesSummary;
 };

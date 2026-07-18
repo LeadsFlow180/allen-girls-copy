@@ -558,3 +558,54 @@
   background: var(--gold-50);
   border: 1px solid var(--orange-200);
 }
+
+/* ── Games card ─────────────────────────────────────────────────────── */
+.gamesStatRow {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+}
+
+.gamesStat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 0.5rem;
+  background: var(--slate-50, #f8fafc);
+  border: 1px solid var(--slate-100, #f1f5f9);
+}
+
+.gamesStatValue {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--aga-navy, #0f172a);
+  font-variant-numeric: tabular-nums;
+}
+
+.gamesStatLabel {
+  font-family: var(--font-body);
+  font-size: 0.62rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--slate-500, #64748b);
+}
+
+.gamesPerGameMeta {
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--slate-600, #475569);
+  font-variant-numeric: tabular-nums;
+}
+
+.gamesSkillNote {
+  margin: 0.5rem 0 0;
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  color: var(--slate-500, #64748b);
+  line-height: 1.4;
+}

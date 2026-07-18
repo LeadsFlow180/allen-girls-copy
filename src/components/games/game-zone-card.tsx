@@ -78,13 +78,17 @@ export function GameZoneCard({ game, index, featured }: GameZoneCardProps) {
 }
 
 type SectionEyebrowProps = {
-  variant: "arcade" | "creative";
+  variant: "arcade" | "creative" | "academic";
   children: React.ReactNode;
 };
 
 export function GameSectionEyebrow({ variant, children }: SectionEyebrowProps) {
   const className =
-    variant === "arcade" ? styles.sectionEyebrowArcade : styles.sectionEyebrowCreative;
+    variant === "arcade"
+      ? styles.sectionEyebrowArcade
+      : variant === "academic"
+        ? styles.sectionEyebrowAcademic
+        : styles.sectionEyebrowCreative;
 
   return (
     <span className={`${styles.sectionEyebrow} ${className}`}>

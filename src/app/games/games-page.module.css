@@ -126,6 +126,11 @@
   color: var(--sky-700);
 }
 
+.sectionEyebrowAcademic {
+  background: rgba(46, 230, 239, 0.14);
+  color: #0d6b73;
+}
+
 .sectionEyebrowCreative {
   background: rgba(124, 34, 197, 0.1);
   color: var(--primary);

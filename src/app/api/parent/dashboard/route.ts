@@ -5,6 +5,7 @@
 import { NextResponse } from "next/server";
 
 import { fetchExtendedProgressByStudent } from "@/lib/parent/fetch-child-extended-progress";
+import { emptyGamesSummary, fetchGamesSummaryByStudent } from "@/lib/games/fetch-games-summary";
 import type { ParentDashboardChild } from "@/lib/parent/parent-dashboard-types";
 import { createServiceRoleSupabaseClient } from "@/lib/supabase/admin";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
@@ -58,6 +59,7 @@ export async function GET() {
     butterfliesRes,
     transactionsRes,
     extendedByStudent,
+    gamesByStudent,
   ] = await Promise.all([
     readDb.from("profiles").select("id, display_name").in("id", studentIds),
     readDb
@@ -88,6 +90,7 @@ export async function GET() {
       .order("created_at", { ascending: false })
       .limit(50),
     fetchExtendedProgressByStudent(readDb, studentIds),
+    fetchGamesSummaryByStudent(readDb, studentIds),
   ]);
 
   const profilesData = profilesRes.data;
@@ -217,6 +220,7 @@ export async function GET() {
             modulesCleared: 0,
           },
         },
+      games: gamesByStudent.get(sid) ?? emptyGamesSummary(),
     };
   });
 

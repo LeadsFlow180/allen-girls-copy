@@ -8,6 +8,27 @@ import classroom from "@/components/teacher/teacher-classroom.module.css";
 import { formatStudentNumber } from "@/lib/student/format-student-number";
 
 type DomainTier = { domain: string; tier: string; percent: number };
+type GameSkill = { skillId: string; accuracyPercent: number; attempts: number } | null;
+type StudentGames = {
+  playSeconds: number;
+  sessions: number;
+  questionsAsked: number;
+  questionsCorrect: number;
+  gamePoints: number;
+  accuracyPercent: number | null;
+  strongestSkill: GameSkill;
+  weakestSkill: GameSkill;
+  perGame: {
+    gameSlug: string;
+    gameTitle: string;
+    gameClass: "academic" | "arcade";
+    sessions: number;
+    playSeconds: number;
+    questionsAsked: number;
+    questionsCorrect: number;
+    pointsEarned: number;
+  }[];
+};
 type StudentRow = {
   userId: string;
   studentNumber: number | null;
@@ -17,7 +38,17 @@ type StudentRow = {
   overallPercent: number | null;
   domainTiers: DomainTier[];
   points: { balance: number; lifetimeEarned: number } | null;
+  games?: StudentGames;
 };
+
+function formatPlaytime(totalSeconds: number): string {
+  if (!totalSeconds || totalSeconds <= 0) return "0m";
+  const mins = Math.round(totalSeconds / 60);
+  if (mins < 60) return `${mins}m`;
+  const hrs = Math.floor(mins / 60);
+  const rem = mins % 60;
+  return rem > 0 ? `${hrs}h ${rem}m` : `${hrs}h`;
+}
 
 type DashboardData = {
   inviteCode: string | null;
@@ -105,12 +136,21 @@ export default function TeacherDashboardPage() {
     if (s.placementTier) tierCounts[s.placementTier] = (tierCounts[s.placementTier] ?? 0) + 1;
   }
 
+  const gameQuestionsAsked = students.reduce((n, s) => n + (s.games?.questionsAsked ?? 0), 0);
+  const gameQuestionsCorrect = students.reduce((n, s) => n + (s.games?.questionsCorrect ?? 0), 0);
+  const classGameAccuracy =
+    gameQuestionsAsked > 0 ? Math.round((gameQuestionsCorrect / gameQuestionsAsked) * 100) : null;
+
   const stats = [
     { label: "Students", value: `${students.length}` },
     { label: "Class Average", value: avgPercent !== null ? `${avgPercent}%` : "—" },
     { label: "Emerging", value: `${tierCounts.emerging ?? 0}` },
     { label: "On Track", value: `${tierCounts.on_track ?? 0}` },
     { label: "Stretch", value: `${tierCounts.stretch ?? 0}` },
+    {
+      label: "Game Q's",
+      value: gameQuestionsAsked > 0 ? `${gameQuestionsAsked}${classGameAccuracy !== null ? ` · ${classGameAccuracy}%` : ""}` : "—",
+    },
   ];
 
   return (
@@ -254,6 +294,50 @@ export default function TeacherDashboardPage() {
                             ⭐ {student.points?.lifetimeEarned.toLocaleString() ?? 0} lifetime pts
                           </span>
                         </div>
+                        {student.games && student.games.sessions > 0 ? (
+                          <div className={`font-nunito ${classroom.tagRow}`} style={{ marginTop: 8 }}>
+                            <span
+                              className={classroom.domainTag}
+                              style={{ color: "#0d6b73", borderColor: "#a5f3fc" }}
+                            >
+                              🎮 {formatPlaytime(student.games.playSeconds)} played
+                            </span>
+                            {student.games.questionsAsked > 0 ? (
+                              <span
+                                className={classroom.domainTag}
+                                style={{ color: "#0369a1", borderColor: "#bae6fd" }}
+                              >
+                                {student.games.questionsCorrect}/{student.games.questionsAsked} correct
+                                {student.games.accuracyPercent !== null
+                                  ? ` · ${student.games.accuracyPercent}%`
+                                  : ""}
+                              </span>
+                            ) : null}
+                            <span className={classroom.pointsTag}>
+                              ⭐ {student.games.gamePoints} game pts
+                            </span>
+                            {student.games.strongestSkill ? (
+                              <span
+                                className={classroom.domainTag}
+                                style={{ color: "#15803d", borderColor: "#bbf7d0" }}
+                              >
+                                Strongest: {student.games.strongestSkill.skillId} (
+                                {student.games.strongestSkill.accuracyPercent}%)
+                              </span>
+                            ) : null}
+                            {student.games.weakestSkill &&
+                            student.games.weakestSkill.skillId !==
+                              student.games.strongestSkill?.skillId ? (
+                              <span
+                                className={classroom.domainTag}
+                                style={{ color: "#b45309", borderColor: "#fde68a" }}
+                              >
+                                Needs work: {student.games.weakestSkill.skillId} (
+                                {student.games.weakestSkill.accuracyPercent}%)
+                              </span>
+                            ) : null}
+                          </div>
+                        ) : null}
                         <p className={`font-nunito ${classroom.linkedAt}`}>
                           Linked {new Date(student.linkedAt).toLocaleDateString()}
                         </p>

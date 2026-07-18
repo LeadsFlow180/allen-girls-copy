@@ -24,6 +24,8 @@ export type PointEventType =
   | "streak_milestone"
   | "clean_run_bonus"
   | "placement_complete"
+  | "game_question_correct"
+  | "game_session_complete"
   | "redeem";
 
 type AwardOpts = {
