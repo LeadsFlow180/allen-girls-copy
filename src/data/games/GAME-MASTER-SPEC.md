@@ -163,10 +163,10 @@ Skid Runner this week, 83% correct, mostly independent").
 
 ---
 
-## 7. Database plan (migration `024_game_engine.sql`)
+## 7. Database (migration `024_game_engine.sql` — **applied**)
 
-Builds the two tables PROGRESSION-SPEC already calls for (they don't exist yet) plus a
-game session table. Sketch — exact SQL written at build time:
+Creates the two tables PROGRESSION-SPEC calls for plus a game session table.
+Canonical SQL lives in `src/data/supabase/024_game_engine.sql` and has been run in Supabase:
 
 ```sql
 -- 7.1 Every scored interaction, from ANY source (games, missions, gateways, reviews)

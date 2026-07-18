@@ -156,7 +156,7 @@ Mastery engine takes over from here (games + missions refine the band)
 
 - Also keep writing the existing `placement_results` + `student_domain_tiers` rows so the current
   parent/teacher dashboards keep working during the transition.
-- `student_skill_mastery` is created by **migration 024** (already written, awaiting run).
+- `student_skill_mastery` is created by **migration 024** (**applied** in Supabase).
 
 ---
 

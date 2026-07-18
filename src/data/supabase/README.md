@@ -243,3 +243,25 @@ This command refreshes Section 1 content in-place and tags inserted questions wi
 
 Run **`src/data/supabase/013_learn_daily_quests.sql`** only when you want quest claim state synced across devices for guests or signed-in learners.
 
+## 15. Game engine + mastery (run `024_game_engine.sql`) — **applied**
+
+**Status: applied in Supabase (2026-07-18).**
+
+Creates the academic-game + mastery tables used by games APIs and parent/teacher dashboards:
+
+| Table | Purpose |
+|-------|---------|
+| `skill_attempts` | Every scored question attempt (games, missions, etc.) |
+| `student_skill_mastery` | Rolling per-skill band + mastery scores |
+| `game_sessions` | Each play session (academic or arcade) |
+
+App pieces that write/read these tables:
+
+- `POST /api/games/session/start`
+- `GET`/`POST /api/games/question` + `/api/games/attempt`
+- `POST /api/games/session/complete`
+- Parent/teacher dashboard game summaries (`src/lib/games/fetch-games-summary.ts`)
+- Mastery engine (`src/lib/lms/mastery/engine.ts`)
+
+If you ever rebuild a fresh project, re-run **`src/data/supabase/024_game_engine.sql`** in the SQL Editor after the earlier migrations.
+
