@@ -12,16 +12,98 @@ type IframeGameShellProps = {
   game: IframeGameData;
 };
 
+type PendingAttempt = {
+  skillId: string;
+  subject: string | null;
+  lessonName: string | null;
+  correct: boolean;
+  firstTry: boolean;
+};
+
+const FLUSH_INTERVAL_MS = 4000;
+const MAX_BUFFERED_ATTEMPTS = 500;
+
 /**
- * Starts a game_sessions row when the player opens the game, and closes it on
- * leave. If Supabase tables aren't ready yet (or the student isn't signed in),
- * the game still plays — we just skip recording.
+ * Opens a game_sessions row, then bridges the game → platform:
+ *  - listens for same-origin postMessages from the game (source:'aga-game')
+ *  - buffers answered questions + latest coin total
+ *  - flushes to /api/games/report so answers feed dashboards and coins become
+ *    real, capped store points
+ *  - closes the session on leave
+ *
+ * If Supabase isn't ready or the child isn't signed in as a student, the game
+ * still plays — we just skip recording.
  */
-function useGameSession(gameSlug: string) {
+function useGameBridge(gameSlug: string) {
   const sessionIdRef = useRef<string | null>(null);
+  const attemptsRef = useRef<PendingAttempt[]>([]);
+  const coinsTotalRef = useRef<number>(0);
+  const dirtyRef = useRef<boolean>(false);
+  const sendingRef = useRef<boolean>(false);
 
   useEffect(() => {
     let cancelled = false;
+
+    const flush = (keepalive: boolean) => {
+      const id = sessionIdRef.current;
+      if (!id) return;
+      if (!dirtyRef.current) return;
+      if (sendingRef.current && !keepalive) return;
+
+      const attempts = attemptsRef.current;
+      attemptsRef.current = [];
+      dirtyRef.current = false;
+      sendingRef.current = true;
+
+      const body = JSON.stringify({
+        sessionId: id,
+        attempts,
+        coinsTotal: coinsTotalRef.current,
+      });
+
+      void fetch("/api/games/report", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body,
+        keepalive,
+      })
+        .catch(() => {
+          // best-effort re-queue for the next interval flush
+          if (!keepalive) {
+            attemptsRef.current = [...attempts, ...attemptsRef.current].slice(-MAX_BUFFERED_ATTEMPTS);
+            dirtyRef.current = true;
+          }
+        })
+        .finally(() => {
+          sendingRef.current = false;
+        });
+    };
+
+    const onMessage = (e: MessageEvent) => {
+      if (e.origin !== window.location.origin) return;
+      const d = e.data as
+        | { source?: string; type?: string; skillId?: unknown; subject?: unknown; lessonName?: unknown; correct?: unknown; firstTry?: unknown; total?: unknown }
+        | null;
+      if (!d || d.source !== "aga-game") return;
+
+      if (d.type === "attempt" && typeof d.skillId === "string") {
+        if (attemptsRef.current.length < MAX_BUFFERED_ATTEMPTS) {
+          attemptsRef.current.push({
+            skillId: d.skillId,
+            subject: typeof d.subject === "string" ? d.subject : null,
+            lessonName: typeof d.lessonName === "string" ? d.lessonName : null,
+            correct: d.correct === true,
+            firstTry: d.firstTry !== false,
+          });
+          dirtyRef.current = true;
+        }
+      } else if (d.type === "coins" && typeof d.total === "number") {
+        coinsTotalRef.current = Math.max(coinsTotalRef.current, d.total);
+        dirtyRef.current = true;
+      }
+    };
+
+    window.addEventListener("message", onMessage);
 
     void (async () => {
       try {
@@ -32,21 +114,32 @@ function useGameSession(gameSlug: string) {
         });
         if (!res.ok || cancelled) return;
         const data = (await res.json()) as { sessionId?: string };
-        if (data.sessionId) sessionIdRef.current = data.sessionId;
+        if (data.sessionId) {
+          sessionIdRef.current = data.sessionId;
+          flush(false); // send anything buffered before the session opened
+        }
       } catch {
         /* offline / tables not migrated yet — play anyway */
       }
     })();
 
+    const interval = window.setInterval(() => flush(false), FLUSH_INTERVAL_MS);
+    const onHide = () => flush(true);
+    window.addEventListener("pagehide", onHide);
+
     return () => {
       cancelled = true;
+      window.clearInterval(interval);
+      window.removeEventListener("message", onMessage);
+      window.removeEventListener("pagehide", onHide);
+      flush(true);
+
       const id = sessionIdRef.current;
       if (!id) return;
-      // keepalive so the request survives page navigation
       void fetch("/api/games/session/complete", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ sessionId: id }),
+        body: JSON.stringify({ sessionId: id, funCoins: coinsTotalRef.current }),
         keepalive: true,
       }).catch(() => {});
     };
@@ -55,7 +148,7 @@ function useGameSession(gameSlug: string) {
 
 export function IframeGameShell({ game }: IframeGameShellProps) {
   const frameRef = useRef<HTMLDivElement>(null);
-  useGameSession(game.id);
+  useGameBridge(game.id);
 
   const handleFullscreen = useCallback(() => {
     const el = frameRef.current;

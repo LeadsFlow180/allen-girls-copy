@@ -1,8 +1,9 @@
 /**
  * POST /api/games/session/complete
- * Closes a game session: records duration + arcade fun-coins (decoration only),
- * and pays the +5 completion bonus for academic sessions with ≥ 3 answered
- * questions (subject to the daily game cap).
+ * Closes a game session: records duration + the final coin total, and pays the
+ * +5 completion bonus for academic sessions with ≥ 3 answered questions
+ * (subject to the daily game cap). Coins are converted to store points live
+ * during play by /api/games/report, so this route does NOT re-award them.
  *
  * Body: { sessionId: string, funCoins?: number }
  * Returns: { ok, bonusAwarded, totals }
@@ -87,7 +88,7 @@ export async function POST(request: Request) {
     .update({
       ended_at: endedAt.toISOString(),
       duration_seconds: durationSeconds,
-      // Fun coins are decoration — stored for the session record, never converted.
+      // Final coin total for the record; points were already minted by /report.
       fun_coins: parsed.data.funCoins ?? 0,
       points_awarded: (session.points_awarded as number) + bonusAwarded,
     })

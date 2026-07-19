@@ -19,6 +19,13 @@ const GAME_QUESTION_RATES: Record<Band, [number, number, number]> = {
 export const SESSION_COMPLETE_BONUS = 5;
 export const SESSION_BONUS_MIN_QUESTIONS = 3;
 
+/**
+ * How many store points one in-game coin/gem/jewel is worth.
+ * Every game's collectible currency converts to real store points at this rate
+ * (still subject to the daily cap below so games can't be farmed).
+ */
+export const COIN_TO_POINTS = 1;
+
 /** Wallet points from games max out at 60/day (mastery still records past it). */
 export const GAME_DAILY_POINT_CAP = 60;
 
@@ -39,7 +46,7 @@ export async function gamePointsEarnedToday(
     .from("point_transactions")
     .select("amount, event_type, created_at")
     .eq("student_user_id", studentId)
-    .in("event_type", ["game_question_correct", "game_session_complete"])
+    .in("event_type", ["game_question_correct", "game_session_complete", "game_coins"])
     .gte("created_at", dayStart);
 
   return (data ?? []).reduce((sum, row) => sum + Math.max(0, row.amount as number), 0);

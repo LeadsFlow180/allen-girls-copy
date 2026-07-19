@@ -7,6 +7,24 @@ import { ASSETS } from "./assets-config.js";
 import { AudioEngine } from "./audio.js";
 import { mulberry32, makeProblem, FAMILY_LABELS, makeProblemG4, FAMILY_LABELS_G4, makeProblemG5, FAMILY_LABELS_G5 } from "./mathgen.js";
 
+// ── AGA platform bridge ────────────────────────────────────────────────
+// Tells the Allen Girls Adventures site when a checkpoint question is answered
+// and how many jewels (coins) have been earned, so real store points +
+// parent/teacher reports work. Safe no-op when played outside the site.
+function agaPost(msg) {
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage(Object.assign({ source: "aga-game" }, msg), window.location.origin);
+    }
+  } catch (e) { /* not embedded — ignore */ }
+}
+let _agaLastCoins = -1;
+function agaReportCoins(total) {
+  if (typeof total !== "number" || total === _agaLastCoins) return;
+  _agaLastCoins = total;
+  agaPost({ type: "coins", total });
+}
+
 // ---------------------------------------------------------------- constants
 const STEP = 1 / 60;
 const GRAV = 22;
@@ -2401,6 +2419,7 @@ export class Game {
       store[fam].seen++;
       if (!correct) store[fam].missed++;
     }
+    agaPost({ type: "attempt", skillId: "JJ-" + fam, subject: "math", correct: !!correct, firstTry: !!correct });
   }
   openQuiz(e) {
     if (this.state !== "playing" || e.solved || this.quizEnt === e && this.state === "quiz") return;
@@ -3019,6 +3038,7 @@ export class Game {
     timer.classList.toggle("danger", t < 20);
     $("hudScore").textContent = `${STR.score}: ${this.score}`;
     $("hudJewels").textContent = `\u25C6 ${this.jewels}`;
+    agaReportCoins(this.jewels);
     $("hudPasses").textContent = STR.hudPasses(this.passesLeft === undefined ? 2 : this.passesLeft);
 {
       const box = $("hudLives");

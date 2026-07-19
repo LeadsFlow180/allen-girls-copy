@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Bike, Bird, Cat, CircleDot, Mountain, Palette, School, Sparkles } from "lucide-react";
+import { Bike, Bird, Cat, CircleDot, Cpu, Mountain, Palette, School, Sparkles } from "lucide-react";
 
 export type GameKind = "native" | "iframe";
 
@@ -86,6 +86,40 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     accent: "#2ee6ef",
     emoji: "🌋",
     embedUrl: "/games/jurassic-journey/index.html",
+    embedHeight: 720,
+  },
+  {
+    id: "screen-hop",
+    gameClass: "academic",
+    integration: "native",
+    wrongAnswerPolicy: "soft",
+    skillIds: [
+      "SK-M3-101", "SK-M3-102", "SK-M3-103", "SK-M3-104", "SK-M3-105",
+      "SK-M4-301", "SK-M4-302", "SK-M4-303", "SK-M4-304", "SK-M4-305",
+      "SK-FR-501", "SK-FR-502", "SK-FR-503", "SK-FR-504", "SK-FR-505",
+      "SK-RP-601", "SK-RP-602", "SK-RP-603", "SK-RP-604", "SK-RP-605",
+    ],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: ["math", "ela"],
+    questionCadence: { kind: "per_checkpoint", value: 1 },
+    title: "Screen Hop 3D",
+    description:
+      "Dive inside Futuria's computer! Cross 8 neon sectors, solve learning checkpoints to recover the Master Key, and out-think The Glitcher.",
+    kind: "iframe",
+    /** Feature card points kids to the adventure world, not arcade free-play */
+    href: "/worlds/futuria-world",
+    available: true,
+    icon: Cpu,
+    badge: "Academic · Multi-subject",
+    world: {
+      slug: "futuria-world",
+      name: "Futuria World",
+      emoji: "🤖",
+    },
+    gradient: "linear-gradient(145deg, #180f28 0%, #2a1848 45%, #be185d 100%)",
+    accent: "#ff4fb4",
+    emoji: "👾",
+    embedUrl: "/games/screen-hop/index.html",
     embedHeight: 720,
   },
 

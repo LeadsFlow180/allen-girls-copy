@@ -26,6 +26,7 @@ export type PointEventType =
   | "placement_complete"
   | "game_question_correct"
   | "game_session_complete"
+  | "game_coins"
   | "redeem";
 
 type AwardOpts = {

@@ -1,0 +1,156 @@
+/* Meet the Girls — picture LEFT of text (or right on even rows), one tight band */
+
+.profile {
+  padding: 2.25rem 1.5rem !important;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+  gap: 1.75rem 2.25rem;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.rowFlip {
+  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+}
+
+.rowFlip .photo {
+  order: 2;
+}
+
+.rowFlip .copy {
+  order: 1;
+}
+
+.photo {
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+  aspect-ratio: 2 / 3;
+  border-radius: 1.25rem;
+  overflow: hidden;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.photoImg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  display: block;
+}
+
+.copy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-width: 0;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.pill {
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.age {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+}
+
+.role {
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.name {
+  font-size: clamp(1.6rem, 3.5vw, 2.35rem);
+  color: #fff;
+  line-height: 1.1;
+  margin: 0.15rem 0 0;
+}
+
+.tagline {
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+  margin: 0.2rem 0 0;
+}
+
+.bio {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.traits {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.trait {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  color: #e0e7ff;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.facts {
+  border-radius: 0.9rem;
+  padding: 0.9rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.fact {
+  font-size: 0.8rem;
+  color: #e0e7ff;
+}
+
+.cta {
+  width: fit-content;
+}
+
+@media (max-width: 720px) {
+  .profile {
+    padding: 1.75rem 1rem !important;
+  }
+
+  .row,
+  .rowFlip {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .rowFlip .photo,
+  .rowFlip .copy {
+    order: unset;
+  }
+
+  .photo {
+    max-width: 280px;
+  }
+}
