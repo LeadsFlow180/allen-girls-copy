@@ -64,6 +64,14 @@
   --font-display:    var(--nf-fredoka), system-ui, sans-serif;  /* headings (Fredoka) */
   --font-body:       var(--nf-nunito), system-ui, sans-serif;   /* body (Nunito) */
 
+  /* ── Responsive + safe areas (phone notches / home bar) ── */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-right:  env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left:   env(safe-area-inset-left, 0px);
+  --page-pad-x:  clamp(0.75rem, 3vw, 1.5rem);
+  --touch-min:   44px; /* minimum tap target */
+
   /* ── Color scales (Move 2) ─────────────────────────────────
      Grouped tints/shades. Near-duplicate hardcoded values in the
      modules are mapped to the nearest step here. Add a step here
@@ -412,6 +420,49 @@ body.store-immersive {
 html:has(body.store-immersive) {
   overflow-x: clip;
   max-width: 100vw;
+}
+
+/* Games play mode — same full-screen chrome as store/library */
+body.games-immersive .top-nav,
+body.games-immersive .site-footer {
+  display: none !important;
+}
+
+body.games-immersive .site-wrapper {
+  min-height: 0;
+  height: 100dvh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+body.games-immersive .site-main {
+  overflow: hidden;
+  min-height: 0;
+  height: 100%;
+}
+
+/* Shared game play shell — use on current + future native games */
+.game-play-shell {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+  max-width: 100vw;
+  overflow-x: clip;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-top: var(--safe-top);
+  padding-right: var(--safe-right);
+  padding-bottom: var(--safe-bottom);
+  padding-left: var(--safe-left);
+}
+
+.game-play-shell img,
+.game-play-shell video,
+.game-play-shell canvas,
+.game-play-shell iframe,
+.game-play-shell svg {
+  max-width: 100%;
 }
 
 /* ── NAV ──────────────────────────────────────── */
@@ -832,7 +883,7 @@ html:has(body.store-immersive) {
 .zone-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
 
 /* ── Kid sub-pages (library, explore) ─────────── */
-.page-shell { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+.page-shell { max-width: 1200px; margin: 0 auto; padding: 2rem var(--page-pad-x); }
 .kid-shell .page-header {
   padding: 3rem 2rem; text-align: center;
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--secondary) 100%);
@@ -929,6 +980,15 @@ html:has(body.store-immersive) {
 
   .feature-box:last-child {
     border-bottom: none;
+  }
+
+  .page-shell {
+    padding: 1.25rem var(--page-pad-x);
+  }
+
+  .hero-inner {
+    padding: 2.5rem var(--page-pad-x);
+    min-height: 320px;
   }
 }
 

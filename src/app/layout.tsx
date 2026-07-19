@@ -1,10 +1,18 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { Nunito, Fredoka } from "next/font/google";
 import "./globals.css";
 
 import { SiteTopNav } from "@/components/site-top-nav";
 import { ScrollMascotGuide } from "@/components/scroll-mascot-guide";
+
+/** Phone + desktop: correct width, notch-safe, no surprise zoom issues */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#1a0a40",
+};
 
 // Move 6: self-hosted via next/font (no render-blocking <link>, no FOUT).
 // Fredoka replaces the single-weight "Fredoka One" — it is a variable font,

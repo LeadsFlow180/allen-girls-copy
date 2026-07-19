@@ -1,0 +1,34 @@
+---
+description: Every current and future game must work well on phone and desktop (responsive + touch-friendly).
+globs: src/app/games/**/*,src/components/games/**/*,public/games/**/*
+alwaysApply: false
+---
+
+# Games — Responsive (phone + desktop)
+
+## Hard rules
+1. **Play screens fill the device.** New play routes use `GameImmersiveBody` (or a layout that adds `store-immersive` + `games-immersive`) so site nav/footer do not steal space.
+2. **Wrap the root in `game-play-shell`.** This class (in `globals.css`) adds safe-area padding and prevents sideways scroll.
+3. **No fixed desktop-only widths.** Prefer `%`, `min()`, `clamp()`, `fr`, and `minmax(0, 1fr)`. Never assume 1100px+ screens.
+4. **Touch targets ≥ 44px** (`var(--touch-min)`). Buttons, choice chips, and HUD controls must be easy to tap.
+5. **Iframe / canvas / WebGL games** must resize on `resize` + `orientationchange`, use `viewport-fit=cover`, and keep HUD away from notches with `env(safe-area-inset-*)`.
+6. **Question overlays** stack full-width on small screens; use `question-overlay.module.css` patterns (single-column choices under ~560px).
+7. **Catalog cards** (`/games`) stay one column on phones, two on tablets, auto-fill on desktop — see `games-page.module.css`.
+
+## Shared pieces to reuse
+- `src/components/games/game-immersive-body.tsx`
+- `src/components/games/iframe-game-shell.tsx` (+ module CSS) for any new iframe/Unity/WebGL game
+- `src/components/games/question-overlay.tsx` for academic question moments
+- CSS vars: `--safe-top/right/bottom/left`, `--page-pad-x`, `--touch-min`
+
+## Checklist before shipping a game
+- [ ] Phone portrait: play area usable, no horizontal scroll
+- [ ] Phone landscape: chrome shrinks; game still playable
+- [ ] Desktop: centered, readable, not stretched awkwardly
+- [ ] iOS notch / home bar: controls not clipped
+- [ ] If academic: question overlay readable and tappable on a small phone
+
+## Do not
+- Rely on hover-only controls (always provide a tap path)
+- Hardcode iframe `height={720}` — let CSS fill leftover viewport height
+- Leave marketing nav visible on full-screen play pages

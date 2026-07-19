@@ -102,12 +102,29 @@ export function getCadetIntroVideoSrc(): string {
   return "/videos/aga-cadet-intro-2026.mp4";
 }
 
+/**
+ * Game Zone hero video (/games).
+ * Prefer NEXT_PUBLIC_GAME_ZONE_HERO_VIDEO_URL (CDN) when set.
+ */
+export function getGameZoneHeroVideoSrc(): string {
+  const fromEnv = process.env.NEXT_PUBLIC_GAME_ZONE_HERO_VIDEO_URL?.trim();
+  if (fromEnv) return fromEnv;
+  return "/videos/power-up-games.mp4";
+}
+
 /** Registry of platform cinematic videos. Add CDN URLs here after upload — never file bytes. */
 export const platformCinematicVideos: Record<string, CdnVideoAsset | null> = {
   /** Galaxy-map first-click intro → fades into Signal Clarity Scan. */
   placement_opening_the_signal_and_the_stone: assertCdnVideoAsset({
     id: "placement_opening_the_signal_and_the_stone",
     url: getCadetIntroVideoSrc(),
+    formats: ["mp4_h264"],
+    durationSeconds: undefined,
+  }),
+  /** Game Zone page hero loop. */
+  game_zone_power_up: assertCdnVideoAsset({
+    id: "game_zone_power_up",
+    url: getGameZoneHeroVideoSrc(),
     formats: ["mp4_h264"],
     durationSeconds: undefined,
   }),

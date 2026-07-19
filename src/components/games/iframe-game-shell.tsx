@@ -55,7 +55,6 @@ function useGameSession(gameSlug: string) {
 
 export function IframeGameShell({ game }: IframeGameShellProps) {
   const frameRef = useRef<HTMLDivElement>(null);
-  const { embedUrl, embedHeight } = game;
   useGameSession(game.id);
 
   const handleFullscreen = useCallback(() => {
@@ -64,7 +63,9 @@ export function IframeGameShell({ game }: IframeGameShellProps) {
     if (document.fullscreenElement) {
       void document.exitFullscreen();
     } else {
-      void el.requestFullscreen();
+      void el.requestFullscreen().catch(() => {
+        /* iOS may block fullscreen — ignore */
+      });
     }
   }, []);
 
@@ -77,7 +78,7 @@ export function IframeGameShell({ game }: IframeGameShellProps) {
 
   return (
     <div
-      className={styles.shell}
+      className={`${styles.shell} game-play-shell`}
       style={{ "--game-glow": `${game.accent}33` } as React.CSSProperties}
     >
       <div className={styles.ambientOrb1} aria-hidden />
@@ -87,7 +88,7 @@ export function IframeGameShell({ game }: IframeGameShellProps) {
       <header className={styles.header}>
         <Link href={backHref} className={styles.backLink}>
           <ArrowLeft size={16} aria-hidden />
-          {game.gameClass === "academic" ? "Game info" : "All games"}
+          <span>{game.gameClass === "academic" ? "Game info" : "All games"}</span>
         </Link>
 
         <div className={styles.titleBlock}>
@@ -100,16 +101,16 @@ export function IframeGameShell({ game }: IframeGameShellProps) {
         <div className={styles.headerActions}>
           <button type="button" className={styles.actionBtn} onClick={handleFullscreen}>
             <Maximize2 size={15} aria-hidden />
-            Fullscreen
+            <span>Fullscreen</span>
           </button>
           <a
-            href={embedUrl}
+            href={game.embedUrl}
             target="_blank"
             rel="noopener noreferrer"
             className={styles.actionBtn}
           >
             <ExternalLink size={15} aria-hidden />
-            New tab
+            <span>New tab</span>
           </a>
         </div>
       </header>
@@ -120,13 +121,14 @@ export function IframeGameShell({ game }: IframeGameShellProps) {
             <span className={`${styles.dot} ${styles.dotRed}`} />
             <span className={`${styles.dot} ${styles.dotYellow}`} />
             <span className={`${styles.dot} ${styles.dotGreen}`} />
-            <span className={styles.frameLabel}>{game.title} — click inside to play</span>
+            <span className={styles.frameLabel}>
+              {game.title} — tap inside to play
+            </span>
           </div>
           <iframe
-            src={embedUrl}
+            src={game.embedUrl}
             title={game.title}
             className={styles.iframe}
-            height={embedHeight}
             allow="autoplay; fullscreen; gamepad; xr-spatial-tracking"
             allowFullScreen
           />
@@ -134,12 +136,12 @@ export function IframeGameShell({ game }: IframeGameShellProps) {
 
         <p className={styles.footer}>
           Game not loading?{" "}
-          <a href={embedUrl} target="_blank" rel="noopener noreferrer">
+          <a href={game.embedUrl} target="_blank" rel="noopener noreferrer">
             Open {game.title} in a new tab
           </a>
           <span className={styles.tip}>
-            Tip: click inside the frame to start. Academic games save progress when you&apos;re
-            signed in (after the database tables are connected).
+            Tip: tap inside the frame to start. Academic games save progress when you&apos;re
+            signed in.
           </span>
         </p>
       </main>

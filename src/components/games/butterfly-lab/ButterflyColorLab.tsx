@@ -132,17 +132,20 @@ export default function ButterflyColorLab() {
 
   return (
     <div
-      className="font-nunito"
+      className="font-nunito game-play-shell"
       suppressHydrationWarning={true}
       style={{
-        minHeight: "100vh",
+        minHeight: "100%",
         background: "linear-gradient(135deg, #1a0533 0%, #2d1060 40%, #0d2060 100%)",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
-        padding: "16px",
+        padding: "max(12px, env(safe-area-inset-top)) max(12px, env(safe-area-inset-right)) max(16px, env(safe-area-inset-bottom)) max(12px, env(safe-area-inset-left))",
         position: "relative",
-        overflow: "hidden",
+        overflowX: "clip",
+        overflowY: "auto",
+        width: "100%",
+        boxSizing: "border-box",
       }}
     >
       {/* Starfield — fixed positions to avoid hydration mismatch */}
@@ -313,8 +316,7 @@ export default function ButterflyColorLab() {
           <svg
             ref={svgRef}
             viewBox={scene.viewBox}
-            width="min(380px, 90vw)"
-            style={{ display: "block", cursor: "crosshair" }}
+            style={{ display: "block", cursor: "crosshair", width: "min(380px, 90vw)", height: "auto", maxWidth: "100%" }}
           >
             {scene.image ? (
               <>

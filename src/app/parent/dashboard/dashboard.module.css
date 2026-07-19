@@ -567,6 +567,12 @@
   margin-bottom: 0.65rem;
 }
 
+@media (max-width: 420px) {
+  .gamesStatRow {
+    grid-template-columns: 1fr;
+  }
+}
+
 .gamesStat {
   display: flex;
   flex-direction: column;

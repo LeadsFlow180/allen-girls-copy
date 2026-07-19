@@ -10,7 +10,7 @@ import {
 } from "@/lib/library/configure-pdf-worker";
 import type { LibraryNovel } from "@/lib/library/library-catalog";
 
-import { LibrarySceneBackground } from "./library-scene-background";
+import { LibraryReadingSurface } from "./library-reading-surface";
 import styles from "./library-pdf-reader.module.css";
 
 import "react-pdf/dist/Page/AnnotationLayer.css";
@@ -78,7 +78,7 @@ export function LibraryPdfReader({ novel, onClose, onReadOnline }: Props) {
 
   return (
     <div className={styles.reader}>
-      <LibrarySceneBackground dim="medium" />
+      <LibraryReadingSurface />
       <header className={styles.header}>
         <button type="button" className={styles.exit} onClick={onClose}>
           <ArrowLeft size={16} aria-hidden />

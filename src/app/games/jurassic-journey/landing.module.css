@@ -196,5 +196,23 @@
 @media (max-width: 640px) {
   .content {
     max-width: none;
+    padding-left: max(1rem, var(--safe-left));
+    padding-right: max(1rem, var(--safe-right));
+    padding-bottom: max(1.5rem, var(--safe-bottom));
+  }
+
+  .playBtn {
+    width: 100%;
+    justify-content: center;
+    min-height: var(--touch-min);
+  }
+
+  .tagline {
+    letter-spacing: 0.16em;
+    font-size: 0.82rem;
+  }
+
+  .desc {
+    font-size: 1rem;
   }
 }

@@ -1,0 +1,157 @@
+.shell {
+  box-sizing: border-box;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: clip;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: calc(0.75rem + var(--safe-top)) var(--page-pad-x)
+    calc(1rem + var(--safe-bottom));
+  font-family: var(--font-body);
+  background: linear-gradient(135deg, #1a0533 0%, #2d1060 40%, #0d2060 100%);
+}
+
+.star {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #fff;
+  pointer-events: none;
+  animation: twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle {
+  from {
+    opacity: 0.2;
+  }
+  to {
+    opacity: 0.9;
+  }
+}
+
+.header {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 56rem;
+  text-align: center;
+  margin-bottom: 0.75rem;
+}
+
+.badge {
+  margin: 0 0 0.25rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--purple-300);
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 5vw, 2.25rem);
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  background: linear-gradient(90deg, #ff6b9d, #a855f7, #00c6ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.subtitle {
+  margin: 0.35rem 0 0;
+  color: var(--purple-300);
+  font-size: 0.9rem;
+}
+
+.spark {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 30rem;
+  margin-bottom: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(168, 85, 247, 0.4);
+  background: rgba(168, 85, 247, 0.15);
+  color: #e9d5ff;
+  font-size: 0.9rem;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  line-height: 1.45;
+}
+
+.sparkLabel {
+  font-weight: 800;
+  color: var(--purple-300);
+}
+
+.progressWrap {
+  position: relative;
+  z-index: 1;
+  width: min(25rem, 100%);
+  margin-bottom: 0.85rem;
+}
+
+.progressMeta {
+  display: flex;
+  justify-content: space-between;
+  color: var(--purple-300);
+  font-size: 0.75rem;
+  margin-bottom: 0.3rem;
+}
+
+.progressTrack {
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ff6b9d, #a855f7);
+  transition: width 0.4s ease;
+}
+
+.layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(11rem, 14rem);
+  gap: 1rem;
+  width: 100%;
+  max-width: 56rem;
+  align-items: start;
+}
+
+.mainPane,
+.asidePane {
+  min-width: 0;
+}
+
+@media (max-width: 720px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .asidePane {
+    order: 2;
+  }
+
+  .spark {
+    font-size: 0.85rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .star {
+    animation: none;
+  }
+}

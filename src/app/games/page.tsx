@@ -1,21 +1,49 @@
 "use client";
 
-import Image from "next/image";
+import { useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
 
-import gameZoneImg from "@/assets/images/AGA Game Card.png";
 import { GameSectionEyebrow, GameZoneCard } from "@/components/games/game-zone-card";
 import { ACADEMIC_GAMES, ARCADE_GAMES, CREATIVE_GAMES } from "@/data/games/catalog";
+import { getGameZoneHeroVideoSrc } from "@/lib/media/cdn-video";
 
 import styles from "./games-page.module.css";
 
 export default function GamesPage() {
+  const heroVideoSrc = getGameZoneHeroVideoSrc();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    el.muted = true;
+    const play = () => {
+      void el.play().catch(() => {
+        /* autoplay blocked — still shows first frame */
+      });
+    };
+    play();
+    el.addEventListener("loadeddata", play);
+    return () => el.removeEventListener("loadeddata", play);
+  }, [heroVideoSrc]);
+
   return (
     <div className={styles.page}>
       <section className={styles.hero}>
-        <div className={styles.heroGlow1} aria-hidden />
-        <div className={styles.heroGlow2} aria-hidden />
+        <div className={styles.heroMedia} aria-hidden>
+          <video
+            ref={videoRef}
+            className={styles.heroVideo}
+            src={heroVideoSrc}
+            autoPlay
+            muted
+            playsInline
+            preload="auto"
+          />
+          <div className={styles.heroScrim} />
+        </div>
+
         <div className={styles.heroInner}>
           <motion.span
             initial={{ opacity: 0, y: 8 }}
@@ -51,22 +79,6 @@ export default function GamesPage() {
             Peek at learning adventures inside the worlds, then play free arcade games and creative
             color labs!
           </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.96 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className={styles.heroImageWrap}
-          >
-            <Image
-              src={gameZoneImg}
-              alt="Game Zone — Power Up & Play!"
-              width={560}
-              height={315}
-              className={styles.heroImage}
-              priority
-            />
-          </motion.div>
         </div>
       </section>
 

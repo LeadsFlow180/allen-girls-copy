@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 
+import styles from "./color-quest-layout.module.css";
+
 // Fixed star positions/opacities so server and client render the same (avoids hydration mismatch)
 const STARS = [
   { top: 8, left: 12, opacity: 0.35 },
@@ -41,140 +43,47 @@ export function ColorQuestLayout({
   subtitle,
   sparkMessage,
   progressPercent,
-  isComplete,
   rightAside,
   children,
 }: ColorQuestLayoutProps) {
   return (
-    <div
-      className="font-nunito"
-      style={{
-        minHeight: "100vh",
-        background: "linear-gradient(135deg, #1a0533 0%, #2d1060 40%, #0d2060 100%)",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        padding: "16px",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      {/* Starfield — fixed positions to avoid hydration mismatch */}
+    <div className={`${styles.shell} game-play-shell`}>
       {STARS.map((star, i) => (
         <div
           key={i}
+          className={styles.star}
           style={{
-            position: "absolute",
-            width: 3,
-            height: 3,
-            borderRadius: "50%",
-            background: "#fff",
             opacity: star.opacity,
             top: `${star.top}%`,
             left: `${star.left}%`,
-            animation: "twinkle 3s infinite alternate",
           }}
+          aria-hidden
         />
       ))}
 
-      <div style={{ textAlign: "center", marginBottom: 12, zIndex: 1 }}>
-        <div
-          style={{
-            fontSize: 13,
-            letterSpacing: 4,
-            color: "#c084fc",
-            textTransform: "uppercase",
-            marginBottom: 4,
-          }}
-        >
-          Allen Girls Adventures
-        </div>
-        <h1
-          className="font-fredoka"
-          style={{
-            fontSize: "clamp(24px, 5vw, 36px)",
-            margin: 0,
-            background: "linear-gradient(90deg, #FF6B9D, #A855F7, #00C6FF)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            fontWeight: 900,
-            letterSpacing: 1,
-          }}
-        >
-          {title}
-        </h1>
-        {subtitle ? (
-          <p style={{ color: "#c4b5fd", fontSize: 14, marginTop: 4 }}>{subtitle}</p>
-        ) : null}
+      <header className={styles.header}>
+        <p className={styles.badge}>Allen Girls Adventures · {badge}</p>
+        <h1 className={styles.title}>{title}</h1>
+        {subtitle ? <p className={styles.subtitle}>{subtitle}</p> : null}
+      </header>
+
+      <div className={styles.spark}>
+        <span className={styles.sparkLabel}>S.P.A.R.K.:</span> {sparkMessage}
       </div>
 
-      {/* S.P.A.R.K. message */}
-      <div
-        style={{
-          background: "rgba(168, 85, 247, 0.15)",
-          border: "1px solid rgba(168,85,247,0.4)",
-          borderRadius: 16,
-          padding: "10px 18px",
-          color: "#e9d5ff",
-          fontSize: 14,
-          maxWidth: 480,
-          textAlign: "center",
-          marginBottom: 12,
-          zIndex: 1,
-          backdropFilter: "blur(8px)",
-        }}
-      >
-        <span style={{ fontWeight: 700, color: "#c084fc" }}>S.P.A.R.K.:</span> {sparkMessage}
-      </div>
-
-      {/* Progress bar */}
-      <div style={{ width: "min(400px, 90vw)", marginBottom: 12, zIndex: 1 }}>
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            color: "#c4b5fd",
-            fontSize: 12,
-            marginBottom: 4,
-          }}
-        >
+      <div className={styles.progressWrap}>
+        <div className={styles.progressMeta}>
           <span>Progress</span>
           <span>{progressPercent}%</span>
         </div>
-        <div
-          style={{
-            height: 10,
-            background: "rgba(255,255,255,0.1)",
-            borderRadius: 99,
-          }}
-        >
-          <div
-            style={{
-              height: "100%",
-              borderRadius: 99,
-              transition: "width 0.4s ease",
-              background: "linear-gradient(90deg, #FF6B9D, #A855F7)",
-              width: `${progressPercent}%`,
-            }}
-          />
+        <div className={styles.progressTrack}>
+          <div className={styles.progressFill} style={{ width: `${progressPercent}%` }} />
         </div>
       </div>
 
-      {/* Main layout: canvas + sidebar */}
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: 16,
-          justifyContent: "center",
-          alignItems: "flex-start",
-          zIndex: 1,
-          width: "100%",
-          maxWidth: 900,
-        }}
-      >
-        <div style={{ flex: "1 1 320px", minWidth: 0 }}>{children}</div>
-        <div style={{ flex: "0 0 auto", minWidth: 200 }}>{rightAside}</div>
+      <div className={styles.layout}>
+        <div className={styles.mainPane}>{children}</div>
+        <aside className={styles.asidePane}>{rightAside}</aside>
       </div>
     </div>
   );

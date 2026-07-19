@@ -9,7 +9,7 @@ import type { LibraryNovel } from "@/lib/library/library-catalog";
 
 import { LibraryCurtainScroll } from "./library-curtain-scroll";
 import { LibraryHighlightedText } from "./library-highlighted-text";
-import { LibrarySceneBackground } from "./library-scene-background";
+import { LibraryReadingSurface } from "./library-reading-surface";
 import styles from "./library-page-reader.module.css";
 
 type Props = {
@@ -164,7 +164,7 @@ export function LibraryPageReader({ novel, onClose }: Props) {
 
   return (
     <div className={styles.reader}>
-      <LibrarySceneBackground dim="medium" />
+      <LibraryReadingSurface />
 
       <header className={styles.hud}>
         <button type="button" className={styles.hudBack} onClick={onClose}>

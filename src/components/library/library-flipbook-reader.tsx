@@ -21,7 +21,7 @@ import {
   LibraryStFlipbook,
   type LibraryStFlipbookHandle,
 } from "./library-st-flipbook";
-import { LibrarySceneBackground } from "./library-scene-background";
+import { LibraryReadingSurface } from "./library-reading-surface";
 import styles from "./library-flipbook-reader.module.css";
 
 type Props = {
@@ -180,7 +180,7 @@ export function LibraryFlipbookReader({ novel, onClose, onReadOnline }: Props) {
 
   return (
     <div className={styles.reader}>
-      <LibrarySceneBackground dim="medium" />
+      <LibraryReadingSurface />
 
       <header className={styles.hud}>
         <button type="button" className={styles.hudBack} onClick={onClose}>
