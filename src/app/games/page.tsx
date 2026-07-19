@@ -76,9 +76,48 @@ export default function GamesPage() {
             transition={{ duration: 0.5, delay: 0.2 }}
             className={styles.heroSubtitle}
           >
-            Peek at learning adventures inside the worlds, then play free arcade games and creative
-            color labs!
+            Jump into just-for-fun arcade games and creative color labs — then find learning
+            adventures inside the worlds!
           </motion.p>
+        </div>
+      </section>
+
+      <section className={styles.section}>
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionHeader}>
+            <GameSectionEyebrow variant="arcade">Just for Fun</GameSectionEyebrow>
+            <h2 className={styles.sectionTitle}>Arcade Vault</h2>
+            <p className={styles.sectionDesc}>
+              Fast-paced browser games — tap, fly, swim, and race without downloading anything.
+            </p>
+          </div>
+          <div className={`${styles.grid} ${styles.gridArcade}`}>
+            {ARCADE_GAMES.map((game, i) => (
+              <GameZoneCard
+                key={game.id}
+                game={game}
+                index={i}
+                featured={game.id === "moto-rush" || game.id === "fin-feast"}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className={`${styles.section} ${styles.sectionAlt}`}>
+        <div className={styles.sectionInner}>
+          <div className={styles.sectionHeader}>
+            <GameSectionEyebrow variant="creative">Color &amp; Create</GameSectionEyebrow>
+            <h2 className={styles.sectionTitle}>Creative Studio</h2>
+            <p className={styles.sectionDesc}>
+              Relax and express yourself — color by numbers and bring magical scenes to life.
+            </p>
+          </div>
+          <div className={styles.grid}>
+            {CREATIVE_GAMES.map((game, i) => (
+              <GameZoneCard key={game.id} game={game} index={i} />
+            ))}
+          </div>
         </div>
       </section>
 
@@ -101,40 +140,6 @@ export default function GamesPage() {
           </div>
         </section>
       )}
-
-      <section className={`${styles.section} ${styles.sectionAlt}`}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <GameSectionEyebrow variant="arcade">Fun Games</GameSectionEyebrow>
-            <h2 className={styles.sectionTitle}>Unity Arcade Vault</h2>
-            <p className={styles.sectionDesc}>
-              Fast-paced browser games — tap, fly, and race without downloading anything.
-            </p>
-          </div>
-          <div className={`${styles.grid} ${styles.gridArcade}`}>
-            {ARCADE_GAMES.map((game, i) => (
-              <GameZoneCard key={game.id} game={game} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className={styles.section}>
-        <div className={styles.sectionInner}>
-          <div className={styles.sectionHeader}>
-            <GameSectionEyebrow variant="creative">Color &amp; Create</GameSectionEyebrow>
-            <h2 className={styles.sectionTitle}>Creative Studio</h2>
-            <p className={styles.sectionDesc}>
-              Relax and express yourself — color by numbers and bring magical scenes to life.
-            </p>
-          </div>
-          <div className={styles.grid}>
-            {CREATIVE_GAMES.map((game, i) => (
-              <GameZoneCard key={game.id} game={game} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

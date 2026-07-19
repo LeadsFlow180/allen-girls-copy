@@ -27,13 +27,22 @@ export function GameZoneCard({ game, index, featured }: GameZoneCardProps) {
           : undefined
       }
     >
-      <div className={styles.cardArt} style={{ background: game.gradient }}>
+      <div
+        className={`${styles.cardArt} ${styles.cardArtCover}`}
+        style={{ background: game.gradient }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          className={styles.cardCover}
+          src={game.coverImage}
+          alt=""
+          loading="lazy"
+          decoding="async"
+        />
+        <div className={styles.cardArtScrim} aria-hidden />
         <div className={styles.cardShine} aria-hidden />
         <span className={styles.cardBadge}>{game.badge}</span>
         {!isPlayable && <span className={styles.cardSoon}>Coming soon</span>}
-        <span className={styles.cardEmoji} role="img" aria-hidden>
-          {game.emoji}
-        </span>
         {featured && isPlayable && (
           <div className={styles.featuredRibbon}>
             {isAcademicWorld

@@ -223,9 +223,19 @@ export default function WorldDetailPage() {
                     color: "inherit",
                   }}
                 >
-                  <span style={{ fontSize: "1.75rem", lineHeight: 1 }} aria-hidden>
-                    {game.emoji}
-                  </span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={game.coverImage}
+                    alt=""
+                    style={{
+                      width: "4.5rem",
+                      height: "2.85rem",
+                      objectFit: "cover",
+                      borderRadius: "0.55rem",
+                      flexShrink: 0,
+                      boxShadow: "0 2px 8px rgba(0,0,0,0.15)",
+                    }}
+                  />
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p className="font-fredoka" style={{ margin: 0, fontSize: "1.05rem", color: "#0f172a" }}>
                       {game.title}

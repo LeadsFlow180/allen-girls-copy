@@ -1,5 +1,16 @@
 import type { LucideIcon } from "lucide-react";
-import { Bike, Bird, Cat, CircleDot, Cpu, Mountain, Palette, School, Sparkles } from "lucide-react";
+import {
+  Bike,
+  Bird,
+  Cat,
+  CircleDot,
+  Cpu,
+  Fish,
+  Mountain,
+  Palette,
+  School,
+  Sparkles,
+} from "lucide-react";
 
 export type GameKind = "native" | "iframe";
 
@@ -45,12 +56,14 @@ export type GameCatalogEntry = {
   };
   /** Short label shown on the card badge */
   badge: string;
-  /** CSS gradient for card background */
+  /** CSS gradient for card background (fallback under cover art) */
   gradient: string;
   /** Accent color for borders, glow, and CTA */
   accent: string;
-  /** Emoji or symbol for the card art area */
+  /** Emoji fallback if cover art fails to load */
   emoji: string;
+  /** Promotional cover image shown on Game Zone cards */
+  coverImage: string;
   /** iframe embed URL — only for kind: "iframe" */
   embedUrl?: string;
   /** Suggested iframe height in px */
@@ -85,6 +98,7 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     gradient: "linear-gradient(145deg, #180f28 0%, #2a1848 45%, #0d6b73 100%)",
     accent: "#2ee6ef",
     emoji: "🌋",
+    coverImage: "/games/covers/jurassic-journey.png",
     embedUrl: "/games/jurassic-journey/index.html",
     embedHeight: 720,
   },
@@ -119,11 +133,54 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     gradient: "linear-gradient(145deg, #180f28 0%, #2a1848 45%, #be185d 100%)",
     accent: "#ff4fb4",
     emoji: "👾",
+    coverImage: "/games/covers/screen-hop.png",
     embedUrl: "/games/screen-hop/index.html",
     embedHeight: 720,
   },
 
-  // ── Arcade (iframe Unity / WebGL) ─────────────────────────────────────
+  // ── Arcade (iframe Unity / WebGL / HTML) ───────────────────────────────
+  {
+    id: "moto-rush",
+    gameClass: "arcade",
+    skillIds: [],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: [],
+    title: "Moto Rush",
+    description:
+      "Lean in, hold the line! Race 3D motorcycles, collect rings, and beat rival riders across desert tracks.",
+    kind: "iframe",
+    href: "/games/play/moto-rush",
+    available: true,
+    icon: Bike,
+    badge: "Just for Fun",
+    gradient: "linear-gradient(145deg, #1a0a00 0%, #7c2d12 45%, #ea580c 100%)",
+    accent: "#ff4500",
+    emoji: "🏍️",
+    coverImage: "/games/covers/moto-rush.png",
+    embedUrl: "/games/moto-rush/index.html",
+    embedHeight: 720,
+  },
+  {
+    id: "fin-feast",
+    gameClass: "arcade",
+    skillIds: [],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: [],
+    title: "Fin Feast",
+    description:
+      "You're a tiny fish — eat smaller fish, dodge bigger ones, grow through 9 stages, then face the Great White!",
+    kind: "iframe",
+    href: "/games/play/fin-feast",
+    available: true,
+    icon: Fish,
+    badge: "Just for Fun",
+    gradient: "linear-gradient(145deg, #0c4a6e 0%, #0369a1 45%, #0e7490 100%)",
+    accent: "#22d3ee",
+    emoji: "🐠",
+    coverImage: "/games/covers/fin-feast.png",
+    embedUrl: "/games/fin-feast/index.html",
+    embedHeight: 720,
+  },
   {
     id: "penguin-flapper",
     gameClass: "arcade",
@@ -140,6 +197,7 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     gradient: "linear-gradient(145deg, #0ea5e9 0%, #0369a1 55%, #1e3a8a 100%)",
     accent: "#38bdf8",
     emoji: "🐧",
+    coverImage: "/games/covers/penguin-flapper.png",
     embedUrl: "https://neon-semifreddo-a0a119.netlify.app/",
     embedHeight: 640,
   },
@@ -159,6 +217,7 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     gradient: "linear-gradient(145deg, #f97316 0%, #ea580c 55%, #9a3412 100%)",
     accent: "#fb923c",
     emoji: "🐱",
+    coverImage: "/games/covers/skid-runner.png",
     embedUrl: "https://classy-torte-710428.netlify.app/",
     embedHeight: 640,
   },
@@ -178,6 +237,7 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     gradient: "linear-gradient(145deg, #22c55e 0%, #16a34a 55%, #14532d 100%)",
     accent: "#4ade80",
     emoji: "🏍️",
+    coverImage: "/games/covers/bike-wheel.png",
     embedUrl: "https://glowing-dasik-41c0bf.netlify.app/",
     embedHeight: 640,
   },
@@ -197,6 +257,7 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     gradient: "linear-gradient(145deg, #a855f7 0%, #7c3aed 55%, #4c1d95 100%)",
     accent: "#c084fc",
     emoji: "🏫",
+    coverImage: "/games/covers/town-school.png",
     embedUrl: "https://storied-bavarois-6f2509.netlify.app/",
     embedHeight: 640,
   },
@@ -216,6 +277,7 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     gradient: "linear-gradient(145deg, #ec4899 0%, #db2777 45%, #7c22c5 100%)",
     accent: "#f472b6",
     emoji: "⚗️",
+    coverImage: "/games/covers/dot-physics.png",
     embedUrl: "https://calm-starlight-cbec40.netlify.app/",
     embedHeight: 640,
   },
@@ -237,6 +299,7 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     gradient: "linear-gradient(145deg, #f5f3ff 0%, #ede9fe 55%, #ddd6fe 100%)",
     accent: "#7c22c5",
     emoji: "🦋",
+    coverImage: "/games/covers/butterfly-lab.png",
   },
   {
     id: "color-quest",
@@ -254,6 +317,7 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
     gradient: "linear-gradient(145deg, #fdf2f8 0%, #fce7f3 55%, #fbcfe8 100%)",
     accent: "#e8357a",
     emoji: "🎨",
+    coverImage: "/games/covers/color-quest.png",
   },
 ];
 
