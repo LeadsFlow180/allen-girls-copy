@@ -34,7 +34,7 @@ const NAV_LINKS: ReadonlyArray<{
   { href: "/", label: "Home", hint: "Start your journey", icon: Home, tone: "violet" },
   { href: "/characters", label: "Characters", hint: "Meet the sisters", icon: Users, tone: "pink" },
   { href: "/episodes", label: "Adventures", hint: "Episodes & quests", icon: BookOpen, tone: "sky" },
-  { href: "/parent", label: "About", hint: "Our story & mission", icon: Info, tone: "amber" },
+  { href: "/about", label: "About", hint: "Our story & mission", icon: Info, tone: "amber" },
   { href: "/rewards", label: "Rewards", hint: "Earn stars & prizes", icon: Gift, tone: "gold" },
 ];
 

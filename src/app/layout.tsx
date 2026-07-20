@@ -2,6 +2,9 @@ import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { Nunito, Fredoka } from "next/font/google";
 import "./globals.css";
+// Side-effect import — styles the /about, /our-approach, /educators,
+// /families, /diversity, /partners, /compare, /faq pages. DO NOT REMOVE.
+import "./styles/marketing.css";
 
 import { SiteTopNav } from "@/components/site-top-nav";
 import { ScrollMascotGuide } from "@/components/scroll-mascot-guide";
@@ -33,12 +36,17 @@ const fredoka = Fredoka({
 });
 //deployment
 export const metadata: Metadata = {
-  title: "Allen Girls Adventures",
+  metadataBase: new URL("https://www.allengirlsadventures.com"),
+  title: {
+    default: "Allen Girls Adventures | Story-Based Learning for Grades 3–6",
+    template: "%s | Allen Girls Adventures",
+  },
   icons: { icon: "/favicon.png", apple: "/favicon.png" },
   description: "Join Maya, Alana & Natalia on epic learning adventures through dinosaurs, space, history and more!",
   authors: [{ name: "Allen Girls Adventures" }],
   openGraph: {
     type: "website",
+    siteName: "Allen Girls Adventures",
     title: "Allen Girls Adventures",
     description: "Join three amazing sisters as they explore dinosaurs, blast into space, and discover the magic of learning together!",
     images: ["/og-image.png"],
@@ -55,6 +63,24 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   return (
     <html lang="en" className={`${nunito.variable} ${fredoka.variable}`}>
       <body suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "EducationalOrganization",
+              name: "Allen Girls Adventures",
+              url: "https://www.allengirlsadventures.com",
+              logo: "https://www.allengirlsadventures.com/favicon.png",
+              slogan: "Bold Girls. Big Adventures.",
+              sameAs: [
+                "https://www.youtube.com/@AllenGirlAdventures-ii6tr",
+                "https://www.facebook.com/profile.php?id=61588148717114",
+              ],
+            }),
+          }}
+        />
+
         <ScrollMascotGuide />
 
         <SiteTopNav />
@@ -85,8 +111,32 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <Link href="/episodes" className="footer-link">
                   Adventures
                 </Link>
-                <Link href="/parent" className="footer-link">
+                <Link href="/about" className="footer-link">
                   About Us
+                </Link>
+              </div>
+              <div>
+                <div className="footer-heading"><span>☆</span> Learn More</div>
+                <Link href="/our-approach" className="footer-link">
+                  Our Approach
+                </Link>
+                <Link href="/families" className="footer-link">
+                  For Families
+                </Link>
+                <Link href="/educators" className="footer-link">
+                  For Educators
+                </Link>
+                <Link href="/compare" className="footer-link">
+                  Compare Platforms
+                </Link>
+                <Link href="/diversity" className="footer-link">
+                  Diversity
+                </Link>
+                <Link href="/partners" className="footer-link">
+                  Partners
+                </Link>
+                <Link href="/faq" className="footer-link">
+                  FAQ
                 </Link>
               </div>
               <div>
@@ -95,15 +145,23 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                   Follow us for behind-the-scenes fun and new adventure announcements!
                 </p>
                 <div className="footer-social">
-                  <a href="#" className="footer-social-btn">
+                  <a
+                    href="https://www.youtube.com/@AllenGirlAdventures-ii6tr"
+                    className="footer-social-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     YouTube
                   </a>
-                  <a href="#" className="footer-social-btn">
-                    Instagram
+                  <a
+                    href="https://www.facebook.com/profile.php?id=61588148717114"
+                    className="footer-social-btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Facebook
                   </a>
-                  <a href="#" className="footer-social-btn">
-                    TikTok
-                  </a>
+                  {/* TikTok: re-add when account exists */}
                 </div>
               </div>
             </div>

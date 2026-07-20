@@ -9,7 +9,7 @@ import mayaImg    from "@/assets/images/Maya 2027 White.png";
 import alanaImg   from "@/assets/images/Alana 2027 White.png";
 import nataliaImg from "@/assets/images/Natalia 2027 White.png";
 import sparkImg   from "@/assets/images/SPARK 2027 New.png";
-import heroImg    from "@/assets/images/AGA_action_pose.png";
+import heroWavingImg from "@/assets/images/characters-hero-waving.png";
 
 import styles from "./characters.module.css";
 
@@ -92,21 +92,22 @@ const characters = [
 export default function CharactersPage() {
   return (
     <>
-      {/* HERO — match home purple gradient + overlay */}
-      <section className="hero" style={{ minHeight: "420px" }}>
+      {/* HERO — full-bleed "girls waving" header photo with a readability gradient */}
+      <section className="hero" style={{ position: "relative", minHeight: "clamp(360px, 52vw, 560px)", overflow: "hidden", padding: 0 }}>
+        <Image
+          src={heroWavingImg}
+          alt="Natalia, Alana, and Maya waving hello with S.P.A.R.K., their robotic best buddy"
+          fill
+          priority
+          sizes="100vw"
+          style={{ objectFit: "cover", objectPosition: "center 20%", zIndex: 0 }}
+        />
         <div style={{
-          position: "absolute", inset: 0,
-          background: "linear-gradient(135deg, #7c22c5 0%, #5a18a0 50%, #e8357a 100%)",
-          zIndex: 0,
+          position: "absolute", inset: 0, zIndex: 1,
+          background: "linear-gradient(180deg, rgba(30,8,60,0) 0%, rgba(30,8,60,0.12) 38%, rgba(30,8,60,0.82) 80%, rgba(30,8,60,0.94) 100%)",
         }} />
-        <div style={{
-          position: "absolute", right: 0, bottom: 0, width: "50%", maxWidth: "500px", zIndex: 1, opacity: 0.4,
-          pointerEvents: "none",
-        }}>
-          <Image src={heroImg} alt="" width={900} height={600} style={{ width: "100%", height: "auto" }} />
-        </div>
-        <div className="hero-inner" style={{ minHeight: "420px" }}>
-          <div className="hero-left" style={{ zIndex: 2 }}>
+        <div className="hero-inner" style={{ position: "absolute", inset: 0, display: "flex", alignItems: "flex-end", zIndex: 2 }}>
+          <div className="hero-left" style={{ zIndex: 2, paddingBottom: "1.75rem" }}>
             <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="hero-eyebrow">👧🏾 Our Characters</motion.div>
             <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="hero-title" style={{ fontSize: "clamp(2rem, 5vw, 2.8rem)" }}>
               Meet the Allen Girls<br />

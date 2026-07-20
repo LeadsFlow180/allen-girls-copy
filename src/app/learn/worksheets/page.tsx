@@ -1,3 +1,12 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Printable Worksheets & Activities for Grades 3–6",
+  description:
+    "Free printable worksheets and brain-booster activities for grades 3–6 — extra math, reading, and science practice that keeps the adventure going off-screen.",
+  alternates: { canonical: "/learn/worksheets" },
+};
+
 const WORKSHEET_URL = "https://claude.site/public/artifacts/27994eee-d273-4a9d-a0dc-c58ef25e1846/embed";
 const WORKSHEET_OPEN_URL = "https://claude.site/public/artifacts/27994eee-d273-4a9d-a0dc-c58ef25e1846";
 

@@ -32,6 +32,15 @@ const nextConfig: NextConfig = {
     // !! WARN !!
     ignoreBuildErrors: true,
   },
+  async redirects() {
+    return [
+      {
+        source: "/adventures",
+        destination: "/episodes",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default nextConfig;
