@@ -97,7 +97,11 @@ export default function GamesPage() {
                 key={game.id}
                 game={game}
                 index={i}
-                featured={game.id === "moto-rush" || game.id === "fin-feast"}
+                featured={
+                  game.id === "morphfit" ||
+                  game.id === "moto-rush" ||
+                  game.id === "fin-feast"
+                }
               />
             ))}
           </div>

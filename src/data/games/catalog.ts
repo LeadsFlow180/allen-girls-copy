@@ -2,6 +2,7 @@ import type { LucideIcon } from "lucide-react";
 import {
   Bike,
   Bird,
+  Blocks,
   Cat,
   CircleDot,
   Cpu,
@@ -139,6 +140,27 @@ export const GAME_CATALOG: GameCatalogEntry[] = [
   },
 
   // ── Arcade (iframe Unity / WebGL / HTML) ───────────────────────────────
+  {
+    id: "morphfit",
+    gameClass: "arcade",
+    skillIds: [],
+    gradeLevels: [3, 4, 5, 6],
+    subjects: [],
+    title: "MorphFit",
+    description:
+      "Drag shapes to fill rows, columns, and diagonals — but the board morphs into a brand-new shape every level. Clear lines, chain combos, and keep up as it bends!",
+    kind: "iframe",
+    href: "/games/play/morphfit",
+    available: true,
+    icon: Blocks,
+    badge: "Just for Fun",
+    gradient: "linear-gradient(145deg, #1e1b4b 0%, #6d28d9 45%, #22d3ee 100%)",
+    accent: "#a78bfa",
+    emoji: "🧩",
+    coverImage: "/games/covers/morphfit.png",
+    embedUrl: "/games/morphfit/index.html",
+    embedHeight: 720,
+  },
   {
     id: "moto-rush",
     gameClass: "arcade",
