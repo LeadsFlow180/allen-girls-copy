@@ -120,6 +120,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 <Link href="/our-approach" className="footer-link">
                   Our Approach
                 </Link>
+                <Link href="/curriculum" className="footer-link">
+                  Curriculum
+                </Link>
                 <Link href="/families" className="footer-link">
                   For Families
                 </Link>
@@ -134,6 +137,12 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
                 </Link>
                 <Link href="/partners" className="footer-link">
                   Partners
+                </Link>
+                <Link href="/blog" className="footer-link">
+                  Blog
+                </Link>
+                <Link href="/grade-4" className="footer-link">
+                  4th Grade
                 </Link>
                 <Link href="/faq" className="footer-link">
                   FAQ
