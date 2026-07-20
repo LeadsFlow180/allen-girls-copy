@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 
 export const metadata: Metadata = {
-  title: "Adventures & Episodes for Kids in Grades 3–6",
+  title: "See the Show — Allen Girls Adventures Episodes",
   description:
-    "Explore Allen Girls Adventures episodes — missions across amazing worlds where math, reading, and science skills unlock the story.",
+    "Watch Allen Girls Adventures episodes — the YouTube series where Natalia, Alana, Maya, and S.P.A.R.K. turn learning into quests kids want to follow.",
   alternates: { canonical: "/episodes" },
 };
 

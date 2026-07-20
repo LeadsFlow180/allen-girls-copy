@@ -28,13 +28,22 @@ export default function EpisodesPage() {
             🎬 Season 1 Now Available
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }} className="font-fredoka" style={{ fontSize: "clamp(2rem, 5vw, 3rem)", color: "#fff", lineHeight: 1.15, marginBottom: "0.75rem" }}>
-            Adventure Episodes{" "}
+            See the Show{" "}
             <Sparkles style={{ display: "inline", width: "1.5rem", height: "1.5rem", color: "var(--accent)", verticalAlign: "middle" }} />
           </motion.h1>
-          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="font-nunito" style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.9)", lineHeight: 1.65, marginBottom: "2rem" }}>
-            Every episode is a quest that connects to real learning activities on the platform.
-            Watch, then play — reinforcing what your child just discovered.
+          <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="font-nunito" style={{ fontSize: "1.05rem", color: "rgba(255,255,255,0.9)", lineHeight: 1.65, marginBottom: "1.25rem" }}>
+            Watch Allen Girls Adventures episodes right here — then jump into the matching learning quests on the platform.
           </motion.p>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.22 }} style={{ marginBottom: "2rem" }}>
+            <a
+              href="https://www.youtube.com/@AllenGirlAdventures-ii6tr"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-hero-primary"
+            >
+              ▶ &nbsp;Watch on YouTube
+            </a>
+          </motion.div>
 
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.25 }} style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", justifyContent: "center" }}>
             {themes.map((t, i) => (
@@ -112,10 +121,10 @@ export default function EpisodesPage() {
       <section className={`cta-strip ${styles.ctaSection}`}>
         <div style={{ position: "relative", zIndex: 1, maxWidth: "700px", margin: "0 auto", textAlign: "center" }}>
           <h2 className="font-fredoka" style={{ fontSize: "clamp(1.75rem, 4vw, 2.25rem)", color: "#fff", lineHeight: 1.2, marginBottom: "0.75rem" }}>
-            Watch &amp; Learn Together
+            Give Your Child a Reason to Love Learning
           </h2>
           <p className="font-nunito" style={{ fontSize: "1rem", color: "rgba(255,255,255,0.9)", marginBottom: "1.5rem" }}>
-            Every episode unlocks activities, quizzes, and adventures on the platform.
+            Watch the show, then play the adventure — every episode unlocks activities on the platform.
           </p>
           <Link href="/worlds" className="btn-hero-primary">▶ &nbsp;Start Learning Free</Link>
         </div>

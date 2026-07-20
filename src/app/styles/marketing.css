@@ -212,6 +212,9 @@
   color: #fff;
   text-align: center;
   padding: 4rem 1.5rem;
+  /* Keeps this band visually separate from the deep-purple footer below */
+  margin-bottom: 0;
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.12);
 }
 .mkCtaBand h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); }
 .mkCtaBand p { max-width: 560px; margin: 0.9rem auto 0; opacity: 0.94; }

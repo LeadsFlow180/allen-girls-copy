@@ -197,6 +197,10 @@
   color: var(--text-subtle);
 }
 
+.drawerSectionLabel + .drawerLinkList + .drawerSectionLabel {
+  margin-top: 1.15rem;
+}
+
 .drawerLinkList {
   display: flex;
   flex-direction: column;
@@ -341,13 +345,157 @@
   border-color: var(--gold-300);
 }
 
+.toneMint .drawerLinkIcon {
+  color: #0f766e;
+  background: #f0fdfa;
+  border-color: #99f6e4;
+}
+
+.toneCoral .drawerLinkIcon {
+  color: #c02672;
+  background: #fff1f7;
+  border-color: #fbcfe8;
+}
+
 .drawerLinkActive.toneViolet .drawerLinkIcon,
 .drawerLinkActive.tonePink .drawerLinkIcon,
 .drawerLinkActive.toneSky .drawerLinkIcon,
 .drawerLinkActive.toneAmber .drawerLinkIcon,
 .drawerLinkActive.toneEmerald .drawerLinkIcon,
-.drawerLinkActive.toneGold .drawerLinkIcon {
+.drawerLinkActive.toneGold .drawerLinkIcon,
+.drawerLinkActive.toneMint .drawerLinkIcon,
+.drawerLinkActive.toneCoral .drawerLinkIcon {
   box-shadow: 0 4px 12px rgba(124, 34, 197, 0.12);
+}
+
+/* Desktop Explore dropdown */
+.exploreMenu {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.exploreTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  padding: inherit;
+}
+
+.exploreTriggerActive {
+  color: var(--primary);
+}
+
+.explorePanel {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  left: 50%;
+  z-index: 80;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 15.5rem;
+  padding: 0.45rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(124, 34, 197, 0.14);
+  background: rgba(255, 255, 255, 0.98);
+  box-shadow:
+    0 16px 40px rgba(26, 10, 64, 0.16),
+    0 2px 0 rgba(245, 197, 24, 0.35);
+  transform: translateX(-50%);
+}
+
+.exploreItem {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0.65rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s ease;
+}
+
+.exploreItem:hover,
+.exploreItemActive {
+  background: rgba(124, 34, 197, 0.06);
+}
+
+.exploreItemIcon {
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.6rem;
+  display: grid;
+  place-items: center;
+  border: 1px solid transparent;
+}
+
+.exploreItemIcon.toneViolet {
+  color: var(--primary);
+  background: var(--purple-50);
+  border-color: var(--purple-200);
+}
+
+.exploreItemIcon.tonePink {
+  color: var(--pink-600);
+  background: var(--purple-50);
+  border-color: var(--pink-100);
+}
+
+.exploreItemIcon.toneSky {
+  color: var(--sky-600);
+  background: var(--sky-50);
+  border-color: var(--sky-200);
+}
+
+.exploreItemIcon.toneAmber {
+  color: var(--amber-orange);
+  background: var(--gold-50);
+  border-color: var(--gold-200);
+}
+
+.exploreItemIcon.toneGold {
+  color: var(--brown-warn);
+  background: var(--gold-50);
+  border-color: var(--gold-300);
+}
+
+.exploreItemIcon.toneMint {
+  color: #0f766e;
+  background: #f0fdfa;
+  border-color: #99f6e4;
+}
+
+.exploreItemIcon.toneCoral {
+  color: #c02672;
+  background: #fff1f7;
+  border-color: #fbcfe8;
+}
+
+.exploreItemCopy {
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.exploreItemLabel {
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  color: var(--aga-navy);
+  line-height: 1.15;
+}
+
+.exploreItemHint {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
 }
 
 .drawerFooter {

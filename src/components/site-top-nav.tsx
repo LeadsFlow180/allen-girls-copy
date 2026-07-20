@@ -1,16 +1,23 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   BookOpen,
+  Brain,
+  ChevronDown,
   ChevronRight,
+  Clapperboard,
+  Gamepad2,
   Gift,
+  Globe2,
   Home,
   Info,
+  Languages,
   Menu,
+  ShoppingBag,
   Sparkles,
   Users,
   X,
@@ -22,19 +29,32 @@ import logo from "@/assets/images/logo2026.png";
 
 import styles from "./site-top-nav.module.css";
 
-type NavTone = "violet" | "pink" | "sky" | "amber" | "gold";
+type NavTone = "violet" | "pink" | "sky" | "amber" | "gold" | "mint" | "coral";
 
-const NAV_LINKS: ReadonlyArray<{
+type NavItem = {
   href: string;
   label: string;
   hint: string;
   icon: LucideIcon;
   tone: NavTone;
-}> = [
+};
+
+/** Top-bar primary links — Adventures = Choose Your World (/worlds) */
+const PRIMARY_LINKS: ReadonlyArray<NavItem> = [
   { href: "/", label: "Home", hint: "Start your journey", icon: Home, tone: "violet" },
   { href: "/characters", label: "Characters", hint: "Meet the sisters", icon: Users, tone: "pink" },
-  { href: "/episodes", label: "Adventures", hint: "Episodes & quests", icon: BookOpen, tone: "sky" },
+  { href: "/worlds", label: "Adventures", hint: "Choose your world", icon: Globe2, tone: "sky" },
+  { href: "/episodes", label: "See the Show", hint: "Watch the series", icon: Clapperboard, tone: "coral" },
   { href: "/about", label: "About", hint: "Our story & mission", icon: Info, tone: "amber" },
+];
+
+/** Extra destinations — mobile drawer + desktop Explore menu */
+const EXPLORE_LINKS: ReadonlyArray<NavItem> = [
+  { href: "/games", label: "Game Zone", hint: "Play & power up", icon: Gamepad2, tone: "violet" },
+  { href: "/learn/library", label: "Story Time", hint: "Library Labyrinth", icon: BookOpen, tone: "sky" },
+  { href: "/learn/explore", label: "Land of Languages", hint: "Say words a new way", icon: Languages, tone: "mint" },
+  { href: "/learn/worksheets", label: "Brain Boosters", hint: "Worksheets & activities", icon: Brain, tone: "amber" },
+  { href: "/store", label: "Shop", hint: "Merch & goodies", icon: ShoppingBag, tone: "pink" },
   { href: "/rewards", label: "Rewards", hint: "Earn stars & prizes", icon: Gift, tone: "gold" },
 ];
 
@@ -44,6 +64,8 @@ const TONE_CLASS: Record<NavTone, string> = {
   sky: styles.toneSky,
   amber: styles.toneAmber,
   gold: styles.toneGold,
+  mint: styles.toneMint,
+  coral: styles.toneCoral,
 };
 
 function isNavLinkActive(pathname: string, href: string) {
@@ -138,6 +160,74 @@ function MobileAccountButton({ account }: { account: ReturnType<typeof useNavAcc
   );
 }
 
+function ExploreDropdown({ pathname }: { pathname: string }) {
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+  const exploreActive = EXPLORE_LINKS.some((item) => isNavLinkActive(pathname, item.href));
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onPointerDown = (event: MouseEvent) => {
+      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
+    };
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    window.addEventListener("mousedown", onPointerDown);
+    window.addEventListener("keydown", onKey);
+    return () => {
+      window.removeEventListener("mousedown", onPointerDown);
+      window.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+
+  return (
+    <div className={styles.exploreMenu} ref={rootRef}>
+      <button
+        type="button"
+        className={`nav-link ${styles.exploreTrigger} ${exploreActive || open ? styles.exploreTriggerActive : ""}`}
+        aria-expanded={open}
+        aria-haspopup="menu"
+        onClick={() => setOpen((value) => !value)}
+      >
+        Explore
+        <ChevronDown size={14} strokeWidth={2.5} aria-hidden />
+      </button>
+      {open ? (
+        <div className={styles.explorePanel} role="menu" aria-label="Explore">
+          {EXPLORE_LINKS.map((item) => {
+            const Icon = item.icon;
+            const active = isNavLinkActive(pathname, item.href);
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                role="menuitem"
+                className={`${styles.exploreItem} ${active ? styles.exploreItemActive : ""}`}
+                onClick={() => setOpen(false)}
+              >
+                <span className={`${styles.exploreItemIcon} ${TONE_CLASS[item.tone]}`} aria-hidden>
+                  <Icon size={16} strokeWidth={2.1} />
+                </span>
+                <span className={styles.exploreItemCopy}>
+                  <span className={styles.exploreItemLabel}>{item.label}</span>
+                  <span className={styles.exploreItemHint}>{item.hint}</span>
+                </span>
+              </Link>
+            );
+          })}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 export function SiteTopNav() {
   const pathname = usePathname();
   const account = useNavAccount();
@@ -189,11 +279,12 @@ export function SiteTopNav() {
 
           <div className="top-nav-right">
             <nav className="top-nav-links top-nav-links-desktop" aria-label="Main">
-              {NAV_LINKS.map((item) => (
+              {PRIMARY_LINKS.map((item) => (
                 <Link key={item.href} href={item.href} className="nav-link">
                   {item.label}
                 </Link>
               ))}
+              <ExploreDropdown pathname={pathname} />
               <div className="top-nav-cta-group">
                 <DesktopAccountButton account={account} />
                 <Link href="/worlds" className="nav-btn-primary">
@@ -275,7 +366,7 @@ export function SiteTopNav() {
             <nav className={styles.drawerNav} aria-label="Mobile">
               <p className={styles.drawerSectionLabel}>Navigate</p>
               <div className={styles.drawerLinkList}>
-                {NAV_LINKS.map((item, index) => {
+                {PRIMARY_LINKS.map((item, index) => {
                   const Icon = item.icon;
                   const active = isNavLinkActive(pathname, item.href);
 
@@ -287,6 +378,36 @@ export function SiteTopNav() {
                         active ? styles.drawerLinkActive : ""
                       }`}
                       style={{ animationDelay: `${index * 45}ms` }}
+                      aria-current={active ? "page" : undefined}
+                      onClick={closeMenu}
+                    >
+                      <span className={styles.drawerLinkIcon} aria-hidden>
+                        <Icon size={19} strokeWidth={2.1} />
+                      </span>
+                      <span className={styles.drawerLinkCopy}>
+                        <span className={styles.drawerLinkLabel}>{item.label}</span>
+                        <span className={styles.drawerLinkHint}>{item.hint}</span>
+                      </span>
+                      <ChevronRight className={styles.drawerLinkArrow} size={18} aria-hidden />
+                    </Link>
+                  );
+                })}
+              </div>
+
+              <p className={styles.drawerSectionLabel}>Play &amp; Learn</p>
+              <div className={styles.drawerLinkList}>
+                {EXPLORE_LINKS.map((item, index) => {
+                  const Icon = item.icon;
+                  const active = isNavLinkActive(pathname, item.href);
+
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`${styles.drawerLink} ${TONE_CLASS[item.tone]} ${
+                        active ? styles.drawerLinkActive : ""
+                      }`}
+                      style={{ animationDelay: `${(PRIMARY_LINKS.length + index) * 45}ms` }}
                       aria-current={active ? "page" : undefined}
                       onClick={closeMenu}
                     >
