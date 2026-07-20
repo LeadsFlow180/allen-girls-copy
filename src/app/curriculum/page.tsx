@@ -352,6 +352,11 @@ export default function CurriculumPage() {
                 </div>
               ))}
             </div>
+            <div className="mkCenter" style={{ marginTop: "1.5rem" }}>
+              <a className="mkBtn mkBtnGhost" href={`/grade-${g.grade}`}>
+                See the full Grade {g.grade} page →
+              </a>
+            </div>
           </div>
         </section>
       ))}
