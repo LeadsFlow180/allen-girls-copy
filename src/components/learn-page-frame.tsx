@@ -15,6 +15,7 @@ type LearnPageFrameTab =
   | "achievements"
   | "quests"
   | "leaderboards"
+  | "hq"
   | "shop";
 
 export type LearnPageFrameProps = {

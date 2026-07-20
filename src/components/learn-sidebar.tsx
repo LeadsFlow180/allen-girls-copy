@@ -8,6 +8,7 @@ import {
   Compass,
   Ellipsis,
   GraduationCap,
+  LayoutDashboard,
   ListChecks,
   Lock,
   Map,
@@ -31,6 +32,7 @@ type LearnSidebarTab =
   | "achievements"
   | "quests"
   | "leaderboards"
+  | "hq"
   | "shop";
 
 type LearnSidebarProps = {
@@ -255,6 +257,13 @@ export function LearnSidebar({
 
   const progressItems: NavItem[] = [
     {
+      id: "hq",
+      label: "Explorer HQ",
+      hint: "Your rewards & journey",
+      Icon: LayoutDashboard,
+      href: "/learn/hq",
+    },
+    {
       id: "achievements",
       label: "Trophies",
       hint: "Badges & rewards",
@@ -289,8 +298,8 @@ export function LearnSidebar({
     },
     {
       id: "shop",
-      label: "Shop",
-      hint: "Gems, badges & boosts",
+      label: "Gem Bazaar",
+      hint: "Gems, treasures & boosts",
       Icon: ShoppingBag,
       href: "/shop",
     },
